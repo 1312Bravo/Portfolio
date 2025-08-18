@@ -1,0 +1,16 @@
+---
+title: "Welcome"
+---
+
+# 👋 Hi, I’m [Your Name]
+
+Welcome to my portfolio. Here you’ll find projects on data science, sports analytics and many other topics.
+::: {.callout-note}
+This site is built with [Quarto](https://quarto.org) and updates from my GitHub projects.
+::: 
+
+## Featured Projects
+
+- [Training Log Analysis](projects/training_log.qmd)  
+  Analysing training data with Python and Garmin data.
+- Others
