@@ -6,3 +6,17 @@ title: "Training Log"
 
 [View Daily Log Data](https://docs.google.com/spreadsheets/d/12Nd6dxw6wux5hFYeiei8l0OXqXG4aBpASzTdXb3rpdw/edit?usp=sharing){.data-link target="_blank"}
 
+::: {.blog-card}
+[**HRV Analysis**](training_log/blog_1.qmd)  
+Looking at heart rate variability trends and training load.
+:::
+
+::: {.blog-card}
+[**TRIMP vs Garmin Load**](training_log/blog_2.qmd)  
+Comparing different training load metrics with visualizations.
+:::
+
+::: {.blog-card}
+[**Sleep & Recovery**](training_log/blog_3.qmd)  
+Exploring how sleep impacts recovery and performance.
+:::

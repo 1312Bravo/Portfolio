@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "projects/training_log.html",
+    "href": "projects/training_log.html",
+    "title": "Training Log",
+    "section": "",
+    "text": "View Training Data\nView Daily Log Data\n\nHRV Analysis\nLooking at heart rate variability trends and training load.\n\n\nTRIMP vs Garmin Load\nComparing different training load metrics with visualizations.\n\n\nSleep & Recovery\nExploring how sleep impacts recovery and performance."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Urh Peček",
@@ -14,10 +21,10 @@
     "text": "Featured Projects\n\nTraining Log\nAnalysing training data with Python and Garmin data.\n\n\nOther\nSome description here."
   },
   {
-    "objectID": "projects/training_log.html",
-    "href": "projects/training_log.html",
-    "title": "Training Log",
+    "objectID": "projects/training_log/blog_1.html",
+    "href": "projects/training_log/blog_1.html",
+    "title": "HRV Analysis",
     "section": "",
-    "text": "View Training Data\nView Daily Log Data"
+    "text": "HRV Analysis\nSome intro text here…\nimport matplotlib.pyplot as plt import numpy as np\nx = np.arange(0, 10, 0.1) y = np.sin(x)\nplt.plot(x, y) plt.title(“Example HRV Trend”) plt.show()"
   }
 ]
