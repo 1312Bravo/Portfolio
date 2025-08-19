@@ -1,0 +1,59 @@
+/* Navbar */
+.navbar {
+    background-color: #ffffff !important;
+}
+
+.navbar a,
+.navbar .navbar-brand {
+    color: #000000 !important;
+}
+
+/* Title banner*/
+.title-banner {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+.title-banner h1,
+.title-banner p {
+    color: #000000 !important;
+}
+
+
+/* Project card */
+.project-card {
+    color: #000000;
+    border-radius: 16px;
+    padding: 0.5rem 0.8rem;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+}
+
+.project-card a {
+    color: inherit;
+}
+
+/* Data link */
+.data-link {
+    display: inline-block;
+    background-color: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 68px;
+    padding: 0.6rem 2.8rem;
+    margin: 0.1rem 0;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.data-link:hover {
+    background-color: #f7f7f7;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
