@@ -2,15 +2,22 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Welcome",
+    "title": "Urh Peček",
     "section": "",
-    "text": "Welcome to my portfolio. Here you’ll find projects on data science, sports analytics and many other topics. ::: {.callout-note} This site is built with Quarto and updates from my GitHub projects. :::\n\n\n\nTraining Log Analysis\nAnalysing training data with Python and Garmin data.\nOthers"
+    "text": "Welcome to my portfolio. Here you’ll find projects on data science, sports analytics and other topics."
   },
   {
     "objectID": "index.html#featured-projects",
     "href": "index.html#featured-projects",
-    "title": "Welcome",
+    "title": "Urh Peček",
+    "section": "Featured Projects",
+    "text": "Featured Projects\n\nTraining Log\nAnalysing training data with Python and Garmin data.\n\n\nOther\nSome description here."
+  },
+  {
+    "objectID": "projects/training_log.html",
+    "href": "projects/training_log.html",
+    "title": "Training Log",
     "section": "",
-    "text": "Training Log Analysis\nAnalysing training data with Python and Garmin data.\nOthers"
+    "text": "View Training Data\nView Daily Log Data"
   }
 ]

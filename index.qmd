@@ -1,16 +1,18 @@
 ---
-title: "Welcome"
+title: Urh Peček  
+subtitle: Data Science Projects Portfolio, Blog & Stories
 ---
 
-# 👋 Hi, I’m [Your Name]
-
-Welcome to my portfolio. Here you’ll find projects on data science, sports analytics and many other topics.
-::: {.callout-note}
-This site is built with [Quarto](https://quarto.org) and updates from my GitHub projects.
-::: 
+Welcome to my portfolio. Here you’ll find projects on data science, sports analytics and other topics.
 
 ## Featured Projects
 
-- [Training Log Analysis](projects/training_log.qmd)  
-  Analysing training data with Python and Garmin data.
-- Others
+::: {.project-card}
+### [Training Log](projects/training_log.qmd)
+Analysing training data with Python and Garmin data.
+:::
+
+::: {.project-card}
+### [Other](projects/other.qmd)
+Some description here.
+:::

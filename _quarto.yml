@@ -2,21 +2,26 @@ project:
   type: website
 
 website:
-  title: "My Portfolio"
+  title: "Urh Peček | Data Science Projects Portfolio, Blog & Stories"
+  description: "Exploring Data Science & Analytics ideas and writting a blog"
   navbar:
+
     left:
-      - href: index.qmd
-        text: Home
-      - href: about.qmd
-        text: About
+      - text: Home
+        href: index.qmd
+      - text: About
+        href: about.qmd
       - text: Projects
         menu:
           - href: projects/training_log.qmd
             text: Training Log
 
+    right:
+      - icon: github
+        href: https://github.com/1312Bravo
+        target: _blank
+
 format:
   html:
-    theme:
-      light: litera
-      dark: darkly
+    theme: default
     css: styles.css
