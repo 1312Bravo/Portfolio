@@ -25,6 +25,6 @@
     "href": "projects/training_log/blog_1.html",
     "title": "HRV Analysis",
     "section": "",
-    "text": "Some intro text here…\nimport matplotlib.pyplot as plt import numpy as np\nx = np.arange(0, 10, 0.1) y = np.sin(x)\nplt.plot(x, y) plt.title(“Example HRV Trend”) plt.show()"
+    "text": "Some intro text here…\n\n\nCode\nprint(\"Hello from Python!\")\n\n\nHello from Python!\n\n\nThis is it."
   }
 ]
