@@ -21,7 +21,7 @@ website:
 
 format:
   html:
-    theme: default
+    theme: cosmo  
     css: styles.css
     code-fold: true
     code-overflow: wrap

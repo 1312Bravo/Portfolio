@@ -20,6 +20,17 @@
 }
 
 
+/* Search icon */
+.navbar .search-toggle svg,
+.navbar .search-toggle svg * {
+    fill: #000000 !important;
+}
+
+.navbar .search-toggle:hover svg,
+.navbar .search-toggle:hover svg * {
+    fill: #000000 !important;
+}
+
 /* Project card */
 .project-card {
     color: #000000;
