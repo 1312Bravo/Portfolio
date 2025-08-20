@@ -5,12 +5,26 @@ title: "HRV Analysis"
 Some intro text here...
 
 ```{python}
+print("Hello from Python!")
+```
+
+
+This is it.
+
+
+```{python}
+#| echo: false
 import matplotlib.pyplot as plt
-import numpy as np
 
-x = np.arange(0, 10, 0.1)
-y = np.sin(x)
+# Sample data
+x = [1, 2, 3, 4, 5]
+y = [2, 4, 6, 8, 10]
 
-plt.plot(x, y)
-plt.title("Example HRV Trend")
+# Create plot
+plt.plot(x, y, marker="o")
+plt.title("Simple Test Plot")
+plt.xlabel("X-axis")
+plt.ylabel("Y-axis")
+plt.grid(True)
 plt.show()
+```
