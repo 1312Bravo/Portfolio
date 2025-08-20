@@ -3,8 +3,6 @@ title: Urh Peček
 subtitle: Data Science Projects Portfolio, Blog & Stories
 ---
 
-Welcome to my portfolio. Here you’ll find projects on data science, sports analytics and other topics.
-
 ## Featured Projects
 
 ::: {.project-card}
