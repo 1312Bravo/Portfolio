@@ -8,7 +8,13 @@
     color: #000000 !important;
 }
 
-/* Title banner*/
+.navbar-brand {
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+}
+
+/* Title banner */
 .title-banner {
     background-color: #ffffff !important;
     color: #000000 !important;
@@ -19,6 +25,15 @@
     color: #000000 !important;
 }
 
+/* Links */
+a {
+    color: black;
+}
+
+a:hover {
+    color: black;
+    text-decoration: underline;
+}
 
 /* Search icon */
 .navbar .search-toggle svg,

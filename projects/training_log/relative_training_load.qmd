@@ -19,10 +19,12 @@ The goal is to provide a simple, practical metric that helps answer questions li
 
 By the end of this post, you’ll understand how to put each training session into context, see the bigger picture of your progress, and make informed decisions about how to plan future sessions safely and effectively.
 
-### Deep dive
+### Selecting the metric
 
 When it comes to measuring today’s effort, there are several options: distance, time, heart rate, pace, or best combination of all of them. Each tells part of the story. Distance and time capture volume, heart rate reflects intensity, and pace shows how much stress you put on your muscles and joints. But taken alone, none of these gives the full picture.
 
 That’s why we focus on training load, a metric that combines duration, intensity, and heart rate into a single number. It is provided from all of ours smart wearables. It’s a practical way to capture both volume and intensity in one value, making comparisons across very different sessions much more meaningful. Additionaly, because our main sport of interest is trail and mountain running, on trails, distance or pace can be misleading. There can be technical trails with steep climbs, uneven terrain and dangerous esctions, make it hard to judge intensity from speed or distance alone. Training load, however, tries to account for the actual physiological stress of a session, capturing how your body is working regardless of terrain. We will talk more about it in some upcoming posts.
 
 While training load is our main metric, the same approach can be applied to others—distance, time, or heart rate. By calculating relative values for each, we can see the story from multiple angles. Today’s high training load might coincide with a moderate distance or unusually high heart rate, offering deeper insight into how your body responded. Additional power comes when we combine these perspectives. 
+
+### Deep dive

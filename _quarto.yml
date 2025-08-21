@@ -2,17 +2,16 @@ project:
   type: website
 
 website:
-  title: "Urh Peček | Data Science Projects Portfolio, Blog & Stories"
-  description: "Exploring Data Science & Analytics ideas and writing a blog"
+  title: "Urh Peček | Data Science Blog"
+  description: "Projects, experiments, and stories in data science and analytics."
   navbar:
-    left:
+    left: 
       - text: Home
         href: index.qmd
       - text: Projects
         menu:
           - text: Training Log
             href: projects/training_log.qmd
-            
     right:
       - icon: github
         href: https://github.com/1312Bravo
@@ -25,3 +24,4 @@ format:
     code-fold: true
     code-overflow: wrap
     highlight-style: github
+    font-awesome: true

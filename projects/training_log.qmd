@@ -12,7 +12,8 @@ Just as I enjoy solving equations or structuring data models at work, I enjoy ap
 
 
 ::: {.blog-card}
-[**Data**](training_log/data.qmd)  
+[**Track Your Training Smarter - Data**](training_log/data.qmd)  
+Keep all your training and daily metrics in one place without lifting a finger. With a Python pipeline connecting Garmin Connect to Google Sheets, your workouts and daily metrics update automatically every day. The result: a complete, always-current record that makes analysis, trend spotting, and make data-driven decisions precise.
 :::
 
 ::: {.blog-card}

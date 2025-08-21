@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Increase your chances of staying away from running injuries – Urh Peček | Data Science Projects Portfolio, Blog &amp; Stories</title>
+<title>Increase your chances of staying away from running injuries – Urh Peček | Data Science Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -80,7 +80,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">Urh Peček | Data Science Projects Portfolio, Blog &amp; Stories</span>
+    <span class="navbar-title">Urh Peček | Data Science Blog</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -92,10 +92,6 @@ ul.task-list li input[type="checkbox"] {
   <li class="nav-item">
     <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../about.html"> 
-<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-projects" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -158,11 +154,14 @@ ul.task-list li input[type="checkbox"] {
 <p>The goal is to provide a simple, practical metric that helps answer questions like: - Am I pushing into new territory today? - Is my current load within a safe range based on what I’ve done in the past weeks? - Could this workout increase my risk of overtraining or injury if repeated too often?</p>
 <p>By the end of this post, you’ll understand how to put each training session into context, see the bigger picture of your progress, and make informed decisions about how to plan future sessions safely and effectively.</p>
 </section>
-<section id="deep-dive" class="level3">
-<h3 class="anchored" data-anchor-id="deep-dive">Deep dive</h3>
+<section id="selecting-the-metric" class="level3">
+<h3 class="anchored" data-anchor-id="selecting-the-metric">Selecting the metric</h3>
 <p>When it comes to measuring today’s effort, there are several options: distance, time, heart rate, pace, or best combination of all of them. Each tells part of the story. Distance and time capture volume, heart rate reflects intensity, and pace shows how much stress you put on your muscles and joints. But taken alone, none of these gives the full picture.</p>
 <p>That’s why we focus on training load, a metric that combines duration, intensity, and heart rate into a single number. It is provided from all of ours smart wearables. It’s a practical way to capture both volume and intensity in one value, making comparisons across very different sessions much more meaningful. Additionaly, because our main sport of interest is trail and mountain running, on trails, distance or pace can be misleading. There can be technical trails with steep climbs, uneven terrain and dangerous esctions, make it hard to judge intensity from speed or distance alone. Training load, however, tries to account for the actual physiological stress of a session, capturing how your body is working regardless of terrain. We will talk more about it in some upcoming posts.</p>
 <p>While training load is our main metric, the same approach can be applied to others—distance, time, or heart rate. By calculating relative values for each, we can see the story from multiple angles. Today’s high training load might coincide with a moderate distance or unusually high heart rate, offering deeper insight into how your body responded. Additional power comes when we combine these perspectives.</p>
+</section>
+<section id="deep-dive" class="level3">
+<h3 class="anchored" data-anchor-id="deep-dive">Deep dive</h3>
 
 
 </section>
@@ -240,7 +239,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/1312Bravo\.github\.io\/Portfolio\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
