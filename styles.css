@@ -8,7 +8,13 @@
     color: #000000 !important;
 }
 
-/* Title banner*/
+.navbar-brand {
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+}
+
+/* Title banner */
 .title-banner {
     background-color: #ffffff !important;
     color: #000000 !important;
@@ -19,6 +25,15 @@
     color: #000000 !important;
 }
 
+/* Links */
+a {
+    color: black;
+}
+
+a:hover {
+    color: black;
+    text-decoration: underline;
+}
 
 /* Search icon */
 .navbar .search-toggle svg,
@@ -51,26 +66,7 @@
     color: inherit;
 }
 
-/* Data link */
-.data-link {
-    display: inline-block;
-    background-color: #ffffff;
-    color: #000000;
-    text-decoration: none;
-    border: 1px solid #ddd;
-    border-radius: 68px;
-    padding: 0.6rem 2.8rem;
-    margin: 0.1rem 0;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.data-link:hover {
-    background-color: #f7f7f7;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-}
-
 /* Blog cards */
-
 .blog-card {
     background-color: #ffffff;
     color: #000000;
