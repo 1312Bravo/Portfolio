@@ -1,0 +1,40 @@
+---
+title: "Data"
+---
+
+Before diving into analysis, it’s worth showing where the numbers come from. I wanted a consistent and automated way to capture my training. 
+
+Two main datasets are daily updated and live in Google Sheets. Having the data in this format makes it easy to explore manually, but also gives me a flexible base for deeper analysis.
+
+- [Training Log](https://docs.google.com/spreadsheets/d/11oJAhAphaHDnGHdknI8TrZjeIy7Aq2DqJ8lInu_XL_M/edit?usp=sharing){target="_blank"} – workouts with different metrics, including distance, duration, elevation, heart rate. 
+- [Daily Log](https://docs.google.com/spreadsheets/d/12Nd6dxw6wux5hFYeiei8l0OXqXG4aBpASzTdXb3rpdw/edit?usp=sharing){target="_blank"} – day-level statistics, such as steps, sleep, resting heart rate, recovery time, and other daily metrics.
+
+The statistics come from the Garmin Connect API. A Python script fetches both activity and daily statistics, and then pushes them into the Google Sheets. Some metrics are raw Garmin values, while others are adjusted or calculated. The script is run each morning and spreadsheets expand by one more day of history (yesterday's data), keeping the logs synchronized without manual work. The script can also loop through multiple accounts if provided.
+
+The script relies two key integrations:
+
+- `Garmin Connect API` – fetch activities and health metrics.
+```python
+from garminconnect import Garmin  
+
+garminClient = Garmin(user_email, user_password)  
+garminClient.login()
+garminClient.get_activities_by_date(date_from, date_to)
+```
+
+- `Google Sheets API` – store and update logs.
+```python
+import gspread
+from google.oauth2.service_account import Credentials  
+
+drive_credentials = Credentials.from_service_account_file(
+    "googleDrive_secrets.json",  
+    scopes=["https://www.googleapis.com/auth/spreadsheets",  
+            "https://www.googleapis.com/auth/drive"]  
+)
+
+googleDrive_client = gspread.authorize(drive_credentials)  
+googleDrive_client.open(user_dailyLogFilename)
+```
+
+Of course, logging in requires credentials (emails, passwords, API keys). They are not hardcoded, but live in a *.env* file locally and as GitHub Secrets in the cloud, keeping sensitive content secure while still accessible for automation.

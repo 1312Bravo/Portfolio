@@ -10,7 +10,3 @@ subtitle: Data Science Projects Portfolio, Blog & Stories
 Analysing training data with Python and Garmin data.
 :::
 
-::: {.project-card}
-### [Other](projects/other.qmd)
-Some description here.
-:::
