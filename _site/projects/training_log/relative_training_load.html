@@ -161,6 +161,10 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="deep-dive" class="level3">
 <h3 class="anchored" data-anchor-id="deep-dive">Deep dive</h3>
+<p>Different platforms and devices provide their own Training Load (TL) metrics, each based on a different formula or physiological model. We will use Garmin’s Training Load values provided in our training log. Garmin TL is based on EPOC (Excess Post-Exercise Oxygen Consumption) - a physiological response.</p>
+<p>Absolute TL values are useful, but they lack context: they don’t tell us how today’s load compares to what our body is currently adapted to. Garmin’s Training Load values are absolute — a TL of 200 means the same physiological stress no matter who performs it. But what that stress means depends on context. For a beginner, 200 might feel overwhelming; for an elite, it might feel trivial. Even for the same athlete, a TL of 200 can feel very different depending on whether you’re coming off a heavy week (where it feels easy) or off several rest days (where it feels harder).</p>
+<p>Our goal is to define a Relative Training Load (RTL) metric that normalizes today’s TL against recent history. By putting training load into context, RTL allows us to better understand whether today’s effort is appropriate, progressive, and safe for long-term adaptation.</p>
+<p>The idea of comparing current workload to past workload isn’t new. Sports science has long used the Acute:Chronic Workload Ratio (ACWR) to capture how today’s training compares to longer-term training history. But ACWR has well-known limitations: it usually relies on a single rolling average, and it can miss important context about peak efforts or variation in load. That’s where our approach comes in. We’ll start from the same foundation but further extend it nto a more flexible and informative framework.</p>
 
 
 </section>

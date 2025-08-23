@@ -4,25 +4,33 @@ title: "Increase your chances of staying away from running injuries"
 
 ### About
 
-Some days, a run feels effortless and every kilometer seems to pass in a blur. Other days, even a short loop feels heavy and you wonder if you should even have laced up. The same workout has a different effect depending on what you’ve done in the days or weeks before. Raw distance, time or heart rate alone can be misleading when assessing effort. 
+Some days, a run feels effortless and every kilometer seems to pass in a blur. Other days, even a short loop feels heavy and you wonder if you should even have laced up. The same workout has a different effect depending on what you've done in the days or weeks before. Raw distance, time or heart rate alone can be misleading when assessing effort. 
 
-As runners, we all experience these highs and lows. But what if there was a way to put today’s effort into context—to see whether you’re genuinely pushing your limits or simply running within what your body is ready for? That’s exactly the question this post explores: how to quantify your relative training load, so each session tells a story about progress, adaptation, and safety.
+As runners, we all experience these highs and lows. But what if there was a way to put today's effort into context—to see whether you're genuinely pushing your limits or simply running within what your body is ready for? That's exactly the question this post explores: how to quantify your relative training load, so each session tells a story about progress, adaptation, and safety.
 
-We’ll focus on one specific metric: normalizing today’s training load relative to recent history. By comparing current sessions to your typical training patterns, you can get a clearer picture of whether you’re progressing safely or stepping into risky territory that could lead to overtraining or injury.
+We'll focus on one specific metric: normalizing today's training load relative to recent history. By comparing current sessions to your typical training patterns, you can get a clearer picture of whether you're progressing safely or stepping into risky territory that could lead to overtraining or injury.
 
 The goal is to provide a simple, practical metric that helps answer questions like:
 - Am I pushing into new territory today?
-- Is my current load within a safe range based on what I’ve done in the past weeks?
+- Is my current load within a safe range based on what I've done in the past weeks?
 - Could this workout increase my risk of overtraining or injury if repeated too often?
 
-By the end of this post, you’ll understand how to put each training session into context, see the bigger picture of your progress, and make informed decisions about how to plan future sessions safely and effectively.
+By the end of this post, you'll understand how to put each training session into context, see the bigger picture of your progress, and make informed decisions about how to plan future sessions safely and effectively.
 
 ### Selecting the metric
 
 When it comes to measuring effort in endurance sports, there are several options: distance, time, heart rate, pace or something else. Best is combination of all, as each tells part of the story. Taken alone, none of these gives the full picture. Also, as my priority is trail running, also the type of activity, on which most of the data is based on, it makes it hard to judge intensity from speed or distance alone.
 
-That’s why we focus on training load, a metric that combines duration, intensity, and heart rate into a single number. It is provided from all of ours smart wearables and a practical way to capture both volume and intensity in one value, making comparisons across very different sessions (and sports) much more meaningful. It tries to account for the actual physiological stress of a session, capturing how your body is working regardless of terrain or event sport. We will talk more about it in some upcoming posts.
+That's why we focus on training load, a metric that combines duration, intensity, and heart rate into a single number. It is provided from all of ours smart wearables and a practical way to capture both volume and intensity in one value, making comparisons across very different sessions (and sports) much more meaningful. It tries to account for the actual physiological stress of a session, capturing how your body is working regardless of terrain or event sport. We will talk more about it in some upcoming posts.
 
 While training load will be our main metric, the same approach can be applied to others, also mentioned above. By calculating relative values for each, we can see the story from multiple angles. The power comes when we can successfuly combine different perspectives. 
 
 ### Deep dive
+
+Different platforms and devices provide their own Training Load (TL) metrics, each based on a different formula or physiological model. We will use Garmin's Training Load values provided in our training log. Garmin TL is based on EPOC (Excess Post-Exercise Oxygen Consumption) - a physiological response.
+
+Absolute TL values are useful, but they lack context: they don't tell us how today's load compares to what our body is currently adapted to. Garmin's Training Load values are absolute — a TL of 200 means the same physiological stress no matter who performs it. But what that stress means depends on context. For a beginner, 200 might feel overwhelming; for an elite, it might feel trivial. Even for the same athlete, a TL of 200 can feel very different depending on whether you're coming off a heavy week (where it feels easy) or off several rest days (where it feels harder).
+
+Our goal is to define a Relative Training Load (RTL) metric that normalizes today's TL against recent history. By putting training load into context, RTL allows us to better understand whether today's effort is appropriate, progressive, and safe for long-term adaptation.
+
+The idea of comparing current workload to past workload isn’t new. Sports science has long used the Acute:Chronic Workload Ratio (ACWR) to capture how today’s training compares to longer-term training history. But ACWR has well-known limitations: it usually relies on a single rolling average, and it can miss important context about peak efforts or variation in load. That’s where our approach comes in. We'll start from the same foundation but further extend it nto a more flexible and informative framework.

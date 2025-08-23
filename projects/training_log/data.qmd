@@ -6,7 +6,7 @@ title: "Data"
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 :::
 
-Before diving into analysis, it’s worth showing where the numbers come from. I wanted a consistent and automated way to capture my training. 
+Before diving into analysis, it's worth showing where the numbers come from. I wanted a consistent and automated way to capture my training. 
 
 Two main datasets are daily updated and live in Google Sheets. Having the data in this format makes it easy to explore manually, but also gives me a flexible base for deeper analysis.
 
