@@ -180,13 +180,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<div class="{=html}">
+<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer"></p>
+</div>
 <p>Before diving into analysis, it’s worth showing where the numbers come from. I wanted a consistent and automated way to capture my training.</p>
 <p>Two main datasets are daily updated and live in Google Sheets. Having the data in this format makes it easy to explore manually, but also gives me a flexible base for deeper analysis.</p>
 <ul>
 <li><a href="https://docs.google.com/spreadsheets/d/11oJAhAphaHDnGHdknI8TrZjeIy7Aq2DqJ8lInu_XL_M/edit?usp=sharing" target="_blank">Training Log</a> – workouts with different metrics, including distance, duration, elevation, heart rate.</li>
 <li><a href="https://docs.google.com/spreadsheets/d/12Nd6dxw6wux5hFYeiei8l0OXqXG4aBpASzTdXb3rpdw/edit?usp=sharing" target="_blank">Daily Log</a> – day-level statistics, such as steps, sleep, resting heart rate, recovery time, and other daily metrics.</li>
 </ul>
-<p>The statistics come from the Garmin Connect API. A Python script fetches both activity and daily statistics, and then pushes them into the Google Sheets. Some metrics are raw Garmin values, while others are adjusted or calculated. The script is run each morning and spreadsheets expand by one more day of history (yesterday’s data), keeping the logs synchronized without manual work. The script can also loop through multiple accounts if provided.</p>
+<p>The statistics come from the Garmin Connect API. A Python script fetches both activity and daily statistics, and then pushes them into the Google Sheets. Some metrics are raw Garmin values, while others are adjusted or calculated. Statistics that are captured in sheets can also evolve over time as we discover new metrics or further analyze training. So, some of the statistics in the sheet can also be presented in details in other blog posts.</p>
+<p>The script is run each morning and spreadsheets expand by one more day of history (yesterday’s data), keeping the logs synchronized without manual work. The script can also loop through multiple accounts if provided.</p>
 <p>The script relies two key integrations:</p>
 <ul>
 <li><code>Garmin Connect API</code> – fetch activities and health metrics.</li>
@@ -211,6 +215,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>googleDrive_client <span class="op">=</span> gspread.authorize(drive_credentials)  </span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>googleDrive_client.<span class="bu">open</span>(user_dailyLogFilename)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Of course, logging in requires credentials (emails, passwords, API keys). They are not hardcoded, but live in a <em>.env</em> file locally and as GitHub Secrets in the cloud, keeping sensitive content secure while still accessible for automation.</p>
+<div class="project-link-container">
+    <i class="fab fa-github"></i>
+    <span> You can find the full code for this part on my Github repository under the
+    <a href="https://github.com/1312Bravo/TrainingPeaks_customLog/tree/fetch-data-write-gs" target="_blank"> related branch </a>
+    .</span>
+</div>
 
 
 
