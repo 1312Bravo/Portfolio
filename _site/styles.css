@@ -46,6 +46,32 @@ a:hover {
     fill: #000000 !important;
 }
 
+/* Project GitHub link styling */
+.project-link-container {
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+    font-size: 1.0em;
+}
+
+.project-link-container i.fab {
+    font-size: 1.5em;
+    margin-right: 8px;
+    color: #000000;
+}
+
+.project-link-container a {
+    color: #00008B;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.project-link-container a:hover {
+    color: #00008B;
+    text-decoration: underline;
+}
+
 /* Project card */
 .project-card {
     color: #000000;
@@ -92,4 +118,27 @@ a:hover {
 
 .blog-card a:hover {
     text-decoration: underline;
+}
+
+/* Info icons */
+.info-icons {
+    text-align: center;
+}
+
+.info-icons a {
+    display: inline-block;
+    margin: 0 15px;
+    font-size: 1.8em;
+    color: #000000;
+    text-decoration: none;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.info-icons a i {
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.info-icons a:hover i {
+    transform: scale(1.2);
+    color: #000;
 }

@@ -2,6 +2,10 @@
 title: "Data"
 ---
 
+:::{=html}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+:::
+
 Before diving into analysis, it’s worth showing where the numbers come from. I wanted a consistent and automated way to capture my training. 
 
 Two main datasets are daily updated and live in Google Sheets. Having the data in this format makes it easy to explore manually, but also gives me a flexible base for deeper analysis.
@@ -38,3 +42,12 @@ googleDrive_client.open(user_dailyLogFilename)
 ```
 
 Of course, logging in requires credentials (emails, passwords, API keys). They are not hardcoded, but live in a *.env* file locally and as GitHub Secrets in the cloud, keeping sensitive content secure while still accessible for automation.
+
+```{=html}
+<div class="project-link-container">
+    <i class="fab fa-github"></i>
+    <span> You can find the full code for this part on my Github repository under the
+    <a href="https://github.com/1312Bravo/TrainingPeaks_customLog/tree/fetch-data-write-gs" target="_blank"> related branch </a>
+    .</span>
+</div>
+```
