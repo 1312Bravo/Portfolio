@@ -184,10 +184,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer"></p>
 </div>
 <p>Before diving into analysis, it’s worth showing where the numbers come from. I wanted a consistent and automated way to capture my training.</p>
-<p>Two main datasets are daily updated and live in Google Sheets. Having the data in this format makes it easy to explore manually, but also gives me a flexible base for deeper analysis.</p>
+<p>Two main datasets are daily updated and live in Google Sheets. Having the data in this format makes it easy to explore manually, but also gives me a flexible base for deeper analysis. I provide only a static sample of data logs.</p>
 <ul>
-<li><a href="https://docs.google.com/spreadsheets/d/11oJAhAphaHDnGHdknI8TrZjeIy7Aq2DqJ8lInu_XL_M/edit?usp=sharing" target="_blank">Training Log</a> – workouts with different metrics, including distance, duration, elevation, heart rate.</li>
-<li><a href="https://docs.google.com/spreadsheets/d/12Nd6dxw6wux5hFYeiei8l0OXqXG4aBpASzTdXb3rpdw/edit?usp=sharing" target="_blank">Daily Log</a> – day-level statistics, such as steps, sleep, resting heart rate, recovery time, and other daily metrics.</li>
+<li><a href="https://docs.google.com/spreadsheets/d/1o5Y9_AM_8baj5DnB2AE9nYXU_ZSPsyFW6VjRbljSWIw/edit?gid=412740509#gid=412740509" target="_blank">Training Log</a> – workouts with different metrics, including distance, duration, elevation, heart rate.</li>
+<li><a href="https://docs.google.com/spreadsheets/d/1k-JIYE5z9a-2IqcslkliL_Y6CdvcNeZ7NoVe8wDbo8I/edit?gid=0#gid=0" target="_blank">Daily Log</a> – day-level statistics, such as steps, sleep, resting heart rate, recovery time, and other daily metrics.</li>
 </ul>
 <p>The statistics come from the Garmin Connect API. A Python script fetches both activity and daily statistics, and then pushes them into the Google Sheets. Some metrics are raw Garmin values, while others are adjusted or calculated. Statistics that are captured in sheets can also evolve over time as we discover new metrics or further analyze training. So, some of the statistics in the sheet can also be presented in details in other blog posts.</p>
 <p>The script is run each morning and spreadsheets expand by one more day of history (yesterday’s data), keeping the logs synchronized without manual work. The script can also loop through multiple accounts if provided.</p>
@@ -297,7 +297,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/1312Bravo\.github\.io\/Portfolio\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
