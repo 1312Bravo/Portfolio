@@ -13,7 +13,9 @@ Two main datasets are daily updated and live in Google Sheets. Having the data i
 - [Training Log](https://docs.google.com/spreadsheets/d/11oJAhAphaHDnGHdknI8TrZjeIy7Aq2DqJ8lInu_XL_M/edit?usp=sharing){target="_blank"} – workouts with different metrics, including distance, duration, elevation, heart rate. 
 - [Daily Log](https://docs.google.com/spreadsheets/d/12Nd6dxw6wux5hFYeiei8l0OXqXG4aBpASzTdXb3rpdw/edit?usp=sharing){target="_blank"} – day-level statistics, such as steps, sleep, resting heart rate, recovery time, and other daily metrics.
 
-The statistics come from the Garmin Connect API. A Python script fetches both activity and daily statistics, and then pushes them into the Google Sheets. Some metrics are raw Garmin values, while others are adjusted or calculated. The script is run each morning and spreadsheets expand by one more day of history (yesterday's data), keeping the logs synchronized without manual work. The script can also loop through multiple accounts if provided.
+The statistics come from the Garmin Connect API. A Python script fetches both activity and daily statistics, and then pushes them into the Google Sheets. Some metrics are raw Garmin values, while others are adjusted or calculated. Statistics that are captured in sheets can also evolve over time as we discover new metrics or further analyze training. So, some of the statistics in the sheet can also be presented in details in other blog posts.
+
+The script is run each morning and spreadsheets expand by one more day of history (yesterday's data), keeping the logs synchronized without manual work. The script can also loop through multiple accounts if provided.
 
 The script relies two key integrations:
 
