@@ -6,13 +6,11 @@ title: "Training Log"
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 :::
 
-For me, the most logical thing in the world has always been mathematics—derivations and equations that can fully explain the conclusion. I bring the same mindset into many areas of life, not just running. This blog will be a place where I combine my passion for endurance sports with my professional background in data science, statistics, and analytics. Training logs, race preparation, and performance modeling—all of these can be enriched by numbers, models, and careful analysis.
+I see everything in life through the prism of mathematics or statistics. It's no different with sports, especially running (or cycling). This blog will be a place where I combine my passion for endurance sports with professional background in data science.  Just as I enjoy solving equations or structuring data models at work, I enjoy applying that same curiosity to my own training. Training logs, race preparation, and performance modeling — all of these can be enriched by numbers, models, and careful analysis.
 
 Another motivation behind starting this blog is that I recently began working with a coach. That gave me an extra push to look deeper into how we are structuring the training, how I’m progressing, and to better understand the “why” behind what we’re doing. It’s not only about following workouts but also about making sense of the bigger picture, seeing how the plan unfolds, and how the numbers reflect adaptation and improvement.
 
-I don’t see data as something abstract, but as a tool for making sense of the effort I put into my body and mind. Numbers, when put into context, tell a story: whether I’m adapting, improving, or stepping into risky territory. That’s why each blog post will focus on a specific question and explore how mathematical thinking can bring clarity—whether it’s about training load (like in this post), heart rate, distance, or other aspects of performance.
-
-Just as I enjoy solving equations or structuring data models at work, I enjoy applying that same curiosity to my own training. For me, this is more than measuring kilometers or hours; it’s about uncovering the patterns that keep me progressing without breaking down. This blog is my way of sharing that journey—where mountains, trails, and bikes meet mathematics, analytics, and a touch of artistry.
+Numbers, when put into context, tell a story: whether I’m adapting, improving, or stepping into risky territory. That’s why each blog post will focus on a specific question and explore how mathematical thinking can bring clarity—whether it’s about training load, heart rate, distance, or other aspects of performance. This blog is my way of sharing that journey—where mountains, trails, and bikes meet mathematics, analytics, and a touch of artistry.
 
 ```{=html}
 <div class="project-link-container">
