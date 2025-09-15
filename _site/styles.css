@@ -152,6 +152,22 @@ a:hover {
     color: #000;
 }
 
+/*Click zoom images*/
+img.click-zoom {
+    transition: transform 0.3s ease;
+    cursor: zoom-in;
+    max-width: 100%;
+    height: auto;
+}
+
+img.click-zoom:active {
+    transform: scale(2);
+    /* zoom factor */
+    cursor: zoom-out;
+    z-index: 999;
+    position: relative;
+}
+
 /* 
 quarto preview     
 quarto publish gh-pages

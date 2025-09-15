@@ -28,14 +28,14 @@ Our goal is to define a metric that normalizes recent TL against historical. We 
 - **Baseline (long term) adaptation** - Load the body has been succesfully adapted to over a longer period, assuming this distribution is "safe", disregarding recent acute load.
 
     - Denoted as $TL_{\text{baseline},t}$.
-    - Computed over a long baseline window of $N$ days, excluding last $n$ days: $\mathcal{L}_t=\{TL_{t-(n+j)}\mid j=1,\dots, N\}$ 
-    - To give more importance to recent training within the baseline period, we assign weights decreasing with days: $w_j = \lambda^{j-1}, \quad 0 < \lambda <= 1, \quad j = 1, ..., N$, where more recent baseline days contribute more to defining the baseline load.
+    - Computed over a long baseline window of $N$ days, excluding last $n$ days: $$\mathcal{L}_t=\{TL_{t-(n+j)}\mid j=1,\dots, N\}$$
+    - To give more importance to recent training within the baseline period, we assign weights decreasing with days: $$w_j = \lambda^{j-1}, \quad 0 < \lambda <= 1, \quad j = 1, ..., N,$$ where more recent baseline days contribute more to defining the baseline load.
 
 - **Recent training pattern** - Load the body is currently being exposed to, capturing acute training load.
 
     - Denoted as $TL_{\text{recent},t}$.
-    - Computed over a recent window of $n$ days: $\mathcal{R}_t=\{TL_{t-j}\mid j=1,\dots,n\}$.
-    - This can also be weighted to emphasize the most recent sessions: $v_j = \lambda^{j-1}, \quad 0 < \lambda <= 1, \quad j = 1, ..., n$
+    - Computed over a recent window of $n$ days: $$\mathcal{R}_t=\{TL_{t-j}\mid j=1,\dots,n\}$$.
+    - This can also be weighted to emphasize the most recent sessions: $$v_j = \lambda^{j-1}, \quad 0 < \lambda <= 1, \quad j = 1, ..., n$$
 
 We define the **parameters** as:
 
@@ -48,6 +48,59 @@ Additionaly: Because we aim to capture relative load patterns rather than total 
 - $\overline{w}_j = \frac{w_j}{\sum_{k=1}^{N}w_k} \quad j = 1, ..., N$
 - $\overline{v}_j = \frac{v_j}{\sum_{k=1}^{v}w_k} \quad j = 1, ..., v$
 
+![](saved_files/baseline_recent_weighting.png){ class="click-zoom" }
+
 Notes: By keeping the baseline and recent windows non-overlapping, we ensure that the baseline reflects only training the body has already adapted to, without being influenced by recent sessions that the body has not yet adjusted to. This allows us to identify increases in stress in the recent window that may pose a risk.
 
 Dateset: We take into account all measured activities, regardless if it was real training or not (including hiking, swimming, easy cycling etc.) and treat total daily training load as daily sample.  
+
+### Percentile stratified metric
+
+In endurance sports, training days can be grouped into a few main types:
+
+- **Easy sessions & Rest days** - used for recovery, aerobic base, and technique work. These make up roughly 55% of all sessions.
+- **Hard sessions** - tempo, threshold, VO2max, or interval workouts. Typically around 30% of sessions.
+- **Long days** - the occasional very long run, bike ride, or race that forms the extreme right tail of the distribution. About 15% of sessions.
+
+By tracking these session types separately we can see if:
+
+- easy sessins are getting too long, too intense, or too rare, ensuring that we can perform well in harder workouts,
+- or recent hard sessions make up a reasonable portion of total sessions to allow sufficient recovery,
+- or recent long days are not too frequent or extreme.
+
+We will divide our days into these three categories based on Training Load values. Baseline window training load percentiles to define thresholds as this approach is individualized, automatic, and reproducible. These thresholds are then applied to both baseline and recent data.
+
+- This ensures the baseline distribution reflects the training the body has already adapted to, providing a safe reference.
+- Recent sessions are evaluated relative to this safe baseline, so any increase in intensity, frequency, or duration signals higher acute load or potential risk.
+
+Formally, let $\mathcal{Q}^w_p(\mathcal{L}_t)$ be weighted $p$-th quantile of the baseline window $\mathcal{L}_t$ using weights $w_j$ and define the baseline and recent buckets using baseline percentiles $q^w_{70,t}$ and $q^w_{90,t}$ as follows:
+
+- **Easy sessions**: Training loads falling below the weighted $q_{low}$ percentile of the window: $$TL \leq q^w_{low,t}=Q^w_{low}(\mathcal{L}_t)$$
+- **Hard sessions**: Training loads between the weighted $q_{low}$ and $q_{high}$ percentiles: $$q^w_{70,t} < $ TL $\leq q^w_{high,t}=Q^w_{high}(\mathcal{L}_t)$$
+- **Long days**: Training loads above the weighted 90th percentile: $$TL > q^w_{high,t}=Q^w_{high}(\mathcal{L}_t)$$
+
+Note on weighted percentiles: The weighted percentile represents the TL at which the cumulative sum of weights reaches the desired fraction of total weight. This accounts for the fact that more recent baseline sessions contribute more to the threshold.
+
+Having defined these buckets, we summarize each bucket by the weighted average training load within, where we allow more recent training days to contribute more to the bucket averages. With this, we make the metric sensitive to shifts in the typical intensity of each type of session within the bucket. 
+
+Let $w_j$ be the weight of day $j$ in the baseline window $\mathcal{L}_t$ and $v_j$ be the weight of day $j$ in the recent window $\mathcal{R}_t$. We then define the weighted averages within each bucket as:
+
+**Baseline bucket weighted averages:**
+
+- Easy: $\mu^w_{1,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{L}_t,\; TL \le q^w_{low,t}\,]$
+- Hard: $\mu^w_{2,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{L}_t,\; q^w_{low,t} < TL \le q^w_{high,t}\,]$
+- Long: $\mu^w_{3,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{L}_t,\; TL > q^w_{high,t}\,]$
+
+**Recent bucket weighted averages:**
+
+- Easy: $\nu^w_{1,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{R}_t,\; TL \le q^w_{low,t}\,]$
+- Hard: $\nu^w_{2,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{R}_t,\; q^w_{low,t} < TL \le q^w_{high,t}\,]$
+- Long: $\nu^w_{3,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{R}_t,\; TL > q^w_{high,t}\,]$
+
+Where $\mathbb{E}[\cdot]$ denotes the empirical weighted mean $\mathbb{E}_w[v] = \frac{\sum_{i=1}^nw_iv_i}{\sum_{i=1}^nw_i}$ over the subset of training load values falling into the specified bucket.
+
+In addition to the weighted averages, we can also track the proportion of sessions falling into each bucket in both the baseline and the recent window, as the number of easy, hard, and long sessions is not fixed once baseline thresholds are applied to recent training. For example, if the proportion of easy days decreases in recent window  may signal insufficient recovery. Formally, let:
+
+$\pi_{k,t}^{(b)}$ and $\pi_{k,t}^{(r)}$ 
+
+denote proportions of sessions in bucket $k = 1,2,3$ in baseline and recent window respectively.
