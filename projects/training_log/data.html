@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data – Urh Peček | Data Science Blog</title>
+<title>Track Your Training Smarter - Data – Urh Peček | Data Science Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -128,17 +128,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-projects" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Projects</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
-        <li>
-    <a class="dropdown-item" href="../../projects/training_log.html">
- <span class="dropdown-text">Training Log</span></a>
+  <li class="nav-item">
+    <a class="nav-link" href="../../projects/training_log.html"> 
+<span class="menu-text">Training Log</span></a>
   </li>  
-    </ul>
-  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
@@ -163,7 +156,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Data</h1>
+<h1 class="title">Track Your Training Smarter - Data</h1>
 </div>
 
 
@@ -197,7 +190,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> garminconnect <span class="im">import</span> Garmin  </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>garminClient <span class="op">=</span> Garmin(user_email, user_password)  </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>garminClient <span class="op">=</span> Garmin(garmin_email, garmin_password)  </span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>garminClient.login()</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>garminClient.get_activities_by_date(date_from, date_to)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
@@ -217,9 +210,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Of course, logging in requires credentials (emails, passwords, API keys). They are not hardcoded, but live in a <em>.env</em> file locally and as GitHub Secrets in the cloud, keeping sensitive content secure while still accessible for automation.</p>
 <div class="project-link-container">
     <i class="fab fa-github"></i>
-    <span> You can find the full code for this part on my Github repository under the
-    <a href="https://github.com/1312Bravo/TrainingPeaks_customLog/tree/fetch-data-write-gs" target="_blank"> related branch </a>
-    .</span>
+    <span> You can find the full code for this part, which is then easily implemented into <code>src/main.py</code> script, on my Github repository under the
+    <a href="https://github.com/1312Bravo/TrainingPeaks_customLog/tree/main/basic_daily_activity_statistics" target="_blank"> basic_daily_activity_statistics</a>
+     folder.</span>
 </div>
 
 

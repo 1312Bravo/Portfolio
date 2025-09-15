@@ -94,6 +94,7 @@ a:hover {
 
 /* Blog cards */
 .blog-card {
+    position: relative;
     background-color: #ffffff;
     color: #000000;
     border-radius: 12px;
@@ -102,6 +103,14 @@ a:hover {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
+}
+
+.blog-card .blog-date {
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+    font-size: 0.8rem;
+    color: gray;
 }
 
 .blog-card:hover {
@@ -142,3 +151,24 @@ a:hover {
     transform: scale(1.2);
     color: #000;
 }
+
+/*Click zoom images*/
+img.click-zoom {
+    transition: transform 0.3s ease;
+    cursor: zoom-in;
+    max-width: 100%;
+    height: auto;
+}
+
+img.click-zoom:active {
+    transform: scale(2);
+    /* zoom factor */
+    cursor: zoom-out;
+    z-index: 999;
+    position: relative;
+}
+
+/* 
+quarto preview     
+quarto publish gh-pages
+*/

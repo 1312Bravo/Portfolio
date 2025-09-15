@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Urh Peček – Urh Peček | Data Science Blog</title>
+<title>Increase your chances of staying away from running injuries - HASR-TL – Urh Peček | Data Science Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +23,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-59898bd1c6b9d2bb783127feaa000c76.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-920f8b5b4a9e6fe8e930067d636556fa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-59898bd1c6b9d2bb783127feaa000c76.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-920f8b5b4a9e6fe8e930067d636556fa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,8 +68,37 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent quarto-light">
@@ -79,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Urh Peček | Data Science Blog</span>
     </a>
   </div>
@@ -90,11 +119,11 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./projects/training_log.html"> 
+    <a class="nav-link" href="../../projects/training_log.html"> 
 <span class="menu-text">Training Log</span></a>
   </li>  
 </ul>
@@ -121,8 +150,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Urh Peček</h1>
-<p class="subtitle lead">Data Science Projects Portfolio, Blog &amp; Stories</p>
+<h1 class="title">Increase your chances of staying away from running injuries - HASR-TL</h1>
 </div>
 
 
@@ -139,21 +167,98 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="{=html}">
-<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer"></p>
-</div>
-<p>Hi, I’m Urh Peček! A data scientist and lifelong learner, fascinated by how numbers, models, and analytics help us make sense of the world. On this site, I share projects, experiments, and stories that spark my curiosity.</p>
-<p>These posts come from my own independent interests—questions I want to explore, datasets I find intriguing, or challenges that push me to think differently. Each project may be explored through multiple blog-style posts, each focusing on a different aspect, insight, or experiment. This allows me to break complex topics into digestible pieces while following a clear narrative. Each one is an opportunity to apply mathematics, statistics, and analytical thinking in a way that’s both rigorous and creative.</p>
-<p>I aim to make insights clear, actionable, and occasionally even artistic. I share not just results, but the thought process, experiments, and learning along the way. My hope is that every post inspires you to look at problems differently, question assumptions, and maybe spark your own experiments.</p>
-<div class="info-icons">
-<p><a href="https://github.com/1312Bravo" target="_blank"><i class="fab fa-github"></i></a> <a href="https://www.linkedin.com/in/urh-pe%C4%8Dek-a52527246/" target="_blank"><i class="fab fa-linkedin"></i></a> <a href="https://www.instagram.com/urhpecek/" target="_blank"><i class="fab fa-instagram"></i></a> <a href="mailto:pecek.urh@gmail.com"><i class="fas fa-envelope"></i></a></p>
-</div>
-<section id="featured-projects" class="level2">
-<h2 class="anchored" data-anchor-id="featured-projects">Featured Projects</h2>
-<section id="training-log" class="level3 project-card">
-<h3 class="anchored" data-anchor-id="training-log"><a href="./projects/training_log.html">Training Log</a></h3>
-<p>Analysing training data with Python and Garmin data.</p>
+<section id="idea" class="level3">
+<h3 class="anchored" data-anchor-id="idea">Idea</h3>
+<p>When training for endurance sports, our bodies adapt over time, and whether a workout is “hard” or “easy” on the body, depends on what we’ve been doing recently and historically. The goal is to define a simple metric that shows where we are with our current training compared to what we’ve been doing in the recent past. The purpose is to:</p>
+<ul>
+<li>see if we should reduce our training load so that we don’t overreach or risk injury,</li>
+<li>oncrease it to match what our body has adapted to in the recent past, or</li>
+<li>simply define where we are in the training cycle when taking the bigger picture into account.</li>
+</ul>
+<p>The idea of comparing current workload to past workload isn’t new. Sports science has long used the Acute:Chronic Workload Ratio (ACWR) to capture how today’s training compares to longer-term training history. But ACWR has well-known limitations: it usually relies on a single rolling average, and it can miss important context about peak efforts or variation in load. That’s where our approach comes in. We’ll further extend it into a more flexible and informative framework.</p>
 </section>
+<section id="selecting-the-metric" class="level3">
+<h3 class="anchored" data-anchor-id="selecting-the-metric">Selecting the metric:</h3>
+<p>To measure effort, we focus on <strong>Training Load</strong>, a metric that combines all other measures (options: distance, time, heart rate, pace or something else) into a single number. This also strongly coincides with the sport we are analyzing - trail running, where it is hard to judge intensity from speed or distance alone. We might talk more about Training Load in further blogs.</p>
+<p>Training Load is provided from all of ours smart wearables and a practical way for making comparisons across very different sessions (and sports). We will use Garmin’s Training Load values provided in our training log.</p>
+<p>The same approach can be applied to any other training metric. And by calculating values for each, we can see the story from multiple angles.</p>
+</section>
+<section id="deep-dive" class="level3">
+<h3 class="anchored" data-anchor-id="deep-dive">Deep dive</h3>
+<p>Let <span class="math inline">\(TL_i\)</span> be the training load of the day <span class="math inline">\(i\)</span>. Our goal is to define a metric that normalizes recent TL against historical. We can think of this in two complementary components:</p>
+<ul>
+<li><p><strong>Baseline (long term) adaptation</strong> - Load the body has been succesfully adapted to over a longer period, assuming this distribution is “safe”, disregarding recent acute load.</p>
+<ul>
+<li>Denoted as <span class="math inline">\(TL_{\text{baseline},t}\)</span>.</li>
+<li>Computed over a long baseline window of <span class="math inline">\(N\)</span> days, excluding last <span class="math inline">\(n\)</span> days: <span class="math display">\[\mathcal{L}_t=\{TL_{t-(n+j)}\mid j=1,\dots, N\}\]</span></li>
+<li>To give more importance to recent training within the baseline period, we assign weights decreasing with days: <span class="math display">\[w_j = \lambda^{j-1}, \quad 0 &lt; \lambda &lt;= 1, \quad j = 1, ..., N,\]</span> where more recent baseline days contribute more to defining the baseline load.</li>
+</ul></li>
+<li><p><strong>Recent training pattern</strong> - Load the body is currently being exposed to, capturing acute training load.</p>
+<ul>
+<li>Denoted as <span class="math inline">\(TL_{\text{recent},t}\)</span>.</li>
+<li>Computed over a recent window of <span class="math inline">\(n\)</span> days: <span class="math display">\[\mathcal{R}_t=\{TL_{t-j}\mid j=1,\dots,n\}\]</span>.</li>
+<li>This can also be weighted to emphasize the most recent sessions: <span class="math display">\[v_j = \lambda^{j-1}, \quad 0 &lt; \lambda &lt;= 1, \quad j = 1, ..., n\]</span></li>
+</ul></li>
+</ul>
+<p>We define the <strong>parameters</strong> as:</p>
+<ul>
+<li>Baseline window: <span class="math inline">\(N = 90 days\)</span></li>
+<li>Recent window: <span class="math inline">\(n = 14 days\)</span></li>
+<li>Weight base <span class="math inline">\(\lambda\)</span> = <span class="math inline">\((0.5)^\frac{1}{31} = 0.978\)</span>, so weight halves approximately every 31 days.</li>
+</ul>
+<p>Additionaly: Because we aim to capture relative load patterns rather than total accumulated load, we normalize the weights so that they sum to 1. This ensures that the weighted, for example averages, for baseline and recent windows are directly comparable:</p>
+<ul>
+<li><span class="math inline">\(\overline{w}_j = \frac{w_j}{\sum_{k=1}^{N}w_k} \quad j = 1, ..., N\)</span></li>
+<li><span class="math inline">\(\overline{v}_j = \frac{v_j}{\sum_{k=1}^{v}w_k} \quad j = 1, ..., v\)</span></li>
+</ul>
+<p><img src="saved_files/baseline_recent_weighting.png" class="click-zoom img-fluid"></p>
+<p>Notes: By keeping the baseline and recent windows non-overlapping, we ensure that the baseline reflects only training the body has already adapted to, without being influenced by recent sessions that the body has not yet adjusted to. This allows us to identify increases in stress in the recent window that may pose a risk.</p>
+<p>Dateset: We take into account all measured activities, regardless if it was real training or not (including hiking, swimming, easy cycling etc.) and treat total daily training load as daily sample.</p>
+</section>
+<section id="percentile-stratified-metric" class="level3">
+<h3 class="anchored" data-anchor-id="percentile-stratified-metric">Percentile stratified metric</h3>
+<p>In endurance sports, training days can be grouped into a few main types:</p>
+<ul>
+<li><strong>Easy sessions &amp; Rest days</strong> - used for recovery, aerobic base, and technique work. These make up roughly 55% of all sessions.</li>
+<li><strong>Hard sessions</strong> - tempo, threshold, VO2max, or interval workouts. Typically around 30% of sessions.</li>
+<li><strong>Long days</strong> - the occasional very long run, bike ride, or race that forms the extreme right tail of the distribution. About 15% of sessions.</li>
+</ul>
+<p>By tracking these session types separately we can see if:</p>
+<ul>
+<li>easy sessins are getting too long, too intense, or too rare, ensuring that we can perform well in harder workouts,</li>
+<li>or recent hard sessions make up a reasonable portion of total sessions to allow sufficient recovery,</li>
+<li>or recent long days are not too frequent or extreme.</li>
+</ul>
+<p>We will divide our days into these three categories based on Training Load values. Baseline window training load percentiles to define thresholds as this approach is individualized, automatic, and reproducible. These thresholds are then applied to both baseline and recent data.</p>
+<ul>
+<li>This ensures the baseline distribution reflects the training the body has already adapted to, providing a safe reference.</li>
+<li>Recent sessions are evaluated relative to this safe baseline, so any increase in intensity, frequency, or duration signals higher acute load or potential risk.</li>
+</ul>
+<p>Formally, let <span class="math inline">\(\mathcal{Q}^w_p(\mathcal{L}_t)\)</span> be weighted <span class="math inline">\(p\)</span>-th quantile of the baseline window <span class="math inline">\(\mathcal{L}_t\)</span> using weights <span class="math inline">\(w_j\)</span> and define the baseline and recent buckets using baseline percentiles <span class="math inline">\(q^w_{70,t}\)</span> and <span class="math inline">\(q^w_{90,t}\)</span> as follows:</p>
+<ul>
+<li><strong>Easy sessions</strong>: Training loads falling below the weighted <span class="math inline">\(q_{low}\)</span> percentile of the window: <span class="math display">\[TL \leq q^w_{low,t}=Q^w_{low}(\mathcal{L}_t)\]</span></li>
+<li><strong>Hard sessions</strong>: Training loads between the weighted <span class="math inline">\(q_{low}\)</span> and <span class="math inline">\(q_{high}\)</span> percentiles: <span class="math display">\[q^w_{70,t} &lt; $ TL $\leq q^w_{high,t}=Q^w_{high}(\mathcal{L}_t)\]</span></li>
+<li><strong>Long days</strong>: Training loads above the weighted 90th percentile: <span class="math display">\[TL &gt; q^w_{high,t}=Q^w_{high}(\mathcal{L}_t)\]</span></li>
+</ul>
+<p>Note on weighted percentiles: The weighted percentile represents the TL at which the cumulative sum of weights reaches the desired fraction of total weight. This accounts for the fact that more recent baseline sessions contribute more to the threshold.</p>
+<p>Having defined these buckets, we summarize each bucket by the weighted average training load within, where we allow more recent training days to contribute more to the bucket averages. With this, we make the metric sensitive to shifts in the typical intensity of each type of session within the bucket.</p>
+<p>Let <span class="math inline">\(w_j\)</span> be the weight of day <span class="math inline">\(j\)</span> in the baseline window <span class="math inline">\(\mathcal{L}_t\)</span> and <span class="math inline">\(v_j\)</span> be the weight of day <span class="math inline">\(j\)</span> in the recent window <span class="math inline">\(\mathcal{R}_t\)</span>. We then define the weighted averages within each bucket as:</p>
+<p><strong>Baseline bucket weighted averages:</strong></p>
+<ul>
+<li>Easy: <span class="math inline">\(\mu^w_{1,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{L}_t,\; TL \le q^w_{low,t}\,]\)</span></li>
+<li>Hard: <span class="math inline">\(\mu^w_{2,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{L}_t,\; q^w_{low,t} &lt; TL \le q^w_{high,t}\,]\)</span></li>
+<li>Long: <span class="math inline">\(\mu^w_{3,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{L}_t,\; TL &gt; q^w_{high,t}\,]\)</span></li>
+</ul>
+<p><strong>Recent bucket weighted averages:</strong></p>
+<ul>
+<li>Easy: <span class="math inline">\(\nu^w_{1,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{R}_t,\; TL \le q^w_{low,t}\,]\)</span></li>
+<li>Hard: <span class="math inline">\(\nu^w_{2,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{R}_t,\; q^w_{low,t} &lt; TL \le q^w_{high,t}\,]\)</span></li>
+<li>Long: <span class="math inline">\(\nu^w_{3,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{R}_t,\; TL &gt; q^w_{high,t}\,]\)</span></li>
+</ul>
+<p>Where <span class="math inline">\(\mathbb{E}[\cdot]\)</span> denotes the empirical weighted mean <span class="math inline">\(\mathbb{E}_w[v] = \frac{\sum_{i=1}^nw_iv_i}{\sum_{i=1}^nw_i}\)</span> over the subset of training load values falling into the specified bucket.</p>
+<p>In addition to the weighted averages, we can also track the proportion of sessions falling into each bucket in both the baseline and the recent window, as the number of easy, hard, and long sessions is not fixed once baseline thresholds are applied to recent training. For example, if the proportion of easy days decreases in recent window may signal insufficient recovery. Formally, let:</p>
+<p><span class="math inline">\(\pi_{k,t}^{(b)}\)</span> and <span class="math inline">\(\pi_{k,t}^{(r)}\)</span></p>
+<p>denote proportions of sessions in bucket <span class="math inline">\(k = 1,2,3\)</span> in baseline and recent window respectively.</p>
 
 
 </section>
