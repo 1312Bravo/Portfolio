@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Track Your Training Smarter - Data – Urh Peček | Data Science Blog</title>
+<title>Increase your chances of staying away from running injuries - HASR-TL – Urh Peček | Data Science Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,41 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -103,6 +68,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -156,7 +150,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Track Your Training Smarter - Data</h1>
+<h1 class="title">Increase your chances of staying away from running injuries - HASR-TL</h1>
 </div>
 
 
@@ -173,49 +167,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="{=html}">
-<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer"></p>
-</div>
-<p>Before diving into analysis, it’s worth showing where the numbers come from. I wanted a consistent and automated way to capture my training.</p>
-<p>Two main datasets are daily updated and live in Google Sheets. Having the data in this format makes it easy to explore manually, but also gives me a flexible base for deeper analysis. I provide only a static sample of data logs.</p>
+<section id="idea" class="level3">
+<h3 class="anchored" data-anchor-id="idea">Idea</h3>
+<p>When training for endurance sports, our bodies adapt over time, and whether a workout is “hard” or “easy” on the body, depends on what we’ve been doing recently and historically. The goal is to define a simple metric that shows where we are with our current training compared to what we’ve been doing in the recent past. The purpose is to:</p>
 <ul>
-<li><a href="https://docs.google.com/spreadsheets/d/1o5Y9_AM_8baj5DnB2AE9nYXU_ZSPsyFW6VjRbljSWIw/edit?gid=412740509#gid=412740509" target="_blank">Training Log</a> – workouts with different metrics, including distance, duration, elevation, heart rate.</li>
-<li><a href="https://docs.google.com/spreadsheets/d/1k-JIYE5z9a-2IqcslkliL_Y6CdvcNeZ7NoVe8wDbo8I/edit?gid=0#gid=0" target="_blank">Daily Log</a> – day-level statistics, such as steps, sleep, resting heart rate, recovery time, and other daily metrics.</li>
+<li>see if we should reduce our training load so that we don’t overreach or risk injury,</li>
+<li>oncrease it to match what our body has adapted to in the recent past, or</li>
+<li>simply define where we are in the training cycle when taking the bigger picture into account.</li>
 </ul>
-<p>The statistics come from the Garmin Connect API. A Python script fetches both activity and daily statistics, and then pushes them into the Google Sheets. Some metrics are raw Garmin values, while others are adjusted or calculated. Statistics that are captured in sheets can also evolve over time as we discover new metrics or further analyze training. So, some of the statistics in the sheet can also be presented in details in other blog posts.</p>
-<p>The script is run each morning and spreadsheets expand by one more day of history (yesterday’s data), keeping the logs synchronized without manual work. The script can also loop through multiple accounts if provided.</p>
-<p>The script relies two key integrations:</p>
+<p>The idea of comparing current workload to past workload isn’t new. Sports science has long used the Acute:Chronic Workload Ratio (ACWR) to capture how today’s training compares to longer-term training history. But ACWR has well-known limitations: it usually relies on a single rolling average, and it can miss important context about peak efforts or variation in load. That’s where our approach comes in. We’ll further extend it into a more flexible and informative framework.</p>
+</section>
+<section id="selecting-the-metric" class="level3">
+<h3 class="anchored" data-anchor-id="selecting-the-metric">Selecting the metric:</h3>
+<p>To measure effort, we focus on <strong>Training Load</strong>, a metric that combines all other measures (options: distance, time, heart rate, pace or something else) into a single number. This also strongly coincides with the sport we are analyzing - trail running, where it is hard to judge intensity from speed or distance alone. We might talk more about Training Load in further blogs.</p>
+<p>Training Load is provided from all of ours smart wearables and a practical way for making comparisons across very different sessions (and sports). We will use Garmin’s Training Load values provided in our training log.</p>
+<p>The same approach can be applied to any other training metric. And by calculating values for each, we can see the story from multiple angles.</p>
+</section>
+<section id="deep-dive" class="level3">
+<h3 class="anchored" data-anchor-id="deep-dive">Deep dive</h3>
+<p>Let <span class="math inline">\(TL_i\)</span> be the training load of the day <span class="math inline">\(i\)</span>. Our goal is to define a metric that normalizes recent TL against historical. We can think of this in two complementary components:</p>
 <ul>
-<li><code>Garmin Connect API</code> – fetch activities and health metrics.</li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> garminconnect <span class="im">import</span> Garmin  </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>garminClient <span class="op">=</span> Garmin(garmin_email, garmin_password)  </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>garminClient.login()</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>garminClient.get_activities_by_date(date_from, date_to)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<li><p><strong>Baseline (long term) adaptation</strong> - Load the body has been succesfully adapted to over a longer period, assuming this distribution is “safe”, disregarding recent acute load.</p>
 <ul>
-<li><code>Google Sheets API</code> – store and update logs.</li>
+<li>Denoted as <span class="math inline">\(TL_{\text{baseline},t}\)</span>.</li>
+<li>Computed over a long baseline window of <span class="math inline">\(N\)</span> days, excluding last <span class="math inline">\(n\)</span> days: <span class="math inline">\(\mathcal{L}_t=\{TL_{t-(n+j)}\mid j=1,\dots, N\}\)</span></li>
+<li>To give more importance to recent training within the baseline period, we assign weights decreasing with days: <span class="math inline">\(w_j = \lambda^{j-1}, \quad 0 &lt; \lambda &lt;= 1, \quad j = 1, ..., N\)</span>, where more recent baseline days contribute more to defining the baseline load.</li>
+</ul></li>
+<li><p><strong>Recent training pattern</strong> - Load the body is currently being exposed to, capturing acute training load.</p>
+<ul>
+<li>Denoted as <span class="math inline">\(TL_{\text{recent},t}\)</span>.</li>
+<li>Computed over a recent window of <span class="math inline">\(n\)</span> days: <span class="math inline">\(\mathcal{R}_t=\{TL_{t-j}\mid j=1,\dots,n\}\)</span>.</li>
+<li>This can also be weighted to emphasize the most recent sessions: <span class="math inline">\(v_j = \lambda^{j-1}, \quad 0 &lt; \lambda &lt;= 1, \quad j = 1, ..., n\)</span></li>
+</ul></li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gspread</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> google.oauth2.service_account <span class="im">import</span> Credentials  </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>drive_credentials <span class="op">=</span> Credentials.from_service_account_file(</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"googleDrive_secrets.json"</span>,  </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    scopes<span class="op">=</span>[<span class="st">"https://www.googleapis.com/auth/spreadsheets"</span>,  </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"https://www.googleapis.com/auth/drive"</span>]  </span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>googleDrive_client <span class="op">=</span> gspread.authorize(drive_credentials)  </span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>googleDrive_client.<span class="bu">open</span>(user_dailyLogFilename)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Of course, logging in requires credentials (emails, passwords, API keys). They are not hardcoded, but live in a <em>.env</em> file locally and as GitHub Secrets in the cloud, keeping sensitive content secure while still accessible for automation.</p>
-<div class="project-link-container">
-    <i class="fab fa-github"></i>
-    <span> You can find the full code for this part, which is then easily implemented into <code>src/main.py</code> script, on my Github repository under the
-    <a href="https://github.com/1312Bravo/TrainingPeaks_customLog/tree/main/basic_daily_activity_statistics" target="_blank"> basic_daily_activity_statistics</a>
-     folder.</span>
-</div>
+<p>We define the <strong>parameters</strong> as:</p>
+<ul>
+<li>Baseline window: <span class="math inline">\(N = 90 days\)</span></li>
+<li>Recent window: <span class="math inline">\(n = 14 days\)</span></li>
+<li>Weight base <span class="math inline">\(\lambda\)</span> = <span class="math inline">\((0.5)^\frac{1}{31} = 0.978\)</span>, so weight halves approximately every 31 days.</li>
+</ul>
+<p>Additionaly: Because we aim to capture relative load patterns rather than total accumulated load, we normalize the weights so that they sum to 1. This ensures that the weighted, for example averages, for baseline and recent windows are directly comparable:</p>
+<ul>
+<li><span class="math inline">\(\overline{w}_j = \frac{w_j}{\sum_{k=1}^{N}w_k} \quad j = 1, ..., N\)</span></li>
+<li><span class="math inline">\(\overline{v}_j = \frac{v_j}{\sum_{k=1}^{v}w_k} \quad j = 1, ..., v\)</span></li>
+</ul>
+<p>Notes: By keeping the baseline and recent windows non-overlapping, we ensure that the baseline reflects only training the body has already adapted to, without being influenced by recent sessions that the body has not yet adjusted to. This allows us to identify increases in stress in the recent window that may pose a risk.</p>
+<p>Dateset: We take into account all measured activities, regardless if it was real training or not (including hiking, swimming, easy cycling etc.) and treat total daily training load as daily sample.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

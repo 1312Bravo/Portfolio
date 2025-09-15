@@ -1,0 +1,53 @@
+---
+title: "Increase your chances of staying away from running injuries - HASR-TL"
+---
+
+### Idea
+
+When training for endurance sports, our bodies adapt over time, and whether a workout is "hard" or "easy" on the body, depends on what we’ve been doing recently and historically.  The goal is to define a simple metric that shows where we are with our current training compared to what we've been doing in the recent past. The purpose is to:
+
+- see if we should reduce our training load so that we don’t overreach or risk injury,
+- oncrease it to match what our body has adapted to in the recent past, or
+- simply define where we are in the training cycle when taking the bigger picture into account.
+
+The idea of comparing current workload to past workload isn’t new. Sports science has long used the Acute:Chronic Workload Ratio (ACWR) to capture how today’s training compares to longer-term training history. But ACWR has well-known limitations: it usually relies on a single rolling average, and it can miss important context about peak efforts or variation in load. That’s where our approach comes in. We'll further extend it into a more flexible and informative framework.
+
+### Selecting the metric: 
+
+To measure effort, we focus on **Training Load**, a metric that combines all other measures (options: distance, time, heart rate, pace or something else) into a single number. This also strongly coincides with the sport we are analyzing - trail running, where it is hard to judge intensity from speed or distance alone. We might talk more about Training Load in further blogs.
+
+Training Load is provided from all of ours smart wearables and a practical way for making comparisons across very different sessions (and sports). We will use Garmin's Training Load values provided in our training log.
+
+The same approach can be applied to any other training metric. And by calculating values for each, we can see the story from multiple angles.
+
+### Deep dive
+
+Let $TL_i$ be the training load of the day $i$. 
+Our goal is to define a metric that normalizes recent TL against historical. We can think of this in two complementary components:
+
+- **Baseline (long term) adaptation** - Load the body has been succesfully adapted to over a longer period, assuming this distribution is "safe", disregarding recent acute load.
+
+    - Denoted as $TL_{\text{baseline},t}$.
+    - Computed over a long baseline window of $N$ days, excluding last $n$ days: $\mathcal{L}_t=\{TL_{t-(n+j)}\mid j=1,\dots, N\}$ 
+    - To give more importance to recent training within the baseline period, we assign weights decreasing with days: $w_j = \lambda^{j-1}, \quad 0 < \lambda <= 1, \quad j = 1, ..., N$, where more recent baseline days contribute more to defining the baseline load.
+
+- **Recent training pattern** - Load the body is currently being exposed to, capturing acute training load.
+
+    - Denoted as $TL_{\text{recent},t}$.
+    - Computed over a recent window of $n$ days: $\mathcal{R}_t=\{TL_{t-j}\mid j=1,\dots,n\}$.
+    - This can also be weighted to emphasize the most recent sessions: $v_j = \lambda^{j-1}, \quad 0 < \lambda <= 1, \quad j = 1, ..., n$
+
+We define the **parameters** as:
+
+- Baseline window: $N = 90 days$
+- Recent window: $n = 14 days$
+- Weight base $\lambda$ = $(0.5)^\frac{1}{31} = 0.978$, so weight halves approximately every 31 days.
+
+Additionaly: Because we aim to capture relative load patterns rather than total accumulated load, we normalize the weights so that they sum to 1. This ensures that the weighted, for example averages, for baseline and recent windows are directly comparable: 
+
+- $\overline{w}_j = \frac{w_j}{\sum_{k=1}^{N}w_k} \quad j = 1, ..., N$
+- $\overline{v}_j = \frac{v_j}{\sum_{k=1}^{v}w_k} \quad j = 1, ..., v$
+
+Notes: By keeping the baseline and recent windows non-overlapping, we ensure that the baseline reflects only training the body has already adapted to, without being influenced by recent sessions that the body has not yet adjusted to. This allows us to identify increases in stress in the recent window that may pose a risk.
+
+Dateset: We take into account all measured activities, regardless if it was real training or not (including hiking, swimming, easy cycling etc.) and treat total daily training load as daily sample.  

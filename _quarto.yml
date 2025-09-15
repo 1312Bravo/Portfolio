@@ -8,10 +8,8 @@ website:
     left: 
       - text: Home
         href: index.qmd
-      - text: Projects
-        menu:
-          - text: Training Log
-            href: projects/training_log.qmd
+      - text: Training Log
+        href: projects/training_log.qmd
     right:
       - icon: github
         href: https://github.com/1312Bravo
