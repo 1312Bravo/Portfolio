@@ -62,16 +62,6 @@ In endurance sports, training days can be grouped into a few main types:
 - **Hard sessions** - tempo, threshold, VO2max, or interval workouts. Typically around 30% of sessions.
 - **Long days** - the occasional very long run, bike ride, or race that forms the extreme right tail of the distribution. About 15% of sessions.
 
-Based on my training data (with a hardcoded mapping into the categories Rest, Easy, Hard, Long, and Other), the distribution of training loads and their descriptive values are as follows:
-
-- Rest — 14% of days, TL = avg 0, SD 0
-- Easy — 47% of days, TL = avg 96, SD 43
-- Hard — 14% of days, TL = avg 190, SD 56
-- Long — 18% of days, TL = avg 218, SD 96
-- Other — 7% of days, TL = avg 130, SD 66
-
-![](saved_files/training_type_distribution.png){ class="click-zoom" }
-
 By tracking these session types separately we can see if:
 
 - easy sessins are getting too long, too intense, or too rare, ensuring that we can perform well in harder workouts,
@@ -93,22 +83,50 @@ Note on weighted percentiles: The weighted percentile represents the TL at which
 
 Having defined these buckets, we summarize each bucket by the weighted average training load within, where we allow more recent training days to contribute more to the bucket averages. With this, we make the metric sensitive to shifts in the typical intensity of each type of session within the bucket. 
 
+Based on my training data (with a hardcoded mapping into the categories Rest, Easy, Hard, Long, and Other), the distribution of training loads and their descriptive values are as follows:
+
+- Rest — 14% of days, TL = avg 0, SD 0
+- Easy — 47% of days, TL = avg 96, SD 43
+- Hard — 14% of days, TL = avg 190, SD 56
+- Long — 18% of days, TL = avg 218, SD 96
+- Other — 7% of days, TL = avg 130, SD 66
+
+![](saved_files/training_type_distribution.png){ class="click-zoom" }
+
 Let $w_j$ be the weight of day $j$ in the baseline window $\mathcal{L}_t$ and $v_j$ be the weight of day $j$ in the recent window $\mathcal{R}_t$. We then define the weighted averages within each bucket as:
 
 **Baseline bucket weighted averages:**
 
-- Easy: $\mu^w_{1,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{L}_t,\; TL \le q^w_{low,t}\,]$
-- Hard: $\mu^w_{2,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{L}_t,\; q^w_{low,t} < TL \le q^w_{high,t}\,]$
-- Long: $\mu^w_{3,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{L}_t,\; TL > q^w_{high,t}\,]$
+$$\text{Easy}: \mu^w_{1,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{L}_t,\; TL \le q^w_{low,t}\,]$$
+$$\text{Hard}: \mu^w_{2,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{L}_t,\; q^w_{low,t} < TL \le q^w_{high,t}\,]$$
+$$\text{Long}: \mu^w_{3,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{L}_t,\; TL > q^w_{high,t}\,]$$
 
 **Recent bucket weighted averages:**
 
-- Easy: $\nu^w_{1,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{R}_t,\; TL \le q^w_{low,t}\,]$
-- Hard: $\nu^w_{2,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{R}_t,\; q^w_{low,t} < TL \le q^w_{high,t}\,]$
-- Long: $\nu^w_{3,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{R}_t,\; TL > q^w_{high,t}\,]$
+$$\text{Easy}: \nu^w_{1,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{R}_t,\; TL \le q^w_{low,t}\,]$$
+$$\text{Hard}: \nu^w_{2,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{R}_t,\; q^w_{low,t} < TL \le q^w_{high,t}\,]$$
+$$\text{Long}: \nu^w_{3,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{R}_t,\; TL > q^w_{high,t}\,]$$
 
 Where $\mathbb{E}[\cdot]$ denotes the empirical weighted mean $\mathbb{E}_w[v] = \frac{\sum_{i=1}^nw_iv_i}{\sum_{i=1}^nw_i}$ over the subset of training load values falling into the specified bucket.
 
 In addition to the weighted averages, we can also track the proportion of sessions falling into each bucket in both the baseline and the recent window, as the number of easy, hard, and long sessions is not fixed once baseline thresholds are applied to recent training. For example, if the proportion of easy days decreases in recent window  may signal insufficient recovery. 
 
-Formally, let: $\pi_{k,t}^{(b)}$ and $\pi_{k,t}^{(r)}$ denote proportions of sessions in bucket $k = 1,2,3$ in baseline and recent window respectively.
+Formally, let: $$\pi_{k,t}^{(b)} \quad \text{and} \quad \pi_{k,t}^{(r)}$$ denote proportions of sessions in bucket $k = 1,2,3$ in baseline and recent window respectively.
+
+### History-Aware Statified Relative - Training Load (HASR-TL)
+
+Once training sessions are divided into the three percentile-based buckets, defined from the baseline window, we can combine them into a single, interpretable metric that reflects how recent training compares to the athlete's long-term adaptation. The central idea is weighted aggregation, where each bucket contributes differently to the overall metric. By aggregating the per-bucket loads with appropriate weights, HASRTL produces a single number that reflects how the overall recent training load compares to the baseline adaptation.
+
+**Weighted aggregation**
+
+Let $w_1, w_2, w_3$ denote weights for easy, hard, and long sessions, respectively, with $$w_1+w_2+w_3=1,\quad w_k\ge 0$$. 
+The baseline aggregate load is then: $$TL_{\text{baseline},t} = w_1 \mu_{1,t} + w_2 \mu_{2,t} + w_3 \mu_{3,t}.$$ 
+Similarly, the recent aggregate load is: $$TL_{\text{recent},t} = w_1 \nu_{1,t} + w_2 \nu_{2,t} + w_3 \nu_{3,t}.$$
+
+Finally, the **History-Aware Stratified Relative Training Load (HASRTL)** is defined as: $$\Delta_t = \frac{TL_{\text{recent}}}{TL_{\text{baseline}}}.$$
+
+Here, $\Delta_t$ expresses how the current (recent) training load compares to the long-term baseline. It can be interpreted as a percentage increase or decrease of recent load relative to baseline adaptation.
+
+Since recent sessions are classified using baseline-defined buckets, $\Delta_t$ represents the relative training load compared to what the athlete has already adapted to, making it a robust measure of both increased stress and potential risk.
+
+**Selection of weights $w_1, w_2, w_3$**
