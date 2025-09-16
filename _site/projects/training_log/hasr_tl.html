@@ -202,8 +202,8 @@ window.Quarto = {
 </ul>
 <p>We define the <strong>parameters</strong> as:</p>
 <ul>
-<li>Baseline window: <span class="math inline">\(N = 90 days\)</span></li>
-<li>Recent window: <span class="math inline">\(n = 14 days\)</span></li>
+<li>Baseline window: <span class="math inline">\(N = 90\)</span> days</li>
+<li>Recent window: <span class="math inline">\(n = 14\)</span> days</li>
 <li>Weight base <span class="math inline">\(\lambda\)</span> = <span class="math inline">\((0.5)^\frac{1}{31} = 0.978\)</span>, so weight halves approximately every 31 days.</li>
 </ul>
 <p>Additionaly: Because we aim to capture relative load patterns rather than total accumulated load, we normalize the weights so that they sum to 1. This ensures that the weighted, for example averages, for baseline and recent windows are directly comparable:</p>
@@ -269,6 +269,32 @@ window.Quarto = {
 <p>Here, <span class="math inline">\(\Delta_t\)</span> expresses how the current (recent) training load compares to the long-term baseline. It can be interpreted as a percentage increase or decrease of recent load relative to baseline adaptation.</p>
 <p>Since recent sessions are classified using baseline-defined buckets, <span class="math inline">\(\Delta_t\)</span> represents the relative training load compared to what the athlete has already adapted to, making it a robust measure of both increased stress and potential risk.</p>
 <p><strong>Selection of weights <span class="math inline">\(w_1, w_2, w_3\)</span></strong></p>
+<p>When defining the buckets weights, for our purpose, we have to consider the bucket’s contribution to adaptation and also their potential impact on injury risk. The weights should reflect the relative importance of bucket’s session type in promoting positive training effects while also accounting for their role in acute stress spikes that may increase the probability of injury.</p>
+<ul>
+<li>Easy sessions: As we defined them, they are frequent and involve low-intensity activities. They have low impact on both the adaptation and injury risk. Weight reflects their impact on training adaptation and injury risk.
+<ul>
+<li><span class="math inline">\(w_1 = 0.15\)</span></li>
+</ul></li>
+<li>Hard sessison: Less frequent but high-intensity activities that drive the adaptation and also impose higher acute loads that increase injury risk. Weight reflects their contribution to acute stress.
+<ul>
+<li><span class="math inline">\(w2 = 0.40\)</span></li>
+</ul></li>
+<li>Long sessison: They are rare but lead to high cumulative stress. They significantly contribute to adaptation and also pose a highest risk of injury. Weight reflects their peak stress contribution.
+<ul>
+<li><span class="math inline">\(w3: = 0.45\)</span></li>
+</ul></li>
+</ul>
+<p>These weights are not directly measurable — they are largely subjective, based on expert knowledge, experience, and general principles of training load management rather than precise data.</p>
+</section>
+<section id="interpretation-bucket-level-diagnostics" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-bucket-level-diagnostics">Interpretation &amp; Bucket-level diagnostics</h3>
+<p>Although <span class="math inline">\(\Delta_t\)</span> provides a clear mathematical ratio of recent to baseline training load, its practical interpretation is less straightforward — it is not always obvious when an increase or decrease becomes significant, risky, or indicative of detraining.</p>
+<p><img src="saved_files/hasr_tl_full.png" class="click-zoom img-fluid"></p>
+<p>The idea behind the HASR-TL metric is to summarize this relationship in a single number, but a deeper understanding comes from also examining the individual training buckets (e.g., easy, hard, long). Comparing these buckets within the baseline and recent windows, and between them, helps reveal where changes originate and adds richer context than the ratio alone.</p>
+<p>By <strong>comparing bucket values within the same window</strong>, we gain insight to how well the training program is balanced across session types. This helps us check whether easy, hard, and long sessions are clearly distinct, or whether the loads are starting to blur together — which could reduce the effectiveness of the training. In practice, we calculate pairwise ratios of bucket weighted averages:</p>
+<p><span class="math display">\[\zeta_{\mu_i, \mu_j} = \frac{\mu_{i,t}}{\mu_{j,t}} \quad \text{and} \quad \zeta_{\nu_i, \nu_j} = \frac{\nu_{i,t}}{\nu_{j,t}}, \quad i,j = 1,2,3, i \neq j\]</span></p>
+<p>By monitoring these values, we can identify trends such as if easy vs.&nbsp;hard sessions are becoming too similar, which might indicate reduced stimulus diversity.</p>
+<p><strong>The question remains</strong>: Ultimately, bucket-level diagnostics are a key aid in interpreting <span class="math inline">\(\Delta_t\)</span>, but they raise the same challenge: deciding what magnitude of change truly matters. These interpretive questions will be addressed in the next chapter.</p>
 
 
 </section>
