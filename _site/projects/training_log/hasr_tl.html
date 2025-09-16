@@ -240,6 +240,7 @@ window.Quarto = {
 <li><strong>Hard sessions</strong>: Training loads between the weighted <span class="math inline">\(q_{low}\)</span> and <span class="math inline">\(q_{high}\)</span> percentiles: <span class="math display">\[q^w_{70,t} &lt; TL \leq q^w_{high,t}=Q^w_{high}(\mathcal{L}_t)\]</span></li>
 <li><strong>Long days</strong>: Training loads above the weighted 90th percentile: <span class="math display">\[TL &gt; q^w_{high,t}=Q^w_{high}(\mathcal{L}_t)\]</span></li>
 </ul>
+<p>Clarifying note: In order to perform any structured analysis, each session must be assigned to a bucket based on the percentile thresholds. This means that some sessions may fall into different buckets due to small differences in Training Load, even if their physiological impact is similar. So these categories should be interpreted with caution. Categories are a practical tool for analysis and a guide, rather than absolute labels. When interpreting them, consider the broader context.</p>
 <p>Note on weighted percentiles: The weighted percentile represents the TL at which the cumulative sum of weights reaches the desired fraction of total weight. This accounts for the fact that more recent baseline sessions contribute more to the threshold.</p>
 <p>Having defined these buckets, we summarize each bucket by the weighted average training load within, where we allow more recent training days to contribute more to the bucket averages. With this, we make the metric sensitive to shifts in the typical intensity of each type of session within the bucket.</p>
 <p>Based on my training data (with a hardcoded mapping into the categories Rest, Easy, Hard, Long, and Other), the distribution of training loads and their descriptive values are as follows:</p>
@@ -259,6 +260,21 @@ window.Quarto = {
 <p>Where <span class="math inline">\(\mathbb{E}[\cdot]\)</span> denotes the empirical weighted mean <span class="math inline">\(\mathbb{E}_w[v] = \frac{\sum_{i=1}^nw_iv_i}{\sum_{i=1}^nw_i}\)</span> over the subset of training load values falling into the specified bucket.</p>
 <p>In addition to the weighted averages, we can also track the proportion of sessions falling into each bucket in both the baseline and the recent window. Wheres the proportion of sessions falling into each bucket in Baseline window as pre-determined with quantiles, the number of easy, hard, and long sessions is not fixed once baseline thresholds are applied to recent training. For example, if the proportion of easy days decreases in recent window may signal insufficient recovery.</p>
 <p>Formally, let: <span class="math display">\[\pi_{k,t}^{(b)} \quad \text{and} \quad \pi_{k,t}^{(r)}\]</span> denote proportions of sessions in bucket <span class="math inline">\(k = 1,2,3\)</span> in baseline and recent window respectively.</p>
+<p><strong>Most recent Session Classification</strong></p>
+<p>In addition to aggregated metrics, we can also assess each most recent individual session in the context of the baseline distribution. Specifically, for the most recent training session (e.g., the date of analysis), we can determine where its Training Load falls within the weighted baseline distribution.</p>
+<p>This can be expressed as the weighted percentile (or baseline-relative quantile rank) of the session:</p>
+<p><span class="math display">\[\phi_t = \frac{\sum_{j \in \mathcal{L}_t} w_j \,\mathbf{1}\{\,TL_j \leq TL_t^{(\text{recent})}\}}{\sum_{j \in \mathcal{L}_t} w_j}\]</span></p>
+<p>This allows us to assign the session to one of the predefined buckets — Easy, Hard, or Long — using the same percentile thresholds derived from the baseline window:</p>
+<p><span class="math display">\[
+\text{Session classification} =
+\begin{cases}
+\text{Easy} &amp; \text{if } TL \le q^w_{\text{low},t} \\[2mm]
+\text{Hard} &amp; \text{if } q^w_{\text{low},t} &lt; TL \le q^w_{\text{high},t} \\[1mm]
+\text{Long} &amp; \text{if } TL &gt; q^w_{\text{high},t}
+\end{cases}
+\]</span></p>
+<p>Also, as mentioned above, these classifications are meant as guidance; a more complete understanding comes from considering the weighted percentile values, which provide richer context on the session’s relative intensity.</p>
+<p>By doing this, we can assess the acute characteristics of the latest session relative to what the athlete has already adapted to and estimate how individual session contributes to overall training stress. This information can then guide adjustments for upcoming workouts to ensure we stay on track with the training plan.</p>
 </section>
 <section id="history-aware-statified-relative---training-load-hasr-tl" class="level3">
 <h3 class="anchored" data-anchor-id="history-aware-statified-relative---training-load-hasr-tl">History-Aware Statified Relative - Training Load (HASR-TL)</h3>
@@ -306,6 +322,16 @@ window.Quarto = {
 <p><img src="saved_files/bucket_proportion_easy_hard_comparison.png" class="click-zoom img-fluid"></p>
 <p>For example, <span class="math inline">\(\rho_{1,t} &lt; 1\)</span> may indicate that recovery-oriented easy days are becoming too rare, while <span class="math inline">\(\rho_{3,t} &gt; 1\)</span> suggests long sessions are occurring more frequently, than the body is adapted to.</p>
 <p>Together, these diagnostics offer a comprehensive view of training composition and its evolution and form the foundation for interpreting the aggregated HASRTL metric. However, <strong>the key question remains</strong>: how large a change is meaningful, risky, or indicative of under or over-training? These interpretive challenges will be explored in the next chapter.</p>
+</section>
+<section id="implementation" class="level3">
+<h3 class="anchored" data-anchor-id="implementation">Implementation</h3>
+<p>These statistics are similar to activity statistics presented in the Data blog, daily calculated and available for review and possible analysis in Google sheets. They are under <a href="https://docs.google.com/spreadsheets/d/1o5Y9_AM_8baj5DnB2AE9nYXU_ZSPsyFW6VjRbljSWIw/edit?gid=2140406364#gid=2140406364" target="_blank">Activity Log file - HASR-TL sheet</a>.</p>
+<div class="project-link-container">
+    <i class="fab fa-github"></i>
+    <span> You can find the full code for this section, along with the analyses, which is then easily integrated into the <code>src/main.py</code> script, on my Github repository under the
+    <a href="https://github.com/1312Bravo/TrainingPeaks_customLog/tree/main/analysis/history_aware_relative_stratified_training_load" target="_blank"> history_aware_relative_stratified_training_load</a>
+     folder.</span>
+</div>
 
 
 </section>

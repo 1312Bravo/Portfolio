@@ -10,7 +10,7 @@ Before diving into analysis, it's worth showing where the numbers come from. I w
 
 Two main datasets are daily updated and live in Google Sheets. Having the data in this format makes it easy to explore manually, but also gives me a flexible base for deeper analysis. I provide only a static sample of data logs.
 
-- [Training Log](https://docs.google.com/spreadsheets/d/1o5Y9_AM_8baj5DnB2AE9nYXU_ZSPsyFW6VjRbljSWIw/edit?gid=412740509#gid=412740509){target="_blank"} – workouts with different metrics, including distance, duration, elevation, heart rate. 
+- [Activity Log](https://docs.google.com/spreadsheets/d/1o5Y9_AM_8baj5DnB2AE9nYXU_ZSPsyFW6VjRbljSWIw/edit?gid=412740509#gid=412740509){target="_blank"} – training activities with different metrics, including distance, duration, elevation, heart rate. 
 - [Daily Log](https://docs.google.com/spreadsheets/d/1k-JIYE5z9a-2IqcslkliL_Y6CdvcNeZ7NoVe8wDbo8I/edit?gid=0#gid=0){target="_blank"} – day-level statistics, such as steps, sleep, resting heart rate, recovery time, and other daily metrics.
 
 The statistics come from the Garmin Connect API. A Python script fetches both activity and daily statistics, and then pushes them into the Google Sheets. Some metrics are raw Garmin values, while others are adjusted or calculated. Statistics that are captured in sheets can also evolve over time as we discover new metrics or further analyze training. So, some of the statistics in the sheet can also be presented in details in other blog posts.
