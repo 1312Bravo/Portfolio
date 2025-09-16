@@ -223,6 +223,15 @@ window.Quarto = {
 <li><strong>Hard sessions</strong> - tempo, threshold, VO2max, or interval workouts. Typically around 30% of sessions.</li>
 <li><strong>Long days</strong> - the occasional very long run, bike ride, or race that forms the extreme right tail of the distribution. About 15% of sessions.</li>
 </ul>
+<p>Based on my training data (with a hardcoded mapping into the categories Rest, Easy, Hard, Long, and Other), the distribution of training loads and their descriptive values are as follows:</p>
+<ul>
+<li>Rest — 14% of days, TL = avg 0, SD 0</li>
+<li>Easy — 47% of days, TL = avg 96, SD 43</li>
+<li>Hard — 14% of days, TL = avg 190, SD 56</li>
+<li>Long — 18% of days, TL = avg 218, SD 96</li>
+<li>Other — 7% of days, TL = avg 130, SD 66</li>
+</ul>
+<p><img src="saved_files/training_type_distribution.png" class="click-zoom img-fluid"></p>
 <p>By tracking these session types separately we can see if:</p>
 <ul>
 <li>easy sessins are getting too long, too intense, or too rare, ensuring that we can perform well in harder workouts,</li>
@@ -237,7 +246,7 @@ window.Quarto = {
 <p>Formally, let <span class="math inline">\(\mathcal{Q}^w_p(\mathcal{L}_t)\)</span> be weighted <span class="math inline">\(p\)</span>-th quantile of the baseline window <span class="math inline">\(\mathcal{L}_t\)</span> using weights <span class="math inline">\(w_j\)</span> and define the baseline and recent buckets using baseline percentiles <span class="math inline">\(q^w_{70,t}\)</span> and <span class="math inline">\(q^w_{90,t}\)</span> as follows:</p>
 <ul>
 <li><strong>Easy sessions</strong>: Training loads falling below the weighted <span class="math inline">\(q_{low}\)</span> percentile of the window: <span class="math display">\[TL \leq q^w_{low,t}=Q^w_{low}(\mathcal{L}_t)\]</span></li>
-<li><strong>Hard sessions</strong>: Training loads between the weighted <span class="math inline">\(q_{low}\)</span> and <span class="math inline">\(q_{high}\)</span> percentiles: <span class="math display">\[q^w_{70,t} &lt; $ TL $\leq q^w_{high,t}=Q^w_{high}(\mathcal{L}_t)\]</span></li>
+<li><strong>Hard sessions</strong>: Training loads between the weighted <span class="math inline">\(q_{low}\)</span> and <span class="math inline">\(q_{high}\)</span> percentiles: <span class="math display">\[q^w_{70,t} &lt; TL \leq q^w_{high,t}=Q^w_{high}(\mathcal{L}_t)\]</span></li>
 <li><strong>Long days</strong>: Training loads above the weighted 90th percentile: <span class="math display">\[TL &gt; q^w_{high,t}=Q^w_{high}(\mathcal{L}_t)\]</span></li>
 </ul>
 <p>Note on weighted percentiles: The weighted percentile represents the TL at which the cumulative sum of weights reaches the desired fraction of total weight. This accounts for the fact that more recent baseline sessions contribute more to the threshold.</p>
@@ -256,9 +265,8 @@ window.Quarto = {
 <li>Long: <span class="math inline">\(\nu^w_{3,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{R}_t,\; TL &gt; q^w_{high,t}\,]\)</span></li>
 </ul>
 <p>Where <span class="math inline">\(\mathbb{E}[\cdot]\)</span> denotes the empirical weighted mean <span class="math inline">\(\mathbb{E}_w[v] = \frac{\sum_{i=1}^nw_iv_i}{\sum_{i=1}^nw_i}\)</span> over the subset of training load values falling into the specified bucket.</p>
-<p>In addition to the weighted averages, we can also track the proportion of sessions falling into each bucket in both the baseline and the recent window, as the number of easy, hard, and long sessions is not fixed once baseline thresholds are applied to recent training. For example, if the proportion of easy days decreases in recent window may signal insufficient recovery. Formally, let:</p>
-<p><span class="math inline">\(\pi_{k,t}^{(b)}\)</span> and <span class="math inline">\(\pi_{k,t}^{(r)}\)</span></p>
-<p>denote proportions of sessions in bucket <span class="math inline">\(k = 1,2,3\)</span> in baseline and recent window respectively.</p>
+<p>In addition to the weighted averages, we can also track the proportion of sessions falling into each bucket in both the baseline and the recent window, as the number of easy, hard, and long sessions is not fixed once baseline thresholds are applied to recent training. For example, if the proportion of easy days decreases in recent window may signal insufficient recovery.</p>
+<p>Formally, let: <span class="math inline">\(\pi_{k,t}^{(b)}\)</span> and <span class="math inline">\(\pi_{k,t}^{(r)}\)</span> denote proportions of sessions in bucket <span class="math inline">\(k = 1,2,3\)</span> in baseline and recent window respectively.</p>
 
 
 </section>

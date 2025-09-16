@@ -62,6 +62,16 @@ In endurance sports, training days can be grouped into a few main types:
 - **Hard sessions** - tempo, threshold, VO2max, or interval workouts. Typically around 30% of sessions.
 - **Long days** - the occasional very long run, bike ride, or race that forms the extreme right tail of the distribution. About 15% of sessions.
 
+Based on my training data (with a hardcoded mapping into the categories Rest, Easy, Hard, Long, and Other), the distribution of training loads and their descriptive values are as follows:
+
+- Rest — 14% of days, TL = avg 0, SD 0
+- Easy — 47% of days, TL = avg 96, SD 43
+- Hard — 14% of days, TL = avg 190, SD 56
+- Long — 18% of days, TL = avg 218, SD 96
+- Other — 7% of days, TL = avg 130, SD 66
+
+![](saved_files/training_type_distribution.png){ class="click-zoom" }
+
 By tracking these session types separately we can see if:
 
 - easy sessins are getting too long, too intense, or too rare, ensuring that we can perform well in harder workouts,
@@ -76,7 +86,7 @@ We will divide our days into these three categories based on Training Load value
 Formally, let $\mathcal{Q}^w_p(\mathcal{L}_t)$ be weighted $p$-th quantile of the baseline window $\mathcal{L}_t$ using weights $w_j$ and define the baseline and recent buckets using baseline percentiles $q^w_{70,t}$ and $q^w_{90,t}$ as follows:
 
 - **Easy sessions**: Training loads falling below the weighted $q_{low}$ percentile of the window: $$TL \leq q^w_{low,t}=Q^w_{low}(\mathcal{L}_t)$$
-- **Hard sessions**: Training loads between the weighted $q_{low}$ and $q_{high}$ percentiles: $$q^w_{70,t} < $ TL $\leq q^w_{high,t}=Q^w_{high}(\mathcal{L}_t)$$
+- **Hard sessions**: Training loads between the weighted $q_{low}$ and $q_{high}$ percentiles: $$q^w_{70,t} < TL \leq q^w_{high,t}=Q^w_{high}(\mathcal{L}_t)$$
 - **Long days**: Training loads above the weighted 90th percentile: $$TL > q^w_{high,t}=Q^w_{high}(\mathcal{L}_t)$$
 
 Note on weighted percentiles: The weighted percentile represents the TL at which the cumulative sum of weights reaches the desired fraction of total weight. This accounts for the fact that more recent baseline sessions contribute more to the threshold.
@@ -99,8 +109,6 @@ Let $w_j$ be the weight of day $j$ in the baseline window $\mathcal{L}_t$ and $v
 
 Where $\mathbb{E}[\cdot]$ denotes the empirical weighted mean $\mathbb{E}_w[v] = \frac{\sum_{i=1}^nw_iv_i}{\sum_{i=1}^nw_i}$ over the subset of training load values falling into the specified bucket.
 
-In addition to the weighted averages, we can also track the proportion of sessions falling into each bucket in both the baseline and the recent window, as the number of easy, hard, and long sessions is not fixed once baseline thresholds are applied to recent training. For example, if the proportion of easy days decreases in recent window  may signal insufficient recovery. Formally, let:
+In addition to the weighted averages, we can also track the proportion of sessions falling into each bucket in both the baseline and the recent window, as the number of easy, hard, and long sessions is not fixed once baseline thresholds are applied to recent training. For example, if the proportion of easy days decreases in recent window  may signal insufficient recovery. 
 
-$\pi_{k,t}^{(b)}$ and $\pi_{k,t}^{(r)}$ 
-
-denote proportions of sessions in bucket $k = 1,2,3$ in baseline and recent window respectively.
+Formally, let: $\pi_{k,t}^{(b)}$ and $\pi_{k,t}^{(r)}$ denote proportions of sessions in bucket $k = 1,2,3$ in baseline and recent window respectively.
