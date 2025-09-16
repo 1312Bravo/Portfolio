@@ -87,11 +87,11 @@ Having defined these buckets, we summarize each bucket by the weighted average t
 
 Based on my training data (with a hardcoded mapping into the categories Rest, Easy, Hard, Long, and Other), the distribution of training loads and their descriptive values are as follows:
 
-- Rest — 14% of days, TL = avg 0, SD 0
-- Easy — 47% of days, TL = avg 96, SD 43
-- Hard — 14% of days, TL = avg 190, SD 56
-- Long — 18% of days, TL = avg 218, SD 96
-- Other — 7% of days, TL = avg 130, SD 66
+- Rest - 14% of days, TL = avg 0, SD 0
+- Easy - 47% of days, TL = avg 96, SD 43
+- Hard - 14% of days, TL = avg 190, SD 56
+- Long - 18% of days, TL = avg 218, SD 96
+- Other - 7% of days, TL = avg 130, SD 66
 
 ![](saved_files/training_type_distribution.png){ class="click-zoom" }
 
@@ -123,7 +123,7 @@ This can be expressed as the weighted percentile (or baseline-relative quantile 
 
 $$\phi_t = \frac{\sum_{j \in \mathcal{L}_t} w_j \,\mathbf{1}\{\,TL_j \leq TL_t^{(\text{recent})}\}}{\sum_{j \in \mathcal{L}_t} w_j}$$
 
-This allows us to assign the session to one of the predefined buckets — Easy, Hard, or Long — using the same percentile thresholds derived from the baseline window:
+This allows us to assign the session to one of the predefined buckets: Easy, Hard, or Long - using the same percentile thresholds derived from the baseline window:
 
 $$
 \text{Session classification} =
@@ -165,17 +165,17 @@ When defining the buckets weights, for our purpose, we have to consider the buck
 - Long sessison: They are rare but lead to high cumulative stress. They significantly contribute to adaptation and also pose a highest risk of injury. Weight reflects their peak stress contribution.
     - $w3: = 0.45$
 
-These weights are not directly measurable — they are largely subjective, based on expert knowledge, experience, and general principles of training load management rather than precise data.
+These weights are not directly measurable, they are largely subjective, based on expert knowledge, experience, and general principles of training load management rather than precise data.
 
 ### Interpretation & Bucket-level diagnostics
 
-Although $\Delta_t$ provides a clear mathematical ratio of recent to baseline training load, its practical interpretation is less straightforward — it is not always obvious when an increase or decrease becomes significant, risky, or indicative of detraining.
+Although $\Delta_t$ provides a clear mathematical ratio of recent to baseline training load, its practical interpretation is less straightforward - it is not always obvious when an increase or decrease becomes significant, risky, or indicative of detraining.
 
 ![](saved_files/hasr_tl_full.png){ class="click-zoom" }
 
 The idea behind the HASR-TL metric is to summarize this relationship in a single number, but a deeper understanding comes from also examining the individual training buckets (e.g., easy, hard, long). Comparing these buckets within the baseline and recent windows, and between them, helps reveal where changes originate and adds richer context than the ratio alone.
 
-By **comparing bucket values within the same window**, we gain insight to how well the training program is balanced across session types. This helps us check whether easy, hard, and long sessions are clearly distinct, or whether the loads are starting to blur together — which could reduce the effectiveness of the training. In practice, we calculate pairwise ratios of bucket weighted averages:
+By **comparing bucket values within the same window**, we gain insight to how well the training program is balanced across session types. This helps us check whether easy, hard, and long sessions are clearly distinct, or whether the loads are starting to blur together, which could reduce the effectiveness of the training. In practice, we calculate pairwise ratios of bucket weighted averages:
 
 $$\zeta_{\mu_i, \mu_j} = \frac{\mu_{i,t}}{\mu_{j,t}} \quad \text{and} \quad \zeta_{\nu_i, \nu_j} = \frac{\nu_{i,t}}{\nu_{j,t}}, \quad i,j = 1,2,3, i \neq j$$
 
