@@ -245,11 +245,11 @@ window.Quarto = {
 <p>Having defined these buckets, we summarize each bucket by the weighted average training load within, where we allow more recent training days to contribute more to the bucket averages. With this, we make the metric sensitive to shifts in the typical intensity of each type of session within the bucket.</p>
 <p>Based on my training data (with a hardcoded mapping into the categories Rest, Easy, Hard, Long, and Other), the distribution of training loads and their descriptive values are as follows:</p>
 <ul>
-<li>Rest — 14% of days, TL = avg 0, SD 0</li>
-<li>Easy — 47% of days, TL = avg 96, SD 43</li>
-<li>Hard — 14% of days, TL = avg 190, SD 56</li>
-<li>Long — 18% of days, TL = avg 218, SD 96</li>
-<li>Other — 7% of days, TL = avg 130, SD 66</li>
+<li>Rest - 14% of days, TL = avg 0, SD 0</li>
+<li>Easy - 47% of days, TL = avg 96, SD 43</li>
+<li>Hard - 14% of days, TL = avg 190, SD 56</li>
+<li>Long - 18% of days, TL = avg 218, SD 96</li>
+<li>Other - 7% of days, TL = avg 130, SD 66</li>
 </ul>
 <p><img src="saved_files/training_type_distribution.png" class="click-zoom img-fluid"></p>
 <p>Let <span class="math inline">\(w_j\)</span> be the weight of day <span class="math inline">\(j\)</span> in the baseline window <span class="math inline">\(\mathcal{L}_t\)</span> and <span class="math inline">\(v_j\)</span> be the weight of day <span class="math inline">\(j\)</span> in the recent window <span class="math inline">\(\mathcal{R}_t\)</span>. We then define the weighted averages within each bucket as:</p>
@@ -264,7 +264,7 @@ window.Quarto = {
 <p>In addition to aggregated metrics, we can also assess each most recent individual session in the context of the baseline distribution. Specifically, for the most recent training session (e.g., the date of analysis), we can determine where its Training Load falls within the weighted baseline distribution.</p>
 <p>This can be expressed as the weighted percentile (or baseline-relative quantile rank) of the session:</p>
 <p><span class="math display">\[\phi_t = \frac{\sum_{j \in \mathcal{L}_t} w_j \,\mathbf{1}\{\,TL_j \leq TL_t^{(\text{recent})}\}}{\sum_{j \in \mathcal{L}_t} w_j}\]</span></p>
-<p>This allows us to assign the session to one of the predefined buckets — Easy, Hard, or Long — using the same percentile thresholds derived from the baseline window:</p>
+<p>This allows us to assign the session to one of the predefined buckets: Easy, Hard, or Long - using the same percentile thresholds derived from the baseline window:</p>
 <p><span class="math display">\[
 \text{Session classification} =
 \begin{cases}
@@ -300,14 +300,14 @@ window.Quarto = {
 <li><span class="math inline">\(w3: = 0.45\)</span></li>
 </ul></li>
 </ul>
-<p>These weights are not directly measurable — they are largely subjective, based on expert knowledge, experience, and general principles of training load management rather than precise data.</p>
+<p>These weights are not directly measurable, they are largely subjective, based on expert knowledge, experience, and general principles of training load management rather than precise data.</p>
 </section>
 <section id="interpretation-bucket-level-diagnostics" class="level3">
 <h3 class="anchored" data-anchor-id="interpretation-bucket-level-diagnostics">Interpretation &amp; Bucket-level diagnostics</h3>
-<p>Although <span class="math inline">\(\Delta_t\)</span> provides a clear mathematical ratio of recent to baseline training load, its practical interpretation is less straightforward — it is not always obvious when an increase or decrease becomes significant, risky, or indicative of detraining.</p>
+<p>Although <span class="math inline">\(\Delta_t\)</span> provides a clear mathematical ratio of recent to baseline training load, its practical interpretation is less straightforward - it is not always obvious when an increase or decrease becomes significant, risky, or indicative of detraining.</p>
 <p><img src="saved_files/hasr_tl_full.png" class="click-zoom img-fluid"></p>
 <p>The idea behind the HASR-TL metric is to summarize this relationship in a single number, but a deeper understanding comes from also examining the individual training buckets (e.g., easy, hard, long). Comparing these buckets within the baseline and recent windows, and between them, helps reveal where changes originate and adds richer context than the ratio alone.</p>
-<p>By <strong>comparing bucket values within the same window</strong>, we gain insight to how well the training program is balanced across session types. This helps us check whether easy, hard, and long sessions are clearly distinct, or whether the loads are starting to blur together — which could reduce the effectiveness of the training. In practice, we calculate pairwise ratios of bucket weighted averages:</p>
+<p>By <strong>comparing bucket values within the same window</strong>, we gain insight to how well the training program is balanced across session types. This helps us check whether easy, hard, and long sessions are clearly distinct, or whether the loads are starting to blur together, which could reduce the effectiveness of the training. In practice, we calculate pairwise ratios of bucket weighted averages:</p>
 <p><span class="math display">\[\zeta_{\mu_i, \mu_j} = \frac{\mu_{i,t}}{\mu_{j,t}} \quad \text{and} \quad \zeta_{\nu_i, \nu_j} = \frac{\nu_{i,t}}{\nu_{j,t}}, \quad i,j = 1,2,3, i \neq j\]</span></p>
 <p>By monitoring these values, we can identify trends such as if easy vs.&nbsp;hard sessions are becoming too similar, which might indicate reduced stimulus diversity.</p>
 <p><img src="saved_files/within_window_baseline_recent_comparison.png" class="click-zoom img-fluid"></p>
