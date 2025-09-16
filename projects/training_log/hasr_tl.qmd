@@ -75,7 +75,7 @@ We will divide our days into these three categories based on Training Load value
 
 Formally, let $\mathcal{Q}^w_p(\mathcal{L}_t)$ be weighted $p$-th quantile of the baseline window $\mathcal{L}_t$ using weights $w_j$ and define the baseline and recent buckets using baseline percentiles $q^w_{70,t}$ and $q^w_{90,t}$ as follows:
 
-- **Easy sessions**: Training loads falling below the weighted $q_{low}$ percentile of the window: $$TL \leq q^w_{low,t}=Q^w_{low}(\mathcal{L}_t)$$
+- **Easy sessions & Rest days**: Training loads falling below the weighted $q_{low}$ percentile of the window: $$TL \leq q^w_{low,t}=Q^w_{low}(\mathcal{L}_t)$$
 - **Hard sessions**: Training loads between the weighted $q_{low}$ and $q_{high}$ percentiles: $$q^w_{70,t} < TL \leq q^w_{high,t}=Q^w_{high}(\mathcal{L}_t)$$
 - **Long days**: Training loads above the weighted 90th percentile: $$TL > q^w_{high,t}=Q^w_{high}(\mathcal{L}_t)$$
 
@@ -109,7 +109,7 @@ $$\text{Long}: \nu^w_{3,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{R}_t,\; TL >
 
 Where $\mathbb{E}[\cdot]$ denotes the empirical weighted mean $\mathbb{E}_w[v] = \frac{\sum_{i=1}^nw_iv_i}{\sum_{i=1}^nw_i}$ over the subset of training load values falling into the specified bucket.
 
-In addition to the weighted averages, we can also track the proportion of sessions falling into each bucket in both the baseline and the recent window, as the number of easy, hard, and long sessions is not fixed once baseline thresholds are applied to recent training. For example, if the proportion of easy days decreases in recent window  may signal insufficient recovery. 
+In addition to the weighted averages, we can also track the proportion of sessions falling into each bucket in both the baseline and the recent window. Wheres the proportion of sessions falling into each bucket in Baseline window as pre-determined with quantiles, the number of easy, hard, and long sessions is not fixed once baseline thresholds are applied to recent training. For example, if the proportion of easy days decreases in recent window may signal insufficient recovery. 
 
 Formally, let: $$\pi_{k,t}^{(b)} \quad \text{and} \quad \pi_{k,t}^{(r)}$$ denote proportions of sessions in bucket $k = 1,2,3$ in baseline and recent window respectively.
 
@@ -156,6 +156,37 @@ $$\zeta_{\mu_i, \mu_j} = \frac{\mu_{i,t}}{\mu_{j,t}} \quad \text{and} \quad \zet
 
 By monitoring these values, we can identify trends such as if easy vs. hard sessions are becoming too similar, which might indicate reduced stimulus diversity.
 
-**The question remains**: Ultimately, bucket-level diagnostics are a key aid in interpreting $\Delta_t$, but they raise the same challenge: deciding what magnitude of change truly matters. These interpretive questions will be addressed in the next chapter.
+![](saved_files/within_window_baseline_recent_comparison.png){ class="click-zoom" }
+
+To understand which types of sessions are driving changes in overall load and what type of training have we been emphasizing lately, we **compare values each bucket between recent and baseline windows**. 
+
+$$\delta_{k,t} = \frac{\nu_{k,t}}{\mu_{k,t}}, \quad k = 1,2,3$$
+
+This ratio focuses on the intensity or load of sessions of a given type, independent of how often these sessions occur.
+
+![](saved_files/within_bucket_easy_hard_comparison.png){ class="click-zoom" }
+
+For example, a rise in $\delta_{1,t}$ might indicate that easy sessions are becoming more demanding relative to the baseline. Whereas a decrease in $\delta_{3,t}$ suggests that long sessions are less intense, long possibly absent.
+
+In contrast, to see how the distribution of session types is shifting, we **compare the proportion of each session type in the recent window relative to the baseline**: 
+
+$$\rho_{k,t} = \frac{\pi_{k,t}^{(r)}}{\pi_{k,t}^{(b)}}, \quad k=1,2,3$$
+
+This ratio captures frequency changes, not intensity.
+
+![](saved_files/bucket_proportion_easy_hard_comparison.png){ class="click-zoom" }
+
+For example, $\rho_{1,t} < 1$ may indicate that recovery-oriented easy days are becoming too rare, while $\rho_{3,t} > 1$ suggests long sessions are occurring more frequently, than the body is adapted to.
+
+Together, these diagnostics offer a comprehensive view of training composition and its evolution and form the foundation for interpreting the aggregated HASRTL metric. However, **the key question remains**: how large a change is meaningful, risky, or indicative of under or over-training? These interpretive challenges will be explored in the next chapter.
+
+```{=html}
+<div class="project-link-container">
+    <i class="fab fa-github"></i>
+    <span> You can find the full code for this section, along with the analyses, which is then easily integrated into the <code>src/main.py</code> script, on my Github repository under the
+    <a href="https://github.com/1312Bravo/TrainingPeaks_customLog/tree/main/analysis/history_aware_relative_stratified_training_load" target="_blank"> history_aware_relative_stratified_training_load</a>
+     folder.</span>
+</div>
+```
 
 

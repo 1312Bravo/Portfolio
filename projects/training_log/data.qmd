@@ -48,7 +48,7 @@ Of course, logging in requires credentials (emails, passwords, API keys). They a
 ```{=html}
 <div class="project-link-container">
     <i class="fab fa-github"></i>
-    <span> You can find the full code for this part, which is then easily implemented into <code>src/main.py</code> script, on my Github repository under the
+    <span> You can find the full code for this section, which is then easily integrated into the <code>src/main.py</code> script, on my Github repository under the
     <a href="https://github.com/1312Bravo/TrainingPeaks_customLog/tree/main/basic_daily_activity_statistics" target="_blank"> basic_daily_activity_statistics</a>
      folder.</span>
 </div>
