@@ -301,7 +301,7 @@ window.Quarto = {
 </ul></li>
 <li><strong>Long sessison</strong>: They are rare but lead to high cumulative stress. They significantly contribute to adaptation and also pose a highest risk of injury. Weight reflects their peak stress contribution.
 <ul>
-<li><span class="math inline">\(w3: = 0.45\)</span></li>
+<li><span class="math inline">\(w3 = 0.45\)</span></li>
 </ul></li>
 </ul>
 <p>These weights are not directly measurable, they are largely subjective, based on expert knowledge, experience, and general principles of training load management rather than precise data.</p>
@@ -416,7 +416,7 @@ window.Quarto = {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/1312Bravo\.github\.io\/Portfolio\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
