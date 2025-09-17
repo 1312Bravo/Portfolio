@@ -240,9 +240,13 @@ window.Quarto = {
 <li><strong>Hard sessions</strong>: Training loads between the weighted <span class="math inline">\(q_{low}\)</span> and <span class="math inline">\(q_{high}\)</span> percentiles: <span class="math display">\[q^w_{70,t} &lt; TL \leq q^w_{high,t}=Q^w_{high}(\mathcal{L}_t)\]</span></li>
 <li><strong>Long days</strong>: Training loads above the weighted 90th percentile: <span class="math display">\[TL &gt; q^w_{high,t}=Q^w_{high}(\mathcal{L}_t)\]</span></li>
 </ul>
-<p>Clarifying note: In order to perform any structured analysis, each session must be assigned to a bucket based on the percentile thresholds. This means that some sessions may fall into different buckets due to small differences in Training Load, even if their physiological impact is similar. So these categories should be interpreted with caution. Categories are a practical tool for analysis and a guide, rather than absolute labels. When interpreting them, consider the broader context.</p>
-<p>Note on weighted percentiles: The weighted percentile represents the TL at which the cumulative sum of weights reaches the desired fraction of total weight. This accounts for the fact that more recent baseline sessions contribute more to the threshold.</p>
-<p>Having defined these buckets, we summarize each bucket by the weighted average training load within, where we allow more recent training days to contribute more to the bucket averages. With this, we make the metric sensitive to shifts in the typical intensity of each type of session within the bucket.</p>
+<p>Clarifying notes:</p>
+<ul>
+<li><p>In order to perform any structured analysis, each session must be assigned to a bucket based on the percentile thresholds. This means that some sessions may fall into different buckets due to small differences in Training Load, even if their physiological impact is similar. So these categories should be interpreted with caution. Categories are a practical tool for analysis and a guide, rather than absolute labels. When interpreting them, consider the broader context.</p></li>
+<li><p>The distinction created by quantiles: that hard sessions have lower training load than long sessions, is based on observed patterns in my training. In particular, for ultra and sub-ultra endurance activities such as trail running, long sessions are disproportionately long and thus accumulate higher training loads compared to interval-based hard sessions. If different training pattern would be observed, the classification scheme could be adjusted accordingly. Also, in some cases of extremely hard sessions, the accumulated training load may be high enough that they fall into the “long” classification bucket, even though their nature differs from typical long endurance efforts.</p></li>
+</ul>
+<p>Note on <strong>weighted percentiles</strong>: The weighted percentile represents the TL at which the cumulative sum of weights reaches the desired fraction of total weight. This accounts for the fact that more recent baseline sessions contribute more to the threshold.</p>
+<p>Having defined these buckets, we summarize each bucket by the <strong>weighted average training load</strong> within, where we allow more recent training days to contribute more to the bucket averages. With this, we make the metric sensitive to shifts in the typical intensity of each type of session within the bucket.</p>
 <p>Based on my training data (with a hardcoded mapping into the categories Rest, Easy, Hard, Long, and Other), the distribution of training loads and their descriptive values are as follows:</p>
 <ul>
 <li>Rest - 14% of days, TL = avg 0, SD 0</li>
@@ -258,7 +262,7 @@ window.Quarto = {
 <p><strong>Recent bucket weighted averages:</strong></p>
 <p><span class="math display">\[\text{Easy}: \nu^w_{1,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{R}_t,\; TL \le q^w_{low,t}\,]\]</span> <span class="math display">\[\text{Hard}: \nu^w_{2,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{R}_t,\; q^w_{low,t} &lt; TL \le q^w_{high,t}\,]\]</span> <span class="math display">\[\text{Long}: \nu^w_{3,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{R}_t,\; TL &gt; q^w_{high,t}\,]\]</span></p>
 <p>Where <span class="math inline">\(\mathbb{E}[\cdot]\)</span> denotes the empirical weighted mean <span class="math inline">\(\mathbb{E}_w[v] = \frac{\sum_{i=1}^nw_iv_i}{\sum_{i=1}^nw_i}\)</span> over the subset of training load values falling into the specified bucket.</p>
-<p>In addition to the weighted averages, we can also track the proportion of sessions falling into each bucket in both the baseline and the recent window. Wheres the proportion of sessions falling into each bucket in Baseline window as pre-determined with quantiles, the number of easy, hard, and long sessions is not fixed once baseline thresholds are applied to recent training. For example, if the proportion of easy days decreases in recent window may signal insufficient recovery.</p>
+<p>In addition to the weighted averages, we can also track the <strong>proportion of sessions</strong> falling into each bucket in both the baseline and the recent window. Wheres the proportion of sessions falling into each bucket in Baseline window as pre-determined with quantiles, the number of easy, hard, and long sessions is not fixed once baseline thresholds are applied to recent training. For example, if the proportion of easy days decreases in recent window may signal insufficient recovery.</p>
 <p>Formally, let: <span class="math display">\[\pi_{k,t}^{(b)} \quad \text{and} \quad \pi_{k,t}^{(r)}\]</span> denote proportions of sessions in bucket <span class="math inline">\(k = 1,2,3\)</span> in baseline and recent window respectively.</p>
 <p><strong>Most recent Session Classification</strong></p>
 <p>In addition to aggregated metrics, we can also assess each most recent individual session in the context of the baseline distribution. Specifically, for the most recent training session (e.g., the date of analysis), we can determine where its Training Load falls within the weighted baseline distribution.</p>
@@ -287,17 +291,17 @@ window.Quarto = {
 <p><strong>Selection of weights <span class="math inline">\(w_1, w_2, w_3\)</span></strong></p>
 <p>When defining the buckets weights, for our purpose, we have to consider the bucket’s contribution to adaptation and also their potential impact on injury risk. The weights should reflect the relative importance of bucket’s session type in promoting positive training effects while also accounting for their role in acute stress spikes that may increase the probability of injury.</p>
 <ul>
-<li>Easy sessions: As we defined them, they are frequent and involve low-intensity activities. They have low impact on both the adaptation and injury risk. Weight reflects their impact on training adaptation and injury risk.
+<li><strong>Easy sessions</strong>: As we defined them, they are frequent and involve low-intensity activities. They have low impact on both the adaptation and injury risk. Weight reflects their impact on training adaptation and injury risk.
 <ul>
 <li><span class="math inline">\(w_1 = 0.15\)</span></li>
 </ul></li>
-<li>Hard sessison: Less frequent but high-intensity activities that drive the adaptation and also impose higher acute loads that increase injury risk. Weight reflects their contribution to acute stress.
+<li><strong>Hard sessison</strong>: Less frequent but high-intensity activities that drive the adaptation and also impose higher acute loads that increase injury risk. Weight reflects their contribution to acute stress.
 <ul>
 <li><span class="math inline">\(w2 = 0.40\)</span></li>
 </ul></li>
-<li>Long sessison: They are rare but lead to high cumulative stress. They significantly contribute to adaptation and also pose a highest risk of injury. Weight reflects their peak stress contribution.
+<li><strong>Long sessison</strong>: They are rare but lead to high cumulative stress. They significantly contribute to adaptation and also pose a highest risk of injury. Weight reflects their peak stress contribution.
 <ul>
-<li><span class="math inline">\(w3: = 0.45\)</span></li>
+<li><span class="math inline">\(w3 = 0.45\)</span></li>
 </ul></li>
 </ul>
 <p>These weights are not directly measurable, they are largely subjective, based on expert knowledge, experience, and general principles of training load management rather than precise data.</p>
