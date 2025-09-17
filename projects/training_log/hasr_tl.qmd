@@ -209,6 +209,8 @@ For example, $\rho_{1,t} < 1$ may indicate that recovery-oriented easy days are 
 
 Together, these diagnostics offer a comprehensive view of training composition and its evolution and form the foundation for interpreting the aggregated HASRTL metric. However, **the key question remains**: how large a change is meaningful, risky, or indicative of under or over-training? These interpretive challenges will be explored in the next chapter.
 
+### 
+
 ### Implementation
 
 These statistics are similar to activity statistics presented in the Data blog, daily calculated and available for review and possible analysis in Google sheets. They are under [Activity Log file - HASR-TL sheet](https://docs.google.com/spreadsheets/d/1o5Y9_AM_8baj5DnB2AE9nYXU_ZSPsyFW6VjRbljSWIw/edit?gid=2140406364#gid=2140406364){target="_blank"}.
