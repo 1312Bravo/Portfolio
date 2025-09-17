@@ -79,11 +79,15 @@ Formally, let $\mathcal{Q}^w_p(\mathcal{L}_t)$ be weighted $p$-th quantile of th
 - **Hard sessions**: Training loads between the weighted $q_{low}$ and $q_{high}$ percentiles: $$q^w_{70,t} < TL \leq q^w_{high,t}=Q^w_{high}(\mathcal{L}_t)$$
 - **Long days**: Training loads above the weighted 90th percentile: $$TL > q^w_{high,t}=Q^w_{high}(\mathcal{L}_t)$$
 
-Clarifying note: In order to perform any structured analysis, each session must be assigned to a bucket based on the percentile thresholds. This means that some sessions may fall into different buckets due to small differences in Training Load, even if their physiological impact is similar. So these categories should be interpreted with caution. Categories are a practical tool for analysis and a guide, rather than absolute labels. When interpreting them, consider the broader context.
+Clarifying notes: 
 
-Note on weighted percentiles: The weighted percentile represents the TL at which the cumulative sum of weights reaches the desired fraction of total weight. This accounts for the fact that more recent baseline sessions contribute more to the threshold.
+- In order to perform any structured analysis, each session must be assigned to a bucket based on the percentile thresholds. This means that some sessions may fall into different buckets due to small differences in Training Load, even if their physiological impact is similar. So these categories should be interpreted with caution. Categories are a practical tool for analysis and a guide, rather than absolute labels. When interpreting them, consider the broader context.
 
-Having defined these buckets, we summarize each bucket by the weighted average training load within, where we allow more recent training days to contribute more to the bucket averages. With this, we make the metric sensitive to shifts in the typical intensity of each type of session within the bucket. 
+- The distinction created by quantiles: that hard sessions have lower training load than long sessions, is based on observed patterns in my training. In particular, for ultra and sub-ultra endurance activities such as trail running, long sessions are disproportionately long and thus accumulate higher training loads compared to interval-based hard sessions. If different training pattern would be observed, the classification scheme could be adjusted accordingly. Also, in some cases of extremely hard sessions, the accumulated training load may be high enough that they fall into the “long” classification bucket, even though their nature differs from typical long endurance efforts.
+
+Note on **weighted percentiles**: The weighted percentile represents the TL at which the cumulative sum of weights reaches the desired fraction of total weight. This accounts for the fact that more recent baseline sessions contribute more to the threshold.
+
+Having defined these buckets, we summarize each bucket by the **weighted average training load** within, where we allow more recent training days to contribute more to the bucket averages. With this, we make the metric sensitive to shifts in the typical intensity of each type of session within the bucket. 
 
 Based on my training data (with a hardcoded mapping into the categories Rest, Easy, Hard, Long, and Other), the distribution of training loads and their descriptive values are as follows:
 
@@ -111,7 +115,7 @@ $$\text{Long}: \nu^w_{3,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{R}_t,\; TL >
 
 Where $\mathbb{E}[\cdot]$ denotes the empirical weighted mean $\mathbb{E}_w[v] = \frac{\sum_{i=1}^nw_iv_i}{\sum_{i=1}^nw_i}$ over the subset of training load values falling into the specified bucket.
 
-In addition to the weighted averages, we can also track the proportion of sessions falling into each bucket in both the baseline and the recent window. Wheres the proportion of sessions falling into each bucket in Baseline window as pre-determined with quantiles, the number of easy, hard, and long sessions is not fixed once baseline thresholds are applied to recent training. For example, if the proportion of easy days decreases in recent window may signal insufficient recovery. 
+In addition to the weighted averages, we can also track the **proportion of sessions** falling into each bucket in both the baseline and the recent window. Wheres the proportion of sessions falling into each bucket in Baseline window as pre-determined with quantiles, the number of easy, hard, and long sessions is not fixed once baseline thresholds are applied to recent training. For example, if the proportion of easy days decreases in recent window may signal insufficient recovery. 
 
 Formally, let: $$\pi_{k,t}^{(b)} \quad \text{and} \quad \pi_{k,t}^{(r)}$$ denote proportions of sessions in bucket $k = 1,2,3$ in baseline and recent window respectively.
 
@@ -158,12 +162,12 @@ Since recent sessions are classified using baseline-defined buckets, $\Delta_t$ 
 
 When defining the buckets weights, for our purpose, we have to consider the bucket's contribution to adaptation and also their potential impact on injury risk. The weights should reflect the relative importance of bucket's session type in promoting positive training effects while also accounting for their role in acute stress spikes that may increase the probability of injury. 
 
-- Easy sessions: As we defined them, they are frequent and involve low-intensity activities. They have low impact on both the adaptation and injury risk. Weight reflects their impact on training adaptation and injury risk.
+- **Easy sessions**: As we defined them, they are frequent and involve low-intensity activities. They have low impact on both the adaptation and injury risk. Weight reflects their impact on training adaptation and injury risk.
     - $w_1 = 0.15$
-- Hard sessison: Less frequent but high-intensity activities that drive the adaptation and also impose higher acute loads that increase injury risk. Weight reflects their contribution to acute stress.
+- **Hard sessison**: Less frequent but high-intensity activities that drive the adaptation and also impose higher acute loads that increase injury risk. Weight reflects their contribution to acute stress.
     - $w2 = 0.40$
-- Long sessison: They are rare but lead to high cumulative stress. They significantly contribute to adaptation and also pose a highest risk of injury. Weight reflects their peak stress contribution.
-    - $w3: = 0.45$
+- **Long sessison**: They are rare but lead to high cumulative stress. They significantly contribute to adaptation and also pose a highest risk of injury. Weight reflects their peak stress contribution.
+    - $w3 = 0.45$
 
 These weights are not directly measurable, they are largely subjective, based on expert knowledge, experience, and general principles of training load management rather than precise data.
 
