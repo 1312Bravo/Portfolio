@@ -25,13 +25,15 @@
     color: #000000 !important;
 }
 
-/* Links */
 a {
-    color: black;
+    color: #00008B;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s ease, color 0.2s ease;
 }
 
 a:hover {
-    color: black;
+    color: #00008B;
     text-decoration: underline;
 }
 
@@ -166,6 +168,21 @@ img.click-zoom:active {
     cursor: zoom-out;
     z-index: 999;
     position: relative;
+}
+
+/*Google Sheet preview*/
+.sheet-embed-container {
+    width: 100%;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.sheet-embed {
+    width: 100%;
+    height: 200px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* 

@@ -209,6 +209,14 @@ Together, these diagnostics offer a comprehensive view of training composition a
 
 These statistics are similar to activity statistics presented in the Data blog, daily calculated and available for review and possible analysis in Google sheets. They are under [Activity Log file - HASR-TL sheet](https://docs.google.com/spreadsheets/d/1o5Y9_AM_8baj5DnB2AE9nYXU_ZSPsyFW6VjRbljSWIw/edit?gid=2140406364#gid=2140406364){target="_blank"}.
 
+
+<div class="sheet-embed-container">
+  <iframe 
+    src="https://docs.google.com/spreadsheets/d/1o5Y9_AM_8baj5DnB2AE9nYXU_ZSPsyFW6VjRbljSWIw/preview?gid=2140406364#gid=2140406364"
+    class="sheet-embed">
+  </iframe>
+</div>
+
 ```{=html}
 <div class="project-link-container">
     <i class="fab fa-github"></i>

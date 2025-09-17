@@ -180,8 +180,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Two main datasets are daily updated and live in Google Sheets. Having the data in this format makes it easy to explore manually, but also gives me a flexible base for deeper analysis. I provide only a static sample of data logs.</p>
 <ul>
 <li><a href="https://docs.google.com/spreadsheets/d/1o5Y9_AM_8baj5DnB2AE9nYXU_ZSPsyFW6VjRbljSWIw/edit?gid=412740509#gid=412740509" target="_blank">Activity Log</a> – training activities with different metrics, including distance, duration, elevation, heart rate.</li>
+</ul>
+<div class="sheet-embed-container">
+<p><iframe src="https://docs.google.com/spreadsheets/d/1o5Y9_AM_8baj5DnB2AE9nYXU_ZSPsyFW6VjRbljSWIw/preview?gid=412740509#gid=412740509" class="sheet-embed"> </iframe></p>
+</div>
+<ul>
 <li><a href="https://docs.google.com/spreadsheets/d/1k-JIYE5z9a-2IqcslkliL_Y6CdvcNeZ7NoVe8wDbo8I/edit?gid=0#gid=0" target="_blank">Daily Log</a> – day-level statistics, such as steps, sleep, resting heart rate, recovery time, and other daily metrics.</li>
 </ul>
+<div class="sheet-embed-container">
+<p><iframe src="https://docs.google.com/spreadsheets/d/1k-JIYE5z9a-2IqcslkliL_Y6CdvcNeZ7NoVe8wDbo8I/preview?gid=0#gid=0" class="sheet-embed"> </iframe></p>
+</div>
 <p>The statistics come from the Garmin Connect API. A Python script fetches both activity and daily statistics, and then pushes them into the Google Sheets. Some metrics are raw Garmin values, while others are adjusted or calculated. Statistics that are captured in sheets can also evolve over time as we discover new metrics or further analyze training. So, some of the statistics in the sheet can also be presented in details in other blog posts.</p>
 <p>The script is run each morning and spreadsheets expand by one more day of history (yesterday’s data), keeping the logs synchronized without manual work. The script can also loop through multiple accounts if provided.</p>
 <p>The script relies two key integrations:</p>
@@ -290,7 +298,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/1312Bravo\.github\.io\/Portfolio\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
