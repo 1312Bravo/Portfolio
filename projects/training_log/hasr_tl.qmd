@@ -91,11 +91,11 @@ Having defined these buckets, we summarize each bucket by the **weighted average
 
 Based on my training data (with a hardcoded mapping into the categories Rest, Easy, Hard, Long, and Other), the distribution of training loads and their descriptive values are as follows:
 
-- Rest - 14% of days, TL = avg 0, SD 0
-- Easy - 47% of days, TL = avg 96, SD 43
-- Hard - 14% of days, TL = avg 190, SD 56
-- Long - 18% of days, TL = avg 218, SD 96
-- Other - 7% of days, TL = avg 130, SD 66
+- Rest - 14% of days, TL = avg 0, median 0, SD 0
+- Easy - 37% of days, TL = avg 89, median 88, SD 36
+- Hard - 27% of days, TL = avg 188, median 182, SD 58
+- Long - 12% of days, TL = avg 213, median 182, SD 110
+- Other - 10% of days, TL = avg 107, median 100, SD 65
 
 ![](saved_files/training_type_distribution.png){ class="click-zoom" }
 
@@ -148,11 +148,13 @@ Based on the applied most recent session classification, we evaluated the alignm
 
 It is important to emphasize that a mismatch between the two does not necessarily mean the "model" was wrong. Instead, it may indicate that the most recent session was actually harder or easier than we would perceive it. Another possibility is that the sessions in the baseline window were skewed toward the easier or harder side, which would shift the distribution and make the thresholds less "evenly" balanced across truly easy, hard, and long days.
 
-- Easy - proportion of sessions classifed as "by hand" = 90%, average baseline-relative quantile rank = 0.32
-- Hard - proportion of sessions classifed as "by hand" = 31%, average baseline-relative quantile rank = 0.72
-- Long = proportion of sessions classifed as "by hand" = 53%, average baseline-relative quantile rank = 0.93
+- Easy - proportion of sessions classifed as "by hand" = 69%, average baseline-relative quantile rank = 0.37
+- Hard - proportion of sessions classifed as "by hand" = 64%, average baseline-relative quantile rank = 0.80
+- Long = proportion of sessions classifed as "by hand" = 40%, average baseline-relative quantile rank = 0.96
 
-Most of the hard classified sessions that were not classifed the same as "by hand" were some "easy" days that had some fast strides in and some medium-long sessions, that we classifed as long by hand. For the long sessions, most of the wrongly classifed were "by hand" perceived hard, but with training load closer to long runs.
+All in all, proportion of sessions classifed as "by hand" was 66%.
+
+Most of the hard classified sessions that were not classifed the same as "by hand" were some "easy" days that had some fast strides in and some double sessions, where both sessions were mostly easy, but the sum of training loads fall to hard. For the long sessions, most of the wrongly classifed were "by hand" perceived hard, but with training load closer to long runs.
 
 Most of the sessions classified as Hard that did not match the hand-labeled categories were actually "easier" days that included some fast strides or longer high paced segments. Other were some medium-long sessions which were manually classified as Long. For the Long sessions, the majority of misclassifications involved sessions that were perceived as Hard by hand, but whose overall Training Load was closer to that of typical Long sessions, so really hard, fast sessions.
 
