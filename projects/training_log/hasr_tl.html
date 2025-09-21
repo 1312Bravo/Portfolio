@@ -167,12 +167,15 @@ window.Quarto = {
 </header>
 
 
+<div class="{=html}">
+<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer"></p>
+</div>
 <section id="idea" class="level3">
 <h3 class="anchored" data-anchor-id="idea">Idea</h3>
 <p>When training for endurance sports, our bodies adapt over time, and whether a workout is “hard” or “easy” on the body, depends on what we’ve been doing recently and historically. The goal is to define a simple metric that shows where we are with our current training compared to what we’ve been doing in the recent past. The purpose is to:</p>
 <ul>
 <li>see if we should reduce our training load so that we don’t overreach or risk injury,</li>
-<li>oncrease it to match what our body has adapted to in the recent past, or</li>
+<li>increase it to match what our body has adapted to in the recent past, or</li>
 <li>simply define where we are in the training cycle when taking the bigger picture into account.</li>
 </ul>
 <p>The idea of comparing current workload to past workload isn’t new. Sports science has long used the Acute:Chronic Workload Ratio (ACWR) to capture how today’s training compares to longer-term training history. But ACWR has well-known limitations: it usually relies on a single rolling average, and it can miss important context about peak efforts or variation in load. That’s where our approach comes in. We’ll further extend it into a more flexible and informative framework.</p>
@@ -185,18 +188,19 @@ window.Quarto = {
 </section>
 <section id="deep-dive" class="level3">
 <h3 class="anchored" data-anchor-id="deep-dive">Deep dive</h3>
-<p>Let <span class="math inline">\(TL_i\)</span> be the training load of the day <span class="math inline">\(i\)</span>. Our goal is to define a metric that normalizes recent TL against historical. We can think of this in two complementary components:</p>
+<p>Let <span class="math inline">\(TL_i\)</span> be the training load of the day <span class="math inline">\(i\)</span> and <span class="math inline">\(D_i\)</span> be session duration in minutes on day <span class="math inline">\(i\)</span>. We then define Training load per minute for day <span class="math inline">\(i\)</span> as <span class="math inline">\(TL_i^{min} = \frac{TL_i}{D_i}\)</span>.</p>
+<p>Our goal is to define a metric that normalizes recent TL against historical. We can think of this in two complementary components:</p>
 <ul>
 <li><p><strong>Baseline (long term) adaptation</strong> - Load the body has been succesfully adapted to over a longer period, assuming this distribution is “safe”, disregarding recent acute load.</p>
 <ul>
-<li>Denoted as <span class="math inline">\(TL_{\text{baseline},t}\)</span>.</li>
-<li>Computed over a long baseline window of <span class="math inline">\(N\)</span> days, excluding last <span class="math inline">\(n\)</span> days: <span class="math display">\[\mathcal{L}_t=\{TL_{t-(n+j)}\mid j=1,\dots, N\}\]</span></li>
+<li>Denoted as <span class="math inline">\(X_{\text{baseline},t}\)</span>, where <span class="math inline">\(X \in \{TL, D, TL^{min}\}\)</span>.</li>
+<li>Computed over a long baseline window of <span class="math inline">\(N\)</span> days, excluding last <span class="math inline">\(n\)</span> days: <span class="math display">\[\mathcal{X}_{\text{baseline},t}=\{X_{t-(n+j)}\mid j=1,\dots, N\}\]</span></li>
 <li>To give more importance to recent training within the baseline period, we assign weights decreasing with days: <span class="math display">\[w_j = \lambda^{j-1}, \quad 0 &lt; \lambda &lt;= 1, \quad j = 1, ..., N,\]</span> where more recent baseline days contribute more to defining the baseline load.</li>
 </ul></li>
 <li><p><strong>Recent training pattern</strong> - Load the body is currently being exposed to, capturing acute training load.</p>
 <ul>
-<li>Denoted as <span class="math inline">\(TL_{\text{recent},t}\)</span>.</li>
-<li>Computed over a recent window of <span class="math inline">\(n\)</span> days: <span class="math display">\[\mathcal{R}_t=\{TL_{t-j}\mid j=1,\dots,n\}\]</span>.</li>
+<li>Denoted as <span class="math inline">\(X_{\text{recent},t}\)</span>, where <span class="math inline">\(X \in \{TL, D, TL^{min}\}\)</span>.</li>
+<li>Computed over a recent window of <span class="math inline">\(n\)</span> days: <span class="math display">\[\mathcal{X}_{\text{recent},t}=\{X_{t-j}\mid j=1,\dots,n\}\]</span>.</li>
 <li>This can also be weighted to emphasize the most recent sessions: <span class="math display">\[v_j = \lambda^{j-1}, \quad 0 &lt; \lambda &lt;= 1, \quad j = 1, ..., n\]</span></li>
 </ul></li>
 </ul>
@@ -206,21 +210,21 @@ window.Quarto = {
 <li>Recent window: <span class="math inline">\(n = 14\)</span> days</li>
 <li>Weight base <span class="math inline">\(\lambda\)</span> = <span class="math inline">\((0.5)^\frac{1}{31} = 0.978\)</span>, so weight halves approximately every 31 days.</li>
 </ul>
-<p>Additionaly: Because we aim to capture relative load patterns rather than total accumulated load, we normalize the weights so that they sum to 1. This ensures that the weighted, for example averages, for baseline and recent windows are directly comparable:</p>
+<p>Additionally: Because we aim to capture relative load patterns rather than total accumulated load, we normalize the weights so that they sum to 1. This ensures that the weighted, for example averages, for baseline and recent windows are directly comparable:</p>
 <ul>
 <li><span class="math inline">\(\overline{w}_j = \frac{w_j}{\sum_{k=1}^{N}w_k} \quad j = 1, ..., N\)</span></li>
 <li><span class="math inline">\(\overline{v}_j = \frac{v_j}{\sum_{k=1}^{v}w_k} \quad j = 1, ..., v\)</span></li>
 </ul>
 <p><img src="saved_files/baseline_recent_weighting.png" class="click-zoom img-fluid"></p>
 <p>Notes: By keeping the baseline and recent windows non-overlapping, we ensure that the baseline reflects only training the body has already adapted to, without being influenced by recent sessions that the body has not yet adjusted to. This allows us to identify increases in stress in the recent window that may pose a risk.</p>
-<p>Dataset: We take into account all measured activities, regardless if it was real training or not (including hiking, swimming, easy cycling etc.) and treat total daily training load as daily sample.</p>
+<p>Dataset: We take into account all measured activities, regardless if it was real training or not (including hiking, swimming, easy cycling etc.) and treat each activity as an individual sample - same as in the activities log.</p>
 </section>
 <section id="percentile-stratified-metric" class="level3">
 <h3 class="anchored" data-anchor-id="percentile-stratified-metric">Percentile stratified metric</h3>
 <p>In endurance sports, training days can be grouped into a few main types:</p>
 <ul>
-<li><strong>Easy sessions &amp; Rest days</strong> - used for recovery, aerobic base, and technique work. These make up roughly 55% of all sessions.</li>
-<li><strong>Hard sessions</strong> - tempo, threshold, VO2max, or interval workouts. Typically around 30% of sessions.</li>
+<li><strong>Easy sessions &amp; Rest days</strong> - used for recovery, aerobic base, and technique work. In majority of athletes, these make up roughly 60% of all sessions.</li>
+<li><strong>Hard sessions</strong> - tempo, threshold, VO2max, or interval workouts. Typically around 25% of sessions.</li>
 <li><strong>Long days</strong> - the occasional very long run, bike ride, or race that forms the extreme right tail of the distribution. About 15% of sessions.</li>
 </ul>
 <p>By tracking these session types separately we can see if:</p>
@@ -229,90 +233,138 @@ window.Quarto = {
 <li>or recent hard sessions make up a reasonable portion of total sessions to allow sufficient recovery,</li>
 <li>or recent long days are not too frequent or extreme.</li>
 </ul>
-<p>We will divide our days into these three categories based on Training Load values. Baseline window training load percentiles to define thresholds as this approach is individualized, automatic, and reproducible. These thresholds are then applied to both baseline and recent data.</p>
+<p>Instead of using fixed cutoffs, we will classify sessions relative to an athlete’s training history. As the baseline window represents the training distribution the athlete’s body is adapted to, we will use the baseline window to define training classification thresholds. Then we will apply these baseline thresholds on the recent window that represents the training we want to evaluate.</p>
 <ul>
 <li>This ensures the baseline distribution reflects the training the body has already adapted to, providing a safe reference.</li>
 <li>Recent sessions are evaluated relative to this safe baseline, so any increase in intensity, frequency, or duration signals higher acute load or potential risk.</li>
 </ul>
-<p>Formally, let <span class="math inline">\(\mathcal{Q}^w_p(\mathcal{L}_t)\)</span> be weighted <span class="math inline">\(p\)</span>-th quantile of the baseline window <span class="math inline">\(\mathcal{L}_t\)</span> using weights <span class="math inline">\(w_j\)</span> and define the baseline and recent buckets using baseline percentiles <span class="math inline">\(q^w_{70,t}\)</span> and <span class="math inline">\(q^w_{90,t}\)</span> as follows:</p>
+<p>Based on my training data, with a “feel based” hardcoded mapping into the categories Rest, Easy, Hard, Long, and Other, the distribution of training loads and their descriptive values are as follows:</p>
 <ul>
-<li><strong>Easy sessions &amp; Rest days</strong>: Training loads falling below the weighted <span class="math inline">\(q_{low}\)</span> percentile of the window: <span class="math display">\[TL \leq q^w_{low,t}=Q^w_{low}(\mathcal{L}_t)\]</span></li>
-<li><strong>Hard sessions</strong>: Training loads between the weighted <span class="math inline">\(q_{low}\)</span> and <span class="math inline">\(q_{high}\)</span> percentiles: <span class="math display">\[q^w_{70,t} &lt; TL \leq q^w_{high,t}=Q^w_{high}(\mathcal{L}_t)\]</span></li>
-<li><strong>Long days</strong>: Training loads above the weighted 90th percentile: <span class="math display">\[TL &gt; q^w_{high,t}=Q^w_{high}(\mathcal{L}_t)\]</span></li>
-</ul>
-<p>Clarifying notes:</p>
-<ul>
-<li><p>In order to perform any structured analysis, each session must be assigned to a bucket based on the percentile thresholds. This means that some sessions may fall into different buckets due to small differences in Training Load, even if their physiological impact is similar. So these categories should be interpreted with caution. Categories are a practical tool for analysis and a guide, rather than absolute labels. When interpreting them, consider the broader context.</p></li>
-<li><p>The distinction created by quantiles: that hard sessions have lower training load than long sessions, is based on observed patterns in my training. In particular, for ultra and sub-ultra endurance activities such as trail running, long sessions are disproportionately long and thus accumulate higher training loads compared to interval-based hard sessions. If different training pattern would be observed, the classification scheme could be adjusted accordingly. Also, in some cases of extremely hard sessions, the accumulated training load may be high enough that they fall into the “long” classification bucket, even though their nature differs from typical long endurance efforts.</p></li>
-</ul>
-<p>Note on <strong>weighted percentiles</strong>: The weighted percentile represents the TL at which the cumulative sum of weights reaches the desired fraction of total weight. This accounts for the fact that more recent baseline sessions contribute more to the threshold.</p>
-<p>Having defined these buckets, we summarize each bucket by the <strong>weighted average training load</strong> within, where we allow more recent training days to contribute more to the bucket averages. With this, we make the metric sensitive to shifts in the typical intensity of each type of session within the bucket.</p>
-<p>Based on my training data (with a hardcoded mapping into the categories Rest, Easy, Hard, Long, and Other), the distribution of training loads and their descriptive values are as follows:</p>
-<ul>
-<li>Rest - 14% of days, TL = avg 0, median 0, SD 0</li>
-<li>Easy - 37% of days, TL = avg 89, median 88, SD 36</li>
-<li>Hard - 27% of days, TL = avg 188, median 182, SD 58</li>
-<li>Long - 12% of days, TL = avg 213, median 182, SD 110</li>
-<li>Other - 10% of days, TL = avg 107, median 100, SD 65</li>
+<li>Rest - 13% of days, averages = TL per minute 0, Duration [h] 0, TL 0</li>
+<li>Easy - 50% of days, averages = TL per minute 1.14, Duration [h] 1.5, TL 87.0</li>
+<li>Hard - 22% of days, averages = TL per minute 2.47, Duration [h] 1.25, TL 171.6</li>
+<li>Long - 12% of days, averages = TL per minute 1.23, Duration [h] 3.07, TL 197.8</li>
+<li>Other - 3% of days, averages = TL per minute 1.03, Duration [h] 2.31, TL 93.9</li>
 </ul>
 <p><img src="saved_files/training_type_distribution.png" class="click-zoom img-fluid"></p>
-<p>Let <span class="math inline">\(w_j\)</span> be the weight of day <span class="math inline">\(j\)</span> in the baseline window <span class="math inline">\(\mathcal{L}_t\)</span> and <span class="math inline">\(v_j\)</span> be the weight of day <span class="math inline">\(j\)</span> in the recent window <span class="math inline">\(\mathcal{R}_t\)</span>. We then define the weighted averages within each bucket as:</p>
+<p>Formally, let <span class="math inline">\(\mathcal{Q}^w_p(\cdot)\)</span> be weighted <span class="math inline">\(p\)</span>-th quantile operator. We define <strong>baseline and recent buckets</strong> using weighted quantiles over the baseline window of <span class="math inline">\({TL^{min}}\)</span> and <span class="math inline">\(D\)</span> values, with weights <span class="math inline">\(w_j\)</span>, using the baseline quantile values as follows:</p>
+<ol type="1">
+<li><p>To distinguish Hard sessions from Easy and Long, we calculate <strong>Weighted Training Load per minute quantile</strong> over the baseline window: <span class="math display">\[q^w_{TL^{min},t} = Q^w_p(TL^{min}_{\text{baseline},t}, w_j)\]</span></p></li>
+<li><p>To further distinguish Easy and Long sessions, we calculate <strong>Weighted Duration quantile</strong> over the subset of baseline sessions where <span class="math inline">\(TL^{min} \leq q^w_{TL^{min},t}\)</span> (without hard sessions): <span class="math display">\[q^w_{D,t} = Q^w_p(\{D_i \in {D_{baseline},t} \quad | \quad TL^{min}_i \leq  q^w_{TL^{min},t}\}, w_j)\]</span></p></li>
+</ol>
+<p>Then, the <strong>baseline buckets</strong> and <strong>recent buckets</strong> are defined using the baseline quantile values as:</p>
+<ul>
+<li><p><strong>Easy sessions &amp; Rest days</strong> - Sessions with low intensity and short duration: <span class="math display">\[TL^{min} \leq q^w_{TL^{min},t} \quad \text{and} \quad D \leq q^w_{D,t}\]</span></p></li>
+<li><p><strong>Hard sessions</strong> - Sessions with high intensity: <span class="math display">\[TL^{min} &gt; q^w_{TL^{min},t}\]</span></p></li>
+<li><p><strong>Long sessions</strong> - Sessions with low intensity and long duration: <span class="math display">\[TL^{min} \leq q^w_{TL^{min},t} \quad \text{and} \quad D &gt; q^w_{D,t}\]</span></p></li>
+</ul>
+<p><strong>The specific quantile thresholds</strong> used to define session types are chosen based on observed distributions in my training data. They are pretty agnostic, but can be adapted depending on the athlete, sport, or racing distance type.</p>
+<ul>
+<li><p>Hard sessions: The threshold for <strong><span class="math inline">\(TL^{min}\)</span> is set to the weighted 70th percentile</strong> of the baseline window: <span class="math inline">\(q^w_{TL^{min},t} = Q^w_{70}(TL^{min}_{\text{baseline},t}, w_j)\)</span></p></li>
+<li><p>Easy vs Long sessions: The threshold for <strong>Duration is set to the weighted 75th percentile</strong> of the baseline window subset within the non-Hard sessions: <span class="math inline">\(q^w_{D,t} = Q^w_75(\{D_i \in {D_{baseline},t} \quad | \quad TL^{min}_i \leq  q^w_{TL^{min},t}\}, w_j)\)</span></p></li>
+</ul>
+<p><strong>Clarifying note</strong>: In order to perform any structured analysis, each session must be assigned to a bucket based on the defined percentile thresholds. As a result, some sessions may fall into different buckets due to small differences in TL per minute or Duration, even if their physiological impact is similar. These categories should therefore be interpreted within the broader context of the athlete’s training.</p>
+<p>Note on <strong>weighted percentiles</strong>: The weighted percentile represents the TL at which the cumulative sum of weights reaches the desired fraction of total weight. This accounts for the fact that more recent baseline sessions contribute more to the thresholds.</p>
+</section>
+<section id="weighted-average-training-load" class="level3">
+<h3 class="anchored" data-anchor-id="weighted-average-training-load">Weighted average training load</h3>
+<p>Having defined these buckets, we summarize each bucket by the <strong>weighted average training load</strong> within, where we allow more recent training days to contribute more to the bucket averages. With this, we make the metric sensitive to shifts in the typical intensity of each type of session within the bucket.</p>
+<p>Let <span class="math inline">\(w_j\)</span> be the weight of day <span class="math inline">\(j\)</span> in the baseline window and <span class="math inline">\(v_j\)</span> be the weight of day <span class="math inline">\(j\)</span> in the recent window. We then define the weighted averages within each bucket as:</p>
 <p><strong>Baseline bucket weighted averages:</strong></p>
-<p><span class="math display">\[\text{Easy}: \mu^w_{1,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{L}_t,\; TL \le q^w_{low,t}\,]\]</span> <span class="math display">\[\text{Hard}: \mu^w_{2,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{L}_t,\; q^w_{low,t} &lt; TL \le q^w_{high,t}\,]\]</span> <span class="math display">\[\text{Long}: \mu^w_{3,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{L}_t,\; TL &gt; q^w_{high,t}\,]\]</span></p>
+<p><span class="math display">\[
+\text{Easy}: \mu^w_{\text{easy},t} =
+\mathbb{E}_w\Big[\,TL \;\Big|\;
+\underbrace{TL \in TL_{\text{baseline},t}}_{\text{baseline window}} \;\wedge\;
+\underbrace{TL^{min} \leq q^w_{TL^{min},t}}_{\text{low intensity}} \;\wedge\;
+\underbrace{D \leq q^w_{D,t}}_{\text{short duration}}
+\,\Big]
+\]</span> <span class="math display">\[
+\text{Hard}: \mu^w_{\text{Hard},t} =
+\mathbb{E}_w\Big[\,TL \;\Big|\;
+\underbrace{TL \in TL_{\text{baseline},t}}_{\text{baseline window}} \;\wedge\;
+\underbrace{TL^{min} &gt; q^w_{TL^{min},t}}_{\text{high intensity}}
+\,\Big]
+\]</span> <span class="math display">\[
+\text{Hard}: \mu^w_{\text{Hard},t} =
+\mathbb{E}_w\Big[\,TL \;\Big|\;
+\underbrace{TL \in TL_{\text{baseline},t}}_{\text{baseline window}} \;\wedge\;
+\underbrace{TL^{min} &gt; q^w_{TL^{min},t}}_{\text{high intensity}}
+\,\Big]
+\]</span></p>
 <p><strong>Recent bucket weighted averages:</strong></p>
-<p><span class="math display">\[\text{Easy}: \nu^w_{1,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{R}_t,\; TL \le q^w_{low,t}\,]\]</span> <span class="math display">\[\text{Hard}: \nu^w_{2,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{R}_t,\; q^w_{low,t} &lt; TL \le q^w_{high,t}\,]\]</span> <span class="math display">\[\text{Long}: \nu^w_{3,t} = \mathbb{E}_w[\,TL \mid TL \in \mathcal{R}_t,\; TL &gt; q^w_{high,t}\,]\]</span></p>
+<p><span class="math display">\[
+\text{Easy}: \nu^w_{\text{Easy},t} =
+\mathbb{E}_w\Big[\,TL \;\Big|\;
+\underbrace{TL \in TL_{\text{recent},t}}_{\text{recent window}} \;\wedge\;
+\underbrace{TL^{min} \leq q^w_{TL^{min},t}}_{\text{low intensity}} \;\wedge\;
+\underbrace{D \leq q^w_{D,t}}_{\text{short duration}}
+\,\Big]
+\]</span></p>
+<p><span class="math display">\[
+\text{Hard}: \nu^w_{\text{Hard},t} =
+\mathbb{E}_w\Big[\,TL \;\Big|\;
+\underbrace{TL \in TL_{\text{recent},t}}_{\text{recent window}} \;\wedge\;
+\underbrace{TL^{min} &gt; q^w_{TL^{min},t}}_{\text{high intensity}}
+\,\Big]
+\]</span></p>
+<p><span class="math display">\[
+\text{Long}: \nu^w_{\text{Long},t} =
+\mathbb{E}_w\Big[\,TL \;\Big|\;
+\underbrace{TL \in TL_{\text{recent},t}}_{\text{recent window}} \;\wedge\;
+\underbrace{TL^{min} \leq q^w_{TL^{min},t}}_{\text{low intensity}} \;\wedge\;
+\underbrace{D &gt; q^w_{D,t}}_{\text{long duration}}
+\,\Big]
+\]</span></p>
 <p>Where <span class="math inline">\(\mathbb{E}[\cdot]\)</span> denotes the empirical weighted mean <span class="math inline">\(\mathbb{E}_w[v] = \frac{\sum_{i=1}^nw_iv_i}{\sum_{i=1}^nw_i}\)</span> over the subset of training load values falling into the specified bucket.</p>
-<p>In addition to the weighted averages, we can also track the <strong>proportion of sessions</strong> falling into each bucket in both the baseline and the recent window. Wheres the proportion of sessions falling into each bucket in Baseline window as pre-determined with quantiles, the number of easy, hard, and long sessions is not fixed once baseline thresholds are applied to recent training. For example, if the proportion of easy days decreases in recent window may signal insufficient recovery.</p>
-<p>Formally, let: <span class="math display">\[\pi_{k,t}^{(b)} \quad \text{and} \quad \pi_{k,t}^{(r)}\]</span> denote proportions of sessions in bucket <span class="math inline">\(k = 1,2,3\)</span> in baseline and recent window respectively.</p>
+<p>In addition to the weighted averages, we can also track the <strong>proportion of sessions falling into each bucket</strong> in both the baseline and the recent window. Whereas the proportion of sessions falling into each bucket in Baseline window as pre-determined with quantiles, the number of easy, hard, and long sessions is not fixed once baseline thresholds are applied to recent training. For example, if the proportion of easy days decreases in recent window may signal insufficient recovery.</p>
+<p>Formally, let: <span class="math display">\[\pi_{k,t}^{(b)} \quad \text{and} \quad \pi_{k,t}^{(r)}\]</span> denote proportions of sessions in bucket <span class="math inline">\(k = \text{Easy, Hard, Long}\)</span> in baseline and recent window respectively.</p>
 <p><strong>Most recent Session Classification</strong></p>
-<p>In addition to aggregated metrics, we can also assess each most recent individual session in the context of the baseline distribution. Specifically, for the most recent training session (e.g., the date of analysis), we can determine where its Training Load falls within the weighted baseline distribution.</p>
+<p>In addition to aggregated metrics, we can also assess each most recent individual session relative to the baseline distribution. For the most recent training session (e.g., the date of analysis), wwe calculate its overall percentile rank within the weighted baseline window:</p>
 <p>This can be expressed as the weighted percentile (or baseline-relative quantile rank) of the session:</p>
 <p><span class="math display">\[\phi_t = \frac{\sum_{j \in \mathcal{L}_t} w_j \,\mathbf{1}\{\,TL_j \leq TL_t^{(\text{recent})}\}}{\sum_{j \in \mathcal{L}_t} w_j}\]</span></p>
-<p>This allows us to assign the session to one of the predefined buckets: Easy, Hard, or Long - using the same percentile thresholds derived from the baseline window:</p>
-<p><span class="math display">\[
-\text{Session classification} =
-\begin{cases}
-\text{Easy} &amp; \text{if } TL \le q^w_{\text{low},t} \\[2mm]
-\text{Hard} &amp; \text{if } q^w_{\text{low},t} &lt; TL \le q^w_{\text{high},t} \\[1mm]
-\text{Long} &amp; \text{if } TL &gt; q^w_{\text{high},t}
-\end{cases}
-\]</span></p>
-<p>Also, as mentioned above, these classifications are meant as guidance; a more complete understanding comes from considering the weighted percentile values, which provide richer context on the session’s relative intensity.</p>
-<p>By doing this, we can assess the acute characteristics of the latest session relative to what the athlete has already adapted to and estimate how individual session contributes to overall training stress. This information can then guide adjustments for upcoming workouts to ensure we stay on track with the training plan.</p>
+<p>Next, we can assign the session to a Easy, Hard or Long bucket, using the same logic as when defining the recent buckets.</p>
+<p>Once the session is assigned to a bucket, we can also calculate its percentile rank within the assigned bucket, giving insight into how extreme the session is compared to similar sessions:</p>
+<p><span class="math display">\[\psi_{k,t} = \frac{\sum_{j \in \mathcal{B}_{k,t}} w_j \, \mathbf{1}\{\,TL_j \leq TL_t^{(\text{recent})}\}}{\sum_{j \in \mathcal{B}_{k,t}} w_j}, \quad k \in \{\text{Easy, Hard, Long}\},\]</span></p>
+<p>where <span class="math inline">\(\mathcal{B}_{k,t}\)</span> denotes the subset of baseline sessions in bucket <span class="math inline">\(k\)</span>.</p>
+<p>This dual-percentile approach: overall percentile rank <span class="math inline">\(\phi_t\)</span> and within-bucket percentile rank <span class="math inline">\(\psi_{k,t}\)</span>, provides a richer understanding of the session’s relative intensity: - <span class="math inline">\(\phi_t\)</span> shows how the session compares to all historical training. - <span class="math inline">\(\psi_{k,t}\)</span> shows how the session compares to similar types of sessions.</p>
+<p>By doing this, we can assess the acute characteristics of the latest session relative to what the athlete has already adapted to and estimate it contribution to overall training stress. This information supports more informed adjustments for upcoming workouts to ensure we stay on track with the training plan.</p>
 <p><strong>Applied recent session classification analysis</strong></p>
-<p>Based on the applied most recent session classification, we evaluated the alignment between the model’s classifications and the training type categories that were assigned “by hand”, presented above.</p>
-<p>It is important to emphasize that a mismatch between the two does not necessarily mean the “model” was wrong. Instead, it may indicate that the most recent session was actually harder or easier than we would perceive it. Another possibility is that the sessions in the baseline window were skewed toward the easier or harder side, which would shift the distribution and make the thresholds less “evenly” balanced across truly easy, hard, and long days.</p>
+<p>Based on the most recent session classification, we evaluated the alignment between the model’s classifications and the training type categories that were assigned manually, as summarized above.</p>
+<p>It is important to emphasize that a mismatch between the two does not necessarily indicate an error by the model. Rather, it may reflect that the most recent session was actually harder or easier than perceived, or that the baseline window itself was skewed toward easier or harder sessions, which would shift the distribution and affect threshold placement.</p>
+<p>The proportions of sessions classified correctly manually for each category are as follows:</p>
 <ul>
-<li>Easy - proportion of sessions classifed as “by hand” = 69%, average baseline-relative quantile rank = 0.37</li>
-<li>Hard - proportion of sessions classifed as “by hand” = 64%, average baseline-relative quantile rank = 0.80</li>
-<li>Long = proportion of sessions classifed as “by hand” = 40%, average baseline-relative quantile rank = 0.96</li>
+<li>Easy: 93%</li>
+<li>Hard: 72%</li>
+<li>Long: 46%</li>
+<li>Overall: 77%</li>
 </ul>
-<p>All in all, proportion of sessions classifed as “by hand” was 66%.</p>
-<p>Most of the hard classified sessions that were not classifed the same as “by hand” were some “easy” days that had some fast strides in and some double sessions, where both sessions were mostly easy, but the sum of training loads fall to hard. For the long sessions, most of the wrongly classifed were “by hand” perceived hard, but with training load closer to long runs.</p>
-<p>Most of the sessions classified as Hard that did not match the hand-labeled categories were actually “easier” days that included some fast strides or longer high paced segments. Other were some medium-long sessions which were manually classified as Long. For the Long sessions, the majority of misclassifications involved sessions that were perceived as Hard by hand, but whose overall Training Load was closer to that of typical Long sessions, so really hard, fast sessions.</p>
+<p>When sessions were classified as Easy by the model but not “by hand,” they were mostly labeled Hard or Long manually.</p>
+<p>For sessions classified as Hard by the model but not manually, the discrepancies arose from races (manually labeled as Long), “easy” sessions that included some fast strides, sessions that were too hard to be considered easy, other activities (e.g., Hiking, Swimming) that are not traditional training but are included in the dataset.</p>
+<p>For Long sessions, most misclassifications by the model were sessions manually perceived as Hard but with low aggregate intensity, or longer bike rides that were considered Easy.</p>
 </section>
 <section id="history-aware-statified-relative---training-load-hasr-tl" class="level3">
 <h3 class="anchored" data-anchor-id="history-aware-statified-relative---training-load-hasr-tl">History-Aware Statified Relative - Training Load (HASR-TL)</h3>
 <p>Once training sessions are divided into the three percentile-based buckets, defined from the baseline window, we can combine them into a single, interpretable metric that reflects how recent training compares to the athlete’s long-term adaptation. The central idea is weighted aggregation, where each bucket contributes differently to the overall metric. By aggregating the per-bucket loads with appropriate weights, HASRTL produces a single number that reflects how the overall recent training load compares to the baseline adaptation.</p>
 <p><strong>Weighted aggregation</strong></p>
-<p>Let <span class="math inline">\(w_1, w_2, w_3\)</span> denote weights for easy, hard, and long sessions, respectively, with <span class="math display">\[w_1+w_2+w_3=1,\quad w_k\ge 0\]</span>. The baseline aggregate load is then: <span class="math display">\[TL_{\text{baseline},t} = w_1 \mu_{1,t} + w_2 \mu_{2,t} + w_3 \mu_{3,t}.\]</span> Similarly, the recent aggregate load is: <span class="math display">\[TL_{\text{recent},t} = w_1 \nu_{1,t} + w_2 \nu_{2,t} + w_3 \nu_{3,t}.\]</span></p>
+<p>Let <span class="math inline">\(w_\text{Easy}, w_\text{Hard}, w_\text{Long}\)</span> denote weights for Easy, Hard, and Long sessions, respectively, with <span class="math display">\[w_\text{Easy}, w_\text{Hard}, w_\text{Long}=1,\quad w_k \geq 0 .\]</span></p>
+<p>The baseline aggregate load is then: <span class="math display">\[TL_{\text{baseline},t} = w_\text{Easy} \cdot \mu_{\text{Easy},t} + w_\text{Hard} \cdot \mu_{\text{Hard},t} + w_\text{Long} \cdot \mu_{\text{Long},t}.\]</span> Similarly, the recent aggregate load is: <span class="math display">\[TL_{\text{recent},t} = w_\text{Easy} \cdot \nu_{\text{Easy},t} + w_\text{Hard} \cdot \nu_{\text{Hard},t} + w_\text{Long} \cdot \nu_{\text{Long},t}.\]</span></p>
 <p>Finally, the <strong>History-Aware Stratified Relative Training Load (HASRTL)</strong> is defined as: <span class="math display">\[\Delta_t = \frac{TL_{\text{recent}}}{TL_{\text{baseline}}}.\]</span></p>
 <p>Here, <span class="math inline">\(\Delta_t\)</span> expresses how the current (recent) training load compares to the long-term baseline. It can be interpreted as a percentage increase or decrease of recent load relative to baseline adaptation.</p>
 <p>Since recent sessions are classified using baseline-defined buckets, <span class="math inline">\(\Delta_t\)</span> represents the relative training load compared to what the athlete has already adapted to, making it a robust measure of both increased stress and potential risk.</p>
-<p><strong>Selection of weights <span class="math inline">\(w_1, w_2, w_3\)</span></strong></p>
+<p><strong>Selection of weights <span class="math inline">\(w_\text{Eassy}, w_\text{Hard}, w_\text{Long}\)</span></strong></p>
 <p>When defining the buckets weights, for our purpose, we have to consider the bucket’s contribution to adaptation and also their potential impact on injury risk. The weights should reflect the relative importance of bucket’s session type in promoting positive training effects while also accounting for their role in acute stress spikes that may increase the probability of injury.</p>
 <ul>
 <li><strong>Easy sessions</strong>: As we defined them, they are frequent and involve low-intensity activities. They have low impact on both the adaptation and injury risk. Weight reflects their impact on training adaptation and injury risk.
 <ul>
-<li><span class="math inline">\(w_1 = 0.15\)</span></li>
+<li><span class="math inline">\(w_\text{Easy} = 0.15\)</span></li>
 </ul></li>
-<li><strong>Hard sessison</strong>: Less frequent but high-intensity activities that drive the adaptation and also impose higher acute loads that increase injury risk. Weight reflects their contribution to acute stress.
+<li><strong>Hard session</strong>: Less frequent but high-intensity activities that drive the adaptation and also impose higher acute loads that increase injury risk. Weight reflects their contribution to acute stress.
 <ul>
-<li><span class="math inline">\(w2 = 0.40\)</span></li>
+<li><span class="math inline">\(w_\text{Hard} = 0.40\)</span></li>
 </ul></li>
-<li><strong>Long sessison</strong>: They are rare but lead to high cumulative stress. They significantly contribute to adaptation and also pose a highest risk of injury. Weight reflects their peak stress contribution.
+<li><strong>Long session</strong>: They are rare but lead to high cumulative stress. They significantly contribute to adaptation and also pose a highest risk of injury. Weight reflects their peak stress contribution.
 <ul>
-<li><span class="math inline">\(w3 = 0.45\)</span></li>
+<li><span class="math inline">\(w_\text{Long} = 0.45\)</span></li>
 </ul></li>
 </ul>
 <p>These weights are not directly measurable, they are largely subjective, based on expert knowledge, experience, and general principles of training load management rather than precise data.</p>
@@ -323,19 +375,19 @@ window.Quarto = {
 <p><img src="saved_files/hasr_tl_full.png" class="click-zoom img-fluid"></p>
 <p>The idea behind the HASR-TL metric is to summarize this relationship in a single number, but a deeper understanding comes from also examining the individual training buckets (e.g., easy, hard, long). Comparing these buckets within the baseline and recent windows, and between them, helps reveal where changes originate and adds richer context than the ratio alone.</p>
 <p>By <strong>comparing bucket values within the same window</strong>, we gain insight to how well the training program is balanced across session types. This helps us check whether easy, hard, and long sessions are clearly distinct, or whether the loads are starting to blur together, which could reduce the effectiveness of the training. In practice, we calculate pairwise ratios of bucket weighted averages:</p>
-<p><span class="math display">\[\zeta_{\mu_i, \mu_j} = \frac{\mu_{i,t}}{\mu_{j,t}} \quad \text{and} \quad \zeta_{\nu_i, \nu_j} = \frac{\nu_{i,t}}{\nu_{j,t}}, \quad i,j = 1,2,3, i \neq j\]</span></p>
+<p><span class="math display">\[\zeta_{\mu_i, \mu_j} = \frac{\mu_{i,t}}{\mu_{j,t}} \quad \text{and} \quad \zeta_{\nu_i, \nu_j} = \frac{\nu_{i,t}}{\nu_{j,t}}, \quad i,j = \text{Easy, Hard, Long}, i \neq j\]</span></p>
 <p>By monitoring these values, we can identify trends such as if easy vs.&nbsp;hard sessions are becoming too similar, which might indicate reduced stimulus diversity.</p>
 <p><img src="saved_files/within_window_baseline_recent_comparison.png" class="click-zoom img-fluid"></p>
 <p>To understand which types of sessions are driving changes in overall load and what type of training have we been emphasizing lately, we <strong>compare values each bucket between recent and baseline windows</strong>.</p>
-<p><span class="math display">\[\delta_{k,t} = \frac{\nu_{k,t}}{\mu_{k,t}}, \quad k = 1,2,3\]</span></p>
+<p><span class="math display">\[\delta_{k,t} = \frac{\nu_{k,t}}{\mu_{k,t}}, \quad k = \text{Easy, Hard, Long}\]</span></p>
 <p>This ratio focuses on the intensity or load of sessions of a given type, independent of how often these sessions occur.</p>
 <p><img src="saved_files/within_bucket_easy_hard_comparison.png" class="click-zoom img-fluid"></p>
 <p>For example, a rise in <span class="math inline">\(\delta_{1,t}\)</span> might indicate that easy sessions are becoming more demanding relative to the baseline. Whereas a decrease in <span class="math inline">\(\delta_{3,t}\)</span> suggests that long sessions are less intense, long possibly absent.</p>
 <p>In contrast, to see how the distribution of session types is shifting, we <strong>compare the proportion of each session type in the recent window relative to the baseline</strong>:</p>
-<p><span class="math display">\[\rho_{k,t} = \frac{\pi_{k,t}^{(r)}}{\pi_{k,t}^{(b)}}, \quad k=1,2,3\]</span></p>
+<p><span class="math display">\[\rho_{k,t} = \frac{\pi_{k,t}^{(r)}}{\pi_{k,t}^{(b)}}, \quad k=\text{Easy, Hard, Long}\]</span></p>
 <p>This ratio captures frequency changes, not intensity.</p>
 <p><img src="saved_files/bucket_proportion_easy_hard_comparison.png" class="click-zoom img-fluid"></p>
-<p>For example, <span class="math inline">\(\rho_{1,t} &lt; 1\)</span> may indicate that recovery-oriented easy days are becoming too rare, while <span class="math inline">\(\rho_{3,t} &gt; 1\)</span> suggests long sessions are occurring more frequently, than the body is adapted to.</p>
+<p>For example, <span class="math inline">\(\rho_{\text{Easy},t} &lt; 1\)</span> may indicate that recovery-oriented easy days are becoming too rare, while <span class="math inline">\(\rho_{\text{Long},t} &gt; 1\)</span> suggests long sessions are occurring more frequently, than the body is adapted to.</p>
 <p>Together, these diagnostics offer a comprehensive view of training composition and its evolution and form the foundation for interpreting the aggregated HASRTL metric. However, <strong>the key question remains</strong>: how large a change is meaningful, risky, or indicative of under or over-training? These interpretive challenges will be explored in the next chapter.</p>
 </section>
 <section id="implementation" class="level3">
