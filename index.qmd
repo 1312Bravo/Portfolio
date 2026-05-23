@@ -27,3 +27,8 @@ I aim to make insights clear, actionable, and occasionally even artistic. I shar
 Analysing training data with Python and Garmin data.
 :::
 
+::: {.project-card}
+### [Path To UTMB](projects/path_to_utmb.qmd)
+Analysing Trail Running (UTMB) data with the final goal of personal UTMB participation.
+:::
+
