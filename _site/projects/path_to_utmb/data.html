@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Urh Peček – Urh Peček | Data Science Blog</title>
+<title>Scrape UTMB Race and Runners statistics - Data – Urh Peček | Data Science Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-59898bd1c6b9d2bb783127feaa000c76.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-920f8b5b4a9e6fe8e930067d636556fa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-59898bd1c6b9d2bb783127feaa000c76.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-920f8b5b4a9e6fe8e930067d636556fa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,7 +104,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent quarto-light">
@@ -79,7 +114,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Urh Peček | Data Science Blog</span>
     </a>
   </div>
@@ -90,15 +125,15 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./projects/training_log.html"> 
+    <a class="nav-link" href="../../projects/training_log.html"> 
 <span class="menu-text">Training Log</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./projects/path_to_utmb.html"> 
+    <a class="nav-link" href="../../projects/path_to_utmb.html"> 
 <span class="menu-text">Path To UTMB</span></a>
   </li>  
 </ul>
@@ -125,8 +160,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Urh Peček</h1>
-<p class="subtitle lead">Data Science Projects Portfolio, Blog &amp; Stories</p>
+<h1 class="title">Scrape UTMB Race and Runners statistics - Data</h1>
 </div>
 
 
@@ -146,22 +180,65 @@ ul.task-list li input[type="checkbox"] {
 <div class="{=html}">
 <p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer"></p>
 </div>
-<p>Hi, I’m Urh Peček! A data scientist and lifelong learner, fascinated by how numbers, models, and analytics help us make sense of the world. On this site, I share projects, experiments, and stories that spark my curiosity.</p>
-<p>These posts come from my own independent interests and questions I want to explore, datasets I find intriguing, or challenges that push me to think differently. Each project may be explored through multiple blog-style posts, each focusing on a different aspect, insight, or experiment. This allows me to break complex topics into digestible pieces while following a clear narrative. Each one is an opportunity to apply mathematics, statistics, and analytical thinking in a way that’s both rigorous and creative.</p>
-<p>I aim to make insights clear, actionable, and occasionally even artistic. I share not just results, but the thought process, experiments, and learning along the way. My hope is that every post inspires you to look at problems differently, question assumptions, and maybe spark your own experiments.</p>
-<div class="info-icons">
-<p><a href="https://github.com/1312Bravo" target="_blank"><i class="fab fa-github"></i></a> <a href="https://www.linkedin.com/in/urh-pe%C4%8Dek-a52527246/" target="_blank"><i class="fab fa-linkedin"></i></a> <a href="https://www.instagram.com/urhpecek/" target="_blank"><i class="fab fa-instagram"></i></a> <a href="mailto:pecek.urh@gmail.com"><i class="fas fa-envelope"></i></a></p>
+<p>Rather than manually copying race results and runner statistics, which would be practically impossible for any comprehensive analysis, I needed a scalable way to get data from the UTMB website programmatically. I built a toolkit of Python helper functions to extract and standardize information from UTMB APIs instead of scraping webpages directly.</p>
+<div class="project-link-container">
+    <i class="fab fa-github"></i>
+
+    <div style="display: flex; flex-direction: column; gap: 6px; margin-left: 6px;">
+        <span>
+            You can find the full toolkit on the project’s GitHub repository under the
+            <a href="https://github.com/1312Bravo/Path-To-UTMB/blob/main/helper_functions/utmb_api.py" target="_blank">
+                helper_functions and in the utmb_api.py
+            </a> script.
+        </span>
+
+        <span>
+            The examples how to run the helpers are in the
+            <a href="https://github.com/1312Bravo/Path-To-UTMB/blob/main/data/get_data_example.ipynb" target="_blank">
+                data/get_data_example.ipyn
+            </a> notebook.
+        </span>
+    </div>
 </div>
-<section id="featured-projects" class="level2">
-<h2 class="anchored" data-anchor-id="featured-projects">Featured Projects</h2>
-<section id="training-log" class="level3 project-card">
-<h3 class="anchored" data-anchor-id="training-log"><a href="./projects/training_log.html">Training Log</a></h3>
-<p>Analysing training data with Python and Garmin data.</p>
+<section id="utmb-api-authentication-token" class="level3">
+<h3 class="anchored" data-anchor-id="utmb-api-authentication-token">UTMB API Authentication Token</h3>
+<p>Some of the richer UTMB data - such as runner UTMB race scores and runner UTMB index information, is not available through basic scraping, but authentication (a sign in to UTMB webiste) is required. I implemented two helper functions that log into the UTMB API via OAuth and retrieve temporary access tokens. These tokens act as session credentials and allow access to endpoints that are not available through anonymous requests.</p>
+<ul>
+<li>Live Access Token – used for retrieving race-level data</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>utmb_live_access_token <span class="op">=</span> get_utmb_live_access_token(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    utmb_username<span class="op">=</span>utmb_website_login_username, </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    utmb_password<span class="op">=</span>utmb_website_login_password</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Access Token – used for retrieving runner-level statistics</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>utmb_access_token <span class="op">=</span> get_utmb_access_token(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    utmb_username<span class="op">=</span>utmb_website_login_username, </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    utmb_password<span class="op">=</span>utmb_website_login_password</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="path-to-utmb" class="level3 project-card">
-<h3 class="anchored" data-anchor-id="path-to-utmb"><a href="./projects/path_to_utmb.html">Path To UTMB</a></h3>
-<p>Analysing Trail Running (UTMB) data with the final goal of personal UTMB participation.</p>
+<section id="utmb-race-results" class="level3">
+<h3 class="anchored" data-anchor-id="utmb-race-results">UTMB Race Results</h3>
+<p>UTMB race results are retrieved from the official UTMB Live website <a href="https://live.utmb.world/" target="_blank"> https://live.utmb.world/</a> via direct API requests. Since the data comes from the live UTMB service, the function requires a valid Live Access Token for authentication - <code>access_token</code>. The <code>race_year</code> parameter is self-explanatory, while <code>race_id</code> and <code>course_id</code> can be obtained directly from the race URL on the UTMB Live website.</p>
+<p>For example, for the race page <a href="https://live.utmb.world/julianalps/2025/JAT80K" target="_blank"> https://live.utmb.world/julianalps/2025/JAT80K</a> the race results can be retrieved with:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>JAT80K_2025_results <span class="op">=</span> get_race_results(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    race_id <span class="op">=</span> <span class="st">"julianalps"</span>, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    race_year <span class="op">=</span> <span class="dv">2025</span>, </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    course_id <span class="op">=</span> <span class="st">"JAT80K"</span>, </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    access_token <span class="op">=</span> utmb_live_access_token</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The function queries the paginated UTMB Live API, combines all result pages, and returns a standardized DataFrame containing race and runner statistics.</p>
 </section>
+<section id="utmb-runner-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="utmb-runner-statistics">UTMB Runner Statistics</h3>
+<p>Runner statistics are retrieved from the official UTMB website <a href="https://utmb.world/" target="_blank">https://utmb.world/</a> via direct API requests. Since this data comes from the standard UTMB platform (not the live service), the function requires a regular UTMB Access Token for authentication - <code>access_token</code>. The main input is <code>runner_id</code>, which can be obtained directly from the runner profile URL on the UTMB website.</p>
+<p>For example, for the runner profile <a href="https://utmb.world/runner/1410311.tom.evans" target="_blank"> https://utmb.world/runner/1410311.tom.evans</a> the runner statistics can be retrieved with:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>tom_evans_stats <span class="op">=</span> get_runner_results(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    runner_id <span class="op">=</span> <span class="st">"1410311.tom.evans"</span>, </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    access_token <span class="op">=</span> utmb_access_token</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The function queries the UTMB API and returns a standardized DataFrame containing the runner’s historical race results and overall UTMB statistics.</p>
 
 
 </section>
