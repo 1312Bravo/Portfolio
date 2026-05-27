@@ -1,0 +1,19 @@
+---
+title: "What UTMB Index Do I Need to Break 27 Hours With Almost Certainty"
+---
+
+:::{=html}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+:::
+
+![](saved_files/finish_prob_eda.png){ class="click-zoom" }
+
+![](saved_files/race_time_eda.png){ class="click-zoom" }
+
+![](saved_files/finish_prob_diagnostics.png){ class="click-zoom" }
+
+![](saved_files/race_time_diagnostics.png){ class="click-zoom" }
+
+![](saved_files/model_predictions.png){ class="click-zoom" }
+
+![](saved_files/goal_prob_model_estimate.png){ class="click-zoom" }
