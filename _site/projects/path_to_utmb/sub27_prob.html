@@ -68,6 +68,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -145,6 +174,21 @@ ul.task-list li input[type="checkbox"] {
 <div class="{=html}">
 <p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer"></p>
 </div>
+<section id="idea" class="level3">
+<h3 class="anchored" data-anchor-id="idea">Idea</h3>
+<p>Idea is simple: to arrive at the start line of UTMB only once I genuinely believe I am ready to not only run and finish it, but race it.</p>
+<p>But what does “ready to race” actually mean? I defined it as ambitious benchmark: To believe I could finish under 27 hours with near certainty. That leads to a more concrete, mathematically clear and stated question. Since UTMB Index is the most widely used and accessible measure of trail running performance, what value would realistically indicate that a runner will finish the UTMB race in a sub-27 hour time?</p>
+<p>To explore this, I collected results from UTMB races between 2022 and 2025. The dataset contains runners’ - UTMB Index values, - finishing times and - final race status — whether they finished (finsher), withdrew (dnf), or were “broomed” (dnf)</p>
+<p>The problem can be stated as a mathematical formula of findinng the UTMB index <span class="math inline">\(x*\)</span>, such that</p>
+<p><span class="math display">\[
+x* = \text{min}\{x: P(T \leq 27 | x) \geq 0.95\}
+\]</span></p>
+<p>So, minimum UTMB index, such that race time is lower than 27 hours with at least 95% probability.</p>
+<p>The probability of race time under 27 hours, can thus be written as a product of two processes. - The runner first needs to finish the race. - Conditional on finishing, the race has to be run under 27 hours.</p>
+<p><span class="math display">\[
+P(T \leq 27 | x) = P(\text{Finish}|x) \cdot P(T \leq 27 | x, \text{Finish})
+\]</span></p>
+<p>where <span class="math inline">\(x\)</span> denotes the UTMB index.</p>
 <p><img src="saved_files/finish_prob_eda.png" class="click-zoom img-fluid"></p>
 <p><img src="saved_files/race_time_eda.png" class="click-zoom img-fluid"></p>
 <p><img src="saved_files/finish_prob_diagnostics.png" class="click-zoom img-fluid"></p>
@@ -153,6 +197,7 @@ ul.task-list li input[type="checkbox"] {
 <p><img src="saved_files/goal_prob_model_estimate.png" class="click-zoom img-fluid"></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

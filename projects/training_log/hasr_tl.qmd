@@ -6,7 +6,6 @@ title: "Increase your chances of staying away from running injuries - HASR-TL"
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 :::
 
-
 ### Idea
 
 When training for endurance sports, our bodies adapt over time, and whether a workout is "hard" or "easy" on the body, depends on what we’ve been doing recently and historically.  The goal is to define a simple metric that shows where we are with our current training compared to what we've been doing in the recent past. The purpose is to:
