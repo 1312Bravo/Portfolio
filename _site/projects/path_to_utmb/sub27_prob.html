@@ -177,8 +177,11 @@ window.Quarto = {
 <section id="idea" class="level3">
 <h3 class="anchored" data-anchor-id="idea">Idea</h3>
 <p>Idea is simple: to arrive at the start line of UTMB only once I genuinely believe I am ready to not only run and finish it, but race it.</p>
-<p>But what does “ready to race” actually mean? I defined it as ambitious benchmark: To believe I could finish under 27 hours with near certainty. That leads to a more concrete, mathematically clear and stated question. Since UTMB Index is the most widely used and accessible measure of trail running performance, what value would realistically indicate that a runner will finish the UTMB race in a sub-27 hour time?</p>
-<p>To explore this, I collected results from UTMB races between 2022 and 2025. The dataset contains runners’ - UTMB Index values, - finishing times and - final race status — whether they finished (finsher), withdrew (dnf), or were “broomed” (dnf)</p>
+<p>But what does “ready to race” actually mean? I defined it as ambitious benchmark: To believe I could finish under 27 hours with near certainty. That leads to a more concrete, mathematically clear and stated question. Since <strong>UTMB index</strong> is the most widely used and accessible measure of trail running performance, what value would realistically indicate that a runner will finish the UTMB race in a sub-27 hour time?</p>
+<p><img src="saved_files/utmb_index_distribution.png" class="click-zoom img-fluid"></p>
+</section>
+<section id="a-definition-of-readiness" class="level3">
+<h3 class="anchored" data-anchor-id="a-definition-of-readiness">A Definition of readiness</h3>
 <p>The problem can be stated as a mathematical formula of findinng the UTMB index <span class="math inline">\(x*\)</span>, such that</p>
 <p><span class="math display">\[
 x* = \text{min}\{x: P(T \leq 27 | x) \geq 0.95\}
@@ -189,8 +192,51 @@ x* = \text{min}\{x: P(T \leq 27 | x) \geq 0.95\}
 P(T \leq 27 | x) = P(\text{Finish}|x) \cdot P(T \leq 27 | x, \text{Finish})
 \]</span></p>
 <p>where <span class="math inline">\(x\)</span> denotes the UTMB index.</p>
+</section>
+<section id="methodology" class="level3">
+<h3 class="anchored" data-anchor-id="methodology">Methodology</h3>
+<p>We want to understand two relationships:</p>
+<ul>
+<li>How does the probability of finishing UTMB change with UTMB index?</li>
+<li>How does race time change with UTMB index among runners who finish?</li>
+</ul>
+<p>The most straightforward approach would be to estimate these probabilities <strong>empirically</strong> from the observed data. For example, we could group runners by UTMB index and calculate the proportion of finishers or sub-27 hour performances within each group. The problem is that real-world data are noisy. Some UTMB index ranges contain hundreds of runners, while others, particularly at the highest performance levels, contain only a handful. As a result, empirical probabilities become unstable estimates and highly sensitive to random variation. Furthermore, empirical estimates provide no natural way to interpolate between observed values, extrapolate beyond them, or quantify uncertainty.</p>
+<p>My goal is not only to describe what happened in the historical data, but to estimate the underlying relationship between UTMB index and race outcomes. I want to move from a collection of individual observations to a model of performance. A <strong>statistical model</strong> provides exactly that. By combining information across all runners, it produces a smooth and continuous relationship between UTMB index and probability. This allows us to estimate probabilities for any UTMB index value, not only those directly observed in the dataset, and provides a framework for reasoning about uncertainty.</p>
+<p>We model two separate processes:</p>
+<ul>
+<li><span class="math inline">\(P(\text{Finish}|x)\)</span> and</li>
+<li><span class="math inline">\(P(T | x, \text{Finish})\)</span>,</li>
+</ul>
+<p>where <span class="math inline">\(x\)</span> denotes the UTMB index and <span class="math inline">\(T\)</span> the finishing time.</p>
+<p>For the survival component, whether a runner reaches the finish line at all, I will use <strong>logistic regression</strong>. For the performance component, race time conditional on successfully finishing, I will use a <strong>linear regression</strong> model. Besides being interpretable, the linear model provides a direct way to transform predicted finish times into probabilities of running under a given target time, such as 27 hours.</p>
+<p>The objective is therefore not to perfectly reproduce every historical result, but rather to estimate the underlying survival and performance mechanisms that generated those results.</p>
+<p><strong>Why not use survival analysis?</strong></p>
+<p>At first glance, this appears to be a textbook survival-analysis problem. Race time can be viewed as a time-to-event variable, and runners who don’t could be treated as censored observations. The dataset also contains the checkpoint and time at which runners withdrew or were removed from the race.</p>
+<p>In classical survival analysis, censoring typically means that the event of interest has not yet been observed. A DNF at UTMB is different: it is not an unknown finishing time, but a failure to finish. The fact that a runner managed to stay in the race for 20, 30, or 40 hours before dropping out does not necessarily provide information about what their finishing time would have been.</p>
+<p>For this reason, I prefer to treat finishing and performance as two separate processes.</p>
+</section>
+<section id="data-preparation" class="level3">
+<h3 class="anchored" data-anchor-id="data-preparation">Data preparation</h3>
+<p>To explore this, I collected results from UTMB races between 2022 and 2025. Each observation corresponds to a runner in a given race edition and includes: - UTMB Index values, - finishing times and - final race status — whether they finished, withdrew, or were “broomed”</p>
+<p>Overall,the dataset contains 10,363 valid observations.</p>
+<p>For modeling purposes, both DNFs and brooming are treated as non-finishes, resulting in a binary outcome variable indicating whether a runner successfully completed the race. Finishing time is only observed for runners who completed the race.</p>
+<p>The dataset spans multiple UTMB editions, meaning that race-specific conditions such as weather and terrain difficulty are implicitly embedded in the observed variability of outcomes. In some editions with extreme weather, the course may also be slightly adjusted.</p>
+</section>
+<section id="finish-probability" class="level3">
+<h3 class="anchored" data-anchor-id="finish-probability">Finish probability</h3>
+<p>In the data, the overall finish rate is 65.99%. The average UTMB index of finishers is 571, compared to 542 of non finishers. The difference is relatively small, considering the spread of UTMB race runners’ UTMB index. This suggests that UTMB Index alone provides only limited separation between finishers and non-finishers.</p>
+<p>A very small difference, considering the distribution of the UTMB index among runners.</p>
 <p><img src="saved_files/finish_prob_eda.png" class="click-zoom img-fluid"></p>
+</section>
+<section id="race-time-conditional-on-finishing" class="level3">
+<h3 class="anchored" data-anchor-id="race-time-conditional-on-finishing">Race time conditional on Finishing</h3>
+<p>In the data, among finishers, the average race time is 39.11 hours, making the target of sub 27 hours a relatively ambitious outcome. Only 4.56% of finishers achieve a time below this threshold.</p>
+<p>Runners achieving sub-27 hour performances have in average UTMB index 803, with the lowest of 667. While within runners with over 27h of race time, UTMB index extends from 334 to 884 with average of 559.</p>
+<p>This large overlap suggests that UTMB Index is strongly correlated with performance, but far from deterministically predictive of race time.</p>
 <p><img src="saved_files/race_time_eda.png" class="click-zoom img-fluid"></p>
+</section>
+<section id="probability-of-sub-27-hour-race-time-time" class="level3">
+<h3 class="anchored" data-anchor-id="probability-of-sub-27-hour-race-time-time">Probability of sub-27 hour race time time</h3>
 <p><img src="saved_files/finish_prob_diagnostics.png" class="click-zoom img-fluid"></p>
 <p><img src="saved_files/race_time_diagnostics.png" class="click-zoom img-fluid"></p>
 <p><img src="saved_files/model_predictions.png" class="click-zoom img-fluid"></p>
