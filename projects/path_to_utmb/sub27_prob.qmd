@@ -87,13 +87,13 @@ A very small difference, considering the distribution of the UTMB index among ru
 
 We fit a simple logistic regression model **Finish ~ UTMB index**: 
 
-$$P(\text{Finish}) = \frac{1}{1-e^{1-(\alpha + \beta \cdot \text{UTMB index})}}$$
+$$P(\text{Finish}) = \frac{1}{1+e^{-(\alpha + \beta \cdot \text{UTMB index})}}$$
 or 
 $$log(\frac{p}{1-p}) = \alpha + \beta \cdot \text{UTMB index}$$
 
-The $\text{R}^2$ value of the model is 0.695 and the Pearson correlation coefficient of 0.834. This indicates that UTMB index explains a significant portion of the variance in finishing outcomes. However, there is still considerable variability in finish probabilities at any given UTMB index level.
+The estimated **UTMB index coefficient** is 0.0026, meaning that each additional point in UTMB index increases the odds of finishing by 0.26% multiplicatively (odds ration $\approx$ 1.0026). The standard error is 0.0002, indicating that the coefficient is precisely estimated, despite the small effect size.
 
-The UTMB index coefficient value is -0.0517, what means that with each UTMB index increase, 
+The model achieves a $\text{Pseudo R}^2$ of 0.0125 and ROC-AUC of 0.611, where 0.5 corresponds to random classification. This indicates that UTMB index contains some predictive signal for finishing, but the explanatory power is limited.
 
 ### Race time conditional on Finishing
 
@@ -106,6 +106,10 @@ This large overlap suggests that UTMB Index is strongly correlated with performa
 ![](saved_files/race_time_eda.png){ class="click-zoom" }
 
 We fit a simple linear regression model **Race time ~ UTMB index | Finish**. 
+
+The $\text{R}^2$ value of the model is 0.695 and the Pearson correlation coefficient of 0.834. This indicates that UTMB index explains a significant portion of the variance in finishing outcomes. However, there is still considerable variability in finish probabilities at any given UTMB index level.
+
+The UTMB index coefficient value is -0.0517, what means that with each UTMB index increase, 
 
 ### Probability of sub-27 hour race time time
 
