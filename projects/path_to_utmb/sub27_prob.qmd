@@ -180,7 +180,7 @@ $$
 
 Recall, the goals was to be almost certain, with 95% probability, of a sub-27 hour race time. To estimate the minimum UTMB index needed, we evaluate the probability across a range of UTMB index values. Well, the result was both suprising and humbling.
 
-![](saved_files/race_time_prob_under_27_sigmoid.png.png){ class="click-zoom" }
+![](saved_files/race_time_prob_under_27_sigmoid.png){ class="click-zoom" }
 
 According to the model, this threshold is reached at a **UTMB index of approximately 910**. This value is firmly within elite territory. For a runner with a UTMB index of 910, the model predicts:
 
