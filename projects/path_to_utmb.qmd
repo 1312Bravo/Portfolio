@@ -15,6 +15,11 @@ title: "Path To UTMB"
 </div>
 ```
 
+::: {.blog-card}
+[**UTMB - the Olympics of Trail Running**](path_to_utmb/about_utmb.qmd)  
+Often described as the Olympics of trail running, UTMB brings together the world's best runners in Chamonix each year. But UTMB is much more than a single race - it is a global series and qualification system that has shaped modern trail running. Before diving into the analyses, it is worth understanding what makes UTMB so special.
+<span class="blog-date">2026-05-10</span>
+:::
 
 ::: {.blog-card}
 [**Scrape UTMB Race and Runners statistics - Data**](path_to_utmb/data.qmd)  

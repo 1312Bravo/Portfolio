@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Path To UTMB – Urh Peček | Data Science Blog</title>
+<title>UTMB - the Olympics of Trail Tunning – Urh Peček | Data Science Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +23,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-59898bd1c6b9d2bb783127feaa000c76.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-920f8b5b4a9e6fe8e930067d636556fa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-59898bd1c6b9d2bb783127feaa000c76.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-920f8b5b4a9e6fe8e930067d636556fa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,8 +68,37 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="../styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent quarto-light">
@@ -79,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Urh Peček | Data Science Blog</span>
     </a>
   </div>
@@ -90,15 +119,15 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../projects/training_log.html"> 
+    <a class="nav-link" href="../../projects/training_log.html"> 
 <span class="menu-text">Training Log</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../projects/path_to_utmb.html" aria-current="page"> 
+    <a class="nav-link" href="../../projects/path_to_utmb.html"> 
 <span class="menu-text">Path To UTMB</span></a>
   </li>  
 </ul>
@@ -125,7 +154,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Path To UTMB</h1>
+<h1 class="title">UTMB - the Olympics of Trail Tunning</h1>
 </div>
 
 
@@ -145,26 +174,78 @@ ul.task-list li input[type="checkbox"] {
 <div class="{=html}">
 <p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer"></p>
 </div>
+<section id="ultra-trail-du-mont-blanc" class="level3">
+<h3 class="anchored" data-anchor-id="ultra-trail-du-mont-blanc">Ultra-Trail du Mont-Blanc</h3>
+<p><strong>UTMB</strong> (Ultra-Trail du Mont-Blanc) is often referred to as the most important event in trail running and described as the “Olympics of trail running”. Every year in late August, Chamonix becomes the centre of the sport, as the world’s best athletes gather to race around the Mont Blanc massif, crossing the mountains of France, Italy, and Switzerland. Alongside the elites, thousands of amateur runners chase the same dream.</p>
+<p>The <strong>UTMB Finals</strong> is a full week of events with different distances and profiles. The main race - the UTMB itself, is around 170 km long with more than 10,000 meters of elevation gain, circling Mont Blanc. Alongside it are other iconic races such as CCC (Courmayeur-Champex-Chamonix, ~100 km) and OCC (Orsières-Champex-Chamonix, ~50 km), named after the key towns they connect, each attracting different types of runners depending on distance and specialization.</p>
+<p>The route of the UTMB passes through several key mountain towns and checkpoints, including Courmayeur (Italy), Champex-Lac (Switzerland), and Les Houches (France), before returning to Chamonix. These points act as both logistical anchors and psychological milestones throughout the race.</p>
+<p>The UTMB week is the final event of the broader <strong>UTMB World Series</strong>. The Finals in Chamonix represent the culmination of this system, while the World Series itself consists of qualifying races held around the world, where runners collect “Running Stones” by finishing selected events to earn a place in the draw for the start line. For many athletes, this becomes a multi-year process. In addition to the standard qualification route, many UTMB World Series races also reward top performers with automatic qualification to the Finals - typically podium finishers or winners, depending on the specific race and category.</p>
+</section>
+<section id="course-profile" class="level3">
+<h3 class="anchored" data-anchor-id="course-profile">Course Profile</h3>
+<p>To better understand the course, I did a quick analysis of a 2025 GPX file of the UTMB route:</p>
+<ul>
+<li>Total distance: 172.6 km</li>
+<li>Elevation gain: 10,510 m</li>
+<li>Elevation per km: ~60.9 m/km</li>
+<li>Flat sections: ~8.2%</li>
+<li>Uphill sections: ~46.7%</li>
+<li>Downhill sections: ~45.1%</li>
+</ul>
+<p>Flat terrain is almost negligible, and the course is dominated by continuous transitions between climbing and descending. Both components contain a wide range of gradients, from runnable sections to very steep segments, which makes pacing highly nonlinear across the entire race. Breaking the terrain down further, I classified slopes into categories based on gradient (%):</p>
+<ul>
+<li>Flat: (0, 1)%</li>
+<li>Very easy: (1, 3)%</li>
+<li>Easy: (3, 7)%</li>
+<li>Moderate: (7, 12)%</li>
+<li>Steep: (12, 20)%</li>
+<li>Very steep: (20, 30)%</li>
+<li>Extreme: (30, <span class="math inline">\(\infty\)</span>)%</li>
+</ul>
+<p>Using this discretization, the uphill and downhill distributions look as follows:</p>
+<p><strong>Uphill sections</strong></p>
+<ul>
+<li>Extreme: 16.80%</li>
+<li>Very steep: 23.40%</li>
+<li>Steep: 27.90%</li>
+<li>Moderate: 16.74%</li>
+<li>Easy: 10.61%</li>
+<li>Very easy: 4.55%</li>
+</ul>
+<p><strong>Downhill sections</strong></p>
+<ul>
+<li>Extreme: 15.11%</li>
+<li>Very steep: 21.51%</li>
+<li>Steep: 26.31%</li>
+<li>Moderate: 16.60%</li>
+<li>Easy: 13.75%</li>
+<li>Very easy: 6.73%</li>
+</ul>
+<p>Overall, the course is far from uniform. Both climbs and descents are composed of mixed terrain, ranging from runnable to extremely technical sections, which makes simple pacing models insufficient on their own.</p>
+<p>I also estimated what flat-equivalent pacing would look like for different finishing times:</p>
+<ul>
+<li>Top 10 (~21h): ~7:30 min/km</li>
+<li>Average finish (~39h): ~13:36 min/km</li>
+<li>Median (~40.5h): ~14:08 min/km</li>
+<li>Cutoff (~46h): ~15:59 min/km</li>
+</ul>
+<p>Of course, these are purely flat-equivalent paces and do not reflect real effort distribution. However, they help illustrate just how different UTMB is from road marathons, where elevation, terrain variability, and fatigue accumulation dominate the actual pacing strategy.</p>
+<p><img src="saved_files/utmb_course_profile.png" class="click-zoom img-fluid"></p>
+</section>
+<section id="motivation" class="level3">
+<h3 class="anchored" data-anchor-id="motivation">Motivation</h3>
+<p>As a trail runner myself, UTMB sits firmly among long-term goals, almost in the category of dreams that quietly shape how I train year after year. From an analytical perspective, it is also a fascinating system to study. My intention is to use this perspective to better understand both my training and the race itself, so I can meaningfully improve my chances of one day standing at the start line in Chamonix and racing it the way I want to.</p>
 <div class="project-link-container">
     <i class="fab fa-github"></i>
-    <span> Check out the full 
-    <a href="https://github.com/1312Bravo/Path-To-UTMB" target="_blank"> GitHub repository </a>
-    for this project</span>
-</div>
-<div class="blog-card">
-<p><a href="../projects/path_to_utmb/about_utmb.html"><strong>UTMB - the Olympics of Trail Running</strong></a><br>
-Often described as the Olympics of trail running, UTMB brings together the world’s best runners in Chamonix each year. But UTMB is much more than a single race - it is a global series and qualification system that has shaped modern trail running. Before diving into the analyses, it is worth understanding what makes UTMB so special. <span class="blog-date">2026-05-10</span></p>
-</div>
-<div class="blog-card">
-<p><a href="../projects/path_to_utmb/data.html"><strong>Scrape UTMB Race and Runners statistics - Data</strong></a><br>
-Behind every UTMB analysis lies one major challenge: getting the data. A lot of valuable UTMB data exists publicly, but rarely in a format that is easy to analyze. To make large-scale analysis possible, I built a collection of Python functions that scrape and organize race results, runner statistics, and historical performance data directly from UTMB webpages. The pipeline supports multiple races and runner profiles with a simple, reusable interface — turning scattered web data into analysis-ready datasets. <span class="blog-date">2026-05-12</span></p>
-</div>
-<div class="blog-card">
-<p><a href="../projects/path_to_utmb/sub27_prob.html"><strong>What UTMB Index Do I Need to Break 27 Hours With Almost Certainty</strong></a><br>
-UTMB is a dream race for most of trail runners. Also for me. But I don’t want to approach it with the mindset of simply finishing. My goal is to arrive at the start line ready to truly race. I set myself an (perhaps too) ambitious benchmark: I would only commit to UTMB once I believed I could run under 27 hours with near certainty.That naturally led to a more practical question: As UTMB Index is the simplest measurable signal of performance, what value would actually tell I’m ready to realistically expect a sub-27 finish? <span class="blog-date">2026-05-23</span></p>
+    <span>
+    The code for this race profile analysis can be found in the GitHub repository under the 
+    <a href="https://github.com/1312Bravo/Path-To-UTMB/tree/main/course_analysis" target="_blank">course_analysis</a>
+    directory. The script <code>gpx_to_tabular.py</code> also contains a reusable function for <b>converting GPX files into tabular format</b>, which can be useful for analyzing other GPX tracks.
+    </span>
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -34,7 +34,7 @@ Rather than manually copying race results and runner statistics, which would be 
 
 Some of the richer UTMB data - such as runner UTMB race scores and runner UTMB index information, is not available through basic scraping, but authentication (a sign in to UTMB webiste) is required. I implemented two helper functions that log into the UTMB API via OAuth and retrieve temporary access tokens. These tokens act as session credentials and allow access to endpoints that are not available through anonymous requests.
 
-- Live Access Token – used for retrieving race-level data
+- Live Access Token - used for retrieving race-level data
 
 ```python
 utmb_live_access_token = get_utmb_live_access_token(
@@ -43,7 +43,7 @@ utmb_live_access_token = get_utmb_live_access_token(
 )
 ```
 
-- Access Token – used for retrieving runner-level statistics
+- Access Token - used for retrieving runner-level statistics
 
 ```python
 utmb_access_token = get_utmb_access_token(
