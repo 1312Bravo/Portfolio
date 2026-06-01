@@ -132,6 +132,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="../../projects/training_log.html"> 
 <span class="menu-text">Training Log</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../projects/path_to_utmb.html"> 
+<span class="menu-text">Path To UTMB</span></a>
+  </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
@@ -179,13 +183,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Before diving into analysis, it’s worth showing where the numbers come from. I wanted a consistent and automated way to capture my training.</p>
 <p>Two main datasets are daily updated and live in Google Sheets. Having the data in this format makes it easy to explore manually, but also gives me a flexible base for deeper analysis. I provide only a static sample of data logs.</p>
 <ul>
-<li><a href="https://docs.google.com/spreadsheets/d/1o5Y9_AM_8baj5DnB2AE9nYXU_ZSPsyFW6VjRbljSWIw/edit?gid=412740509#gid=412740509" target="_blank">Activity Log</a> – training activities with different metrics, including distance, duration, elevation, heart rate.</li>
+<li><a href="https://docs.google.com/spreadsheets/d/1o5Y9_AM_8baj5DnB2AE9nYXU_ZSPsyFW6VjRbljSWIw/edit?gid=412740509#gid=412740509" target="_blank">Activity Log</a> - training activities with different metrics, including distance, duration, elevation, heart rate.</li>
 </ul>
 <div class="sheet-embed-container">
 <p><iframe src="https://docs.google.com/spreadsheets/d/1o5Y9_AM_8baj5DnB2AE9nYXU_ZSPsyFW6VjRbljSWIw/preview?gid=412740509#gid=412740509" class="sheet-embed"> </iframe></p>
 </div>
 <ul>
-<li><a href="https://docs.google.com/spreadsheets/d/1k-JIYE5z9a-2IqcslkliL_Y6CdvcNeZ7NoVe8wDbo8I/edit?gid=0#gid=0" target="_blank">Daily Log</a> – day-level statistics, such as steps, sleep, resting heart rate, recovery time, and other daily metrics.</li>
+<li><a href="https://docs.google.com/spreadsheets/d/1k-JIYE5z9a-2IqcslkliL_Y6CdvcNeZ7NoVe8wDbo8I/edit?gid=0#gid=0" target="_blank">Daily Log</a> - day-level statistics, such as steps, sleep, resting heart rate, recovery time, and other daily metrics.</li>
 </ul>
 <div class="sheet-embed-container">
 <p><iframe src="https://docs.google.com/spreadsheets/d/1k-JIYE5z9a-2IqcslkliL_Y6CdvcNeZ7NoVe8wDbo8I/preview?gid=0#gid=0" class="sheet-embed"> </iframe></p>
@@ -194,7 +198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The script is run each morning and spreadsheets expand by one more day of history (yesterday’s data), keeping the logs synchronized without manual work. The script can also loop through multiple accounts if provided.</p>
 <p>The script relies two key integrations:</p>
 <ul>
-<li><code>Garmin Connect API</code> – fetch activities and health metrics.</li>
+<li><code>Garmin Connect API</code> - fetch activities and health metrics.</li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> garminconnect <span class="im">import</span> Garmin  </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -202,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>garminClient.login()</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>garminClient.get_activities_by_date(date_from, date_to)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li><code>Google Sheets API</code> – store and update logs.</li>
+<li><code>Google Sheets API</code> - store and update logs.</li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gspread</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> google.oauth2.service_account <span class="im">import</span> Credentials  </span>
@@ -220,7 +224,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <i class="fab fa-github"></i>
     <span> You can find the full code for this section, which is then easily integrated into the <code>src/main.py</code> script, on my Github repository under the
     <a href="https://github.com/1312Bravo/TrainingPeaks_customLog/tree/main/basic_daily_activity_statistics" target="_blank"> basic_daily_activity_statistics</a>
-     folder.</span>
+     directory.</span>
 </div>
 
 
