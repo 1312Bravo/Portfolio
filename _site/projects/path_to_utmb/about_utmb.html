@@ -131,13 +131,6 @@ window.Quarto = {
 <span class="menu-text">Path To UTMB</span></a>
   </li>  
 </ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/1312Bravo" target="_blank"> <i class="bi bi-github" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-</ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
@@ -174,16 +167,9 @@ window.Quarto = {
 <div class="{=html}">
 <p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer"></p>
 </div>
-<section id="ultra-trail-du-mont-blanc" class="level3">
-<h3 class="anchored" data-anchor-id="ultra-trail-du-mont-blanc">Ultra-Trail du Mont-Blanc</h3>
-<p><strong>UTMB</strong> (Ultra-Trail du Mont-Blanc) is often referred to as the most important event in trail running and described as the “Olympics of trail running”. Every year in late August, Chamonix becomes the centre of the sport, as the world’s best athletes gather to race around the Mont Blanc massif, crossing the mountains of France, Italy, and Switzerland. Alongside the elites, thousands of amateur runners chase the same dream.</p>
-<p>The <strong>UTMB Finals</strong> is a full week of events with different distances and profiles. The main race - the UTMB itself, is around 170 km long with more than 10,000 meters of elevation gain, circling Mont Blanc. Alongside it are other iconic races such as CCC (Courmayeur-Champex-Chamonix, ~100 km) and OCC (Orsières-Champex-Chamonix, ~50 km), named after the key towns they connect, each attracting different types of runners depending on distance and specialization.</p>
-<p>The route of the UTMB passes through several key mountain towns and checkpoints, including Courmayeur (Italy), Champex-Lac (Switzerland), and Les Houches (France), before returning to Chamonix. These points act as both logistical anchors and psychological milestones throughout the race.</p>
-<p>The UTMB week is the final event of the broader <strong>UTMB World Series</strong>. The Finals in Chamonix represent the culmination of this system, while the World Series itself consists of qualifying races held around the world, where runners collect “Running Stones” by finishing selected events to earn a place in the draw for the start line. For many athletes, this becomes a multi-year process. In addition to the standard qualification route, many UTMB World Series races also reward top performers with automatic qualification to the Finals - typically podium finishers or winners, depending on the specific race and category.</p>
-</section>
-<section id="course-profile" class="level3">
-<h3 class="anchored" data-anchor-id="course-profile">Course Profile</h3>
-<p>To better understand the course, I did a quick analysis of a 2025 GPX file of the UTMB route:</p>
+<section id="utmb-course-profile" class="level3">
+<h3 class="anchored" data-anchor-id="utmb-course-profile">UTMB Course Profile</h3>
+<p>To better understand the UTMB course, I did a quick analysis of a 2025 GPX file of the UTMB route:</p>
 <ul>
 <li>Total distance: 172.6 km</li>
 <li>Elevation gain: 10,510 m</li>
@@ -231,10 +217,6 @@ window.Quarto = {
 </ul>
 <p>Of course, these are purely flat-equivalent paces and do not reflect real effort distribution. However, they help illustrate just how different UTMB is from road marathons, where elevation, terrain variability, and fatigue accumulation dominate the actual pacing strategy.</p>
 <p><img src="saved_files/utmb_course_profile.png" class="click-zoom img-fluid"></p>
-</section>
-<section id="motivation" class="level3">
-<h3 class="anchored" data-anchor-id="motivation">Motivation</h3>
-<p>As a trail runner myself, UTMB sits firmly among long-term goals, almost in the category of dreams that quietly shape how I train year after year. From an analytical perspective, it is also a fascinating system to study. My intention is to use this perspective to better understand both my training and the race itself, so I can meaningfully improve my chances of one day standing at the start line in Chamonix and racing it the way I want to.</p>
 <div class="project-link-container">
     <i class="fab fa-github"></i>
     <span>
@@ -320,7 +302,7 @@ window.Quarto = {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/1312Bravo\.github\.io\/Portfolio\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

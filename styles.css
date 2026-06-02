@@ -52,25 +52,39 @@ a:hover {
 .project-link-container {
     display: flex;
     align-items: center;
-    margin: 8px 0;
+    background-color: #f8f9fa;
+    border-left: 4px solid #000000;
+    padding: 1.2rem;
+    margin: 1.5rem 0;
+    border-radius: 8px;
     font-size: 1.0em;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0);
+}
+
+.project-link-container:hover {
+    background-color: #f0f2f7;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0);
+    transform: translateX(4px);
 }
 
 .project-link-container i.fab {
     font-size: 1.5em;
-    margin-right: 8px;
+    margin-right: 12px;
     color: #000000;
+    flex-shrink: 0;
 }
 
 .project-link-container a {
-    color: #00008B;
+    color: #000000;
     text-decoration: none;
     display: inline-block;
     transition: transform 0.2s ease, color 0.2s ease;
+    font-weight: 500;
 }
 
 .project-link-container a:hover {
-    color: #00008B;
+    color: #000000;
     text-decoration: underline;
 }
 
@@ -145,11 +159,11 @@ a:hover {
     transition: transform 0.2s ease, color 0.2s ease;
 }
 
-.info-icons a i {
+.info-icons a {
     transition: transform 0.2s ease, color 0.2s ease;
 }
 
-.info-icons a:hover i {
+.info-icons a:hover {
     transform: scale(1.2);
     color: #000;
 }
@@ -183,6 +197,17 @@ img.click-zoom:active {
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/*Profile photo*/
+.profile-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* 

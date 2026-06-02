@@ -1,24 +1,14 @@
 ---
-title: "UTMB - the Olympics of Trail Tunning"
+title: "UTMB - Course profile"
 ---
 
 :::{=html}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 :::
 
-### Ultra-Trail du Mont-Blanc
+### UTMB Course Profile
 
-**UTMB** (Ultra-Trail du Mont-Blanc) is often referred to as the most important event in trail running and described as the "Olympics of trail running". Every year in late August, Chamonix becomes the centre of the sport, as the world's best athletes gather to race around the Mont Blanc massif, crossing the mountains of France, Italy, and Switzerland. Alongside the elites, thousands of amateur runners chase the same dream.
-
-The **UTMB Finals** is a full week of events with different distances and profiles. The main race - the UTMB itself, is around 170 km long with more than 10,000 meters of elevation gain, circling Mont Blanc. Alongside it are other iconic races such as CCC (Courmayeur-Champex-Chamonix, ~100 km) and OCC (Orsières-Champex-Chamonix, ~50 km), named after the key towns they connect, each attracting different types of runners depending on distance and specialization.
-
-The route of the UTMB passes through several key mountain towns and checkpoints, including Courmayeur (Italy), Champex-Lac (Switzerland), and Les Houches (France), before returning to Chamonix. These points act as both logistical anchors and psychological milestones throughout the race.
-
-The UTMB week is the final event of the broader **UTMB World Series**. The Finals in Chamonix represent the culmination of this system, while the World Series itself consists of qualifying races held around the world, where runners collect "Running Stones" by finishing selected events to earn a place in the draw for the start line. For many athletes, this becomes a multi-year process. In addition to the standard qualification route, many UTMB World Series races also reward top performers with automatic qualification to the Finals - typically podium finishers or winners, depending on the specific race and category.
-
-### Course Profile
-
-To better understand the course, I did a quick analysis of a 2025 GPX file of the UTMB route:
+To better understand the UTMB course, I did a quick analysis of a 2025 GPX file of the UTMB route:
 
 - Total distance: 172.6 km
 - Elevation gain: 10,510 m
@@ -69,10 +59,6 @@ I also estimated what flat-equivalent **pacing** would look like for different f
 Of course, these are purely flat-equivalent paces and do not reflect real effort distribution. However, they help illustrate just how different UTMB is from road marathons, where elevation, terrain variability, and fatigue accumulation dominate the actual pacing strategy.
 
 ![](saved_files/utmb_course_profile.png){ class="click-zoom" }
-
-### Motivation
-
-As a trail runner myself, UTMB sits firmly among long-term goals, almost in the category of dreams that quietly shape how I train year after year. From an analytical perspective, it is also a fascinating system to study. My intention is to use this perspective to better understand both my training and the race itself, so I can meaningfully improve my chances of one day standing at the start line in Chamonix and racing it the way I want to.
 
 ```{=html}
 <div class="project-link-container">
