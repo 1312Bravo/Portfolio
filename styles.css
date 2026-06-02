@@ -145,11 +145,11 @@ a:hover {
     transition: transform 0.2s ease, color 0.2s ease;
 }
 
-.info-icons a i {
+.info-icons a {
     transition: transform 0.2s ease, color 0.2s ease;
 }
 
-.info-icons a:hover i {
+.info-icons a:hover {
     transform: scale(1.2);
     color: #000;
 }
@@ -183,6 +183,17 @@ img.click-zoom:active {
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/*Profile photo*/
+.profile-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* 

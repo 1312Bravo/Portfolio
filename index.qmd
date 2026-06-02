@@ -7,6 +7,8 @@ subtitle: Data Science Projects Portfolio, Blog & Stories
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 :::
 
+![](other/profile_photo_bw.png){.profile-photo}
+
 Hi, I'm Urh Peček! A data scientist and lifelong learner, fascinated by how numbers, models, and analytics help us make sense of the world. On this site, I share projects, experiments, and stories that spark my curiosity.
 
 These posts come from my own independent interests and questions I want to explore, datasets I find intriguing, or challenges that push me to think differently. Each project may be explored through multiple blog-style posts, each focusing on a different aspect, insight, or experiment. This allows me to break complex topics into digestible pieces while following a clear narrative. Each one is an opportunity to apply mathematics, statistics, and analytical thinking in a way that's both rigorous and creative.
@@ -18,6 +20,7 @@ I aim to make insights clear, actionable, and occasionally even artistic. I shar
 <a href="https://www.linkedin.com/in/urh-pe%C4%8Dek-a52527246/" target="_blank"><i class="fab fa-linkedin"></i></a>
 <a href="https://www.instagram.com/urhpecek/" target="_blank"><i class="fab fa-instagram"></i></a>
 <a href="mailto:pecek.urh@gmail.com"><i class="fas fa-envelope"></i></a>
+<a href="other/CV.pdf" target="_blank"><b>CV</b></a>
 :::
 
 ## Featured Projects

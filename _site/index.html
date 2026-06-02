@@ -102,13 +102,6 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Path To UTMB</span></a>
   </li>  
 </ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/1312Bravo" target="_blank"> <i class="bi bi-github" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-</ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
@@ -146,11 +139,12 @@ ul.task-list li input[type="checkbox"] {
 <div class="{=html}">
 <p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer"></p>
 </div>
+<p><img src="other/profile_photo_bw.png" class="profile-photo img-fluid"></p>
 <p>Hi, I’m Urh Peček! A data scientist and lifelong learner, fascinated by how numbers, models, and analytics help us make sense of the world. On this site, I share projects, experiments, and stories that spark my curiosity.</p>
 <p>These posts come from my own independent interests and questions I want to explore, datasets I find intriguing, or challenges that push me to think differently. Each project may be explored through multiple blog-style posts, each focusing on a different aspect, insight, or experiment. This allows me to break complex topics into digestible pieces while following a clear narrative. Each one is an opportunity to apply mathematics, statistics, and analytical thinking in a way that’s both rigorous and creative.</p>
 <p>I aim to make insights clear, actionable, and occasionally even artistic. I share not just results, but the thought process, experiments, and learning along the way. My hope is that every post inspires you to look at problems differently, question assumptions, and maybe spark your own experiments.</p>
 <div class="info-icons">
-<p><a href="https://github.com/1312Bravo" target="_blank"><i class="fab fa-github"></i></a> <a href="https://www.linkedin.com/in/urh-pe%C4%8Dek-a52527246/" target="_blank"><i class="fab fa-linkedin"></i></a> <a href="https://www.instagram.com/urhpecek/" target="_blank"><i class="fab fa-instagram"></i></a> <a href="mailto:pecek.urh@gmail.com"><i class="fas fa-envelope"></i></a></p>
+<p><a href="https://github.com/1312Bravo" target="_blank"><i class="fab fa-github"></i></a> <a href="https://www.linkedin.com/in/urh-pe%C4%8Dek-a52527246/" target="_blank"><i class="fab fa-linkedin"></i></a> <a href="https://www.instagram.com/urhpecek/" target="_blank"><i class="fab fa-instagram"></i></a> <a href="mailto:pecek.urh@gmail.com"><i class="fas fa-envelope"></i></a> <a href="other/CV.pdf" target="_blank"><b>CV</b></a></p>
 </div>
 <section id="featured-projects" class="level2">
 <h2 class="anchored" data-anchor-id="featured-projects">Featured Projects</h2>
@@ -239,7 +233,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/1312Bravo\.github\.io\/Portfolio\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

@@ -12,10 +12,10 @@ website:
         href: projects/training_log.qmd
       - text: Path To UTMB
         href: projects\path_to_utmb.qmd
-    right:
-      - icon: github
-        href: https://github.com/1312Bravo
-        target: _blank
+    # right:
+    #   - icon: github
+    #     href: https://github.com/1312Bravo
+    #     target: _blank
 
 format:
   html:
