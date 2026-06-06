@@ -6,7 +6,7 @@ title: "Scrape UTMB Race and Runners statistics - Data"
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 :::
 
-Rather than manually copying race results and runner statistics, which would be practically impossible for any comprehensive analysis, I needed a scalable way to get data from the UTMB website programmatically. I built a toolkit of Python helper functions to extract and standardize information from UTMB APIs instead of scraping webpages directly.
+Rather than manually copying race resultszyy and runner statistics, which would be practically impossible for any comprehensive analysis, I needed a scalable way to get data from the UTMB website programmatically. I built a toolkit of Python helper functions to extract and standardize information from UTMB APIs instead of scraping webpages directly.
 
 ```{=html}
 <div class="project-link-container">
@@ -69,6 +69,26 @@ JAT80K_2025_results = get_race_results(
 
 The function queries the paginated UTMB Live API, combines all result pages, and returns a standardized DataFrame containing race and runner statistics.
 
+### UTMB Race/Runner Sector Data
+
+Sector data for a specific runner and race is retrieved from the official UTMB Live website <a href="https://live.utmb.world/" target="_blank"> https://live.utmb.world/</a> via direct API requests. Sector data contains checkpoint-by-checkpoint passing information for each athlete, including arrival times, departure times, split times, speed, pace, and rank evolution throughout the race. Similar to runner statistics, runner sector data is accessed individually for each athlete using their <code>race_year</code>. 
+
+Along with the race identifiers (<code>race_id</code> and <code>race_year</code>), the runner's bib number <code>runner_bib_num</code> is the required input. There is no need for <code>course_id</code> since all courses within a race have different bib numbers assigned to the runners. The <code>access_token</code> is the same Live Access Token used for retrieving race results.
+
+For example, for the race page and selected runner <a href="https://live.utmb.world/en/julianalps/2025/runners/2006" target="_blank"> https://live.utmb.world/en/julianalps/2025/runners/2006</a> the sector data can be retrieved with: 
+
+```python
+JAT_2025_karol_siola_sector_data = get_runner_race_sector_data(
+    race_id = "julianalps",
+    race_year = 2025,
+    runner_bib_num = 2006,
+    access_token = utmb_live_access_token,
+    printouts = True
+)
+```
+
+The function queries the UTMB API and returns a standardized DataFrame containing the runner's sector data for the selected race. The runners' bib number for the specific race can be obtained from the race results data.
+
 ### UTMB Runner Statistics
 
 Runner statistics are retrieved from the official UTMB website <a href="https://utmb.world/" target="_blank">https://utmb.world/</a> via direct API requests. Since this data comes from the standard UTMB platform (not the live service), the function requires a regular UTMB Access Token for authentication - <code>access_token</code>. The main input is <code>runner_id</code>, which can be obtained directly from the runner profile URL on the UTMB website.
@@ -81,4 +101,8 @@ tom_evans_stats = get_runner_results(
     access_token = utmb_access_token
 )
 ```
-The function queries the UTMB API and returns a standardized DataFrame containing the runner's historical race results and overall UTMB statistics.
+
+The function queries the UTMB API and returns a standardized DataFrame containing the runner's historical race results and overall UTMB statistics. The runners ID is also available in the race results data.
+
+
+
