@@ -8,6 +8,8 @@ The portfolio writing guide defines the voice, structure, and content style. Thi
 ## Step-By-Step Drafting
 - Do not apply new blog text, page structure, or major wording changes immediately unless the user explicitly asks for direct editing.
 - Draft proposed `.qmd`, Markdown, or card text in the chat first.
+- When drafting one substantial base part of a target `.qmd` file in chat, also save that proposed chunk under `notes/<target-qmd-file-name>/` so the discussion copy is not lost. Use small, clearly named files such as `part-01-opening.qmd`.
+- Treat files under `notes/` as base snapshots. Do not update them for every small rephrase or local wording change unless the user explicitly asks; continue those edits in chat first.
 - Work in small chunks so the user can decide what to keep, change, or skip.
 - Treat proposed wording as discussion material, not final copy.
 - After the user approves a chunk or asks for a specific edit, apply only that agreed change.

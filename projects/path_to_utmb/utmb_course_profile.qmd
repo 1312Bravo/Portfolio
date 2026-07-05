@@ -6,9 +6,37 @@ title: "UTMB - Course profile"
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 :::
 
+### What are we actually trying to race?
+
+UTMB is usually described with two numbers: roughly **170 km** and more than **10,000 meters of climbing**. Those numbers already sound large enough, but they still hide most of the story. What makes the course interesting is the way it keeps changing: long climbs, steep descents, runnable sections, technical terrain and aid stations, and very few sections where pace can be interpreted without terrain context.
+
+The route can vary slightly from year to year because of weather, safety decisions, or local course adjustments, but the main structure of the race remains almost constant. So the course is stable enough that the 2025 GPX file that is used can be a representative version of the UTMB course.
+
+### Data
+
+The GPX file was converted into tabular data using the reusable [`gpx_to_tabular()` function](https://github.com/1312Bravo/Path-To-UTMB/blob/main/helper_functions/gpx_to_tabular.py) from the Path To UTMB repository. The function is not UTMB-specific, so it can be used for any GPX file, which makes it useful for analyzing other courses as well.
+
+The GPX-derived course points were then connected with UTMB checkpoint and sector data from the 2022 to 2025 race editions. This sector data comes from the UTMB race and runner sector dataset described in the [data collection post](data.qmd). By matching the checkpoint distances to the GPX profile, we can estimate additional sector-level features such as elevation gain, elevation loss, and position on the course.
+
+Checkpoint IDs are not perfectly stable across years. Some repeated checkpoint IDs refer to very similar course positions, while others shift along the course. Because of that, we keep sectors year-specific for analysis, while using averaged checkpoint positions for the repeated IDs only for presentation.
+
 ### UTMB Course Profile
 
-To better understand the UTMB course, I did a quick analysis of a 2025 GPX file of the UTMB route:
+The rough summary of the UTMB course profile is approximately:
+
+- **Distance:** 172.6 km
+- **Elevation gain:** 10,510 m
+- **Elevation loss:** 10,509 m
+- **Minimum elevation:** 810 m
+- **Maximum elevation:** 2,538 m
+- **Elevation range:** 1,727 m
+- **Elevation gain per km:** 60.9 m/km
+- **Total vertical change per km:** 121.8 m/km
+
+What stands out, in addition to distance and elevation gain, is the vertical density. The course is constantly moving up or down. In average, every kilometer contains about 122 meters of total vertical change when gain and loss are combined. That explains why normal pace becomes a weak description of effort. 
+
+----------
+----------
 
 - Total distance: 172.6 km
 - Elevation gain: 10,510 m

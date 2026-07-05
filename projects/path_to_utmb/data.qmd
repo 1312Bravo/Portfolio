@@ -6,7 +6,7 @@ title: "Scrape UTMB Race and Runners statistics - Data"
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 :::
 
-Rather than manually copying race resultszyy and runner statistics, which would be practically impossible for any comprehensive analysis, I needed a scalable way to get data from the UTMB website programmatically. I built a toolkit of Python helper functions to extract and standardize information from UTMB APIs instead of scraping webpages directly.
+Rather than manually copying race results and runner statistics, which would be practically impossible for any comprehensive analysis, I needed a scalable way to get data from the UTMB website programmatically. I built a toolkit of Python helper functions to extract and standardize information from UTMB APIs instead of scraping webpages directly.
 
 ```{=html}
 <div class="project-link-container">
