@@ -235,6 +235,7 @@ Preferred image pattern:
 - Ask sharp questions when the goal, audience, or structure is unclear.
 - Do not turn every small edit into an interview.
 - Suggest stronger alternatives when a different structure, title, or explanation would make the portfolio clearer.
+- For active step-by-step collaboration rules, use `.agents/portfolio-workflow.md`.
 
 ## Adding New Portfolio Content
 When adding a new project:

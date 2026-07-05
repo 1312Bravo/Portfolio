@@ -31,7 +31,7 @@ Behind every UTMB analysis lies one major challenge: getting the data. A lot of 
 
 ::: {.blog-card}
 [**UTMB - Course profile**](path_to_utmb/utmb_course_profile.qmd)  
-UTMB is not just a hard race because it is long. It is hard because the terrain itself keeps changing. This post turns the 2025 GPX route into a course profile, then links it to sector data across 2022 to 2025 so the pacing analysis has a proper course-level foundation.
+Before we start writing code, fitting models, and making questionable assumptions, we should first understand the course we're trying to explain. At approximately 172 km with 10,510 meters of elevation gain across a wide variety of terrain, UTMB is not just another trail race. This post is a short introduction to the UTMB course profile, setting the foundation for the analyses that follow.
 <span class="blog-date">2026-07-05</span>
 :::
 
