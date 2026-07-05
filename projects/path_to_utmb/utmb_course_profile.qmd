@@ -6,18 +6,31 @@ title: "UTMB - Course profile"
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 :::
 
-### UTMB Course Profile
+### Why this matters
 
-To better understand the UTMB course, I did a quick analysis of a 2025 GPX file of the UTMB route:
+Before talking about pacing, it helps to understand what the UTMB course actually asks of the runner. UTMB is not a steady-distance race with a few hills. It is a long mountain system of climbs, descents, transitions, and repeated terrain shifts.
+
+This post uses the 2025 UTMB GPX route together with sector data from 2022 to 2025 to describe the course in a way that is useful for the pacing analysis that comes later.
+
+### The raw shape of UTMB
+
+The 2025 UTMB course is:
 
 - Total distance: 172.6 km
 - Elevation gain: 10,510 m
-- Elevation per km: ~60.9 m/km
-- Flat sections: ~8.2%
-- Uphill sections: ~46.7%
-- Downhill sections: ~45.1%
+- Elevation loss: 10,509 m
+- Elevation gain per km: 60.9 m/km
+- Elevation loss per km: 60.9 m/km
+- Total vertical change per km: 121.8 m/km
 
-Flat terrain is almost negligible, and the course is dominated by continuous transitions between climbing and descending. Both components contain a wide range of gradients, from runnable sections to very steep segments, which makes pacing highly nonlinear across the entire race. Breaking the terrain down further, I classified slopes into categories based on gradient (%):
+Flat terrain is almost negligible. Only 8.2% of the course is flat. The rest is split almost evenly between climbing and descending:
+
+- Uphill sections: 46.7%
+- Downhill sections: 45.1%
+
+That balance is the first important lesson. UTMB is not mainly a climb-heavy race or a descent-heavy race. It is both, almost constantly, and that makes pacing highly nonlinear.
+
+The slope breakdown makes the point even more clearly. I grouped gradients into categories from flat to extreme:
 
 - Flat: (0, 1)%
 - Very easy: (1, 3)%
@@ -25,38 +38,60 @@ Flat terrain is almost negligible, and the course is dominated by continuous tra
 - Moderate: (7, 12)%
 - Steep: (12, 20)%
 - Very steep: (20, 30)%
-- Extreme: (30, $\infty$)%
+- Extreme: (30, infinity)%
 
-Using this discretization, the uphill and downhill distributions look as follows:
+Among the uphill sections:
 
-**Uphill sections**
+- Steep: 27.9%
+- Very steep: 23.4%
+- Extreme: 16.8%
+- Moderate: 16.7%
+- Easy: 10.6%
+- Very easy: 4.6%
 
-- Extreme: 16.80%
-- Very steep: 23.40%
-- Steep: 27.90%
-- Moderate: 16.74%
-- Easy: 10.61%
-- Very easy: 4.55%
+Among the downhill sections:
 
-**Downhill sections**
+- Steep: 26.3%
+- Very steep: 21.5%
+- Moderate: 16.6%
+- Extreme: 15.1%
+- Easy: 13.8%
+- Very easy: 6.7%
 
-- Extreme: 15.11%
-- Very steep: 21.51%
-- Steep: 26.31%
-- Moderate: 16.60%
-- Easy: 13.75%
-- Very easy: 6.73%
+So both the climbs and the descents are mixed terrain. There is a lot of runnable ground, but also plenty of steep and very steep running. That is why simple pace-based thinking is not enough on its own.
 
-Overall, the course is far from uniform. Both climbs and descents are composed of mixed terrain, ranging from runnable to extremely technical sections, which makes simple pacing models insufficient on their own.
+### What flat pace would look like
 
-I also estimated what flat-equivalent **pacing** would look like for different finishing times:
+To make the scale a bit more intuitive, I also translated a few finishing times into flat-equivalent pace:
 
-* Top 10 (~21h): ~7:30 min/km
-* Average finish (~39h): ~13:36 min/km
-* Median (~40.5h): ~14:08 min/km
-* Cutoff (~46h): ~15:59 min/km
+- Top 10 finish, around 21h: 7.30 min/km
+- Average finish, around 39h: 13.56 min/km
+- Median finish, around 40.5h: 14.08 min/km
+- Cutoff, around 46h: 15.99 min/km
 
-Of course, these are purely flat-equivalent paces and do not reflect real effort distribution. However, they help illustrate just how different UTMB is from road marathons, where elevation, terrain variability, and fatigue accumulation dominate the actual pacing strategy.
+These are not real race paces, of course. They are just a useful reminder of how little UTMB resembles a road race. Even a strong finishing time still implies a very conservative average flat-equivalent pace once the elevation is folded in.
+
+### Sectors and checkpoints
+
+The course profile gets more interesting once the sector data is added.
+
+I matched the GPX route to sector data for 2022, 2023, 2024, and 2025, then looked at how stable the checkpoint structure was across years. The result is that the course is broadly consistent, but not perfectly identical.
+
+- Total unique sector checkpoint IDs across the four years: 30
+- Sector checkpoint IDs common to all years: 22
+- Sector checkpoint IDs not shared by all years: 8
+
+That is a useful reminder for analysis. Some sectors move a little, some appear or disappear, and some are rest-only or course-adaptation points. For that reason, I keep sectors year-specific in the analysis. For presentation, I only group repeated checkpoint IDs when their positions are very close and the meaning is effectively the same.
+
+The repeated-sector check also showed that several sector boundaries are very stable, while others shift more noticeably in distance or elevation context. So the course is consistent enough to compare across years, but not so uniform that we should pretend every checkpoint is exactly the same from one edition to the next.
+
+### Why this helps the pacing story
+
+This course profile is the bridge into the pacing work.
+
+It explains why UTMB pacing should be treated as a terrain problem, not just a speed problem. With so little flat running, and with long stretches of steep climbing and descending, good pacing is really about managing effort across changing terrain while avoiding the big mistakes that accumulate over many hours.
+
+That is why the later pacing analysis focuses on features like early aggressiveness, late strength, and pacing stability rather than only raw speed.
 
 ![](saved_files/utmb_course_profile.png){ class="click-zoom" }
 

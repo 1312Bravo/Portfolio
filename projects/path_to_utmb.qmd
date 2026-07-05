@@ -30,6 +30,12 @@ Behind every UTMB analysis lies one major challenge: getting the data. A lot of 
 :::
 
 ::: {.blog-card}
+[**UTMB - Course profile**](path_to_utmb/utmb_course_profile.qmd)  
+UTMB is not just a hard race because it is long. It is hard because the terrain itself keeps changing. This post turns the 2025 GPX route into a course profile, then links it to sector data across 2022 to 2025 so the pacing analysis has a proper course-level foundation.
+<span class="blog-date">2026-07-05</span>
+:::
+
+::: {.blog-card}
 [**What UTMB Index Do I Need to Break 27 Hours With Almost Certainty**](path_to_utmb/sub27_prob.qmd)  
 UTMB is a dream race for most of trail runners. Also for me. But I don't want to approach it with the mindset of simply finishing. My goal is to arrive at the start line ready to truly race. I set myself an (perhaps too) ambitious benchmark: I would only commit to UTMB once I believed I could run under 27 hours with near certainty.That naturally led to a more practical question: As UTMB Index is the simplest measurable signal of performance, what value would actually tell I'm ready to realistically expect a sub-27 finish?
 <span class="blog-date">2026-05-23</span>
