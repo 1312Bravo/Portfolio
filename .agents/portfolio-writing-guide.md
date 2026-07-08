@@ -61,6 +61,8 @@ Keep detailed methods, formulas, and diagnostics in child posts.
 ### Detailed Posts
 Detailed posts should be self-contained. A reader should understand the question, data, method, and conclusion without opening the notebook.
 
+Do not simply copy notebook sections, outputs, or every intermediate result into the post. Use the notebook as the analytical source of truth, then turn the useful parts into a readable story: select the numbers that move the argument forward, explain why they matter, and omit details that are only needed for exploration or debugging.
+
 Typical structure:
 
 1. Title.
