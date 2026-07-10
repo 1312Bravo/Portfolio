@@ -1,0 +1,51 @@
+---
+title: 'In ultra running, the "winner" is the one who slows down the least. Is this true?'
+---
+
+:::{=html}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+:::
+
+### The pacing question
+
+Pacing advice in ultra running often sounds simple from the outside: start controlled, stay patient, do not get pulled into someone else's race. My coach used to frame this in a very practical way: trail running is not cycling. There is no meaningful draft advantage and very little reason to respond to the runners around you.That connects to one of the classic ultra-running ideas: over long enough distances, performance is not only about who can run fast, but who can avoid slowing down too much.
+
+I wanted to test this idea in a structured way using UTMB data. Is it true that the best pacing strategy is the one that slows down the least? Or is that just a nice saying we repeat because it sounds sensible? 
+
+The goal is to analyse **whether different pacing styles are associated with better or worse results** relative to a runner's ability. In other words: given how strong a runner is, which way of moving through the race seems to produce the best outcome?
+
+The important phrase here is **relative to the runner's ability**. A top runner and a mid-pack runner have very different expected race times, so comparing their raw speeds would mostly tell us what we already know: stronger runners are faster. What matters for this analysis is whether each runner moved through the race better or worse than we would expect from their own level. In that sense, both an elite runner and a mid-pack runner can pace well, pace badly, start too hard, or finish stronger than expected.
+
+So this analysis starts from a simple hypothesis: **the best pacing strategy is not necessarily the most aggressive one, but the one that preserves speed relative to the runner's ability for as long as possible.** 
+
+### From finish time to race shape - Data
+
+To test this, I combine two types of UTMB data from the **2022, 2023, 2024, and 2025** editions, both described in the [data collection post](data.qmd). The first is **[race result data](data.qmd#utmb-race-results)**: finishing time, rank, race status, and runner descriptive variables. The second is **[race/runner sector data](data.qmd#utmb-racerunner-sector-data)**: checkpoint-by-checkpoint timing, including when a runner arrived, when they left, how long they rested, and how long they spent moving through each part of the course.
+
+Together, these data sources connect the final result with the shape of the race that produced it. The dataset contains **10,563 runner-race observations** from **9,528 unique runners**, and for each runner we can follow how the race unfolded sector by sector.
+
+The important unit in this analysis is a **sector**: the part of the race between two checkpoints. Each sector has a distance, a position in the race, a course profile, and a recorded time for each runner. In other words, we can look not only at when a runner finished, but how their race was distributed across the course. For more detail on how the course is split into sectors and how those sectors relate to the terrain profile, see the [UTMB course profile post](utmb_course_profile.qmd).
+
+Each sector contains two different kinds of time: moving time and rest time. For the main pacing analysis, I focus on **moving time through each sector**: from leaving the previous checkpoint to arriving at the next one. This keeps the analysis focused on the movement pattern itself, while rest strategy can be treated separately.
+
+This makes it possible to move beyond final finishing time and ask more useful pacing questions. How did the runner distribute effort across specific parts of the race? Where did they hold speed, and where did they start to lose it? Most importantly for this analysis: are some pacing patterns associated with better or worse results relative to the runner's overall ability?
+
+Before the pacing analysis, the sector data needed a small amount of cleanup and feature engineering. I standardized the sector timing fields, corrected rest-only checkpoints, added absolute and relative sector distance, and connected the sectors with the GPX-derived course profile to add terrain features such as elevation gain and loss. This gives each sector both a timing profile and a course profile.
+
+### Race time normalization
+
+### Sector time normalization
+
+
+
+
+
+
+```{=html}
+<div class="project-link-container">
+    <i class="fab fa-github"></i>
+    <span> You can find the full code for the strucuted analysis, on Path To UTMB Github repository under the
+    <a href="https://github.com/1312Bravo/Path-To-UTMB/tree/main/pacing_strategy" target="_blank"> pacing_strategy</a>
+     directory.</span>
+</div>
+```

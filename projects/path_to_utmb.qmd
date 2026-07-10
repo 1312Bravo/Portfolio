@@ -37,6 +37,13 @@ Before we start writing code, fitting models, and making questionable assumption
 
 ::: {.blog-card}
 [**What UTMB Index Do I Need to Break 27 Hours With Almost Certainty**](path_to_utmb/sub27_prob.qmd)  
-UTMB is a dream race for most of trail runners. Also for me. But I don't want to approach it with the mindset of simply finishing. My goal is to arrive at the start line ready to truly race. I set myself an (perhaps too) ambitious benchmark: I would only commit to UTMB once I believed I could run under 27 hours with near certainty.That naturally led to a more practical question: As UTMB Index is the simplest measurable signal of performance, what value would actually tell I'm ready to realistically expect a sub-27 finish?
+UTMB is a dream race for most of trail runners. Also for me. But I don't want to approach it with the mindset of simply finishing. My goal is to arrive at the start line ready to truly race. I set myself an (perhaps too) ambitious benchmark: I would only commit to UTMB once I believed I could run under 27 hours with near certainty. That naturally led to a more practical question: As UTMB Index is the simplest measurable signal of performance, what value would actually tell I'm ready to realistically expect a sub-27 finish?
 <span class="blog-date">2026-05-23</span>
 :::
+
+::: {.blog-card}
+[**In ultra running, the "winner" is the one who slows down the least. Is this true?**](path_to_utmb/pacing_strategy_analysis.qmd)  
+My coach often reminded me that trail running is not cycling: there is no real draft to hide in, and the best race usually comes from managing your own effort rather than reacting to everyone around you. Another classic ultra-running saying points in the same direction: the winner is not always the one who runs fastest early, but the one who slows down the least. In this post, we look at which pacing styles are associated with the best results, relative to a runner's ability.
+<span class="blog-date">2026-07-10</span>
+:::
+
