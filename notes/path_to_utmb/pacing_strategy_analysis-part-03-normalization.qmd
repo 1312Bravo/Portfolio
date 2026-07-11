@@ -62,4 +62,68 @@ This becomes the outcome variable for the pacing analysis. Instead of asking onl
 
 #### Sector time normalization
 
-For pacing, raw sector times have the same problem, but even more strongly. A sector time depends on runner ability, race year, sector distance, elevation, and terrain. Instead of normalizing raw sector times directly, I normalize **sector time shares**: the fraction of a runner's total moving time spent in each sector. This keeps the focus on the shape of the race. For example, did a runner spend more of their total race time than expected in the early climbs, or less than expected late in the race? The expected sector share is estimated from runner ability, year, and sector. Comparing actual share with expected share gives a sector pacing score: positive values mean the runner moved through that sector faster than expected relative to their own race, while negative values mean they spent more time there than expected.
+Race-time normalization tells us whether a runner finished better or worse than expected. But pacing is not only about the final result. It is about **how the runner distributed their race across the course**.
+
+Raw sector times are not enough for this. A sector time depends on the runner's ability, the year, the sector length, the elevation profile, and the terrain. A fast runner will usually be faster in every sector, so comparing raw sector times would mostly repeat the same information as the final race time. What we need instead is a way to compare the **shape** of each runner's race.
+
+For that, I convert each sector time into a **sector time share**:
+
+$$
+\text{Sector time share} =
+\frac{\text{Sector moving time}}{\text{Runner's total moving time}}
+$$
+
+So if a runner spent 8% of their total moving time in one sector, that sector has a share of `0.08`. The important detail is that these shares sum to 1 for each runner. This means we are no longer asking only who was fast. We are asking how each runner distributed their total moving time across the course.
+
+This is useful because two runners can have very different total finishing times but a similar pacing shape. And the opposite can also happen: two runners can finish in a similar total time, but one may spend more of their race early, while the other loses more time later.
+
+The next step is to estimate the expected sector share. The question becomes: **given this runner's ability, the race year, and the sector, how much of their total moving time would we expect them to spend here?**
+
+The model is:
+
+$$
+\text{Sector time share} \sim
+\text{Race year}:\text{Sector}
++
+\text{UTMB Index}:\text{Sector}
+$$
+
+The first part gives each sector its own baseline in each year. This matters because sectors are not equal units: some are long, some are short, some contain major climbs, and some are mostly descending or more runnable. The same sector can also change slightly by edition. The second part allows the relationship between ability and sector share to differ by sector. Stronger and slower runners do not necessarily distribute time across climbs, descents, and late-race sections in exactly the same way.
+
+After predicting the expected sector shares, I normalize the predictions so that they again sum to 1 for each runner. This is important because sector shares are compositional: if a runner spends more share in one part of the course, they must spend less share somewhere else.
+
+Then we calculate the sector pacing residual:
+
+$$
+\text{Sector pacing residual} =
+\text{Expected sector share} - \text{Actual sector share}
+$$
+
+Again, I use the direction where **higher is better**. A positive residual means the runner spent less of their total moving time in that sector than expected. A negative residual means they spent more of their total moving time there than expected.
+
+For example, if a runner was expected to spend 6% of their moving time in a sector but actually spent 5%, the residual is `+0.01`, or one percentage point better than expected. If they spent 7%, the residual is `-0.01`, or one percentage point worse than expected.
+
+For the main pacing analysis, I also use the relative version:
+
+$$
+\text{Normalized sector pacing} =
+1 - \frac{\text{Actual sector share}}{\text{Expected sector share}}
+$$
+
+This puts sectors with different expected sizes onto a more comparable scale. Being one percentage point faster than expected is not the same thing in a sector that normally takes 2% of the race and in a sector that normally takes 9% of the race. The relative version expresses the difference as a proportion of the expected sector share.
+
+On this scale:
+
+- `0.20` means the runner spent about 20% less share than expected in that sector.
+- `0` means the runner spent almost exactly the expected share.
+- `-0.20` means the runner spent about 20% more share than expected in that sector.
+
+![](saved_files/sector_share_normalization_diagnostics.png){ class="click-zoom" }
+
+The diagnostic plot shows that the model captures the main structure of sector shares. The left panel has visible bands because each sector has its own typical share of the race. That is expected: some sectors simply take a much larger part of the race than others. The predicted shares follow this structure, which means the model is learning the basic sector pattern rather than treating all sectors as interchangeable.
+
+The right panel shows the residuals. They are not perfectly random. This is partly because sector shares are bounded and compositional: every runner's shares must sum to 1, so errors in one sector are connected to errors elsewhere. The pattern also suggests that the model is better as a practical baseline than as a perfect sector-by-sector explanation.
+
+For this analysis, that limitation is acceptable, but it matters for interpretation. A positive sector pacing value does not mean the runner was objectively fast in that sector. It means the runner spent **less of their own race** in that sector than expected, given the sector, year, and ability baseline. This is exactly what we need for the pacing question: not raw speed, but how the race was distributed relative to expectation.
+
+**Comment for the real post:** this section can probably be shorter in the final `.qmd`. The core story is: raw sector times are unfair, sector shares describe race shape, expected shares create a sector baseline, and normalized sector pacing tells us where a runner spent more or less of their race than expected.

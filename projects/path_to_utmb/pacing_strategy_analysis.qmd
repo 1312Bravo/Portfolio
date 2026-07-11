@@ -74,16 +74,39 @@ $$
 
 With the relative version, all race results are put onto the same comparable scale. One hour does not mean the same thing for every runner: being one hour faster than expected is a larger relative improvement for a 22-hour runner than for a 44-hour runner. By using percentages instead of hours, we can compare runners with very different expected finishing times more fairly. 
 
-On this scale, `0.05` means the runner finished about 5% faster than expected, `0` means they finished almost exactly as expected, and `-0.05` means they finished about 5% slower than expected.
+On this scale, 0.05 means the runner finished about 5% faster than expected, 0 means they finished almost exactly as expected, and -0.05 means they finished about 5% slower than expected.
 
 Now, instead of asking only who was fastest overall, we can ask who performed better or worse than expected **relative to their own ability and other factors hiden in race edition**.
 
 ### Sector time normalization
 
+At this point, we have a comparable race result for each runner. The next question is what kind of pacing produced those results: how runners moved through the course.
 
+To answer this, we use sector data: how long each runner needed to move from one checkpoint to the next, together with the distance and profile of that part of the course. This gives us a checkpoint-by-checkpoint view of how each runner distributed their time across UTMB.
 
+Raw sector times and sector distances are not enough on their own. A fast runner will usually be faster in every sector, so comparing raw sector times would mostly repeat the same information as the final race time. What we need instead is a way to compare how runners distributed their effort: where each runner spent **more or less time than expected**.
 
+To compare sector times across runners with different abilities, we convert each sector time into a **sector time share** within that runner's race:
 
+$$
+\text{Sector time share} = \frac{\text{Sector moving time}}{\text{Runner's total moving time}}
+$$
+
+So if a runner spent 8% of their total moving time in one sector, that sector has a share of 0.08. These shares sum to 1 for each runner. 
+
+**Pacing is a relative distribution problem**. It is not only about how fast a runner was in one sector, but how that sector fits into their whole race, and how that distribution compares with other runners. So we need two kinds of comparability: across runners within the same sector, and across sectors within the same runner's race.
+
+Sector time shares give us the first part: they make runners more comparable within the same sector. But they do not fully solve the second part, because sectors are not comparable to each other. Spending 8% of total moving time in one sector may be completely normal if that sector is long, steep, or technical. Spending 8% in another sector may mean the runner lost a lot of time.
+
+That is why we estimate an expected sector share: **given the sector, sector conditions and the runner's ability, what share of total moving time would we expect here?** Only after that can we say whether a runner spent more or less time than expected in a specific sector.
+
+To estimate the expected sector share, we model sector time share as a function of the race year, the sector, and the runner's UTMB Index:
+
+$$
+\text{Sector time share} \sim \text{Race year}:\text{Sector} + \text{UTMB Index}:\text{Sector}
+$$
+
+This means that each sector can have its own baseline in each race year, while the relationship between UTMB Index and sector share is also allowed to differ by sector.
 
 ```{=html}
 <div class="project-link-container">
