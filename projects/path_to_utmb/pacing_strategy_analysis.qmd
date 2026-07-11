@@ -24,7 +24,9 @@ To test this, I combine two types of UTMB data from the **2022, 2023, 2024, and 
 
 Together, these data sources connect the final result with the shape of the race that produced it. The dataset contains **10,563 runner-race observations** from **9,528 unique runners**, and for each runner we can follow how the race unfolded sector by sector.
 
-The important unit in this analysis is a **sector**: the part of the race between two checkpoints. Each sector has a distance, a position in the race, a course profile, and a recorded time for each runner. In other words, we can look not only at when a runner finished, but how their race was distributed across the course. For more detail on how the course is split into sectors and how those sectors relate to the terrain profile, see the [UTMB course profile post](utmb_course_profile.qmd).
+We focus on **finishers with usable sector data across the race**. In the raw data, **6,971 runners finished** which means about **66%** of runner-race observations ended with a finish. Across the four editions, the finisher share ranged from roughly **64% to 68%**. 
+
+The important unit in the analysis is a **sector**: the part of the race between two checkpoints. Each sector has a distance, a position in the race, a course profile, and a recorded time for each runner. In other words, we can look not only at when a runner finished, but how their race was distributed across the course. For more detail on how the course is split into sectors and how those sectors relate to the terrain profile, see the [UTMB course profile post](utmb_course_profile.qmd).
 
 Each sector contains two different kinds of time: moving time and rest time. For the main pacing analysis, I focus on **moving time through each sector**: from leaving the previous checkpoint to arriving at the next one. This keeps the analysis focused on the movement pattern itself, while rest strategy can be treated separately.
 
@@ -33,6 +35,48 @@ This makes it possible to move beyond final finishing time and ask more useful p
 Before the pacing analysis, the sector data needed a small amount of cleanup and feature engineering. I standardized the sector timing fields, corrected rest-only checkpoints, added absolute and relative sector distance, and connected the sectors with the GPX-derived course profile to add terrain features such as elevation gain and loss. This gives each sector both a timing profile and a course profile.
 
 ### Race time normalization
+
+The first thing we need is a fair way to define what a good or bad race was for a specific runner. That means we need a way to **compare finishing times across runners with different abilities**. A runner's final race time depends on pre-race ability, but also on the race edition: weather, conditions, and small course differences can shift the whole field.
+
+We need to **normalize the runners race time**, so we can compare the performance of runners with different abilities and different race conditions. 
+
+For that, we estimate a baseline expectation for each runner's finishing time. The question is: given this runner's pre-race ability, and given the edition they ran, how fast would we expect them to finish? Once we have that expectation, the actual finishing time can be interpreted relative to it.
+
+To estimate that baseline, we use the **UTMB Index** as a measure of pre-race ability and the **race year** as a measure of race conditions. We also use their interaction, which allows the ability-time relationship itself to change by year: a 50-point difference in UTMB Index does not have to translate into exactly the same time difference in every edition of the race.
+
+$$
+\text{Race time} \sim \text{UTMB Index} + \text{Race year} + \text{UTMB Index}:\text{Race year}
+$$
+
+Once we have an expected race time, we can calculate the **residual**:
+
+$$
+\text{Residual} = \text{Expected race time} - \text{Actual race time}
+$$
+
+We use the opposite direction of the residuals than it is usually defined, so that a positive residual means the runner finished faster than expected, and a negative residual means the runner finished slower than expected.
+
+![](saved_files/race_time_normalization_diagnostics.png){ class="click-zoom" }
+
+The above diagnostic plot is mostly a sanity check. From the left panel we see a strong pattern in the expected direction: higher UTMB Index means lower expected race time. We also see that the year lines are not simply one common line. Some editions are shifted slightly up or down, which means the expected race time differs by year even for runners with similar UTMB Index values. Their slopes also differ slightly, which supports the decision to include the interaction term. This is also supported by the model coefficients and their p-values. This gives us a reasonable ability-and-year baseline before we start comparing pacing patterns.
+
+The right panel shows the residuals around that baseline. Ideally, those residuals would look like noise: scattered around zero without a clear pattern. Here we still see some structure. Runners with shorter predicted race times tend to have more negative residuals, while runners with longer predicted race times tend to have more positive residuals. This means the normalization is not perfectly calibrated across the whole field.
+
+This matters for the analysis. The normalized race-time score may partly reflect this calibration pattern, not only pacing quality. The model may be slightly too optimistic for some faster-predicted runners and slightly too pessimistic for some slower-predicted runners. Among runners with longer expected race times, finishing the race already selects a relatively successful group, because similar runners who struggled more are more likely to be missing from the finisher-only analysis because they DNFed.
+
+So the metric is useful, but it should be interpreted as an ability-and-year adjusted outcome among finishers, not as a perfect individual performance score.
+
+For the main analysis, we use a **relative version of the residual**:
+
+$$
+\text{Normalized race time} = 1 - \frac{\text{Actual race time}}{\text{Expected race time}}
+$$
+
+With the relative version, all race results are put onto the same comparable scale. One hour does not mean the same thing for every runner: being one hour faster than expected is a larger relative improvement for a 22-hour runner than for a 44-hour runner. By using percentages instead of hours, we can compare runners with very different expected finishing times more fairly. 
+
+On this scale, `0.05` means the runner finished about 5% faster than expected, `0` means they finished almost exactly as expected, and `-0.05` means they finished about 5% slower than expected.
+
+Now, instead of asking only who was fastest overall, we can ask who performed better or worse than expected **relative to their own ability and other factors hiden in race edition**.
 
 ### Sector time normalization
 

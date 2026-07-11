@@ -1,5 +1,65 @@
 ### Normalizing race time and sector time
 
-**Race time normalization.** Raw finishing times are not directly comparable, because runners arrive with different pre-race ability and each race year has its own conditions. A 35-hour UTMB can mean very different things for two runners with very different UTMB Index values. To handle this, I estimate each runner's expected race time from their pre-race ability and race year. The difference between expected and actual race time becomes the normalized race outcome. If a runner finishes faster than expected, their normalized performance is positive; if they finish slower than expected, it is negative. This gives us a way to ask who performed well **relative to expectation**, not only who was fastest overall.
+#### Race time normalization
 
-**Sector time normalization.** For pacing, raw sector times have the same problem, but even more strongly. A sector time depends on runner ability, race year, sector distance, elevation, and terrain. Instead of normalizing raw sector times directly, I normalize **sector time shares**: the fraction of a runner's total moving time spent in each sector. This keeps the focus on the shape of the race. For example, did a runner spend more of their total race time than expected in the early climbs, or less than expected late in the race? The expected sector share is estimated from runner ability, year, and sector. Comparing actual share with expected share gives a sector pacing score: positive values mean the runner moved through that sector faster than expected relative to their own race, while negative values mean they spent more time there than expected.
+The first normalization step is about the final result. Before we can ask whether a pacing pattern was good or bad, we need a fair way to define what a good or bad race was for that runner. Raw finishing time is not enough. A 35-hour UTMB can be a very strong result for one runner and a disappointing result for another. It depends on pre-race ability, and it also depends on the race year, because weather, conditions, and small course differences can shift the whole field.
+
+So I first build a baseline expectation for each runner's finishing time. The question is not: *how fast did this runner finish?* The more useful question is: **given this runner's UTMB Index, and given the edition they ran, how fast would we expect them to finish?** Once we have that expectation, the actual finishing time can be interpreted relative to it.
+
+To estimate that baseline, I model race time with UTMB Index, race year, and their interaction:
+
+$$
+\text{Race time} \sim \text{UTMB Index} + \text{Race year} + \text{UTMB Index}:\text{Race year}
+$$
+
+The first term captures runner ability. Stronger runners, measured by UTMB Index, are expected to finish faster. The race-year term allows the whole edition to shift up or down. The interaction term allows the ability-time relationship itself to change by year. In other words, a 50-point difference in UTMB Index does not have to translate into exactly the same time difference in every edition of the race.
+
+This interaction is not only a technical detail. In the fitted model, the UTMB Index effect is strongly negative, meaning higher-index runners are clearly faster on average. The interaction terms are also meaningful, especially in 2024 and 2025, where the p-values are well below 0.001. This suggests that the performance gradient by UTMB Index was not identical across editions. That is exactly why I do not want to normalize all years with one fixed line.
+
+| Model term | Estimate | p-value | Interpretation |
+|---|---:|---:|---|
+| UTMB Index | -0.0487 h | <0.001 | Higher-index runners are expected to finish faster. |
+| UTMB Index x 2023 | -0.0024 h | 0.042 | The index-time slope was slightly steeper than in 2022. |
+| UTMB Index x 2024 | -0.0047 h | <0.001 | The index-time slope was clearly steeper than in 2022. |
+| UTMB Index x 2025 | -0.0051 h | <0.001 | The index-time slope was clearly steeper than in 2022. |
+
+The goal is not to build the final performance model of UTMB here. The goal is to create a practical baseline: **given this runner's ability and this race year, what would we expect their finishing time to be?**
+
+Once we have an expected race time, we can calculate the residual:
+
+$$
+\text{Residual} = \text{Expected race time} - \text{Actual race time}
+$$
+
+Usually residuals are written as actual minus expected. I use the opposite direction on purpose, because it makes the interpretation more natural for this analysis: **higher is better**. A positive residual means the runner finished faster than expected. A negative residual means the runner finished slower than expected.
+
+For example, if a runner was expected to finish in 36 hours but actually finished in 34 hours, the residual is +2 hours. They were two hours better than expected. If they finished in 38 hours, the residual is -2 hours. They were two hours worse than expected.
+
+![](saved_files/race_time_normalization_diagnostics.png){ class="click-zoom" }
+
+The diagnostic plot is mostly a sanity check. The left panel shows the expected race-time relationship with UTMB Index separately by year. The pattern is strong and in the expected direction: higher UTMB Index means lower expected race time. The lines are not identical across years, which supports the decision to include the year interaction.
+
+The right panel shows the residuals around that baseline. They are not perfect. There is still a lot of spread, and the residual structure is not completely random. That is expected in a race like UTMB, where weather, execution, nutrition, technical skill, sleepiness, stomach problems, and simple bad days all matter. For this analysis, that imperfection is acceptable, because the model is not meant to explain every runner's result perfectly. It is meant to remove the dominant ability-and-year effect before studying pacing.
+
+For the main analysis, I use a relative version of the residual:
+
+$$
+\text{Normalized race time} =
+1 - \frac{\text{Actual race time}}{\text{Expected race time}}
+$$
+
+The relative version is more useful than the absolute residual because one hour does not mean the same thing for every runner. Being one hour faster than expected is a larger relative improvement for a 22-hour runner than for a 44-hour runner. The percentage version puts everyone on a more comparable scale:
+
+- `0.05` means the runner finished about 5% faster than expected.
+- `0` means the runner finished almost exactly as expected.
+- `-0.05` means the runner finished about 5% slower than expected.
+
+This becomes the outcome variable for the pacing analysis. Instead of asking only who was fastest overall, we can ask who performed better or worse than expected **relative to their own ability**.
+
+**Comment for the real post:** this section should probably replace the current `Race time normalization` block in `projects/path_to_utmb/pacing_strategy_analysis.qmd`. The current post already explains why "relative to ability" matters in the introduction, so this version does not need to repeat that idea too heavily. The main story here is: raw finishing time is unfair, the baseline model creates an expected time, and the normalized race-time score becomes the outcome for the pacing analysis.
+
+
+
+#### Sector time normalization
+
+For pacing, raw sector times have the same problem, but even more strongly. A sector time depends on runner ability, race year, sector distance, elevation, and terrain. Instead of normalizing raw sector times directly, I normalize **sector time shares**: the fraction of a runner's total moving time spent in each sector. This keeps the focus on the shape of the race. For example, did a runner spend more of their total race time than expected in the early climbs, or less than expected late in the race? The expected sector share is estimated from runner ability, year, and sector. Comparing actual share with expected share gives a sector pacing score: positive values mean the runner moved through that sector faster than expected relative to their own race, while negative values mean they spent more time there than expected.

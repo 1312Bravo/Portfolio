@@ -99,13 +99,11 @@ Before drawing conclusions from the model, we need to evaluate whether its assum
 
 ![](saved_files/finish_prob_diagnostics.png){ class="click-zoom" }
 
-The diagnostics suggest that the model has limited but non-trivial ability to distinguish finishers from non-finishers. The separation between the classes from predicted probabilities is clear but imperfect. This indicates that UTMB index alone is insufficient to deterministically classify race completion. 
+The diagnostics suggest that the model has limited but non-trivial ability to distinguish finishers from non-finishers. The ROC-AUC of 0.611 is better than random, but still modest, which confirms the basic point: UTMB Index contains signal, but it is far from enough to explain race completion by itself. 
 
-There is no strong systematic deviations from residual plot, suggesting that the logistic functional form is broadly appropriate. However, the empirical calibration curve shows deviations at higher UTMB index values, where the data becomes sparser and more variable. These deviations are driven by limited sample size in the elite range and increased outcome variability among top-level runners, where strategic risk-taking and race dynamics can lead to higher dropout rates.
+There is no strong systematic deviations from residual plot, suggesting that the logistic functional form is broadly appropriate. However, the empirical calibration curve does not increase smoothly across the whole UTMB Index range. At higher index values the data becomes sparser and more variable, and the observed finish rate can even drop. These deviations are driven by limited sample size in the elite range and likely connected to the structure of elite racing, where stronger runners may take more risks or stop rather than finish far below their goal.
 
-The diagnostics suggest that the model has limited but non-trivial ability to distinguish finishers from non-finishers. The moderate AUC and overlapping probability distributions indicate substantial unexplained variability, but the signal is significant. The residual plot suggests that the logistic functional form is broadly appropriate. Predicted finish rates across UTMB index shows that the model captures the overall increasing trend in finish probability, however deviations at high UTMB index, where data is more sparse, indicates mild calibration imperfections. This is also because the data "imperfection" - where elites are pushing extensively and also rather DNF than finish low.
-
-Overall, the diagnostics support proceeding with a probabilistic modeling framework, while acknowledging that UTMB index is only a partial predictor of race outcome.
+Overall, the diagnostics support using UTMB Index as a partial predictor of finish probability, while reminding us that the model is an approximation, especially at the high end of the index range.
 
 ### Race time conditional on finishing
 
@@ -131,7 +129,7 @@ Similar to logistic model, also linear regression model operates on certain assu
 
 ![](saved_files/race_time_diagnostics.png){ class="click-zoom" }
 
-There is a strong negative relationship between UTMB index and finishing time. There is seen cuttoff time at 46 hours. The relationship is broadly linear, which suggests that the linear functional form is appropriate as an approximation of the underlying relationship. The model captures the overall race time trend well. However, the spread suggests that individual-level variability remains substantial, which is expected. 
+There is a strong negative relationship between UTMB index and finishing time. There is seen cuttoff time at 46 hours. The relationship is broadly linear, which suggests that the linear functional form is appropriate as an approximation of the underlying relationship. The linear model captures the main trend well: among finishers, higher UTMB Index is strongly associated with faster race times.However, the spread suggests that individual-level variability remains substantial, which is expected. 
 
 The residual plot reveals mild heteroskedasticity - the variance of residuals is not constant across predicted values, but instead changes with UTMB index. This suggests that the linear model captures the mean trend well, but does not fully account for variability differences across the performance spectrum. 
 
