@@ -233,15 +233,130 @@ This does not make the pattern meaningless. If the plot only showed separation i
 
 **Pacing pattern features**
 
-TODO
+The performance-group plot gives a useful first picture. It shows how pacing profiles differ on average between better and worse performances. But to analyze this more systematically, we need to turn those profiles into measurable pacing patterns.
 
-The performance-group plot gives a useful first picture, but it is still descriptive. It shows that better and worse performances have different pacing profiles, especially from early to late race. But it does not tell us which specific pacing behaviors matter most, or whether the visible pattern remains useful once we describe pacing more systematically.
+We do this by converting the phase-level pacing values into a set of **pacing features**: starting control, late-race fade, finishing strength, pacing stability, and first-half versus second-half balance. The goal is to describe pacing in variables that still connect to real race behavior, and then ask **which pacing patterns are most strongly associated with better normalized race performance**.
 
-So the next step is to turn the phase-level pacing values into a set of pacing features. Instead of looking only at five separate phase values, we can describe broader race behaviors: how hard a runner started, how much they slowed down, how strong their final phase was, whether their pacing was steady, and how much their race shifted from the first half to the second half.
+The features are grouped by the pacing question they describe. Some describe one phase directly, while others combine phases into broader patterns such as starting too hard, fading late, finishing strongly, or keeping the race stable. The goal is to translate the pacing profile into a few interpretable race behaviors, that still mean something in real racing language.
 
-The goal of this feature engineering step is not to build the most complex model possible. It is to translate the pacing profile into interpretable variables that connect better to real race language. Once we have those features, we can ask a more precise question: which pacing behaviors are most associated with better normalized race performance?
+#### Individual phase scores 
+How relatively strong was the runner in each race phase? Higher means the runner spent less time than expected in that specific phase.
 
+| Feature | Short interpretation |
+|---|---|
+| Very early | Relative pacing in the opening phase. |
+| Early | Relative pacing after the opening phase. |
+| Middle | Relative pacing in the middle of the race. |
+| Late | Relative pacing in the late race. |
+| Very late | Relative pacing in the final phase. |
 
+#### Shape scores 
+Combine race phases to describe the overall shape of the race.
+
+| Feature | Short interpretation |
+|---|---|
+| Finish vs start | Whether the runner finished stronger than they started - relative negative-split style. |
+| Finish kick | Whether the final phase was strong compared with the rest of the race - strong final push. |
+| Final phase kick | Whether the runner improved from the late phase into the final phase - final-phase acceleration. |
+| Late strength | Whether the runner was stronger late than early - race durability. |
+| Early aggressiveness | Whether the opening phase was unusually fast compared with the rest of the race - aggressive start. |
+| Middle strength | Whether the middle phase stands out as especially strong. |
+| U-shape | Whether the runner was stronger at the beginning and end than in the middle. |
+
+#### Stability scores
+How smooth or uneven was the pacing profile?
+
+| Feature | Short interpretation |
+|---|---|
+| Variability | How uneven the pacing profile was across phases - larger phase-to-phase differences. |
+| Range | Gap between the runner's strongest and weakest phase - extreme pacing variation. |
+
+#### Neighbor changes
+How did pacing change from one phase to the next?
+
+| Feature | Short interpretation |
+|---|---|
+| Very early to early | Change after the opening phase. |
+| Early to middle | Change from early race into the middle. |
+| Middle to late | Change from middle race into late race. |
+| Late to very late | Change from late race into the final phase. |
+| Stepwise trend | Average direction of phase-to-phase changes - pacing generally improved as the race progressed. |
+| Worst phase drop | Biggest single fade between neighboring phases. |
+| Best phase gain | Biggest single recovery between neighboring phases. |
+
+#### Overall trend
+One summary feature for the direction of the whole pacing profile. It is calculated by fitting a simple straight line through the five phase pacing values from start to finish. If the line slopes upward, the runner became relatively stronger later in the race. If it slopes downward, the runner faded relative to expectation.
+
+| Feature | Short interpretation |
+|---|---|
+| Trend | Overall start-to-finish direction of the pacing profile. Higher means the runner became relatively stronger later. |
+
+#### Best-profile similarity 
+Compare each runner with the average pacing profile of the best normalized performances. The idea is to ask a slightly different question: do good races need to look like the average "best" pacing profile, or is one specific part of that profile more important than matching the whole shape?
+
+These should be treated as descriptive checks. If best-profile similarity is the strongest signal, then the whole pacing shape matters. But if a simpler feature, such as early aggressiveness or late strength, explains performance better, then runners may not need to copy the full best-performance profile. One part of the race may matter more, while there is still room for variation elsewhere.
+
+| Feature | Short interpretation |
+|---|---|
+| Best profile distance | How far the runner's pacing profile is from the average best-performance profile. |
+| Best profile score | How similar the runner is to that best-performance pacing profile. |
+| Best profile similarity rank | Where the runner ranks by similarity to the best-performance profile. |
+
+One thing to keep in mind is that higher does not always mean "better". For most phase and late-strength features, higher means the runner spent less time than expected or became relatively stronger. For early aggressiveness, higher means the runner was unusually fast at the start compared with the rest of their own race. For variability and range, higher means a more uneven pacing profile.
+
+#### Univariate analysis
+
+The first step is to look at each pacing feature on its own and see how it relates to normalized race performance. This tells us which pacing ideas carry the strongest signal before we combine features in a multivariable model.
+
+For each feature, we fit a simple linear relationship with normalized race performance and compare the direction and strength of the association. The main questions are:
+
+- Which features have the clearest relationship with better normalized performance?
+- Do the relationships match our first racing interpretation?
+- Are the strongest signals about starting control, late strength, pacing stability, or similarity to the best-profile shape?
+
+The univariate analysis gives a clear first message: the strongest single signal is not simply “finish fast”. It is **do not be too aggressive very early**. The early-aggressiveness feature and the very-early phase score carry the strongest relationships with normalized race performance. Their direction also matches the racing interpretation: runners who are relatively too fast in the opening phase tend to perform worse than expected overall.
+
+As a concrete example, here is the univariate relationship for **early aggressiveness**, one of the strongest single pacing signals. The model is intentionally simple:
+
+$$
+\text{Normalized race performance} \sim \text{Early aggressiveness}
+$$
+
+::: {.compact-table}
+| Metric | Value |
+|---|---:|
+| Observations | 6,863 |
+| Intercept | 0.0003 |
+| Coefficient | -0.5031 |
+| Scaled coefficient | -0.0412 |
+| p-value | < 0.001 |
+| R² | 0.214 |
+:::
+
+![](saved_files/pacing_analysis_univariate_example.png){ class="click-zoom" }
+
+The negative coefficient means that higher early aggressiveness is associated with worse normalized race performance. In race language: runners who were unusually fast in the opening phase compared with the rest of their race tended to finish worse relative to expectation. The R² is also relatively high for a single pacing feature, which already tells us that the opening phase carries a lot of information about the final outcome.
+
+Repeating this same univariate analysis across all pacing features gives the following summary.
+
+In race language: started too hot, paid later.
+
+| Finding | What it means |
+|---|---|
+| Early aggressiveness and very early phase pacing are the strongest features, and both have negative coefficients. | The opening phase contains a lot of information about the final outcome. Runners who start more controlled are more likely to keep moving well later. |
+| Early pacing features are stronger than best-profile similarity | Matching the full "best" pacing profile is less informative than what happens very early. The opening decision seems to matter more than copying the whole average shape. |
+| Late strength still matters | Runners who become relatively stronger later tend to perform better. This supports the idea that good UTMB pacing is partly about preserving speed late. |
+| Middle pacing alone is weak | The middle phase by itself explains very little compared with early control or late durability. |
+| Final kick alone is weak | A last-phase improvement does not explain much on its own. It matters less than the broader start-to-finish pacing pattern. |
+| Variability and range are moderate signals | Uneven pacing is related to performance, but less strongly than early aggressiveness and late strength. |
+
+The univariate analysis gives a clear first message: the strongest single signals are **early aggressiveness** and the **very early phase score**. Both point in the same direction. Runners who are relatively too fast in the very early phase tend to have worse normalized race performance.
+
+The early-race signal is especially important because the rest of the pacing profile may partly follow from the opening decision. A start that is too aggressive can create damage that is hard to repair later. Runners who stay more controlled early are more likely to keep moving well when the race becomes longer, steeper, and more expensive.
+
+The main finding is simple: the strongest signal is not finish fast. It is **do not be too aggressive very early**. The best performances tend to come from runners who avoid spending too much too soon, and then maintain or improve their relative pacing later in the race.
+
+#### Multivariate model
 
 
 ```{=html}
