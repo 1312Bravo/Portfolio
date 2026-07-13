@@ -325,7 +325,6 @@ $$
 ::: {.compact-table}
 | Metric | Value |
 |---|---:|
-| Observations | 6,863 |
 | Intercept | 0.0003 |
 | Coefficient | -0.5031 |
 | Scaled coefficient | -0.0412 |
@@ -352,12 +351,45 @@ In race language: started too hot, paid later.
 
 The univariate analysis gives a clear first message: the strongest single signals are **early aggressiveness** and the **very early phase score**. Both point in the same direction. Runners who are relatively too fast in the very early phase tend to have worse normalized race performance.
 
-The early-race signal is especially important because the rest of the pacing profile may partly follow from the opening decision. A start that is too aggressive can create damage that is hard to repair later. Runners who stay more controlled early are more likely to keep moving well when the race becomes longer, steeper, and more expensive.
-
 The main finding is simple: the strongest signal is not finish fast. It is **do not be too aggressive very early**. The best performances tend to come from runners who avoid spending too much too soon, and then maintain or improve their relative pacing later in the race.
 
-#### Multivariate model
+#### Multivariable pacing model
 
+So far, the story keeps pointing in the same direction: better performances seem to come from a more controlled start and stronger relative pacing later. Those two are probably connected. Late strength might matter by itself, or it might only look important because it is the opposite side of starting too fast.
+
+Many pacing features describe the same underlying race shape from different angles. Early aggressiveness, late strength, pacing trend, and phase-to-phase changes are all ways of measuring how the race shifts from start to finish.
+
+With the multivariable model we ask **which features still matter when they are considered together**. The model helps separate what is just another view of the same pattern from what still adds information on its own. The goal is not maximum prediction accuracy, but a small model that keeps the pacing story interpretable.
+
+The final multivariable model was chosen by comparing the univariate results, feature correlations, and several candidate models. The goal was to keep the model small, interpretable, and still strong enough to capture the main pacing-performance relationship.
+
+The chosen model keeps one representative feature from each main pacing idea: **early control, late durability, and pacing smoothness**. 
+
+$$
+\text{Normalized race performance} \sim \text{Early aggressiveness} + \text{Late strength} + \text{Pacing variability}
+$$
+
+The model has an **R² of 0.239**. In other words, these three pacing features explain about **24% of the variation in normalized race performance** among finishers. It also improves over any single-feature model.
+
+This is not a full prediction model, and it should not be read that way. It still leaves a lot of individual variation unexplained, which is expected. Pacing matters, but UTMB performance is also shaped by many things this model does not observe: nutrition, technical problems, stomach issues, sleepiness, injuries, and simple bad days.
+
+| Feature | Coefficient | 95% CI | p-value | Interpretation |
+|---|---:|---:|---:|---|
+| Early aggressiveness | -0.338 | [-0.373, -0.302] | < 0.001 | More aggressive early pacing is associated with worse normalized race performance. |
+| Pacing variability | -0.296 | [-0.352, -0.239] | < 0.001 | More uneven pacing is associated with worse normalized race performance. |
+| Late strength | 0.152 | [0.120, 0.183] | < 0.001 | Stronger late-race pacing is associated with better normalized race performance. |
+
+![](saved_files/normalized_race_time_final_actual_vs_predicted.png){ class="click-zoom" }
+
+### Conclusion
+
+The insights from the analysis fit the coaching advice that started the post. 
+
+The first idea was to start controlled, stay patient, and race within your own ability instead of reacting to everyone around you. The model supports this through the early-aggressiveness feature: runners who pushed too hard in the opening phase tended to perform worse relative to expectation.
+
+The second idea was that ultra performance is not only about who can run fast, but who can avoid slowing down too much. The model supports this through late strength and pacing stability. Better normalized performances were generally not built on a dramatic final kick, but on a more stable race profile and enough relative strength left for the later phases.
+
+In practical terms, if we want to improve the probability of a successful long distance running race, the model points toward a clear strategy: **keep the opening phase under control, maintain a stable pacing profile, and preserve enough relative strength for the late race**.
 
 ```{=html}
 <div class="project-link-container">
