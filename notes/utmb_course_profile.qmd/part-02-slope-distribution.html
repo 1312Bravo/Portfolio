@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Path To UTMB – Urh Peček | Data Science Blog</title>
+<title>part-02-slope-distribution – Urh Peček | Data Science Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +23,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-59898bd1c6b9d2bb783127feaa000c76.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-920f8b5b4a9e6fe8e930067d636556fa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-59898bd1c6b9d2bb783127feaa000c76.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-920f8b5b4a9e6fe8e930067d636556fa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,7 +69,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent quarto-light">
@@ -79,7 +79,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Urh Peček | Data Science Blog</span>
     </a>
   </div>
@@ -90,7 +90,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
 </ul>
@@ -106,58 +106,52 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Path To UTMB</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<div class="{=html}">
-<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer"></p>
-</div>
-<p>The UTMB (<strong>Ultra-Trail du Mont-Blanc</strong>), often called the Olympics of trail running, brings together the world’s best athletes in Chamonix each August. Chamonix becomes the centre of the sport as runners gather to race around the Mont Blanc massif, crossing the mountains of France, Italy, and Switzerland. Alongside the elites, thousands of amateurs chase the same dream.</p>
-<p>The <strong>UTMB Finals</strong> is a race week featuring multiple distances and profiles. The main race, UTMB itself, is about 170 km with over 10,000 meters of elevation gain. Other iconic races include CCC (~100 km) and OCC (~50 km), each linking key alpine towns and attracting different profiles of runners.</p>
-<p>The Finals are the culmination of the <strong>UTMB World Series</strong>, where runners qualify by collecting “Running Stones” at races worldwide or earning direct qualification through top performances. For many, it is a multi-year journey just to reach the start line.</p>
-<p>As a trail runner myself, UTMB sits in the category of <strong>long-term dreams</strong> that shape how I train. From an analytical perspective, it’s also a fascinating system to study, helping me better understand both my preparation and what it takes to one day race in Chamonix.</p>
-<div class="project-link-container">
-    <i class="fab fa-github"></i>
-    <span> Check out the full 
-    <a href="https://github.com/1312Bravo/Path-To-UTMB" target="_blank"> GitHub repository </a>
-    for this project</span>
-</div>
-<div class="blog-card">
-<p><a href="../projects/path_to_utmb/data.html"><strong>Scrape UTMB Race and Runners statistics - Data</strong></a><br>
-Behind every UTMB analysis lies one major challenge: getting the data. A lot of valuable UTMB data exists publicly, but rarely in a format that is easy to analyze. To make large-scale analysis possible, I built a collection of Python functions that scrape and organize race results, runner statistics, and historical performance data directly from UTMB webpages. The pipeline supports multiple races and runner profiles with a simple, reusable interface — turning scattered web data into analysis-ready datasets. <span class="blog-date">2026-05-12</span></p>
-</div>
-<div class="blog-card">
-<p><a href="../projects/path_to_utmb/utmb_course_profile.html"><strong>UTMB - Course profile</strong></a><br>
-Before we start writing code, fitting models, and making questionable assumptions, we should first understand the course we’re trying to explain. At approximately 172 km with 10,510 meters of elevation gain across a wide variety of terrain, UTMB is not just another trail race. This post is a short introduction to the UTMB course profile, setting the foundation for the analyses that follow. <span class="blog-date">2026-07-05</span></p>
-</div>
-<div class="blog-card">
-<p><a href="../projects/path_to_utmb/sub27_prob.html"><strong>What UTMB Index Do I Need to Break 27 Hours With Almost Certainty</strong></a><br>
-UTMB is a dream race for most trail runners. Also for me. But I don’t want to approach it with the mindset of simply finishing. My goal is to arrive at the start line ready to truly race. I set myself a perhaps too ambitious benchmark: I would only commit to UTMB once I believed I could run under 27 hours with near certainty. That naturally led to a more practical question: As UTMB Index is the simplest measurable signal of performance, what value would actually tell me I am ready to realistically expect a sub-27 finish? <span class="blog-date">2026-05-23</span></p>
-</div>
-<div class="blog-card">
-<p><a href="../projects/path_to_utmb/pacing_strategy_analysis.html"><strong>In ultra running, the “winner” is the one who slows down the least. Is this true?</strong></a><br>
-My coach often reminded me that trail running is not cycling: there is no real draft to hide in, and the best race usually comes from managing your own effort rather than reacting to everyone around you. Another classic ultra-running saying points in the same direction: the winner is not always the one who runs fastest early, but the one who slows down the least. In this post, we look at which pacing styles are associated with the best results, relative to a runner’s ability. <span class="blog-date">2026-07-10</span></p>
-</div>
+<section id="slope-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="slope-distribution">Slope distribution</h3>
+<p>To make the course profile more useful, I classified each GPX segment by slope. The categories are based on absolute gradient:</p>
+<ul>
+<li><strong>Flat:</strong> 0-1%</li>
+<li><strong>Very easy:</strong> 1-3%</li>
+<li><strong>Easy:</strong> 3-7%</li>
+<li><strong>Moderate:</strong> 7-12%</li>
+<li><strong>Steep:</strong> 12-20%</li>
+<li><strong>Very steep:</strong> 20-30%</li>
+<li><strong>Extreme:</strong> more than 30%</li>
+</ul>
+<p>The flat category is almost negligible. Only <strong>14.1 km</strong>, or <strong>8.18%</strong> of the course, falls into the flat range. The rest is almost evenly split between climbing and descending:</p>
+<ul>
+<li><strong>Uphill:</strong> 80.6 km, or 46.71% of the course</li>
+<li><strong>Downhill:</strong> 77.9 km, or 45.10% of the course</li>
+</ul>
+<p>But the important part is not only that the course goes up and down. It is how steep those uphills and downhills are. On the uphill sections, the distance-weighted average slope is about <strong>13.0%</strong>. On the downhill sections, the distance-weighted average slope is about <strong>13.5%</strong> in absolute value.</p>
+<p>That means a large part of the course is not simply “climbing” or “descending” in a generic sense. Much of it is steep enough that running economy, muscular load, technical skill, and fatigue become part of the pacing problem.</p>
+<p>For the uphill sections, the distribution is:</p>
+<ul>
+<li><strong>Steep:</strong> 27.90%</li>
+<li><strong>Very steep:</strong> 23.40%</li>
+<li><strong>Extreme:</strong> 16.80%</li>
+<li><strong>Moderate:</strong> 16.74%</li>
+<li><strong>Easy:</strong> 10.61%</li>
+<li><strong>Very easy:</strong> 4.55%</li>
+</ul>
+<p>For the downhill sections, the distribution is:</p>
+<ul>
+<li><strong>Steep:</strong> 26.31%</li>
+<li><strong>Very steep:</strong> 21.51%</li>
+<li><strong>Moderate:</strong> 16.60%</li>
+<li><strong>Extreme:</strong> 15.11%</li>
+<li><strong>Easy:</strong> 13.75%</li>
+<li><strong>Very easy:</strong> 6.73%</li>
+</ul>
+<p>This is where a simple distance-based view of the race starts to break down. Two sectors can have the same length but completely different demands. A five-kilometer section with moderate climbing is not comparable to a five-kilometer section with a very steep technical descent, even if both appear identical in a basic distance table.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -232,7 +226,7 @@ My coach often reminded me that trail running is not cycling: there is no real d
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/1312Bravo\.github\.io\/Portfolio\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

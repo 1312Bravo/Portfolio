@@ -184,6 +184,13 @@ img.click-zoom:active {
     position: relative;
 }
 
+/* Compact tables for small summary blocks */
+.compact-table table {
+    width: auto;
+    min-width: 360px;
+    max-width: 520px;
+}
+
 /*Google Sheet preview*/
 .sheet-embed-container {
     width: 100%;

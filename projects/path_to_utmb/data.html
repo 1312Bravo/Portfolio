@@ -180,14 +180,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <span>
             The examples how to run the helpers are in the
             <a href="https://github.com/1312Bravo/Path-To-UTMB/blob/main/data/get_data_example.ipynb" target="_blank">
-                data/get_data_example.ipyn
+                data/get_data_example.ipynb
             </a> notebook.
         </span>
     </div>
 </div>
 <section id="utmb-api-authentication-token" class="level3">
 <h3 class="anchored" data-anchor-id="utmb-api-authentication-token">UTMB API Authentication Token</h3>
-<p>Some of the richer UTMB data - such as runner UTMB race scores and runner UTMB index information, is not available through basic scraping, but authentication (a sign in to UTMB webiste) is required. I implemented two helper functions that log into the UTMB API via OAuth and retrieve temporary access tokens. These tokens act as session credentials and allow access to endpoints that are not available through anonymous requests.</p>
+<p>Some of the richer UTMB data - such as runner UTMB race scores and runner UTMB index information, is not available through basic scraping, but authentication (a sign-in to the UTMB website) is required. I implemented two helper functions that log into the UTMB API via OAuth and retrieve temporary access tokens. These tokens act as session credentials and allow access to endpoints that are not available through anonymous requests.</p>
 <ul>
 <li>Live Access Token - used for retrieving race-level data</li>
 </ul>
