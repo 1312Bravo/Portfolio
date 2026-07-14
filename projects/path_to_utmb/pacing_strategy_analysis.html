@@ -723,20 +723,12 @@ window.Quarto = {
 <p>The model has an <strong>R² of 0.239</strong>. In other words, these three pacing features explain about <strong>24% of the variation in normalized race performance</strong> among finishers. It also improves over any single-feature model.</p>
 <p>This is not a full prediction model, and it should not be read that way. It still leaves a lot of individual variation unexplained, which is expected. Pacing matters, but UTMB performance is also shaped by many things this model does not observe: nutrition, technical problems, stomach issues, sleepiness, injuries, and simple bad days.</p>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 16%">
-<col style="width: 22%">
-<col style="width: 22%">
-<col style="width: 22%">
-<col style="width: 16%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>Feature</th>
 <th style="text-align: right;">Coefficient</th>
 <th style="text-align: right;">95% CI</th>
 <th style="text-align: right;">p-value</th>
-<th>Interpretation</th>
 </tr>
 </thead>
 <tbody>
@@ -745,24 +737,22 @@ window.Quarto = {
 <td style="text-align: right;">-0.338</td>
 <td style="text-align: right;">[-0.373, -0.302]</td>
 <td style="text-align: right;">&lt; 0.001</td>
-<td>More aggressive early pacing is associated with worse normalized race performance.</td>
 </tr>
 <tr class="even">
 <td>Pacing variability</td>
 <td style="text-align: right;">-0.296</td>
 <td style="text-align: right;">[-0.352, -0.239]</td>
 <td style="text-align: right;">&lt; 0.001</td>
-<td>More uneven pacing is associated with worse normalized race performance.</td>
 </tr>
 <tr class="odd">
 <td>Late strength</td>
 <td style="text-align: right;">0.152</td>
 <td style="text-align: right;">[0.120, 0.183]</td>
 <td style="text-align: right;">&lt; 0.001</td>
-<td>Stronger late-race pacing is associated with better normalized race performance.</td>
 </tr>
 </tbody>
 </table>
+<p><strong>Early aggressiveness</strong> has a negative coefficient, meaning that runners who were more aggressive in the opening phase tended to perform worse relative to expectation. <strong>Pacing variability</strong> is also negative, so more uneven pacing is associated with worse normalized performance. <strong>Late strength</strong> is positive, meaning that runners who stayed relatively stronger late in the race tended to perform better.</p>
 <p><img src="saved_files/normalized_race_time_final_actual_vs_predicted.png" class="click-zoom img-fluid"></p>
 </section>
 </section>
