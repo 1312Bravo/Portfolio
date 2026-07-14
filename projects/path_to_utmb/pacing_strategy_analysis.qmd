@@ -373,11 +373,13 @@ The model has an **R² of 0.239**. In other words, these three pacing features e
 
 This is not a full prediction model, and it should not be read that way. It still leaves a lot of individual variation unexplained, which is expected. Pacing matters, but UTMB performance is also shaped by many things this model does not observe: nutrition, technical problems, stomach issues, sleepiness, injuries, and simple bad days.
 
-| Feature | Coefficient | 95% CI | p-value | Interpretation |
-|---|---:|---:|---:|---|
-| Early aggressiveness | -0.338 | [-0.373, -0.302] | < 0.001 | More aggressive early pacing is associated with worse normalized race performance. |
-| Pacing variability | -0.296 | [-0.352, -0.239] | < 0.001 | More uneven pacing is associated with worse normalized race performance. |
-| Late strength | 0.152 | [0.120, 0.183] | < 0.001 | Stronger late-race pacing is associated with better normalized race performance. |
+| Feature | Coefficient | 95% CI | p-value |
+|---|---:|---:|---:|
+| Early aggressiveness | -0.338 | [-0.373, -0.302] | < 0.001 |
+| Pacing variability | -0.296 | [-0.352, -0.239] | < 0.001 |
+| Late strength | 0.152 | [0.120, 0.183] | < 0.001 |
+
+**Early aggressiveness** has a negative coefficient, meaning that runners who were more aggressive in the opening phase tended to perform worse relative to expectation. **Pacing variability** is also negative, so more uneven pacing is associated with worse normalized performance. **Late strength** is positive, meaning that runners who stayed relatively stronger late in the race tended to perform better.
 
 ![](saved_files/normalized_race_time_final_actual_vs_predicted.png){ class="click-zoom" }
 
