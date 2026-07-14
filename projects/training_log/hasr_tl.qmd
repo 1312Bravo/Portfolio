@@ -184,7 +184,7 @@ Formally, let: $$\pi_{k,t}^{(b)} \quad \text{and} \quad \pi_{k,t}^{(r)}$$ denote
 
 **Most recent Session Classification**
 
-In addition to aggregated metrics, we can also assess each most recent individual session relative to the baseline distribution. For the most recent training session (e.g., the date of analysis), wwe calculate its overall percentile rank within the weighted baseline window:
+In addition to aggregated metrics, we can also assess each most recent individual session relative to the baseline distribution. For the most recent training session (e.g., the date of analysis), we calculate its overall percentile rank within the weighted baseline window:
 
 This can be expressed as the weighted percentile (or baseline-relative quantile rank) of the session:
 

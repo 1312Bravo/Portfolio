@@ -8,9 +8,9 @@ title: "UTMB - Course profile"
 
 ### What are we actually trying to race?
 
-UTMB is usually described with two numbers: roughly **170 km** and more than **10,000 meters of climbing**. Those numbers already sound large enough, but they still hide most of the story. What makes the course interesting is the way it keeps changing: long climbs, steep descents, runnable sections, technical terrain and aid stations, and very few sections where pace can be interpreted without terrain context.
+UTMB is usually described with two numbers: roughly **170 km** and more than **10,000 meters of climbing**. What makes the course additionally interesting is the way it keeps changing: long climbs, steep descents, runnable sections, technical terrain and very few sections where pace can be interpreted without terrain context.
 
-The route can vary slightly from year to year because of weather, safety decisions, or local course adjustments, but the main structure of the race remains almost constant. So the course is stable enough that the 2025 GPX file can be used as a representative version of the UTMB course.
+The route can vary slightly from year to year because of weather, safety decisions, or local course adjustments, but the main structure of the race remains almost constant. So the course is stable enough that the **2025 GPX file** can be used as a representative version of the UTMB course.
 
 ### Data
 
@@ -18,7 +18,7 @@ The GPX file was converted into tabular data using the reusable [`gpx_to_tabular
 
 The GPX-derived course points were then connected with UTMB checkpoint and sector data from the 2022 to 2025 race editions. This sector data comes from the UTMB race and runner sector dataset described in the [data collection post](data.qmd). By matching the checkpoint distances to the GPX profile, we can estimate additional sector-level features such as elevation gain, elevation loss, and position on the course.
 
-Checkpoint IDs are not perfectly stable across years. Some repeated checkpoint IDs refer to very similar course positions, while others shift along the course. Because of that, we keep sectors year-specific for analysis, while using averaged checkpoint positions for the repeated IDs only for presentation.
+**Checkpoint IDs** are not perfectly stable across years. Some repeated checkpoint IDs refer to very similar course positions, while others shift along the course. Because of that, we keep sectors year-specific for analysis, while using averaged checkpoint positions for the repeated IDs only for presentation.
 
 ### Course Profile
 
@@ -37,7 +37,7 @@ The rough summary of the UTMB course profile is approximately:
 | Total vertical change per km | 121.8 m/km |
 :::
 
-What stands out, in addition to distance and elevation gain, is the vertical density. The course is constantly moving up or down. On average, every kilometer contains about 122 meters of total vertical change when gain and loss are combined. That explains why normal pace becomes a weak description of effort. Flat terrain is rare, and most of the climbing and descending is not gentle. These gradients are steep enough to affect pacing. Downhill does not simply mean "free speed". Many of the descents create their own muscular and technical cost, especially late in the race.
+What additionally stands out is the vertical density. The course is constantly moving up or down. On average, every kilometer contains about 122 meters of total vertical change when gain and loss are combined. That explains why normal pace becomes a weak description of effort. Flat terrain is rare, and most of the climbing and descending is not gentle. Downhill does not simply mean "free speed". Many of the descents create their own muscular and technical cost, especially late in the race.
 
 ::: {.compact-table}
 | Slope category | Gradient | Uphill share | Downhill share |
@@ -50,13 +50,13 @@ What stands out, in addition to distance and elevation gain, is the vertical den
 | Extreme | >30% | 16.80% | 15.11% |
 :::
 
-The course profile plot combines the GPX-derived elevation profile with the checkpoint and sector information from the race data. The colored areas indicate the local slope category. Vertical checkpoint lines mark the approximate sector boundaries, using averaged checkpoint positions for the repeated checkpoints across the considered race editions.
+The **course profile plot** combines the GPX-derived elevation profile with the checkpoint and sector information from the race data. The colored areas indicate the local slope category. Vertical checkpoint lines mark the approximate sector boundaries, using averaged checkpoint positions for the repeated checkpoints across the considered race editions.
 
 The plot also shows something that is easy to miss in a table. UTMB is a mountain route from valley to valley, not a long road race with some climbing added on top. The course repeatedly drops into lower villages and then climbs back above 2,000 meters, with the highest point around 2,550 meters above sea level. That shape matters: the race is not only long and steep, but also alpine, exposed, and technical in a way that changes how each section should be understood.
 
 ![](saved_files/utmb_course_profile.png){ class="click-zoom" }
 
-One simple way to feel the scale of the race is to convert typical finishing times into average pace over the full course distance. They are useful reference points. On UTMB, pace only makes sense together with terrain context.
+One simple way to feel the scale of the race is to convert **typical finishing times** into average pace over the full course distance. They are useful reference points. On UTMB, pace only makes sense together with terrain context.
 
 ::: {.compact-table}
 | Finish-time reference | Race time | Flat-equivalent pace |
@@ -73,7 +73,6 @@ One simple way to feel the scale of the race is to convert typical finishing tim
 The main lesson is that UTMB cannot be reduced to distance and elevation gain alone. Those numbers are useful, but they hide the structure of the race: almost no flat terrain, repeated transitions between climbing and descending, and many sections where the gradient is steep enough to change what pace actually means.
 
 This is important for the rest of the project. If we later want to model pacing, compare runners, or estimate what a certain finishing time requires, the course has to be treated as a sequence of terrain-specific problems rather than one continuous 172 km effort. A kilometer on a runnable valley section and a kilometer on a steep technical descent are not the same unit. This gives the race a shape before building models on top of it. Any useful pacing or performance analysis needs to respect that.
-
 
 
 
