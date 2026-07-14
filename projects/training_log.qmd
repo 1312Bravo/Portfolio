@@ -23,7 +23,7 @@ Numbers, when put into context, tell a story: whether I'm adapting, improving, o
 
 ::: {.blog-card}
 [**Track Your Training Smarter - Data**](training_log/data.qmd)  
-Keep all your training and daily metrics in one place without lifting a finger. With a Python pipeline connecting Garmin Connect to Google Sheets, your workouts and daily metrics update automatically every day. The result: a complete, always-current record that makes analysis, trend spotting, and make data-driven decisions precise.
+Keep all your training and daily metrics in one place without lifting a finger. With a Python pipeline connecting Garmin Connect to Google Sheets, your workouts and daily metrics update automatically every day. The result: a complete, always-current record that makes analysis, trend spotting, and data-driven decisions more precise.
 <span class="blog-date">2025-08-20</span>
 :::
 

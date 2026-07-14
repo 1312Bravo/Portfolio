@@ -16,7 +16,7 @@ But what does "ready to race" actually mean? I defined it as ambitious benchmark
 
 ### A Definition of readiness
 
-The problem can be stated as a mathematical formula of findinng the UTMB index $x*$, such that 
+The problem can be stated as a mathematical formula for finding the UTMB index $x*$, such that
 
 $$
 x* = \text{min}\{x: P(T \leq 27 | x) \geq 0.95\}
@@ -71,7 +71,7 @@ To explore this, I collected results from UTMB races between 2022 and 2025. Each
 - finishing times 
 - and final race status — whether they finished, withdrew, or were "broomed"
 
-Overall,the dataset contains 10,363 valid observations. 
+Overall, the dataset contains 10,363 valid observations.
 
 For modeling purposes, both DNFs and brooming are treated as non-finishes, resulting in a binary outcome variable indicating whether a runner successfully completed the race. Finishing time is only observed for runners who completed the race.
 
@@ -79,7 +79,7 @@ The dataset spans multiple UTMB editions, meaning that race-specific conditions 
 
 ### Finish probability
 
-In the data, the overall finish rate is 65.99%. The average UTMB index of finishers is 571, compared to 542 of non finishers. The difference is relatively small, considering the spread of UTMB race runners' UTMB index. This suggests that UTMB index alone provides only limited separation between finishers and non-finishers.
+In the data, the overall finish rate is 65.99%. The average UTMB index of finishers is 571, compared to 542 of non-finishers. The difference is relatively small, considering the spread of UTMB race runners' UTMB index. This suggests that UTMB index alone provides only limited separation between finishers and non-finishers.
 
 A very small difference, considering the distribution of the UTMB index among runners.
 
@@ -91,7 +91,7 @@ $$P(\text{Finish}) = \frac{1}{1+e^{-(\alpha + \beta \cdot \text{UTMB index})}}$$
 or 
 $$log(\frac{p}{1-p}) = \alpha + \beta \cdot \text{UTMB index}$$
 
-The estimated **coefficient UTMB index** is 0.0026, meaning that each additional point in UTMB index increases the odds of finishing by 0.26% multiplicatively (odds ratio $e^{0.0026}$ $\approx$ 1.0026) in average. A 100-point increase in UTMB index multiplies the odds of finishing by about ($(e^{0.0026})^{100}$) $\approx$ 1.30 in average. The standard error is 0.0002, indicating that the coefficient is precisely estimated, despite the small effect size.
+The estimated **coefficient UTMB index** is 0.0026, meaning that each additional point in UTMB index increases the odds of finishing by 0.26% multiplicatively (odds ratio $e^{0.0026}$ $\approx$ 1.0026) on average. A 100-point increase in UTMB index multiplies the odds of finishing by about ($(e^{0.0026})^{100}$) $\approx$ 1.30 on average. The standard error is 0.0002, indicating that the coefficient is precisely estimated, despite the small effect size.
 
 The model achieves a $\text{Pseudo R}^2$ of 0.0125 and ROC-AUC of 0.611, where 0.5 corresponds to random classification. This indicates that UTMB index contains some predictive signal for finishing, but the explanatory power is limited.
 
@@ -99,19 +99,17 @@ Before drawing conclusions from the model, we need to evaluate whether its assum
 
 ![](saved_files/finish_prob_diagnostics.png){ class="click-zoom" }
 
-The diagnostics suggest that the model has limited but non-trivial ability to distinguish finishers from non-finishers. The separation between the classes from predicted probabilities is clear but imperfect. This indicates that UTMB index alone is insufficient to deterministically classify race completion. 
+The diagnostics suggest that the model has limited but non-trivial ability to distinguish finishers from non-finishers. The ROC-AUC of 0.611 is better than random, but still modest, which confirms the basic point: UTMB Index contains signal, but it is far from enough to explain race completion by itself. 
 
-There is no strong systematic deviations from residual plot, suggesting that the logistic functional form is broadly appropriate. However, the empirical calibration curve shows deviations at higher UTMB index values, where the data becomes sparser and more variable. These deviations are driven by limited sample size in the elite range and increased outcome variability among top-level runners, where strategic risk-taking and race dynamics can lead to higher dropout rates.
+There is no strong systematic deviations from residual plot, suggesting that the logistic functional form is broadly appropriate. However, the empirical calibration curve does not increase smoothly across the whole UTMB Index range. At higher index values the data becomes sparser and more variable, and the observed finish rate can even drop. These deviations are driven by limited sample size in the elite range and likely connected to the structure of elite racing, where stronger runners may take more risks or stop rather than finish far below their goal.
 
-The diagnostics suggest that the model has limited but non-trivial ability to distinguish finishers from non-finishers. The moderate AUC and overlapping probability distributions indicate substantial unexplained variability, but the signal is significant. The residual plot suggests that the logistic functional form is broadly appropriate. Predicted finish rates across UTMB index shows that the model captures the overall increasing trend in finish probability, however deviations at high UTMB index, where data is more sparse, indicates mild calibration imperfections. This is also because the data "imperfection" - where elites are pushing extensively and also rather DNF than finish low.
-
-Overall, the diagnostics support proceeding with a probabilistic modeling framework, while acknowledging that UTMB index is only a partial predictor of race outcome.
+Overall, the diagnostics support using UTMB Index as a partial predictor of finish probability, while reminding us that the model is an approximation, especially at the high end of the index range.
 
 ### Race time conditional on finishing
 
 In the data, among finishers, the average race time is 39.11 hours, making the target of sub 27 hours a relatively ambitious outcome. Only 4.56% of finishers achieve a time below this threshold.
 
-Runners achieving sub-27 hour performances have in average UTMB index 803, with the lowest of 667. While within runners with over 27h of race time, UTMB index extends from 334 to 884 with average of 559. 
+Runners achieving sub-27 hour performances have an average UTMB index of 803, with the lowest of 667. While within runners with over 27h of race time, UTMB index extends from 334 to 884 with average of 559.
 
 This large overlap suggests that UTMB index is strongly correlated with performance, but far from deterministically predictive of race time.
 
@@ -123,7 +121,7 @@ $$\text{Race time} = \alpha + \beta \cdot \text{UTMB index},$$
 
 conditional on finishing.
 
-The estimated **coefficient for UTMB index** is -0.0517, meaning that each additional point in UTMB index means approximately 0.0517 hours ($\approx$ 3.1 minutes) faster race time in average. Meaning a 100-point difference in UTMB index corresponds to an expected 5.17-hour faster race time in average. The confidence interval of [-0.0525, -0.0509] indicates a stable and well-identified relationship between UTMB index and race time among finishers.
+The estimated **coefficient for UTMB index** is -0.0517, meaning that each additional point in UTMB index means approximately 0.0517 hours ($\approx$ 3.1 minutes) faster race time on average. Meaning a 100-point difference in UTMB index corresponds to an expected 5.17-hour faster race time on average. The confidence interval of [-0.0525, -0.0509] indicates a stable and well-identified relationship between UTMB index and race time among finishers.
 
 The model explains a substantial portion of variability in race time, with an $R^2$ of 0.6947. The Pearson correlation coefficient of 0.8335 confirms a strong linear relationship between UTMB index and finishing time among finishers. 
 
@@ -131,7 +129,7 @@ Similar to logistic model, also linear regression model operates on certain assu
 
 ![](saved_files/race_time_diagnostics.png){ class="click-zoom" }
 
-There is a strong negative relationship between UTMB index and finishing time. There is seen cuttoff time at 46 hours. The relationship is broadly linear, which suggests that the linear functional form is appropriate as an approximation of the underlying relationship. The model captures the overall race time trend well. However, the spread suggests that individual-level variability remains substantial, which is expected. 
+There is a strong negative relationship between UTMB index and finishing time. We can see the cutoff time at 46 hours. The relationship is broadly linear, which suggests that the linear functional form is appropriate as an approximation of the underlying relationship. The linear model captures the main trend well: among finishers, higher UTMB Index is strongly associated with faster race times. However, the spread suggests that individual-level variability remains substantial, which is expected.
 
 The residual plot reveals mild heteroskedasticity - the variance of residuals is not constant across predicted values, but instead changes with UTMB index. This suggests that the linear model captures the mean trend well, but does not fully account for variability differences across the performance spectrum. 
 
@@ -139,7 +137,7 @@ The relationship may not be perfectly linear across the entire range of UTMB ind
 
 Overall, while the diagnostics reveal mild deviations from ideal linear regression assumptions, these issues are not severe enough to invalidate the model. The residual patterns do not indicate systematic model failure, but rather expected variability in endurance performance data. The model captures the dominant signal in the data and provides stable, interpretable estimates of the average relationship between UTMB index and race time.
 
-### Probability of sub-27 hour race time time
+### Probability of sub-27 hour race time
 
 At this point, we have two separate models:
 
@@ -172,13 +170,13 @@ $$
 
 where $(\Phi(\cdot))$ denotes the cumulative distribution function of the standard normal distribution. 
 
-Combining both comoponents yields the probability of running a sub-27 UTMB for a specific UTMB index. Overall probability that a runner with UTMB index $(x)$ finishes UTMB and does so in under 27 hours.
+Combining both components yields the probability of running a sub-27 UTMB for a specific UTMB index. Overall probability that a runner with UTMB index $(x)$ finishes UTMB and does so in under 27 hours.
 
 $$
 P(T \leq 27 | x) = P(\text{Finish}|x) \cdot \Phi \left(\frac{27-\mu(x)}{\sigma}\right)
 $$
 
-Recall, the goals was to be almost certain, with 95% probability, of a sub-27 hour race time. To estimate the minimum UTMB index needed, we evaluate the probability across a range of UTMB index values. Well, the result was both suprising and humbling.
+Recall, the goal was to be almost certain, with 95% probability, of a sub-27 hour race time. To estimate the minimum UTMB index needed, we evaluate the probability across a range of UTMB index values. Well, the result was both surprising and humbling.
 
 ![](saved_files/race_time_prob_under_27_sigmoid.png){ class="click-zoom" }
 
@@ -190,9 +188,9 @@ According to the model, this threshold is reached at a **UTMB index of approxima
 - Approximate 95% prediction interval: [15.1 h, 28.0 h]
 - Probability of finishing under 27 hours: 95.0%
 
-95% probability of UTMB race under 27 hours is an extremely demanding requirement. The predicted race time must be far below 27 hours in order to absorb the substantial variability. The model requires a runner to possess a performance level that is not merely strong, but genuinely elite.
+95% probability of a UTMB race under 27 hours is an extremely demanding requirement. The predicted race time must be far below 27 hours in order to absorb the substantial variability. The model requires a runner to possess a performance level that is not merely strong, but genuinely elite.
 
-In other words, my definition of readiness was a bit too ambitious. To try to look at the problem from different side, it may be more useful to think in terms of realistic performance levels and the probabilities associated with them. For this, I also evaluated a UTMB index of 780, a level that I currently consider challenging but potentially achievable in the future. For a runner with a **UTMB index of 780**, the model predicts:
+In other words, my definition of readiness was a bit too ambitious. To try to look at the problem from a different side, it may be more useful to think in terms of realistic performance levels and the probabilities associated with them. For this, I also evaluated a UTMB index of 780, a level that I currently consider challenging but potentially achievable in the future. For a runner with a **UTMB index of 780**, the model predicts:
 
 - Probability of finishing UTMB: 77.8%
 - Estimated race time: 28.3 hours
@@ -200,7 +198,7 @@ In other words, my definition of readiness was a bit too ambitious. To try to lo
 - Approximate 95% prediction interval: [21.8 h, 34.7 h]
 - Probability of finishing under 27 hours: 34.9%
 
-A runner with a UTMB index of 780 is not expected to run under 27 hours on average. However, the probability of achieving a sub-27 hour result is far from negligible. 
+A runner with a UTMB index of 780 is not expected to run under 27 hours on average. However, the probability of achieving a sub-27-hour result is far from negligible.
 
 UTMB Index of 780 feels like a challenging but potentially attainable goal, whereas a UTMB Index of 910 belongs to a level of performance that is likely beyond my reach. 
 
@@ -219,7 +217,7 @@ For most runners, readiness is therefore not a point at which success becomes gu
 ```{=html}
 <div class="project-link-container">
     <i class="fab fa-github"></i>
-    <span> You can find the full code for the strucuted analysis, on Path To UTMB Github repository under the
+    <span> You can find the full code for the structured analysis, on Path To UTMB Github repository under the
     <a href="https://github.com/1312Bravo/Path-To-UTMB/tree/main/utmb_under_27h" target="_blank"> utmb_under_27h</a>
      directory.</span>
 </div>

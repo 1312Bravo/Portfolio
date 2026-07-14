@@ -6,7 +6,7 @@ title: "Scrape UTMB Race and Runners statistics - Data"
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 :::
 
-Rather than manually copying race resultszyy and runner statistics, which would be practically impossible for any comprehensive analysis, I needed a scalable way to get data from the UTMB website programmatically. I built a toolkit of Python helper functions to extract and standardize information from UTMB APIs instead of scraping webpages directly.
+Rather than manually copying race results and runner statistics, which would be practically impossible for any comprehensive analysis, I needed a scalable way to get data from the UTMB website programmatically. I built a toolkit of Python helper functions to extract and standardize information from UTMB APIs instead of scraping webpages directly.
 
 ```{=html}
 <div class="project-link-container">
@@ -23,7 +23,7 @@ Rather than manually copying race resultszyy and runner statistics, which would 
         <span>
             The examples how to run the helpers are in the
             <a href="https://github.com/1312Bravo/Path-To-UTMB/blob/main/data/get_data_example.ipynb" target="_blank">
-                data/get_data_example.ipyn
+                data/get_data_example.ipynb
             </a> notebook.
         </span>
     </div>
@@ -32,7 +32,7 @@ Rather than manually copying race resultszyy and runner statistics, which would 
 
 ### UTMB API Authentication Token
 
-Some of the richer UTMB data - such as runner UTMB race scores and runner UTMB index information, is not available through basic scraping, but authentication (a sign in to UTMB webiste) is required. I implemented two helper functions that log into the UTMB API via OAuth and retrieve temporary access tokens. These tokens act as session credentials and allow access to endpoints that are not available through anonymous requests.
+Some of the richer UTMB data - such as runner UTMB race scores and runner UTMB index information, is not available through basic scraping, but authentication (a sign-in to the UTMB website) is required. I implemented two helper functions that log into the UTMB API via OAuth and retrieve temporary access tokens. These tokens act as session credentials and allow access to endpoints that are not available through anonymous requests.
 
 - Live Access Token - used for retrieving race-level data
 
