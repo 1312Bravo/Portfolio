@@ -79,6 +79,37 @@ Typical structure:
 
 Small posts can be shorter, but analysis-heavy posts should preserve this flow.
 
+### Short Version Summary Boxes
+Long or analysis-heavy posts should include a `Short version` box after the opening idea/question and before the detailed data or methodology sections.
+
+Use this pattern:
+
+```markdown
+::: {.post-summary}
+#### Short version
+
+##### Mini section title
+
+...
+:::
+```
+
+The short version should read like a small version of the post. It should give the reader the main question, the data or evidence used, the key method or transformation, the central result, and the final interpretation. A reader who knows statistics should understand the analytical route without reading the whole post, while a non-technical reader should still understand the main idea and conclusion.
+
+Write the short version in connected prose, not as a checklist. For long posts, structure it as a small article inside the summary box: a short opening paragraph, then compact mini sections using `#####` headings. Use headings like `##### Normalized race time`, `##### Performance group descriptive analysis`, or `##### Final model`, followed by one or two short paragraphs. These mini headings should make the analytical path easy to scan without turning the summary into a full second post.
+
+The mini sections should follow the full post's logic, but in compressed form. A good sequence is often: data and scope, main metric or normalization, second metric or transformation, analysis setup, descriptive result, model or deeper analysis, and takeaway. The exact labels should fit the post, not a fixed template.
+
+Mention visuals only through the result they show, not by saying "the plot shows", unless the figure itself is the object of the post.
+
+When the post uses a model, metric, normalization, or engineered feature, keep the technical spine in the short version. Include the core metric, formula, model definition, feature group, or final signal when it is central to the argument. Give formulas inline when possible and translate them into plain language. The summary should explain why the method was needed, not only name it.
+
+Shorter does not mean less technical. It means removing repeated explanation, setup phrases, and wording that does not move the story forward. Each sentence should either define the setup, name the method, report the result, or connect the result to the takeaway.
+
+The short version is not a replacement for the full post. It should compress the story, not copy whole sections. It should not include exploratory dead ends, minor diagnostics, implementation details, or every number from the notebook. It should also not introduce claims that the full post does not support later.
+
+End the short version with what the analysis means: the practical answer, the reframed question, the limitation that changes interpretation, or the main takeaway the reader should carry into the full post.
+
 ## Overall Voice
 - Write like a data scientist explaining a personal project to an interested technical reader.
 - Keep the voice personal, analytical, direct, and grounded in data science.

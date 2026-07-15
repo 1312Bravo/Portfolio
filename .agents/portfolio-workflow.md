@@ -20,6 +20,30 @@ The portfolio writing guide defines the voice, structure, and content style. Thi
 - When one post supports another, make the supporting post stand on its own and let related posts link back to it instead of repeating the full explanation.
 - Separate exploratory explanation from final model or result interpretation when shaping analysis-heavy posts.
 
+## Short Version Blocks
+- For long or analysis-heavy posts, add a visible `Short version` block after the opening idea/question and before the detailed data or methodology sections.
+- Use the reusable Quarto block pattern:
+
+```markdown
+::: {.post-summary}
+#### Short version
+
+##### Mini section title
+
+...
+:::
+```
+
+- Treat the short version as a compact mini-post, not as an abstract, conclusion repeat, or notebook dump.
+- Before writing it, review the full post and identify the actual story arc: question, data scope, key transformation or method, main descriptive result, model or analysis result, limitation if important, and final meaning.
+- Write it in connected prose, usually as a sequence of compact mini sections. Use bullets only if the post itself is primarily a list or guide.
+- For longer blocks, use short `#####` mini headings inside the summary box, such as `##### Normalized race time` or `##### Final model`, followed by one or two short paragraphs.
+- Choose mini titles that match the post's analytical steps, but make them reader-facing and simple. Prefer names of ideas, metrics, models, or results over generic labels like `Method` or `Analysis`.
+- Keep the technical spine: preserve core metrics, formulas, model definitions, feature groups, and final signals when they are central to the post.
+- Cut filler and repeated explanation. The short version should not explain every step twice; each sentence should either define the setup, name the method, report the result, or connect the result to the takeaway.
+- The summary should compress what the full post really focuses on. Do not introduce results, claims, or caveats that the full post does not explain later.
+- For existing posts that are missing this block, add it only after rereading the full post and making sure each summary sentence points to a section that expands it.
+
 ## Working Rhythm
 - Prefer "draft here first, edit later" for writing-heavy work.
 - Make assumptions explicit before proposing copy.

@@ -145,6 +145,27 @@ a:hover {
     text-decoration: underline;
 }
 
+/* Post summary box */
+.post-summary {
+    background-color: #f8f9fa;
+    border: 1px solid #e2e6ea;
+    border-left: 4px solid #000000;
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 1.5rem 0 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.post-summary h4 {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    font-size: 1.05rem;
+}
+
+.post-summary p {
+    margin: 0.45rem 0;
+}
+
 /* Info icons */
 .info-icons {
     text-align: center;
