@@ -18,6 +18,40 @@ The important phrase here is **relative to the runner's ability**. A top runner 
 
 So this analysis starts from a simple hypothesis: **the best pacing strategy is not necessarily the most aggressive one, but the one that preserves speed relative to the runner's ability for as long as possible.** 
 
+::: {.post-summary}
+#### Short version
+
+We use **UTMB data from the 2022, 2023, 2024, and 2025** editions: race results with runner statistics, and sector-by-sector timing data. The analysis focuses on finishers with usable sector data across the whole race, and uses moving time rather than checkpoint rest time.
+
+<div class="summary-label">Normalized race time</div>
+
+Raw finishing time mostly reflects runner ability, so we estimate an **expected race time** from ability and race edition: $\text{Race time} \sim \text{UTMB Index} + \text{Race year} + \text{UTMB Index}:\text{Race year}$. The relative residual, $1 - \text{Actual race time} / \text{Expected race time}$, becomes normalized race time: a comparable score for whether each runner finished better or worse than expected.
+
+<div class="summary-label">Normalized sector pacing</div>
+
+Inside the race, each sector moving time is converted into a share of the runner's total moving time. We then estimate the **expected sector share** with: $\text{Sector time share} \sim \text{Race year}:\text{Sector} + \text{UTMB Index}:\text{Sector}$. The relative residual, $1 - \text{Actual sector share} / \text{Expected sector share}$, becomes normalized sector pacing: where the runner spent more or less of their race than expected.
+
+<div class="summary-label">Race phases</div>
+
+At this point, we have the two quantities we need: normalized race time as the outcome, and normalized sector pacing as the race-shape measure. This lets us ask which pacing patterns are associated with better normalized performance.
+
+Sectors are grouped into **five broader race phases**: very early, early, middle, late, and very late. We aggregate sector shares into phase-level pacing values, then compare runners by performance groups based on normalized race time. As performance improves, the pacing shape shifts from relatively fast early and slow late toward more controlled early and stronger late.
+
+<div class="summary-label">Performance group descriptive analysis</div>
+
+For the first descriptive analysis, we split finishers into **five normalized-performance groups**, from much worse than expected to much better than expected, and add the top 10 finishers from each edition as a raw-performance reference. The pattern is clear: better normalized performances shift from relatively fast early and slow late toward more controlled early pacing and stronger late pacing. The top finishers show the same pattern even more strongly on average, though individual runners still vary.
+
+<div class="summary-label">Pacing features &amp; Final model</div>
+
+Phase-level pacing profiles are converted into interpretable features: early aggressiveness, late strength, pacing variability, trend, best-profile similarity, and related race-shape measures. The strongest single signal is early aggressiveness: runners who were relatively too fast in the opening phase tended to perform worse overall.
+
+The final model keeps three features that still matter together: early aggressiveness, late strength, and pacing variability. Better UTMB performances are associated with **starting controlled**, **keeping the race stable**, and **preserving enough relative strength for the late race**. So the data supports the opening idea: the best race is not necessarily the most aggressive one, but the one where the runner avoids paying too much later.
+
+<div class="summary-label">Takeaway</div>
+
+The final conclusion supports the two ideas from the opening section. Better UTMB performances are associated with **starting controlled**, **keeping the race stable**, and **preserving enough relative strength for the late race**. In other words, the data supports the idea that the best race is not necessarily the most aggressive one, but the one where the runner avoids paying too much later.
+:::
+
 ### From finish time to race shape - Data
 
 To test this, I combine two types of UTMB data from the **2022, 2023, 2024, and 2025** editions, both described in the [data collection post](data.qmd). The first is **[race result data](data.qmd#utmb-race-results)**: finishing time, rank, race status, and runner descriptive variables. The second is **[race/runner sector data](data.qmd#utmb-racerunner-sector-data)**: checkpoint-by-checkpoint timing, including when a runner arrived, when they left, how long they rested, and how long they spent moving through each part of the course.
@@ -56,7 +90,7 @@ $$
 
 We use the opposite direction of the residuals than it is usually defined, so that a positive residual means the runner finished faster than expected, and a negative residual means the runner finished slower than expected.
 
-![](saved_files/race_time_normalization_diagnostics.png){ class="click-zoom" }
+![](saved_files/pacing_strategy_analysis/race_time_normalization_diagnostics.png){ class="click-zoom" }
 
 The above diagnostic plot is mostly a sanity check. From the left panel we see a strong pattern in the expected direction: higher UTMB Index means lower expected race time. We also see that the year lines are not simply one common line. Some editions are shifted slightly up or down, which means the expected race time differs by year even for runners with similar UTMB Index values. Their slopes also differ slightly, which supports the decision to include the interaction term. This is also supported by the model coefficients and their p-values. This gives us a reasonable ability-and-year baseline before we start comparing pacing patterns.
 
@@ -118,7 +152,7 @@ $$
 
 Again, we use the direction where **higher means less time than expected**. A positive residual means the runner spent less of their total moving time in that sector than expected. A negative residual means they spent more of their total moving time there than expected. For example, if a runner was expected to spend 6% of their moving time in a sector but actually spent 5%, the residual is +0.01, or one percentage point less than expected.
 
-![](saved_files/sector_share_normalization_diagnostics.png){ class="click-zoom" }
+![](saved_files/pacing_strategy_analysis/sector_share_normalization_diagnostics.png){ class="click-zoom" }
 
 The diagnostic plots help us check whether this normalization makes sense. In the left panel, each point is one runner-sector observation: the actual sector time share on the x-axis and the expected sector time share on the y-axis. The points are grouped into visible layers because the model gives each year-sector combination its own baseline expected share. Observations from the same sector and year tend to have similar predicted values, so they appear close together vertically. Within those layers, the UTMB Index by sector term allows the expected share to move slightly depending on runner ability. The horizontal spread then shows the actual sector shares: how much runners really spent in that sector.
 
@@ -219,7 +253,7 @@ The table also shows that **better normalized performance groups tend to contain
 
 Then we can compare the average pacing profile of these groups across the five race phases.
 
-![](saved_files/pacing_profile_performance_group.png){ class="click-zoom" }
+![](saved_files/pacing_strategy_analysis/pacing_profile_performance_group.png){ class="click-zoom" }
 
 The first pattern fits almost perfectly with the pacing idea from the introduction. Runners who finished much better than expected spent more of their race than expected early, especially in the very early phase, and **less than expected later**. In race terms, they seem to keep more in reserve for the later parts of the course. Runners who finished much worse than expected show the opposite pattern: less of the race early, more of it late. This looks like a race that was too aggressive for their ability, with the cost appearing later.
 
@@ -332,7 +366,7 @@ $$
 | R² | 0.214 |
 :::
 
-![](saved_files/pacing_analysis_univariate_example.png){ class="click-zoom" }
+![](saved_files/pacing_strategy_analysis/pacing_analysis_univariate_example.png){ class="click-zoom" }
 
 The negative coefficient means that higher early aggressiveness is associated with worse normalized race performance. In race language: runners who were unusually fast in the opening phase compared with the rest of their race tended to finish worse relative to expectation. The R² is also relatively high for a single pacing feature, which already tells us that the opening phase carries a lot of information about the final outcome.
 
@@ -381,7 +415,7 @@ This is not a full prediction model, and it should not be read that way. It stil
 
 **Early aggressiveness** has a negative coefficient, meaning that runners who were more aggressive in the opening phase tended to perform worse relative to expectation. **Pacing variability** is also negative, so more uneven pacing is associated with worse normalized performance. **Late strength** is positive, meaning that runners who stayed relatively stronger late in the race tended to perform better.
 
-![](saved_files/normalized_race_time_final_actual_vs_predicted.png){ class="click-zoom" }
+![](saved_files/pacing_strategy_analysis/normalized_race_time_final_actual_vs_predicted.png){ class="click-zoom" }
 
 ### Conclusion
 

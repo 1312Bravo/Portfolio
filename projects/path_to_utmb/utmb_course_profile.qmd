@@ -54,7 +54,7 @@ The **course profile plot** combines the GPX-derived elevation profile with the 
 
 The plot also shows something that is easy to miss in a table. UTMB is a mountain route from valley to valley, not a long road race with some climbing added on top. The course repeatedly drops into lower villages and then climbs back above 2,000 meters, with the highest point around 2,550 meters above sea level. That shape matters: the race is not only long and steep, but also alpine, exposed, and technical in a way that changes how each section should be understood.
 
-![](saved_files/utmb_course_profile.png){ class="click-zoom" }
+![](saved_files/utmb_course_profile/utmb_course_profile.png){ class="click-zoom" }
 
 One simple way to feel the scale of the race is to convert **typical finishing times** into average pace over the full course distance. They are useful reference points. On UTMB, pace only makes sense together with terrain context.
 

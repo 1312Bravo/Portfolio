@@ -10,7 +10,8 @@ Use it when drafting, editing, restructuring, or reviewing portfolio content.
 - `about.qmd`: optional about page.
 - `projects/<project>.qmd`: project landing page with motivation, context, GitHub link, and post cards.
 - `projects/<project>/<post>.qmd`: detailed project article or analysis post.
-- `projects/<project>/saved_files/`: figures used inside project posts.
+- `projects/<project>/saved_files/<post-name>/`: figures used inside a specific post, where `<post-name>` matches the `.qmd` file stem.
+- `projects/<project>/saved_files/`: shared figures used across multiple posts in the same project.
 - `styles.css`: reusable visual components such as cards, link boxes, profile image, embedded sheets, and click-zoom images.
 - `other/`: static personal assets such as profile photo and CV.
 - `_quarto.yml`: site configuration, navigation, theme, and render options.
@@ -78,6 +79,39 @@ Typical structure:
 11. GitHub/code link box.
 
 Small posts can be shorter, but analysis-heavy posts should preserve this flow.
+
+### Short Version Summary Boxes
+Long or analysis-heavy posts should include a `Short version` box after the opening idea/question and before the detailed data or methodology sections.
+
+Use this pattern:
+
+```markdown
+::: {.post-summary}
+#### Short version
+
+<div class="summary-label">Mini section title</div>
+
+...
+:::
+```
+
+The short version should read like a small version of the post. It should give the reader the main question, the data or evidence used, the key method or transformation, the central result, and the final interpretation. A reader who knows statistics should understand the analytical route without reading the whole post, while a non-technical reader should still understand the main idea and conclusion.
+
+Write the short version in connected prose, not as a checklist. For long posts, structure it as a small article inside the summary box: a short opening paragraph, then compact mini sections introduced with summary labels. Use labels like `<div class="summary-label">Normalized race time</div>`, `<div class="summary-label">Performance group descriptive analysis</div>`, or `<div class="summary-label">Final model</div>`, followed by one or two short paragraphs.
+
+Use summary labels instead of Markdown mini headings. They should feel like designed signposts inside the box, not like a second nested heading structure. This keeps the analytical path easy to scan while avoiding unclear tiny subtitles.
+
+The mini sections should follow the full post's logic, but in compressed form. A good sequence is often: data and scope, main metric or normalization, second metric or transformation, analysis setup, descriptive result, model or deeper analysis, and takeaway. The exact labels should fit the post, not a fixed template.
+
+Mention visuals only through the result they show, not by saying "the plot shows", unless the figure itself is the object of the post.
+
+When the post uses a model, metric, normalization, or engineered feature, keep the technical spine in the short version. Include the core metric, formula, model definition, feature group, or final signal when it is central to the argument. Give formulas inline when possible and translate them into plain language. The summary should explain why the method was needed, not only name it.
+
+Shorter does not mean less technical. It means removing repeated explanation, setup phrases, and wording that does not move the story forward. Each sentence should either define the setup, name the method, report the result, or connect the result to the takeaway.
+
+The short version is not a replacement for the full post. It should compress the story, not copy whole sections. It should not include exploratory dead ends, minor diagnostics, implementation details, or every number from the notebook. It should also not introduce claims that the full post does not support later.
+
+End the short version with what the analysis means: the practical answer, the reframed question, the limitation that changes interpretation, or the main takeaway the reader should carry into the full post.
 
 ## Overall Voice
 - Write like a data scientist explaining a personal project to an interested technical reader.
@@ -193,7 +227,8 @@ Use project link containers for GitHub/code references, and keep link text concr
 
 ## Visuals
 - Use images when they support the story, not as decoration.
-- Use `saved_files/...` paths for project visuals inside project subpages.
+- Use `saved_files/<post-name>/...` paths for post-specific visuals inside project subpages, where the folder name matches the `.qmd` file stem.
+- Use `saved_files/...` at the project level only for images shared across multiple posts.
 - Use `{ class="click-zoom" }` for important analysis images when consistent with nearby pages.
 - Do not dump figures at the end; place each figure near its explanation.
 
@@ -244,7 +279,7 @@ When adding a new project:
 
 1. Create or update a project landing page at `projects/<project>.qmd`.
 2. Put detailed posts under `projects/<project>/`.
-3. Add saved figures under `projects/<project>/saved_files/`.
+3. Add saved figures under `projects/<project>/saved_files/<post-name>/` for post-specific assets, or `projects/<project>/saved_files/` for shared project assets.
 4. Add a blog card on the project landing page.
 5. Add a featured project card on `index.qmd` only if it is a major project.
 
