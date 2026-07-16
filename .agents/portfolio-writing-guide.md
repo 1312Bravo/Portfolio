@@ -10,7 +10,8 @@ Use it when drafting, editing, restructuring, or reviewing portfolio content.
 - `about.qmd`: optional about page.
 - `projects/<project>.qmd`: project landing page with motivation, context, GitHub link, and post cards.
 - `projects/<project>/<post>.qmd`: detailed project article or analysis post.
-- `projects/<project>/saved_files/`: figures used inside project posts.
+- `projects/<project>/saved_files/<post-name>/`: figures used inside a specific post, where `<post-name>` matches the `.qmd` file stem.
+- `projects/<project>/saved_files/`: shared figures used across multiple posts in the same project.
 - `styles.css`: reusable visual components such as cards, link boxes, profile image, embedded sheets, and click-zoom images.
 - `other/`: static personal assets such as profile photo and CV.
 - `_quarto.yml`: site configuration, navigation, theme, and render options.
@@ -224,7 +225,8 @@ Use project link containers for GitHub/code references, and keep link text concr
 
 ## Visuals
 - Use images when they support the story, not as decoration.
-- Use `saved_files/...` paths for project visuals inside project subpages.
+- Use `saved_files/<post-name>/...` paths for post-specific visuals inside project subpages, where the folder name matches the `.qmd` file stem.
+- Use `saved_files/...` at the project level only for images shared across multiple posts.
 - Use `{ class="click-zoom" }` for important analysis images when consistent with nearby pages.
 - Do not dump figures at the end; place each figure near its explanation.
 
@@ -275,7 +277,7 @@ When adding a new project:
 
 1. Create or update a project landing page at `projects/<project>.qmd`.
 2. Put detailed posts under `projects/<project>/`.
-3. Add saved figures under `projects/<project>/saved_files/`.
+3. Add saved figures under `projects/<project>/saved_files/<post-name>/` for post-specific assets, or `projects/<project>/saved_files/` for shared project assets.
 4. Add a blog card on the project landing page.
 5. Add a featured project card on `index.qmd` only if it is a major project.
 

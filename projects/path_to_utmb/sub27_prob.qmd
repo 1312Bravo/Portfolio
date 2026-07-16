@@ -12,7 +12,7 @@ Idea is simple: to arrive at the start line of UTMB only once I genuinely believ
 
 But what does "ready to race" actually mean? I defined it as ambitious benchmark: To believe I could finish under 27 hours with near certainty. That leads to a more concrete, mathematically clear and stated question. Since **UTMB index** is the most widely used and accessible measure of trail running performance, what value would realistically indicate that a runner will finish the UTMB race in a sub-27 hour time?
 
-![](saved_files/utmb_index_distribution.png){ class="click-zoom" }
+![](saved_files/sub27_prob/utmb_index_distribution.png){ class="click-zoom" }
 
 ### A Definition of readiness
 
@@ -83,7 +83,7 @@ In the data, the overall finish rate is 65.99%. The average UTMB index of finish
 
 A very small difference, considering the distribution of the UTMB index among runners.
 
-![](saved_files/finish_prob_eda.png){ class="click-zoom" }
+![](saved_files/sub27_prob/finish_prob_eda.png){ class="click-zoom" }
 
 We model finish probability using a simple logistic regression **Finish ~ UTMB index**: 
 
@@ -97,7 +97,7 @@ The model achieves a $\text{Pseudo R}^2$ of 0.0125 and ROC-AUC of 0.611, where 0
 
 Before drawing conclusions from the model, we need to evaluate whether its assumptions are consistent with the observed data. This provides a sanity check on whether the logistic functional form is appropriate and whether UTMB index contains sufficient signal to justify probabilistic interpretation.
 
-![](saved_files/finish_prob_diagnostics.png){ class="click-zoom" }
+![](saved_files/sub27_prob/finish_prob_diagnostics.png){ class="click-zoom" }
 
 The diagnostics suggest that the model has limited but non-trivial ability to distinguish finishers from non-finishers. The ROC-AUC of 0.611 is better than random, but still modest, which confirms the basic point: UTMB Index contains signal, but it is far from enough to explain race completion by itself. 
 
@@ -113,7 +113,7 @@ Runners achieving sub-27 hour performances have an average UTMB index of 803, wi
 
 This large overlap suggests that UTMB index is strongly correlated with performance, but far from deterministically predictive of race time.
 
-![](saved_files/race_time_eda.png){ class="click-zoom" }
+![](saved_files/sub27_prob/race_time_eda.png){ class="click-zoom" }
 
 We model race time among finishers using a simple linear regression **Race time ~ UTMB index | Finish**:
 
@@ -127,7 +127,7 @@ The model explains a substantial portion of variability in race time, with an $R
 
 Similar to logistic model, also linear regression model operates on certain assumptions that must be met before drawing conclusions. 
 
-![](saved_files/race_time_diagnostics.png){ class="click-zoom" }
+![](saved_files/sub27_prob/race_time_diagnostics.png){ class="click-zoom" }
 
 There is a strong negative relationship between UTMB index and finishing time. We can see the cutoff time at 46 hours. The relationship is broadly linear, which suggests that the linear functional form is appropriate as an approximation of the underlying relationship. The linear model captures the main trend well: among finishers, higher UTMB Index is strongly associated with faster race times. However, the spread suggests that individual-level variability remains substantial, which is expected.
 
@@ -144,7 +144,7 @@ At this point, we have two separate models:
 - a model for the probability of finishing UTMB,
 - and a model for race time among runners who finish.
 
-![](saved_files/model_predictions.png){ class="click-zoom" }
+![](saved_files/sub27_prob/model_predictions.png){ class="click-zoom" }
 
 To estimate the probability of achieving a sub-27 hour result, we combine both components. Recall the decomposition introduced earlier: 
 
@@ -178,7 +178,7 @@ $$
 
 Recall, the goal was to be almost certain, with 95% probability, of a sub-27 hour race time. To estimate the minimum UTMB index needed, we evaluate the probability across a range of UTMB index values. Well, the result was both surprising and humbling.
 
-![](saved_files/race_time_prob_under_27_sigmoid.png){ class="click-zoom" }
+![](saved_files/sub27_prob/race_time_prob_under_27_sigmoid.png){ class="click-zoom" }
 
 According to the model, this threshold is reached at a **UTMB index of approximately 910**. This value is firmly within elite territory. For a runner with a UTMB index of 910, the model predicts:
 
