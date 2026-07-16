@@ -16,6 +16,36 @@ When training for endurance sports, our bodies adapt over time, and whether a wo
 
 The idea of comparing current workload to past workload isn’t new. Sports science has long used the Acute:Chronic Workload Ratio (ACWR) to capture how today’s training compares to longer-term training history. But ACWR has well-known limitations: it usually relies on a single rolling average, and it can miss important context about peak efforts or variation in load. That’s where our approach comes in. We'll further extend it into a more flexible and informative framework.
 
+::: {.post-summary}
+#### Short version
+
+We define a metric for comparing recent training load with the training pattern the body has already adapted to: **History-Aware Stratified Relative Training Load (HASR-TL)**. The goal is not to predict injury directly, but to make recent training stress easier to interpret in context.
+
+<div class="summary-label">Training load</div>
+
+The base metric is Garmin **Training Load**, because it combines duration and intensity better than distance or pace alone, especially for trail running. We also use training load per minute, $TL_i^{min} = TL_i / D_i$, to separate high-intensity sessions from long low-intensity sessions.
+
+<div class="summary-label">Baseline and recent windows</div>
+
+The method compares a long-term **baseline window** with a short-term **recent window**. The baseline uses $N = 90$ days and the recent window uses $n = 14$ days. Within each window, days are weighted with an exponential decay, $w_j = \lambda^{j-1}$, where $\lambda = 0.978$. More recent days therefore contribute slightly more to the average than older days, with the weight approximately halving every 31 days. The baseline and recent windows are kept separate, so recent training does not leak into the reference distribution.
+
+<div class="summary-label">Percentile buckets</div>
+
+Training sessions are split into **Easy, Hard, and Long** buckets using thresholds learned from the baseline window. Hard sessions are identified using the weighted 70th percentile of $TL^{min}$, while Long sessions are separated from Easy sessions using the weighted 75th percentile of duration among non-hard sessions. The same baseline thresholds are then applied to recent training.
+
+<div class="summary-label">HASR-TL metric</div>
+
+Within each bucket, we calculate weighted average training load for the baseline and recent windows. These bucket averages are then combined with subjective stress weights: Easy $0.15$, Hard $0.40$, and Long $0.45$. The final metric is $\Delta_t = TL_{\text{recent},t} / TL_{\text{baseline},t}$, so values above 1 mean recent load is higher than the adapted baseline.
+
+<div class="summary-label">Diagnostics</div>
+
+The single HASR-TL number is useful, but the bucket diagnostics explain where the change comes from. We compare bucket values within each window, recent-vs-baseline load inside each bucket, and recent-vs-baseline bucket proportions. This helps separate questions like: are easy days becoming too hard, are hard sessions too frequent, or are long sessions appearing more often than usual?
+
+<div class="summary-label">Takeaway</div>
+
+HASR-TL turns training load into a history-aware signal. It does not say exactly when training becomes risky, but it gives a structured way to see whether the recent block is aligned with what the athlete has already adapted to, and which type of session is driving the change.
+:::
+
 ### Selecting the metric: 
 
 To measure effort, we focus on **Training Load**, a metric that combines all other measures (options: distance, time, heart rate, pace or something else) into a single number. This also strongly coincides with the sport we are analyzing - trail running, where it is hard to judge intensity from speed or distance alone. We might talk more about Training Load in further blogs.

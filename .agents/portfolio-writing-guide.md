@@ -89,7 +89,7 @@ Use this pattern:
 ::: {.post-summary}
 #### Short version
 
-##### Mini section title
+<div class="summary-label">Mini section title</div>
 
 ...
 :::
@@ -97,7 +97,9 @@ Use this pattern:
 
 The short version should read like a small version of the post. It should give the reader the main question, the data or evidence used, the key method or transformation, the central result, and the final interpretation. A reader who knows statistics should understand the analytical route without reading the whole post, while a non-technical reader should still understand the main idea and conclusion.
 
-Write the short version in connected prose, not as a checklist. For long posts, structure it as a small article inside the summary box: a short opening paragraph, then compact mini sections using `#####` headings. Use headings like `##### Normalized race time`, `##### Performance group descriptive analysis`, or `##### Final model`, followed by one or two short paragraphs. These mini headings should make the analytical path easy to scan without turning the summary into a full second post.
+Write the short version in connected prose, not as a checklist. For long posts, structure it as a small article inside the summary box: a short opening paragraph, then compact mini sections introduced with summary labels. Use labels like `<div class="summary-label">Normalized race time</div>`, `<div class="summary-label">Performance group descriptive analysis</div>`, or `<div class="summary-label">Final model</div>`, followed by one or two short paragraphs.
+
+Use summary labels instead of Markdown mini headings. They should feel like designed signposts inside the box, not like a second nested heading structure. This keeps the analytical path easy to scan while avoiding unclear tiny subtitles.
 
 The mini sections should follow the full post's logic, but in compressed form. A good sequence is often: data and scope, main metric or normalization, second metric or transformation, analysis setup, descriptive result, model or deeper analysis, and takeaway. The exact labels should fit the post, not a fixed template.
 

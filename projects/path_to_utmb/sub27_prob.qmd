@@ -14,6 +14,32 @@ But what does "ready to race" actually mean? I defined it as ambitious benchmark
 
 ![](saved_files/sub27_prob/utmb_index_distribution.png){ class="click-zoom" }
 
+::: {.post-summary}
+#### Short version
+
+We use **UTMB race results from 2022, 2023, 2024, and 2025** to ask a deliberately strict question: what UTMB Index would make a sub-27-hour UTMB finish almost certain? The target is defined as a 95% probability of both finishing the race and finishing under 27 hours.
+
+<div class="summary-label">Readiness definition</div>
+
+The question is written as $x* = \min\{x: P(T \leq 27 | x) \geq 0.95\}$, where $x$ is UTMB Index and $T$ is race time. Because a runner first has to finish before they can run under 27 hours, the probability is split into two parts: $P(T \leq 27 | x) = P(\text{Finish}|x) \cdot P(T \leq 27 | x, \text{Finish})$.
+
+<div class="summary-label">Finish probability</div>
+
+The first model estimates the probability of finishing UTMB with logistic regression: $\text{Finish} \sim \text{UTMB Index}$. UTMB Index has a positive effect on finishing probability, but the signal is modest. The model has ROC-AUC of 0.611, which means UTMB Index helps, but it is far from enough to explain who finishes.
+
+<div class="summary-label">Race time among finishers</div>
+
+The second model estimates race time among finishers with linear regression: $\text{Race time} \sim \text{UTMB Index} \mid \text{Finish}$. Here the relationship is much stronger. Each additional UTMB Index point corresponds to about 0.052 hours faster race time on average, and the model explains about 69% of the variation in finishing time among finishers.
+
+<div class="summary-label">Sub-27 probability</div>
+
+To turn expected race time into a probability, race time is treated as a normal random variable around the predicted mean: $T | x, \text{Finish} \sim N(\mu(x), \sigma^2)$. This gives $P(T \leq 27 | x, \text{Finish}) = \Phi((27-\mu(x))/\sigma)$, which is then multiplied by the finish probability.
+
+<div class="summary-label">Results</div>
+
+The model reaches the 95% sub-27 probability threshold at a **UTMB Index of about 910**. That is firmly elite territory. At a more realistic but still very strong UTMB Index of **780**, the estimated probability of finishing under 27 hours is **34.9%**.
+:::
+
 ### A Definition of readiness
 
 The problem can be stated as a mathematical formula for finding the UTMB index $x*$, such that

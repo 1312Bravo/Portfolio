@@ -28,7 +28,7 @@ The portfolio writing guide defines the voice, structure, and content style. Thi
 ::: {.post-summary}
 #### Short version
 
-##### Mini section title
+<div class="summary-label">Mini section title</div>
 
 ...
 :::
@@ -37,7 +37,7 @@ The portfolio writing guide defines the voice, structure, and content style. Thi
 - Treat the short version as a compact mini-post, not as an abstract, conclusion repeat, or notebook dump.
 - Before writing it, review the full post and identify the actual story arc: question, data scope, key transformation or method, main descriptive result, model or analysis result, limitation if important, and final meaning.
 - Write it in connected prose, usually as a sequence of compact mini sections. Use bullets only if the post itself is primarily a list or guide.
-- For longer blocks, use short `#####` mini headings inside the summary box, such as `##### Normalized race time` or `##### Final model`, followed by one or two short paragraphs.
+- For longer blocks, use `<div class="summary-label">...</div>` labels inside the summary box, such as `<div class="summary-label">Normalized race time</div>` or `<div class="summary-label">Final model</div>`, followed by one or two short paragraphs.
 - Choose mini titles that match the post's analytical steps, but make them reader-facing and simple. Prefer names of ideas, metrics, models, or results over generic labels like `Method` or `Analysis`.
 - Keep the technical spine: preserve core metrics, formulas, model definitions, feature groups, and final signals when they are central to the post.
 - Cut filler and repeated explanation. The short version should not explain every step twice; each sentence should either define the setup, name the method, report the result, or connect the result to the takeaway.
