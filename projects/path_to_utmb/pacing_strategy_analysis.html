@@ -166,6 +166,36 @@ window.Quarto = {
 <p>The goal is to analyse <strong>whether different pacing styles are associated with better or worse results</strong> relative to a runner’s ability. In other words: given how strong a runner is, which way of moving through the race seems to produce the best outcome?</p>
 <p>The important phrase here is <strong>relative to the runner’s ability</strong>. A top runner and a mid-pack runner have very different expected race times, so comparing their raw speeds would mostly tell us what we already know: stronger runners are faster. What matters for this analysis is whether each runner moved through the race better or worse than we would expect from their own level. In that sense, both an elite runner and a mid-pack runner can pace well, pace badly, start too hard, or finish stronger than expected.</p>
 <p>So this analysis starts from a simple hypothesis: <strong>the best pacing strategy is not necessarily the most aggressive one, but the one that preserves speed relative to the runner’s ability for as long as possible.</strong></p>
+<section id="short-version" class="level4 post-summary">
+<h4 class="anchored" data-anchor-id="short-version">Short version</h4>
+<p>We use <strong>UTMB data from the 2022, 2023, 2024, and 2025</strong> editions: race results with runner statistics, and sector-by-sector timing data. The analysis focuses on finishers with usable sector data across the whole race, and uses moving time rather than checkpoint rest time.</p>
+<div class="summary-label">
+Normalized race time
+</div>
+<p>Raw finishing time mostly reflects runner ability, so we estimate an <strong>expected race time</strong> from ability and race edition: <span class="math inline">\(\text{Race time} \sim \text{UTMB Index} + \text{Race year} + \text{UTMB Index}:\text{Race year}\)</span>. The relative residual, <span class="math inline">\(1 - \text{Actual race time} / \text{Expected race time}\)</span>, becomes normalized race time: a comparable score for whether each runner finished better or worse than expected.</p>
+<div class="summary-label">
+Normalized sector pacing
+</div>
+<p>Inside the race, each sector moving time is converted into a share of the runner’s total moving time. We then estimate the <strong>expected sector share</strong> with: <span class="math inline">\(\text{Sector time share} \sim \text{Race year}:\text{Sector} + \text{UTMB Index}:\text{Sector}\)</span>. The relative residual, <span class="math inline">\(1 - \text{Actual sector share} / \text{Expected sector share}\)</span>, becomes normalized sector pacing: where the runner spent more or less of their race than expected.</p>
+<div class="summary-label">
+Race phases
+</div>
+<p>At this point, we have the two quantities we need: normalized race time as the outcome, and normalized sector pacing as the race-shape measure. This lets us ask which pacing patterns are associated with better normalized performance.</p>
+<p>Sectors are grouped into <strong>five broader race phases</strong>: very early, early, middle, late, and very late. We aggregate sector shares into phase-level pacing values, then compare runners by performance groups based on normalized race time. As performance improves, the pacing shape shifts from relatively fast early and slow late toward more controlled early and stronger late.</p>
+<div class="summary-label">
+Performance group descriptive analysis
+</div>
+<p>For the first descriptive analysis, we split finishers into <strong>five normalized-performance groups</strong>, from much worse than expected to much better than expected, and add the top 10 finishers from each edition as a raw-performance reference. The pattern is clear: better normalized performances shift from relatively fast early and slow late toward more controlled early pacing and stronger late pacing. The top finishers show the same pattern even more strongly on average, though individual runners still vary.</p>
+<div class="summary-label">
+Pacing features &amp; Final model
+</div>
+<p>Phase-level pacing profiles are converted into interpretable features: early aggressiveness, late strength, pacing variability, trend, best-profile similarity, and related race-shape measures. The strongest single signal is early aggressiveness: runners who were relatively too fast in the opening phase tended to perform worse overall.</p>
+<p>The final model keeps three features that still matter together: early aggressiveness, late strength, and pacing variability. Better UTMB performances are associated with <strong>starting controlled</strong>, <strong>keeping the race stable</strong>, and <strong>preserving enough relative strength for the late race</strong>. So the data supports the opening idea: the best race is not necessarily the most aggressive one, but the one where the runner avoids paying too much later.</p>
+<div class="summary-label">
+Takeaway
+</div>
+<p>The final conclusion supports the two ideas from the opening section. Better UTMB performances are associated with <strong>starting controlled</strong>, <strong>keeping the race stable</strong>, and <strong>preserving enough relative strength for the late race</strong>. In other words, the data supports the idea that the best race is not necessarily the most aggressive one, but the one where the runner avoids paying too much later.</p>
+</section>
 </section>
 <section id="from-finish-time-to-race-shape---data" class="level3">
 <h3 class="anchored" data-anchor-id="from-finish-time-to-race-shape---data">From finish time to race shape - Data</h3>
@@ -191,7 +221,7 @@ window.Quarto = {
 \text{Residual} = \text{Expected race time} - \text{Actual race time}
 \]</span></p>
 <p>We use the opposite direction of the residuals than it is usually defined, so that a positive residual means the runner finished faster than expected, and a negative residual means the runner finished slower than expected.</p>
-<p><img src="saved_files/race_time_normalization_diagnostics.png" class="click-zoom img-fluid"></p>
+<p><img src="saved_files/pacing_strategy_analysis/race_time_normalization_diagnostics.png" class="click-zoom img-fluid"></p>
 <p>The above diagnostic plot is mostly a sanity check. From the left panel we see a strong pattern in the expected direction: higher UTMB Index means lower expected race time. We also see that the year lines are not simply one common line. Some editions are shifted slightly up or down, which means the expected race time differs by year even for runners with similar UTMB Index values. Their slopes also differ slightly, which supports the decision to include the interaction term. This is also supported by the model coefficients and their p-values. This gives us a reasonable ability-and-year baseline before we start comparing pacing patterns.</p>
 <p>The right panel shows the residuals around that baseline. Ideally, those residuals would look like noise: scattered around zero without a clear pattern. Here we still see some structure. Runners with shorter predicted race times tend to have more negative residuals, while runners with longer predicted race times tend to have more positive residuals. This means the normalization is not perfectly calibrated across the whole field.</p>
 <p>This matters for the analysis. The normalized race-time score may partly reflect this calibration pattern, not only pacing quality. The model may be slightly too optimistic for some faster-predicted runners and slightly too pessimistic for some slower-predicted runners. Among runners with longer expected race times, finishing the race already selects a relatively successful group, because similar runners who struggled more are more likely to be missing from the finisher-only analysis because they DNFed.</p>
@@ -228,7 +258,7 @@ window.Quarto = {
 \text{Sector pacing residual} = \text{Expected sector share} - \text{Actual sector share}
 \]</span></p>
 <p>Again, we use the direction where <strong>higher means less time than expected</strong>. A positive residual means the runner spent less of their total moving time in that sector than expected. A negative residual means they spent more of their total moving time there than expected. For example, if a runner was expected to spend 6% of their moving time in a sector but actually spent 5%, the residual is +0.01, or one percentage point less than expected.</p>
-<p><img src="saved_files/sector_share_normalization_diagnostics.png" class="click-zoom img-fluid"></p>
+<p><img src="saved_files/pacing_strategy_analysis/sector_share_normalization_diagnostics.png" class="click-zoom img-fluid"></p>
 <p>The diagnostic plots help us check whether this normalization makes sense. In the left panel, each point is one runner-sector observation: the actual sector time share on the x-axis and the expected sector time share on the y-axis. The points are grouped into visible layers because the model gives each year-sector combination its own baseline expected share. Observations from the same sector and year tend to have similar predicted values, so they appear close together vertically. Within those layers, the UTMB Index by sector term allows the expected share to move slightly depending on runner ability. The horizontal spread then shows the actual sector shares: how much runners really spent in that sector.</p>
 <p>The right panel shows the residuals around those expected shares. The residuals are not perfectly random, partly because sector shares are connected: every runner’s shares must sum to 1, so spending extra share in one sector has to be balanced somewhere else.</p>
 <p>The residual pattern suggests that the model is more of a practical baseline than a perfect sector-by-sector explanation. A positive sector pacing value does not mean the runner was objectively fast in that sector. It means the runner spent <strong>less of their own race</strong> in that sector than expected, given the sector, year, and ability baseline. This is exactly what we need for the pacing question: how the race was distributed relative to expectation.</p>
@@ -403,7 +433,7 @@ window.Quarto = {
 <p>This also connects back to the race-time normalization diagnostics. There we saw that the residuals are not perfectly calibrated across the whole field, especially among runners with longer expected race times. If the better-than-expected groups were mainly a byproduct of that issue, we might expect them to look like slower raw-result groups. That is not what this summary suggests. Their mean ranks are lower than in the middle and worse-than-expected groups, so <strong>the grouping is not simply separating slower finishers into the better-than-expected side</strong>.</p>
 <p>The table also shows that <strong>better normalized performance groups tend to contain faster runners by raw result</strong>: mean rank improves as we move from worse-than-expected to better-than-expected groups. This is not surprising. Normalization adjusts for ability and race edition, but it does not make raw performance irrelevant. A runner who performs better than expected is still likely to finish higher in the overall ranking, especially if they already started from a strong ability level. Better relative performance naturally tends to show up as a better final result too.</p>
 <p>Then we can compare the average pacing profile of these groups across the five race phases.</p>
-<p><img src="saved_files/pacing_profile_performance_group.png" class="click-zoom img-fluid"></p>
+<p><img src="saved_files/pacing_strategy_analysis/pacing_profile_performance_group.png" class="click-zoom img-fluid"></p>
 <p>The first pattern fits almost perfectly with the pacing idea from the introduction. Runners who finished much better than expected spent more of their race than expected early, especially in the very early phase, and <strong>less than expected later</strong>. In race terms, they seem to keep more in reserve for the later parts of the course. Runners who finished much worse than expected show the opposite pattern: less of the race early, more of it late. This looks like a race that was too aggressive for their ability, with the cost appearing later.</p>
 <p>The <strong>top-10 reference group</strong> shows an even more extreme version of the same pattern on average. They spend clearly more share than expected early and clearly less share than expected in the very late phase. That makes sense: the fastest overall runners are not just surviving the second half, relative to the baseline, they are still moving very efficiently late in the race.</p>
 <p>But the individual lines are an important warning. Even among the top runners, the pattern is not automatic. There is visible variability, and some top-10 finishers still lose more than expected late in the race. So this is not a rule that every elite runner follows perfectly. It is an average tendency: the top group usually shifts less of the race into the final phase, but even at the front, UTMB can still make runners pay late.</p>
@@ -665,7 +695,7 @@ window.Quarto = {
 </tbody>
 </table>
 </div>
-<p><img src="saved_files/pacing_analysis_univariate_example.png" class="click-zoom img-fluid"></p>
+<p><img src="saved_files/pacing_strategy_analysis/pacing_analysis_univariate_example.png" class="click-zoom img-fluid"></p>
 <p>The negative coefficient means that higher early aggressiveness is associated with worse normalized race performance. In race language: runners who were unusually fast in the opening phase compared with the rest of their race tended to finish worse relative to expectation. The R² is also relatively high for a single pacing feature, which already tells us that the opening phase carries a lot of information about the final outcome.</p>
 <p>Repeating this same univariate analysis across all pacing features gives the following summary.</p>
 <p>In race language: started too hot, paid later.</p>
@@ -753,7 +783,7 @@ window.Quarto = {
 </tbody>
 </table>
 <p><strong>Early aggressiveness</strong> has a negative coefficient, meaning that runners who were more aggressive in the opening phase tended to perform worse relative to expectation. <strong>Pacing variability</strong> is also negative, so more uneven pacing is associated with worse normalized performance. <strong>Late strength</strong> is positive, meaning that runners who stayed relatively stronger late in the race tended to perform better.</p>
-<p><img src="saved_files/normalized_race_time_final_actual_vs_predicted.png" class="click-zoom img-fluid"></p>
+<p><img src="saved_files/pacing_strategy_analysis/normalized_race_time_final_actual_vs_predicted.png" class="click-zoom img-fluid"></p>
 </section>
 </section>
 <section id="conclusion" class="level3">

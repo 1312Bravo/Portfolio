@@ -168,6 +168,34 @@ window.Quarto = {
 <li>simply define where we are in the training cycle when taking the bigger picture into account.</li>
 </ul>
 <p>The idea of comparing current workload to past workload isn’t new. Sports science has long used the Acute:Chronic Workload Ratio (ACWR) to capture how today’s training compares to longer-term training history. But ACWR has well-known limitations: it usually relies on a single rolling average, and it can miss important context about peak efforts or variation in load. That’s where our approach comes in. We’ll further extend it into a more flexible and informative framework.</p>
+<section id="short-version" class="level4 post-summary">
+<h4 class="anchored" data-anchor-id="short-version">Short version</h4>
+<p>We define a metric for comparing recent training load with the training pattern the body has already adapted to: <strong>History-Aware Stratified Relative Training Load (HASR-TL)</strong>. The goal is not to predict injury directly, but to make recent training stress easier to interpret in context.</p>
+<div class="summary-label">
+Training load
+</div>
+<p>The base metric is Garmin <strong>Training Load</strong>, because it combines duration and intensity better than distance or pace alone, especially for trail running. We also use training load per minute, <span class="math inline">\(TL_i^{min} = TL_i / D_i\)</span>, to separate high-intensity sessions from long low-intensity sessions.</p>
+<div class="summary-label">
+Baseline and recent windows
+</div>
+<p>The method compares a long-term <strong>baseline window</strong> with a short-term <strong>recent window</strong>. The baseline uses <span class="math inline">\(N = 90\)</span> days and the recent window uses <span class="math inline">\(n = 14\)</span> days. Within each window, days are weighted with an exponential decay, <span class="math inline">\(w_j = \lambda^{j-1}\)</span>, where <span class="math inline">\(\lambda = 0.978\)</span>. More recent days therefore contribute slightly more to the average than older days, with the weight approximately halving every 31 days. The baseline and recent windows are kept separate, so recent training does not leak into the reference distribution.</p>
+<div class="summary-label">
+Percentile buckets
+</div>
+<p>Training sessions are split into <strong>Easy, Hard, and Long</strong> buckets using thresholds learned from the baseline window. Hard sessions are identified using the weighted 70th percentile of <span class="math inline">\(TL^{min}\)</span>, while Long sessions are separated from Easy sessions using the weighted 75th percentile of duration among non-hard sessions. The same baseline thresholds are then applied to recent training.</p>
+<div class="summary-label">
+HASR-TL metric
+</div>
+<p>Within each bucket, we calculate weighted average training load for the baseline and recent windows. These bucket averages are then combined with subjective stress weights: Easy <span class="math inline">\(0.15\)</span>, Hard <span class="math inline">\(0.40\)</span>, and Long <span class="math inline">\(0.45\)</span>. The final metric is <span class="math inline">\(\Delta_t = TL_{\text{recent},t} / TL_{\text{baseline},t}\)</span>, so values above 1 mean recent load is higher than the adapted baseline.</p>
+<div class="summary-label">
+Diagnostics
+</div>
+<p>The single HASR-TL number is useful, but the bucket diagnostics explain where the change comes from. We compare bucket values within each window, recent-vs-baseline load inside each bucket, and recent-vs-baseline bucket proportions. This helps separate questions like: are easy days becoming too hard, are hard sessions too frequent, or are long sessions appearing more often than usual?</p>
+<div class="summary-label">
+Takeaway
+</div>
+<p>HASR-TL turns training load into a history-aware signal. It does not say exactly when training becomes risky, but it gives a structured way to see whether the recent block is aligned with what the athlete has already adapted to, and which type of session is driving the change.</p>
+</section>
 </section>
 <section id="selecting-the-metric" class="level3">
 <h3 class="anchored" data-anchor-id="selecting-the-metric">Selecting the metric:</h3>
@@ -204,7 +232,7 @@ window.Quarto = {
 <li><span class="math inline">\(\overline{w}_j = \frac{w_j}{\sum_{k=1}^{N}w_k} \quad j = 1, ..., N\)</span></li>
 <li><span class="math inline">\(\overline{v}_j = \frac{v_j}{\sum_{k=1}^{v}w_k} \quad j = 1, ..., v\)</span></li>
 </ul>
-<p><img src="saved_files/baseline_recent_weighting.png" class="click-zoom img-fluid"></p>
+<p><img src="saved_files/hasr_tl/baseline_recent_weighting.png" class="click-zoom img-fluid"></p>
 <p>Notes: By keeping the baseline and recent windows non-overlapping, we ensure that the baseline reflects only training the body has already adapted to, without being influenced by recent sessions that the body has not yet adjusted to. This allows us to identify increases in stress in the recent window that may pose a risk.</p>
 <p>Dataset: We take into account all measured activities, regardless if it was real training or not (including hiking, swimming, easy cycling etc.) and treat each activity as an individual sample - same as in the activities log.</p>
 </section>
@@ -235,7 +263,7 @@ window.Quarto = {
 <li>Long - 12% of days, averages = TL per minute 1.23, Duration [h] 3.07, TL 197.8</li>
 <li>Other - 3% of days, averages = TL per minute 1.03, Duration [h] 2.31, TL 93.9</li>
 </ul>
-<p><img src="saved_files/training_type_distribution.png" class="click-zoom img-fluid"></p>
+<p><img src="saved_files/hasr_tl/training_type_distribution.png" class="click-zoom img-fluid"></p>
 <p>Formally, let <span class="math inline">\(\mathcal{Q}^w_p(\cdot)\)</span> be weighted <span class="math inline">\(p\)</span>-th quantile operator. We define <strong>baseline and recent buckets</strong> using weighted quantiles over the baseline window of <span class="math inline">\({TL^{min}}\)</span> and <span class="math inline">\(D\)</span> values, with weights <span class="math inline">\(w_j\)</span>, using the baseline quantile values as follows:</p>
 <ol type="1">
 <li><p>To distinguish Hard sessions from Easy and Long, we calculate <strong>Weighted Training Load per minute quantile</strong> over the baseline window: <span class="math display">\[q^w_{TL^{min},t} = Q^w_p(TL^{min}_{\text{baseline},t}, w_j)\]</span></p></li>
@@ -361,21 +389,21 @@ window.Quarto = {
 <section id="interpretation-bucket-level-diagnostics" class="level3">
 <h3 class="anchored" data-anchor-id="interpretation-bucket-level-diagnostics">Interpretation &amp; Bucket-level diagnostics</h3>
 <p>Although <span class="math inline">\(\Delta_t\)</span> provides a clear mathematical ratio of recent to baseline training load, its practical interpretation is less straightforward - it is not always obvious when an increase or decrease becomes significant, risky, or indicative of detraining.</p>
-<p><img src="saved_files/hasr_tl_full.png" class="click-zoom img-fluid"></p>
+<p><img src="saved_files/hasr_tl/hasr_tl_full.png" class="click-zoom img-fluid"></p>
 <p>The idea behind the HASR-TL metric is to summarize this relationship in a single number, but a deeper understanding comes from also examining the individual training buckets (e.g., easy, hard, long). Comparing these buckets within the baseline and recent windows, and between them, helps reveal where changes originate and adds richer context than the ratio alone.</p>
 <p>By <strong>comparing bucket values within the same window</strong>, we gain insight to how well the training program is balanced across session types. This helps us check whether easy, hard, and long sessions are clearly distinct, or whether the loads are starting to blur together, which could reduce the effectiveness of the training. In practice, we calculate pairwise ratios of bucket weighted averages:</p>
 <p><span class="math display">\[\zeta_{\mu_i, \mu_j} = \frac{\mu_{i,t}}{\mu_{j,t}} \quad \text{and} \quad \zeta_{\nu_i, \nu_j} = \frac{\nu_{i,t}}{\nu_{j,t}}, \quad i,j = \text{Easy, Hard, Long}, i \neq j\]</span></p>
 <p>By monitoring these values, we can identify trends such as if easy vs.&nbsp;hard sessions are becoming too similar, which might indicate reduced stimulus diversity.</p>
-<p><img src="saved_files/within_window_baseline_recent_comparison.png" class="click-zoom img-fluid"></p>
+<p><img src="saved_files/hasr_tl/within_window_baseline_recent_comparison.png" class="click-zoom img-fluid"></p>
 <p>To understand which types of sessions are driving changes in overall load and what type of training have we been emphasizing lately, we <strong>compare values each bucket between recent and baseline windows</strong>.</p>
 <p><span class="math display">\[\delta_{k,t} = \frac{\nu_{k,t}}{\mu_{k,t}}, \quad k = \text{Easy, Hard, Long}\]</span></p>
 <p>This ratio focuses on the intensity or load of sessions of a given type, independent of how often these sessions occur.</p>
-<p><img src="saved_files/within_bucket_easy_hard_comparison.png" class="click-zoom img-fluid"></p>
+<p><img src="saved_files/hasr_tl/within_bucket_easy_hard_comparison.png" class="click-zoom img-fluid"></p>
 <p>For example, a rise in <span class="math inline">\(\delta_{1,t}\)</span> might indicate that easy sessions are becoming more demanding relative to the baseline. Whereas a decrease in <span class="math inline">\(\delta_{3,t}\)</span> suggests that long sessions are less intense, long possibly absent.</p>
 <p>In contrast, to see how the distribution of session types is shifting, we <strong>compare the proportion of each session type in the recent window relative to the baseline</strong>:</p>
 <p><span class="math display">\[\rho_{k,t} = \frac{\pi_{k,t}^{(r)}}{\pi_{k,t}^{(b)}}, \quad k=\text{Easy, Hard, Long}\]</span></p>
 <p>This ratio captures frequency changes, not intensity.</p>
-<p><img src="saved_files/bucket_proportion_easy_hard_comparison.png" class="click-zoom img-fluid"></p>
+<p><img src="saved_files/hasr_tl/bucket_proportion_easy_hard_comparison.png" class="click-zoom img-fluid"></p>
 <p>For example, <span class="math inline">\(\rho_{\text{Easy},t} &lt; 1\)</span> may indicate that recovery-oriented easy days are becoming too rare, while <span class="math inline">\(\rho_{\text{Long},t} &gt; 1\)</span> suggests long sessions are occurring more frequently, than the body is adapted to.</p>
 <p>Together, these diagnostics offer a comprehensive view of training composition and its evolution and form the foundation for interpreting the aggregated HASRTL metric. However, <strong>the key question remains</strong>: how large a change is meaningful, risky, or indicative of under or over-training? These interpretive challenges will be explored in the next chapter.</p>
 </section>
