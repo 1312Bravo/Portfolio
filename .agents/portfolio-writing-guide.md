@@ -212,7 +212,7 @@ Use blog cards for child posts.
 ::: {.blog-card}
 [**Post Title**](project/post.qmd)  
 Short summary of the post, written as a useful teaser rather than a generic abstract.
-<span class="blog-date">YYYY-MM-DD</span>
+<span class="blog-date">Month YYYY</span>
 :::
 ```
 
@@ -221,6 +221,7 @@ Blog card summaries should:
 - explain the post's practical question
 - mention the data or method when useful
 - be one compact paragraph
+- use month and year only for the visible date, such as `July 2026`
 - avoid vague phrases like "this post explores"
 
 Use project link containers for GitHub/code references, and keep link text concrete. Mention the directory or script if possible.
