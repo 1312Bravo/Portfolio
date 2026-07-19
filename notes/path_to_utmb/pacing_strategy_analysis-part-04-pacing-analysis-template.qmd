@@ -1,0 +1,23 @@
+### Pacing analysis
+
+### Multivariate analysis
+
+**Is the best pacing strategy the one that preserves speed relative to ability for as long as possible?**
+
+Possible conclusion directions:
+
+- If late pacing / low fade dominates, the classic saying is supported.
+- If early restraint is more important, the story is more about avoiding early damage.
+- If variability matters, the story is about avoiding large pacing disruptions.
+- If climb/descent features matter, the story may be course-specific rather than only fatigue-based.
+- If effects are weak, then pacing may matter, but the data cannot separate it cleanly from ability, terrain, and race execution.
+
+### Working conclusion placeholder
+
+The pacing analysis should end by connecting the model back to racing language.
+
+Something like:
+
+> The data does not prove that one pacing strategy causes better results. But among finishers, the runners who beat expectations tend to share a recognizable pattern: they spend less of their race than expected in the later phases, avoid large late losses, and distribute their effort in a way that looks less like early aggression and more like controlled durability.
+
+This should be rewritten after we see the actual results.

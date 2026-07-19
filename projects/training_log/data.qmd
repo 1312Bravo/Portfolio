@@ -28,13 +28,13 @@ Two main datasets are daily updated and live in Google Sheets. Having the data i
   </iframe>
 </div>
 
-The statistics come from the Garmin Connect API. A Python script fetches both activity and daily statistics, and then pushes them into the Google Sheets. Some metrics are raw Garmin values, while others are adjusted or calculated. Statistics that are captured in sheets can also evolve over time as we discover new metrics or further analyze training. So, some of the statistics in the sheet can also be presented in details in other blog posts.
+The statistics come from Garmin Connect. A Python script fetches both activity and daily statistics, and then pushes them into the Google Sheets. Some metrics are raw Garmin values, while others are adjusted or calculated. Statistics that are captured in sheets can also evolve over time as we discover new metrics or further analyze training. So, some of the statistics in the sheet can also be presented in detail in other blog posts.
 
 The script is run each morning and spreadsheets expand by one more day of history (yesterday's data), keeping the logs synchronized without manual work. The script can also loop through multiple accounts if provided.
 
 The script relies two key integrations:
 
-- `Garmin Connect API` - fetch activities and health metrics.
+- `Garmin Connect API` - accessed through the unofficial Python `garminconnect` library (`garminconnect==0.2.25`), which is used to fetch activities and health metrics.
 ```python
 from garminconnect import Garmin  
 
@@ -43,7 +43,7 @@ garminClient.login()
 garminClient.get_activities_by_date(date_from, date_to)
 ```
 
-- `Google Sheets API` - store and update logs.
+- `Google Sheets API` - used to store and update logs. The script uses `gspread==6.1.4` as the Python client for Google Sheets, and `google-auth==2.38.0` to authenticate with a service account through `Credentials`.
 ```python
 import gspread
 from google.oauth2.service_account import Credentials  
