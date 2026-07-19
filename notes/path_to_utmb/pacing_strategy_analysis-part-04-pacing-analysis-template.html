@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Track Your Training Smarter - Data – Urh Peček | Data Science Blog</title>
+<title>pacing_strategy_analysis-part-04-pacing-analysis-template – Urh Peček | Data Science Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,41 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -141,78 +106,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Track Your Training Smarter - Data</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<div class="{=html}">
-<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer"></p>
-</div>
-<p>Before diving into analysis, it’s worth showing where the numbers come from. I wanted a consistent and automated way to capture my training.</p>
-<p>Two main datasets are daily updated and live in Google Sheets. Having the data in this format makes it easy to explore manually, but also gives me a flexible base for deeper analysis. I provide only a static sample of data logs.</p>
+<section id="pacing-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="pacing-analysis">Pacing analysis</h3>
+</section>
+<section id="multivariate-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="multivariate-analysis">Multivariate analysis</h3>
+<p><strong>Is the best pacing strategy the one that preserves speed relative to ability for as long as possible?</strong></p>
+<p>Possible conclusion directions:</p>
 <ul>
-<li><a href="https://docs.google.com/spreadsheets/d/1o5Y9_AM_8baj5DnB2AE9nYXU_ZSPsyFW6VjRbljSWIw/edit?gid=412740509#gid=412740509" target="_blank">Activity Log</a> - training activities with different metrics, including distance, duration, elevation, heart rate.</li>
+<li>If late pacing / low fade dominates, the classic saying is supported.</li>
+<li>If early restraint is more important, the story is more about avoiding early damage.</li>
+<li>If variability matters, the story is about avoiding large pacing disruptions.</li>
+<li>If climb/descent features matter, the story may be course-specific rather than only fatigue-based.</li>
+<li>If effects are weak, then pacing may matter, but the data cannot separate it cleanly from ability, terrain, and race execution.</li>
 </ul>
-<div class="sheet-embed-container">
-<p><iframe src="https://docs.google.com/spreadsheets/d/1o5Y9_AM_8baj5DnB2AE9nYXU_ZSPsyFW6VjRbljSWIw/preview?gid=412740509#gid=412740509" class="sheet-embed"> </iframe></p>
-</div>
-<ul>
-<li><a href="https://docs.google.com/spreadsheets/d/1k-JIYE5z9a-2IqcslkliL_Y6CdvcNeZ7NoVe8wDbo8I/edit?gid=0#gid=0" target="_blank">Daily Log</a> - day-level statistics, such as steps, sleep, resting heart rate, recovery time, and other daily metrics.</li>
-</ul>
-<div class="sheet-embed-container">
-<p><iframe src="https://docs.google.com/spreadsheets/d/1k-JIYE5z9a-2IqcslkliL_Y6CdvcNeZ7NoVe8wDbo8I/preview?gid=0#gid=0" class="sheet-embed"> </iframe></p>
-</div>
-<p>The statistics come from Garmin Connect. A Python script fetches both activity and daily statistics, and then pushes them into the Google Sheets. Some metrics are raw Garmin values, while others are adjusted or calculated. Statistics that are captured in sheets can also evolve over time as we discover new metrics or further analyze training. So, some of the statistics in the sheet can also be presented in detail in other blog posts.</p>
-<p>The script is run each morning and spreadsheets expand by one more day of history (yesterday’s data), keeping the logs synchronized without manual work. The script can also loop through multiple accounts if provided.</p>
-<p>The script relies two key integrations:</p>
-<ul>
-<li><code>Garmin Connect API</code> - accessed through the unofficial Python <code>garminconnect</code> library (<code>garminconnect==0.2.25</code>), which is used to fetch activities and health metrics.</li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> garminconnect <span class="im">import</span> Garmin  </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>garminClient <span class="op">=</span> Garmin(garmin_email, garmin_password)  </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>garminClient.login()</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>garminClient.get_activities_by_date(date_from, date_to)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li><code>Google Sheets API</code> - used to store and update logs. The script uses <code>gspread==6.1.4</code> as the Python client for Google Sheets, and <code>google-auth==2.38.0</code> to authenticate with a service account through <code>Credentials</code>.</li>
-</ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gspread</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> google.oauth2.service_account <span class="im">import</span> Credentials  </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>drive_credentials <span class="op">=</span> Credentials.from_service_account_file(</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"googleDrive_secrets.json"</span>,  </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    scopes<span class="op">=</span>[<span class="st">"https://www.googleapis.com/auth/spreadsheets"</span>,  </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"https://www.googleapis.com/auth/drive"</span>]  </span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>googleDrive_client <span class="op">=</span> gspread.authorize(drive_credentials)  </span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>googleDrive_client.<span class="bu">open</span>(user_dailyLogFilename)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Of course, logging in requires credentials (emails, passwords, API keys). They are not hardcoded, but live in a <em>.env</em> file locally and as GitHub Secrets in the cloud, keeping sensitive content secure while still accessible for automation.</p>
-<div class="project-link-container">
-    <i class="fab fa-github"></i>
-    <span> You can find the full code for this section, which is then easily integrated into the <code>src/main.py</code> script, on my Github repository under the
-    <a href="https://github.com/1312Bravo/TrainingPeaks_customLog/tree/main/basic_daily_activity_statistics" target="_blank"> basic_daily_activity_statistics</a>
-     directory.</span>
-</div>
+</section>
+<section id="working-conclusion-placeholder" class="level3">
+<h3 class="anchored" data-anchor-id="working-conclusion-placeholder">Working conclusion placeholder</h3>
+<p>The pacing analysis should end by connecting the model back to racing language.</p>
+<p>Something like:</p>
+<blockquote class="blockquote">
+<p>The data does not prove that one pacing strategy causes better results. But among finishers, the runners who beat expectations tend to share a recognizable pattern: they spend less of their race than expected in the later phases, avoid large late losses, and distribute their effort in a way that looks less like early aggression and more like controlled durability.</p>
+</blockquote>
+<p>This should be rewritten after we see the actual results.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
