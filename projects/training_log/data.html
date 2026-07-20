@@ -181,15 +181,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>The statistics come from Garmin Connect. A Python script fetches both activity and daily statistics, and then pushes them into the Google Sheets. Some metrics are raw Garmin values, while others are adjusted or calculated. Statistics that are captured in sheets can also evolve over time as we discover new metrics or further analyze training. So, some of the statistics in the sheet can also be presented in detail in other blog posts.</p>
 <p>The script is run each morning and spreadsheets expand by one more day of history (yesterday’s data), keeping the logs synchronized without manual work. The script can also loop through multiple accounts if provided.</p>
-<p>The script relies two key integrations:</p>
+<div class="post-note">
+<div class="note-label">
+Note | July 2026 | garminconnect external dependency
+</div>
+<p><code>garminconnect</code> is an unofficial wrapper around Garmin Connect, so login behavior can change outside our control. After GitHub Actions started hitting <code>too many 429 error responses</code>, we moved away from asking Garmin for a fresh email/password login on every scheduled run. The daily job now reuses a saved Garmin session token that was created locally and stored securely in GitHub Secrets, while keeping email/password login as a backup if the saved session stops working.</p>
+</div>
+<p>The script relies on two key integrations:</p>
 <ul>
-<li><code>Garmin Connect API</code> - accessed through the unofficial Python <code>garminconnect</code> library (<code>garminconnect==0.2.25</code>), which is used to fetch activities and health metrics.</li>
+<li><code>Garmin Connect API</code> - accessed through the unofficial Python <code>garminconnect</code> library (<code>garminconnect==0.3.6</code>), which is used to fetch activities and health metrics.</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> garminconnect <span class="im">import</span> Garmin  </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>garminClient <span class="op">=</span> Garmin(garmin_email, garmin_password)  </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>garminClient.login()</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>garminClient.get_activities_by_date(date_from, date_to)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> garminconnect <span class="im">import</span> Garmin  </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>garminClient <span class="op">=</span> Garmin(garmin_email, garmin_password)  </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> garmin_tokenstore:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    garminClient.login(tokenstore<span class="op">=</span>garmin_tokenstore)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    garminClient.login()</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>garminClient.get_activities_by_date(date_from, date_to)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li><code>Google Sheets API</code> - used to store and update logs. The script uses <code>gspread==6.1.4</code> as the Python client for Google Sheets, and <code>google-auth==2.38.0</code> to authenticate with a service account through <code>Credentials</code>.</li>
 </ul>
