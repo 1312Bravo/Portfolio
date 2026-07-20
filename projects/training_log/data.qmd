@@ -32,14 +32,26 @@ The statistics come from Garmin Connect. A Python script fetches both activity a
 
 The script is run each morning and spreadsheets expand by one more day of history (yesterday's data), keeping the logs synchronized without manual work. The script can also loop through multiple accounts if provided.
 
-The script relies two key integrations:
+::: {.post-note}
+<div class="note-label">Note | July 2026 | garminconnect external dependency</div>
 
-- `Garmin Connect API` - accessed through the unofficial Python `garminconnect` library (`garminconnect==0.2.25`), which is used to fetch activities and health metrics.
+`garminconnect` is an unofficial wrapper around Garmin Connect, so login behavior can change outside our control. After GitHub Actions started hitting `too many 429 error responses`, we moved away from asking Garmin for a fresh email/password login on every scheduled run. The daily job now reuses a saved Garmin session token that was created locally and stored securely in GitHub Secrets, while keeping email/password login as a backup if the saved session stops working.
+:::
+
+The script relies on two key integrations:
+
+- `Garmin Connect API` - accessed through the unofficial Python `garminconnect` library (`garminconnect==0.3.6`), which is used to fetch activities and health metrics.
 ```python
+import os
 from garminconnect import Garmin  
 
 garminClient = Garmin(garmin_email, garmin_password)  
-garminClient.login()
+
+if garmin_tokenstore:
+    garminClient.login(tokenstore=garmin_tokenstore)
+else:
+    garminClient.login()
+
 garminClient.get_activities_by_date(date_from, date_to)
 ```
 

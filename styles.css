@@ -188,6 +188,42 @@ a:hover {
     vertical-align: -0.04em;
 }
 
+/* Reusable note box for implementation details */
+.post-note {
+    background-color: #fcfcfc;
+    border: 1px solid #eeeeee;
+    border-left: 3px solid #000000;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    margin: 1.2rem 0 1.5rem;
+    font-size: 0.9em;
+    color: #555555;
+}
+
+.post-note h4 {
+    margin-top: 0;
+    margin-bottom: 0.45rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #444444;
+}
+
+.post-note .note-label {
+    margin-bottom: 0.15rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #6c757d;
+}
+
+.post-note p {
+    margin: 0.35rem 0;
+}
+
+.post-note code {
+    white-space: normal;
+    color: #444444;
+}
+
 /* Info icons */
 .info-icons {
     text-align: center;
