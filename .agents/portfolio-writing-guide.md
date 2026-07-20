@@ -113,6 +113,21 @@ The short version is not a replacement for the full post. It should compress the
 
 End the short version with what the analysis means: the practical answer, the reframed question, the limitation that changes interpretation, or the main takeaway the reader should carry into the full post.
 
+### Implementation Notes
+Use small note boxes for brief implementation caveats, external dependencies, dated fixes, or workflow details that are useful context but not part of the main analysis. Notes should feel quieter than `Short version` boxes: use them sparingly, keep them short, and avoid turning them into a second methodology section.
+
+Use this pattern:
+
+```markdown
+::: {.post-note}
+<div class="note-label">Note | Month YYYY | short topic</div>
+
+One short paragraph explaining the caveat, change, or dependency in reader-facing language.
+:::
+```
+
+The note label should contain `Note`, the month and year, and a compact topic. Do not add a second subtitle inside the note unless the note becomes unusually complex; if it becomes complex, consider moving the material into the main text instead. In the body, explain what changed and why it matters in plain language. Avoid exposing internal filenames, environment variables, or function names unless they are necessary for understanding the point.
+
 ## Overall Voice
 - Write like a data scientist explaining a personal project to an interested technical reader.
 - Keep the voice personal, analytical, direct, and grounded in data science.
@@ -174,8 +189,9 @@ End the short version with what the analysis means: the practical answer, the re
 - Keep the tone confident about the reasoning, but humble about what the model can actually know.
 
 ## Pronoun Style
-- Use `I` when discussing personal motivation, training goals, curiosity, or project decisions.
-- Use `we` when guiding the reader through a method, model, formula, or analytical step.
+- Use `I` for genuinely personal material: motivation, training goals, curiosity, uncertainty, reactions, or project decisions that belong to the author.
+- Use `we` when guiding the reader through code, theory, methods, models, formulas, data preparation, or analytical steps.
+- Avoid turning technical explanation into first-person singular unless the sentence is really about a personal choice or reaction.
 - Use passive voice sparingly, mostly when the object of analysis matters more than the actor.
 
 ## Writing Flow
