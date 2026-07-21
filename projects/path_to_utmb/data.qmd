@@ -6,6 +6,10 @@ title: "Scrape UTMB Race and Runners statistics - Data"
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 :::
 
+<div class="project-trail">
+  <a href="../path_to_utmb.qmd">Path To UTMB</a>
+</div>
+
 Rather than manually copying race results and runner statistics, which would be practically impossible for any comprehensive analysis, I needed a scalable way to get data from the UTMB website programmatically. I built a toolkit of Python helper functions to extract and standardize information from UTMB APIs instead of scraping webpages directly.
 
 ```{=html}
@@ -104,5 +108,6 @@ tom_evans_stats = get_runner_results(
 
 The function queries the UTMB API and returns a standardized DataFrame containing the runner's historical race results and overall UTMB statistics. The runners ID is also available in the race results data.
 
-
-
+::: {.post-nav}
+[Back to Path To UTMB](../path_to_utmb.qmd){.post-nav-back}
+:::

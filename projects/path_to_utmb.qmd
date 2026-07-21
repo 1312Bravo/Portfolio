@@ -6,6 +6,10 @@ title: "Path To UTMB"
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 :::
 
+<div class="project-trail">
+  <a href="../index.qmd">Home</a>
+</div>
+
 The UTMB (**Ultra-Trail du Mont-Blanc**), often called the Olympics of trail running, brings together the world's best athletes in Chamonix each August. Chamonix becomes the centre of the sport as runners gather to race around the Mont Blanc massif, crossing the mountains of France, Italy, and Switzerland. Alongside the elites, thousands of amateurs chase the same dream.
 
 The **UTMB Finals** is a race week featuring multiple distances and profiles. The main race, UTMB itself, is about 170 km with over 10,000 meters of elevation gain. Other iconic races include CCC (~100 km) and OCC (~50 km), each linking key alpine towns and attracting different profiles of runners.

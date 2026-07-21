@@ -1,17 +1,66 @@
 /* Navbar */
 .navbar {
-    background-color: #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.96) !important;
+    border-bottom: 1px solid #eeeeee;
+    box-shadow: none;
 }
 
 .navbar a,
 .navbar .navbar-brand {
-    color: #000000 !important;
+    color: #222222 !important;
 }
 
 .navbar-brand {
-    margin: 0 auto;
-    text-align: center;
+    font-size: 0.98rem;
+    font-weight: 650;
+    letter-spacing: 0;
+}
+
+.navbar-nav .nav-link {
+    border-radius: 6px;
+    margin: 0 0.12rem;
+    padding: 0.45rem 0.7rem !important;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: #555555 !important;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus,
+.navbar-nav .nav-link.active {
+    color: #111111 !important;
+    background-color: #f6f6f6;
+}
+
+.navbar .dropdown-menu {
+    border: 1px solid #eeeeee;
+    border-radius: 6px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+    padding: 0.35rem;
+}
+
+.navbar .dropdown-item {
+    border-radius: 5px;
+    padding: 0.45rem 0.65rem;
+    font-size: 0.9rem;
+    color: #444444 !important;
+}
+
+.navbar .dropdown-item:hover,
+.navbar .dropdown-item:focus {
+    color: #111111 !important;
+    background-color: #f6f6f6;
+}
+
+.navbar .dropdown:hover > .dropdown-menu,
+.navbar .dropdown:focus-within > .dropdown-menu {
     display: block;
+}
+
+.navbar .dropdown:hover > .nav-link,
+.navbar .dropdown:focus-within > .nav-link {
+    color: #111111 !important;
+    background-color: #f6f6f6;
 }
 
 /* Title banner */
@@ -224,6 +273,24 @@ a:hover {
     color: #444444;
 }
 
+/* Quiet breadcrumb for detailed posts */
+.project-trail {
+    margin: 0.25rem 0 1.05rem;
+    font-size: 0.86rem;
+    color: #777777;
+}
+
+.project-trail a {
+    color: #555555;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.project-trail a:hover {
+    color: #000000;
+    text-decoration: underline;
+}
+
 /* Info icons */
 .info-icons {
     text-align: center;
@@ -283,6 +350,27 @@ img.click-zoom:active {
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Post-level navigation */
+.post-nav {
+    border-top: 1px solid #eeeeee;
+    margin-top: 2.5rem;
+    padding-top: 1.2rem;
+}
+
+.post-nav-back {
+    display: inline-block;
+    margin-bottom: 0.9rem;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #555555;
+    text-decoration: none;
+}
+
+.post-nav-back:hover {
+    color: #000000;
+    text-decoration: underline;
 }
 
 /*Profile photo*/
