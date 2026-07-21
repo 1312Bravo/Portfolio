@@ -6,6 +6,10 @@ title: "Path To UTMB"
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 :::
 
+<div class="project-trail">
+  <a href="../index.qmd">Home</a>
+</div>
+
 The UTMB (**Ultra-Trail du Mont-Blanc**), often called the Olympics of trail running, brings together the world's best athletes in Chamonix each August. Chamonix becomes the centre of the sport as runners gather to race around the Mont Blanc massif, crossing the mountains of France, Italy, and Switzerland. Alongside the elites, thousands of amateurs chase the same dream.
 
 The **UTMB Finals** is a race week featuring multiple distances and profiles. The main race, UTMB itself, is about 170 km with over 10,000 meters of elevation gain. Other iconic races include CCC (~100 km) and OCC (~50 km), each linking key alpine towns and attracting different profiles of runners.
@@ -24,25 +28,25 @@ As a trail runner myself, UTMB sits in the category of **long-term dreams** that
 ```
 
 ::: {.blog-card}
-[**Scrape UTMB Race and Runners statistics - Data**](path_to_utmb/data.qmd)  
+## [Scrape UTMB Race and Runners statistics - Data](path_to_utmb/data.qmd)  
 Behind every UTMB analysis lies one major challenge: getting the data. A lot of valuable UTMB data exists publicly, but rarely in a format that is easy to analyze. To make large-scale analysis possible, I built a collection of Python functions that scrape and organize race results, runner statistics, and historical performance data directly from UTMB webpages. The pipeline supports multiple races and runner profiles with a simple, reusable interface — turning scattered web data into analysis-ready datasets.
 <span class="blog-date">May 2026</span>
 :::
 
 ::: {.blog-card}
-[**UTMB - Course profile**](path_to_utmb/utmb_course_profile.qmd)  
+## [UTMB - Course profile](path_to_utmb/utmb_course_profile.qmd)  
 Before we start writing code, fitting models, and making questionable assumptions, we should first understand the course we're trying to explain. At approximately 172 km with 10,510 meters of elevation gain across a wide variety of terrain, UTMB is not just another trail race. This post is a short introduction to the UTMB course profile, setting the foundation for the analyses that follow.
 <span class="blog-date">July 2026</span>
 :::
 
 ::: {.blog-card}
-[**What UTMB Index Do I Need to Break 27 Hours With Almost Certainty**](path_to_utmb/sub27_prob.qmd)  
+## [What UTMB Index Do I Need to Break 27 Hours With Almost Certainty](path_to_utmb/sub27_prob.qmd)  
 UTMB is a dream race for most trail runners. Also for me. But I don't want to approach it with the mindset of simply finishing. My goal is to arrive at the start line ready to truly race. I set myself a perhaps too ambitious benchmark: I would only commit to UTMB once I believed I could run under 27 hours with near certainty. That naturally led to a more practical question: As UTMB Index is the simplest measurable signal of performance, what value would actually tell me I am ready to realistically expect a sub-27 finish?
 <span class="blog-date">May 2026</span>
 :::
 
 ::: {.blog-card}
-[**In ultra running, the "winner" is the one who slows down the least. Is this true?**](path_to_utmb/pacing_strategy_analysis.qmd)  
+## [In ultra running, the "winner" is the one who slows down the least. Is this true?](path_to_utmb/pacing_strategy_analysis.qmd)  
 My coach often reminded me that trail running is not cycling: there is no real draft to hide in, and the best race usually comes from managing your own effort rather than reacting to everyone around you. Another classic ultra-running saying points in the same direction: the winner is not always the one who runs fastest early, but the one who slows down the least. In this post, we look at which pacing styles are associated with the best results, relative to a runner's ability.
 <span class="blog-date">July 2026</span>
 :::

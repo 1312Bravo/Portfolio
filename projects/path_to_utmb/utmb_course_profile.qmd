@@ -6,6 +6,10 @@ title: "UTMB - Course profile"
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 :::
 
+<div class="project-trail">
+  <a href="../path_to_utmb.qmd">Path To UTMB</a>
+</div>
+
 ### What are we actually trying to race?
 
 UTMB is usually described with two numbers: roughly **170 km** and more than **10,000 meters of climbing**. What makes the course additionally interesting is the way it keeps changing: long climbs, steep descents, runnable sections, technical terrain and very few sections where pace can be interpreted without terrain context.
@@ -74,8 +78,9 @@ The main lesson is that UTMB cannot be reduced to distance and elevation gain al
 
 This is important for the rest of the project. If we later want to model pacing, compare runners, or estimate what a certain finishing time requires, the course has to be treated as a sequence of terrain-specific problems rather than one continuous 172 km effort. A kilometer on a runnable valley section and a kilometer on a steep technical descent are not the same unit. This gives the race a shape before building models on top of it. Any useful pacing or performance analysis needs to respect that.
 
-
-
+::: {.post-nav}
+[Back to Path To UTMB](../path_to_utmb.qmd){.post-nav-back}
+:::
 
 
 

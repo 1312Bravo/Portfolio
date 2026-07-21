@@ -6,6 +6,10 @@ title: 'In ultra running, the "winner" is the one who slows down the least. Is t
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 :::
 
+<div class="project-trail">
+  <a href="../path_to_utmb.qmd">Path To UTMB</a>
+</div>
+
 ### The pacing question
 
 Pacing advice in ultra running often sounds simple from the outside: start controlled, stay patient, do not get pulled into someone else's race. My coach used to frame this in a very practical way: trail running is not cycling. There is no meaningful draft advantage and very little reason to respond to the runners around you. That connects to one of the classic ultra-running ideas: over long enough distances, performance is not only about who can run fast, but who can avoid slowing down too much.
@@ -435,3 +439,7 @@ In practical terms, if we want to improve the probability of a successful long d
      directory.</span>
 </div>
 ```
+
+::: {.post-nav}
+[Back to Path To UTMB](../path_to_utmb.qmd){.post-nav-back}
+:::
