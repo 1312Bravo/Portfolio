@@ -17,6 +17,8 @@ website:
           - text: Training Log
             href: projects/training_log.qmd
     right:
+      - text: "pecek.urh@gmail.com"
+        href: mailto:pecek.urh@gmail.com
       - icon: github
         href: https://github.com/1312Bravo
         target: _blank
