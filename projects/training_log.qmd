@@ -36,3 +36,9 @@ Keep all your training and daily metrics in one place without lifting a finger. 
 Put recent training into context by comparing it with your history. Give yourself a clearer picture of whether you're pushing into new territory or staying within safe limits. The goal is to help you understand your training load better, catch signs of overtraining early, reduce the risk of injuries or just define where in the training cycle you are.
 <span class="blog-date">September 2025</span>
 :::
+
+::: {.blog-card}
+## [When Training Becomes a Deck of Cards - Build Training Cards](training_log/hasr_tl.qmd)  
+In the trail-running podcast *The Albon Way*, I heard John Albon describe an idea that immediately clicked with mec and I envisioned it cleanly. As a fan of Pokémon and Yu-Gi-Oh as a kid, I wanted to turn that into a small project with a light data science and data engineering touch that would help me with my training while also teaching me more about endurance sports training along the way.
+<span class="blog-date">August 2026</span>
+:::
