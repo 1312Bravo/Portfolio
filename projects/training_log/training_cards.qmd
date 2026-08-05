@@ -1,0 +1,49 @@
+---
+title: "When Training Becomes a Deck of Cards - Training Card Library"
+---
+
+:::{=html}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+:::
+
+<div class="project-trail">
+  <a href="../training_log.qmd">Training Log</a>
+</div>
+
+### Idea
+
+In the trail-running podcast The Albon Way, I heard John Albon describe training as a card-based system. It immediately clicked with me.
+
+I could vividly picture the idea of running training cards, and I wanted to turn that picture into something real. The concept was to create a set of training cards, a bit like Pokémon, Yu-Gi-Oh, or Cars cards, but built specifically for running. Each card would capture something practical about a training element, such as what exactly to do, its strengths, what it does, when to use it, and who it is for.
+
+Those cards would not just be loose notes. I had a very clear picture of how they could look and work, and that visual idea appealed to me a lot. I wanted them to follow a clear underlying structure while still appearing as real cards in a clean and intuitive user experience. In my head, it was something that could live inside an application and feel easy to browse, almost like a small training deck you could choose from naturally.
+
+The reason this idea appealed to me is that training decisions can be mentally tiring. I usually know roughly where I am in a training period, but after a full day of work I do not always want to think too much about what the next session should be. I wanted this to become a quick tool that would reduce decision fatigue, make daily training choices easier, and give me a few ready-made options to choose from. At the same time, it would educate me about training along the way and make it easier for both newer and more experienced athletes to think about training, effort, and purpose in a clearer way.
+
+The goal was also not to write all of the training content by myself. Instead, I wanted to use an AI agent as a kind of specialized coach, guided by prompts and grounded in publications, training principles, and established endurance knowledge, to help prepare and structure the cards. That way, the training logic would come from a more expert-like source, while I focused on the infrastructure and the overall system.
+
+In a way, the project became a mix of my own ideas, AI support, and careful supervision. A lot of the implementation came together with AI support, but the structure, the card system, and the direction were still strongly shaped by my input. I also wanted the whole thing to stay easy to maintain, adjust, and reuse over time, so the cards would not just live inside this repo, but could also be reused in other projects that would bring the to life. This repo holds the card content and outputs it in a structured, way using a class-based setup.
+
+
+
+
+
+
+
+
+
+
+
+
+```{=html}
+<div class="project-link-container">
+    <i class="fab fa-github"></i>
+    <span> You can find the full
+    <a href="https://github.com/1312Bravo/Trail-Running-Training-Cards" target="_blank">Trai-Running-Training-Cards</a>
+    project on my Github.</span>
+</div>
+```
+
+::: {.post-nav}
+[Back to Training Log](../training_log.qmd){.post-nav-back}
+:::

@@ -38,7 +38,7 @@ Put recent training into context by comparing it with your history. Give yoursel
 :::
 
 ::: {.blog-card}
-## [When Training Becomes a Deck of Cards - Build Training Cards](training_log/hasr_tl.qmd)  
-In the trail-running podcast *The Albon Way*, I heard John Albon describe an idea that immediately clicked with mec and I envisioned it cleanly. As a fan of Pokémon and Yu-Gi-Oh as a kid, I wanted to turn that into a small project with a light data science and data engineering touch that would help me with my training while also teaching me more about endurance sports training along the way.
+## [When Training Becomes a Deck of Cards - Training Card Library](training_log/training_cards.qmd)  
+In the trail-running podcast *The Albon Way*, I heard John Albon describe thinking about training as a card-based system. It immediately clicked with me, and I could picture it clearly. I wanted to turn that into a small project with a light data science and data engineering touch that would help me with my training while also teaching me more about endurance sports training along the way.
 <span class="blog-date">August 2026</span>
 :::
