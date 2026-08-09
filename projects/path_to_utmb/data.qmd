@@ -1,5 +1,5 @@
 ---
-title: "Scrape UTMB Race and Runners statistics - Data"
+title: "Scrape UTMB Race and Runners Statistics - Data"
 ---
 
 :::{=html}

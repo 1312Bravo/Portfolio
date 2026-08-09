@@ -1,5 +1,5 @@
 ---
-title: "What UTMB Index Do I Need to Break 27 Hours With Almost Certainty"
+title: "What UTMB Index Do I Need to Break 27 Hours with Almost Certainty"
 ---
 
 :::{=html}

@@ -1,5 +1,5 @@
 ---
-title: "Bayesian Probability, Statistics, And Project Ideas"
+title: "Bayesian Probability, Statistics, and Project Ideas"
 subtitle: "A conceptual note for a future Training Log predictor"
 author: "Urh"
 date: "July 2026"
@@ -927,4 +927,3 @@ The best first implementation would probably be:
 > Weekly Bayesian readiness score using training features, followed by a target-readiness probability.
 
 That is small enough to build, but rich enough to become a serious portfolio post.
-

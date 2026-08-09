@@ -26,13 +26,26 @@ In a way, the project became a mix of my own ideas, AI support, and careful supe
 
 ### Training Cards Structure
 
-The card's structure follows a simple hierarchy that mirrors the way the content is meant to be understood. The training cards are defined by *macro*, *mezzo*, *micro*, and *session* classes. From the largest planning layer down to the most detailed one. 
+The training-card schema is buit and organized as a ssmall vocabulary for coaching. The training plan has layers, so, the card's structure follows a simple hierarchy that mirrors the way the content is meant to be understood. At the top level, the model uses a few controlled types and a shared base class, then extends that base with more specialized card types. That gives the library one consistent structure while still letting each level carry the information it needs.
 
-#### Cards
+There is the big phase of training (*macro* block), the focused block inside it (*mezzo* block), the week that shapes the load (*micro* block), and the workout itself (*session*). Those are different planning levels, so the code should reflect that.
 
-The classes share a common core, but each level needs a slightly different shape. At the core is `BaseTrainingCard` which is the shared contract for every card in the library.
+#### Shared Base Class
 
-```{python, eval=False}
+`BaseTrainingCard` is the shared foundation for all card types. It is the core definition of what a card is. It holds the fields every card needs to be identified, understood, displayed, and connected to other cards.
+
+It answers questions like:
+- What fields does a training card have?
+- What does each field mean?
+- What shape is valid for a card?
+
+So it separates:
+
+- What must always be there
+- What is useful but not always present
+- What only belongs to a specific card level
+
+```python
 @dataclass(slots=True)
 class BaseTrainingCard:
     id: str
@@ -53,23 +66,36 @@ class BaseTrainingCard:
     references: list[CardReference] = field(default_factory=list)
 ```
 
-On the other hand, `MacroCard`, `MezzoCard`, `MicroCard`, and `SessionCard` add the fields that matter at their own level. 
 
-```{python, eval=False}
+
+Each card object has a fixed set of allowerd fields (`slots=True`). The identity and core coaching fields - `id`, `slug`, `title`, `card_type`, `suitable_levels`, `summary` and `purpose` are required because they have no default value in the schema. The remaining fields are optional because they add detail without being necessary to identify the card. This keeps the schema balanced: strict enough to trust and support coaching, but not so strict that writing cards becomes frustrating.
+
+For the class fields, we used `str` when a field should hold one clear coaching idea and `list[str]` when it should hold several short coaching points. `default_factory` helps avoid shared mutable defaults.
+
+The identity and core coaching fields - `id`, `slug`, `title`, `card_type`, `suitable_levels`, `summary` and `purpose` are 
+#### Specialized Card Classes
+
+`MacroCard` represents the highest planning granularity. It inherits the shared contract (`class MacroCard(BaseTrainingCard)`) and adds the fields that matter only for a broad phase-level object.
+
+```python
 @dataclass(slots=True)
 class MacroCard(BaseTrainingCard):
     recommended_duration_weeks: str = ""
     timing_guidance: list[str] = field(default_factory=list)
 ```
 
-```{python, eval=False}
+`MezzoCard` is the intermediate block layer. 
+
+```python
 @dataclass(slots=True)
 class MezzoCard(BaseTrainingCard):
     recommended_duration_weeks: str = ""
     placement_guidance: list[str] = field(default_factory=list)
 ```
 
-```{python, eval=False}
+`MicroCard` is the week-level object.
+
+```python
 class MicroCard(BaseTrainingCard):
     recommended_duration_days: str = ""
     week_structure: list[str] = field(default_factory=list)
@@ -79,7 +105,9 @@ class MicroCard(BaseTrainingCard):
     recovery_requirements: list[str] = field(default_factory=list)
 ```
 
-```{python, eval=False}
+`SessionCard` is the most detailed card type.
+
+```python
 @dataclass(slots=True)
 class SessionPart:
     name: str
@@ -101,7 +129,7 @@ To keep the schema compact and consistent, the card classes are supported by a f
 
 `CardType` defines the four main card labels: *macro*, *mezzo*, *micro*, and *session*. Using an *enum* here keeps the hierarchy explicit and avoids scattering free-text type names throughout the code. It also makes the model easier to validate, compare, and extend later.
 
-```{python, eval=False}
+```python
 class CardType(StrEnum):
     MACRO = "macro"
     MEZZO = "mezzo"
@@ -111,7 +139,7 @@ class CardType(StrEnum):
 
 `TrainingLevel` is another controlled vocabulary. It describes who a card is suitable for, using a small fixed set of levels instead of arbitrary strings. That keeps the schema readable and prevents the same concept from being written in slightly different ways across different cards.
 
-```{python, eval=False}
+```python
 class TrainingLevel(StrEnum):
     ALL = "all"
     BEGINNER = "beginner"
@@ -122,7 +150,7 @@ class TrainingLevel(StrEnum):
 
 `CardRelationship` describes how one card connects to another. A card can point to a *parent*, *child*, *previous*, *next*, *alternative*, or *support* card. That makes the relationships part of the model itself, rather than something hidden in descriptive text.
 
-```{python, eval=False}
+```python
 class CardRelationship(StrEnum):
     PARENT = "parent"
     CHILD = "child"
@@ -138,7 +166,7 @@ Each card can carry structured references to other cards. That makes the relatio
 
 A reference can say whether another card is a parent, child, previous card, next card, or simply related in some useful way. It also allows small tags to add context without turning the main card into a cluttered object. In practice, this means the structure is not just a flat list of cards. It is a connected library where relationships are part of the data model itself.
 
-```{python, eval=False}
+```python
 @dataclass(slots=True)
 class CardReference:
     card_id: str

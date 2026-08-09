@@ -1,5 +1,5 @@
 ---
-title: "UTMB - Course profile"
+title: "UTMB - Course Profile"
 ---
 
 :::{=html}

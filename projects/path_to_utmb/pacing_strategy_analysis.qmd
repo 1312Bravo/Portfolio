@@ -1,5 +1,5 @@
 ---
-title: 'In ultra running, the "winner" is the one who slows down the least. Is this true?'
+title: 'In Ultra Running, the "Winner" Is the One Who Slows Down the Least. Is This True?'
 ---
 
 :::{=html}
