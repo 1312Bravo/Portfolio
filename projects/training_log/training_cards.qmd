@@ -28,11 +28,19 @@ In a way, the project became a mix of my own ideas, AI support, and careful supe
 
 The training-card schema is buit and organized as a ssmall vocabulary for coaching. The training plan has layers, so, the card's structure follows a simple hierarchy that mirrors the way the content is meant to be understood. At the top level, the model uses a few controlled types and a shared base class, then extends that base with more specialized card types. That gives the library one consistent structure while still letting each level carry the information it needs.
 
-There is the big phase of training (*macro* block), the focused block inside it (*mezzo* block), the week that shapes the load (*micro* block), and the workout itself (*session*). Those are different planning levels, so the code should reflect that.
+The basic idea is simple: a training plan is made of layers, and each layer has a different job. The card system mirrors that coaching reality.
+
+- *macro* block is the big phase of training and answers "What is the long-term direction?"
+    - *mezzo* block is the focused block and answers: "What block are we building inside that phase?"
+        - *micro* block is the week that shapes the load and answers: "What does this week need to do?"
+            - *session* is the workout itself and answers: "What workout should we do today?"
+
+
+Those are different planning levels and the usuall training usualy reflects that hierarchy. 
 
 #### Shared Base Class
 
-`BaseTrainingCard` is the shared foundation for all card types. It is the core definition of what a card is. It holds the fields every card needs to be identified, understood, displayed, and connected to other cards.
+`BaseTrainingCard` is the shared foundation for all card types. It creates the stable frame that every specialized card can build on and is the core definition of what a card is. It holds the fields every card needs to be identified, understood, displayed, and connected to other cards. 
 
 It answers questions like:
 - What fields does a training card have?
@@ -66,16 +74,22 @@ class BaseTrainingCard:
     references: list[CardReference] = field(default_factory=list)
 ```
 
-
-
 Each card object has a fixed set of allowerd fields (`slots=True`). The identity and core coaching fields - `id`, `slug`, `title`, `card_type`, `suitable_levels`, `summary` and `purpose` are required because they have no default value in the schema. The remaining fields are optional because they add detail without being necessary to identify the card. This keeps the schema balanced: strict enough to trust and support coaching, but not so strict that writing cards becomes frustrating.
 
 For the class fields, we used `str` when a field should hold one clear coaching idea and `list[str]` when it should hold several short coaching points. `default_factory` helps avoid shared mutable defaults.
 
-The identity and core coaching fields - `id`, `slug`, `title`, `card_type`, `suitable_levels`, `summary` and `purpose` are 
+The explanation of some fields is as follows:
+- `id` is a unique identifier for the card. It is the internal name the system uses to tell cards apart.
+- `slug`: a readable identifier for URLs, filenames, or search. Short, clear, and easy to recognize at a glance.
+- `title`: the coach-facing name of the card. The label a coach would naturally use when talking about the card.
+- `tags`: quick labels for search or grouping. Help identify related cards quickly without needing to read the full content.
+- `references`: links to related cards. Connect the card to its parent, child, companion, or support cards.
+
 #### Specialized Card Classes
 
-`MacroCard` represents the highest planning granularity. It inherits the shared contract (`class MacroCard(BaseTrainingCard)`) and adds the fields that matter only for a broad phase-level object.
+`MacroCard` represents the highest planning granularity over several weeks or more. It should help answer: what are we trying to accomplish over the next few weeks, and why is this the right time for it?
+
+It inherits the shared contract (`class MacroCard(BaseTrainingCard)`) and adds the fields that matter only for a broad phase-level object.
 
 ```python
 @dataclass(slots=True)
@@ -84,7 +98,7 @@ class MacroCard(BaseTrainingCard):
     timing_guidance: list[str] = field(default_factory=list)
 ```
 
-`MezzoCard` is the intermediate block layer. 
+`MezzoCard` is the intermediate block layer. It answers: what are we sharpening inside this phase, and how should this block sit between the macro plan and the weekly load? It is specific enough to matter, but still broad enough to support several weeks of planning without over-prescribing every day.
 
 ```python
 @dataclass(slots=True)
@@ -93,7 +107,7 @@ class MezzoCard(BaseTrainingCard):
     placement_guidance: list[str] = field(default_factory=list)
 ```
 
-`MicroCard` is the week-level object.
+`MicroCard` is the week-level planning card. It is the bridge between the block-level intention and the day-by-day reality of training. It describes how a coach shapes one training week to support the larger block.
 
 ```python
 class MicroCard(BaseTrainingCard):
@@ -105,7 +119,17 @@ class MicroCard(BaseTrainingCard):
     recovery_requirements: list[str] = field(default_factory=list)
 ```
 
-`SessionCard` is the most detailed card type.
+`SessionCard` is the most detailed card. It describes one workout or session pattern. It needs enough structure to guide execution, but it should still feel like a reusable workout concept rather than a one-off prescription. It should say not just what the workout is, but how to coach it well and what to watch for while it is happening.
+
+```python
+@dataclass(slots=True)
+class SessionCard(BaseTrainingCard):
+    session_family: str = ""
+    typical_duration: str = ""
+    workout_parts: list[SessionPart] = field(default_factory=list)
+```
+
+`SessionPart` is the internal building block inside a session card. Its fields should read like a workout prescription. It breaks a workout into the same language used in daily practice.
 
 ```python
 @dataclass(slots=True)
@@ -115,12 +139,6 @@ class SessionPart:
     rpe: str
     instructions: str = ""
     terrain_notes: str = ""
-
-@dataclass(slots=True)
-class SessionCard(BaseTrainingCard):
-    session_family: str = ""
-    typical_duration: str = ""
-    workout_parts: list[SessionPart] = field(default_factory=list)
 ```
 
 #### Supporting Classes
