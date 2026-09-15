@@ -14,6 +14,8 @@ title: "When Training Becomes a Deck of Cards - Training Card Library"
 
 In the trail-running podcast The Albon Way, I heard John Albon describe training as a card-based system. It immediately clicked with me.
 
+I had a clear idea of what the cards should be, but not yet how everything around them would work. I wanted that part to take shape as we built, letting the original card idea guide the project.
+
 I could vividly picture the idea of running training cards, and I wanted to turn that picture into something real. The concept was to create a set of training cards, a bit like Pokémon, Yu-Gi-Oh, or Cars cards, but built specifically for running. Each card would capture something practical about a training element, such as what exactly to do, its strengths, what it does, when to use it, and who it is for.
 
 Those cards would not just be loose notes. I had a very clear picture of how they could look and work, and that visual idea appealed to me a lot. I wanted them to follow a clear underlying structure while still appearing as real cards in a clean and intuitive user experience. In my head, it was something that could live inside an application and feel easy to browse, almost like a small training deck you could choose from naturally.
