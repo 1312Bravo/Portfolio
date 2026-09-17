@@ -248,6 +248,29 @@ a:hover {
     line-height: 1.6;
 }
 
+/* Minimal expandable class examples */
+.training-card-details {
+    margin: 0.2rem 0 0.9rem;
+}
+
+.training-card-details summary {
+    cursor: pointer;
+    color: #4f4f4f;
+}
+
+.training-card-details summary::marker {
+    font-size: 0.72em;
+    color: #777777;
+}
+
+.training-card-details summary:hover {
+    color: #111111;
+}
+
+.training-card-details pre {
+    margin-top: 0.55rem;
+}
+
 /* Post summary box */
 .post-summary {
     background-color: #f7f7f7;

@@ -26,34 +26,46 @@ The goal was also not to write all of the training content by myself. Instead, I
 
 In a way, the project became a mix of my own ideas, AI support, and careful supervision. A lot of the implementation came together with AI support, but the structure, the card system, and the direction were still strongly shaped by my input. I also wanted the whole thing to stay easy to maintain, adjust, and reuse over time, so the cards would not just live inside this repo, but could also be reused in other projects that would bring the to life. This repo holds the card content and outputs it in a structured, way using a class-based setup.
 
-### Training Cards Structure
+### The Specialized Endurance Coach
 
-The training-card schema is buit and organized as a ssmall vocabulary for coaching. The training plan has layers, so, the card's structure follows a simple hierarchy that mirrors the way the content is meant to be understood. At the top level, the model uses a few controlled types and a shared base class, then extends that base with more specialized card types. That gives the library one consistent structure while still letting each level carry the information it needs.
+Throughout the project, we relied on a separate AI agent as our specialized endurance - (trail) running coach. We gave it a clear role through a set of detailed prompts and treated it as a coach working alongside us. Whenever the project involved endurance knowledge, we used it to provide the specialist information: from deciding what a useful card should contain and how the cards should work together, to defining their purpose and filling them with content.
 
-The basic idea is simple: a training plan is made of layers, and each layer has a different job. The card system mirrors that coaching reality.
+In a way, we outsourced the endurance-specific knowledge to the coach while keeping responsibility for the idea, structure, infrastructure, and direction of the project. Its guidance was based on publications, established training systems, and common endurance-training principles, while we focused on turning that knowledge into a clear and usable system.
 
-- *macro* block is the big phase of training and answers "What is the long-term direction?"
-    - *mezzo* block is the focused block and answers: "What block are we building inside that phase?"
-        - *micro* block is the week that shapes the load and answers: "What does this week need to do?"
-            - *session* is the workout itself and answers: "What workout should we do today?"
+### Training Cards and Hierarchy
 
+#### Hierarchy
 
-Those are different planning levels and the usuall training usualy reflects that hierarchy. 
+Endurance training is usually organized into connected training blocks. Each block covers a different period and has its own purpose, while also containing smaller blocks within it. These are the blocks represented by the cards:
 
-#### Shared Base Class
+**Macro block** · *roughly several months* · Defines the main training phase.
 
-`BaseTrainingCard` is the shared foundation for all card types. It creates the stable frame that every specialized card can build on and is the core definition of what a card is. It holds the fields every card needs to be identified, understood, displayed, and connected to other cards. 
+<div style="margin-left: 2rem;">↓</div>
 
-It answers questions like:
-- What fields does a training card have?
-- What does each field mean?
-- What shape is valid for a card?
+**Mezzo block** · *roughly several weeks* · Focuses on one part of that phase.
 
-So it separates:
+<div style="margin-left: 2rem;">↓</div>
+
+**Micro block** · *roughly one week* · Organizes the training week.
+
+<div style="margin-left: 2rem;">↓</div>
+
+**Session** · *one workout* · Describes the individual training session.
+
+The card structure follows this hierarchy. Each card is defined as a Python class based on its place in the training hierarchy. All card classes share the same *BaseTrainingCard*, which contains the information common to every card. The specialized *MacroCard*, *MezzoCard*, *MicroCard*, and *SessionCard* then build on that base by adding the fields needed for their own planning block.
+
+#### BaseTrainingCard
+
+`BaseTrainingCard` is the shared foundation for all card types. It creates the stable frame that every specialized card can build on.
+
+It separates:
 
 - What must always be there
 - What is useful but not always present
 - What only belongs to a specific card level
+
+<details class="training-card-details">
+<summary>BaseTrainingCard</summary>
 
 ```python
 @dataclass(slots=True)
@@ -66,6 +78,7 @@ class BaseTrainingCard:
     summary: str
     purpose: str
     tags: list[str] = field(default_factory=list)
+    philosophy_profile_ids: list[str] = field(default_factory=list)
     goal_race_context: list[str] = field(default_factory=list)
     training_profile: list[str] = field(default_factory=list)
     expected_adaptations: list[str] = field(default_factory=list)
@@ -76,22 +89,20 @@ class BaseTrainingCard:
     references: list[CardReference] = field(default_factory=list)
 ```
 
-Each card object has a fixed set of allowerd fields (`slots=True`). The identity and core coaching fields - `id`, `slug`, `title`, `card_type`, `suitable_levels`, `summary` and `purpose` are required because they have no default value in the schema. The remaining fields are optional because they add detail without being necessary to identify the card. This keeps the schema balanced: strict enough to trust and support coaching, but not so strict that writing cards becomes frustrating.
+</details>
 
-For the class fields, we used `str` when a field should hold one clear coaching idea and `list[str]` when it should hold several short coaching points. `default_factory` helps avoid shared mutable defaults.
+Using `slots=True` means that each card can only use the fields defined in its class. The card identity fields are `id`, `slug`, `title`, and `card_type`. In addition addition to the required fields `suitable_levels`, `summary`, and `purpose`, the other fields contain the card's coaching information, while `references` connects the card to other cards in the library.
 
-The explanation of some fields is as follows:
-- `id` is a unique identifier for the card. It is the internal name the system uses to tell cards apart.
-- `slug`: a readable identifier for URLs, filenames, or search. Short, clear, and easy to recognize at a glance.
-- `title`: the coach-facing name of the card. The label a coach would naturally use when talking about the card.
-- `tags`: quick labels for search or grouping. Help identify related cards quickly without needing to read the full content.
-- `references`: links to related cards. Connect the card to its parent, child, companion, or support cards.
+Fields without a default value are required. Fields with a default value, such as `""` or `field(default_factory=list)`, can be left out when a card is created. They add detail without being necessary to identify the card. This keeps the schema balanced: strict enough to support consistent cards and coaching, but not so strict that writing cards becomes frustrating. Although `philosophy_profile_ids` has a default value in the class, validation still requires every valid card to contain at least one philosophy profile.
 
 #### Specialized Card Classes
 
-`MacroCard` represents the highest planning granularity over several weeks or more. It should help answer: what are we trying to accomplish over the next few weeks, and why is this the right time for it?
+`MacroCard` represents the broadest planning block that spans over several weeks or more. It should help answer: what are we trying to accomplish during this phase, and how does it fit into the wider training plan?
 
-It inherits the shared contract (`class MacroCard(BaseTrainingCard)`) and adds the fields that matter only for a broad phase-level object.
+It inherits the shared contract and adds the fields that matter only for a broad phase-level object.
+
+<details class="training-card-details">
+<summary>MacroCard</summary>
 
 ```python
 @dataclass(slots=True)
@@ -100,7 +111,12 @@ class MacroCard(BaseTrainingCard):
     timing_guidance: list[str] = field(default_factory=list)
 ```
 
-`MezzoCard` is the intermediate block layer. It answers: what are we sharpening inside this phase, and how should this block sit between the macro plan and the weekly load? It is specific enough to matter, but still broad enough to support several weeks of planning without over-prescribing every day.
+</details>
+
+`MezzoCard` is the intermediate block layer. It answers: what are we sharpening inside this phase, and how should this block sit between the macro plan and the weekly load?
+
+<details class="training-card-details">
+<summary>MezzoCard</summary>
 
 ```python
 @dataclass(slots=True)
@@ -109,9 +125,15 @@ class MezzoCard(BaseTrainingCard):
     placement_guidance: list[str] = field(default_factory=list)
 ```
 
+</details>
+
 `MicroCard` is the week-level planning card. It is the bridge between the block-level intention and the day-by-day reality of training. It describes how a coach shapes one training week to support the larger block.
 
+<details class="training-card-details">
+<summary>MicroCard</summary>
+
 ```python
+@dataclass(slots=True)
 class MicroCard(BaseTrainingCard):
     recommended_duration_days: str = ""
     week_structure: list[str] = field(default_factory=list)
@@ -121,70 +143,83 @@ class MicroCard(BaseTrainingCard):
     recovery_requirements: list[str] = field(default_factory=list)
 ```
 
-`SessionCard` is the most detailed card. It describes one workout or session pattern. It needs enough structure to guide execution, but it should still feel like a reusable workout concept rather than a one-off prescription. It should say not just what the workout is, but how to coach it well and what to watch for while it is happening.
+</details>
+
+`SessionCard` is the most detailed card. It describes one workout or session pattern. It needs enough structure to guide execution, but it should still feel like a reusable workout concept rather than a one-off prescription.
+
+It is supported by three smaller classes: `WorkoutBlock`, `WorkoutOption`, and `SessionPart`. They break a workout into its main parts, possible variations, and individual instructions. `SessionFamily` groups similar workouts under a common label. Together, these supporting classes give each session a clear structure while still allowing us to represent different workout formats and options.
+
+<details class="training-card-details">
+<summary>SessionCard</summary>
+
+```python
+@dataclass(slots=True, kw_only=True)
+class SessionCard(BaseTrainingCard):
+    session_family: SessionFamily
+    typical_duration: str = ""
+    workout_blocks: list[WorkoutBlock] = field(default_factory=list)
+```
+
+</details>
+
+<details class="training-card-details">
+<summary>WorkoutBlock</summary>
 
 ```python
 @dataclass(slots=True)
-class SessionCard(BaseTrainingCard):
-    session_family: str = ""
-    typical_duration: str = ""
-    workout_parts: list[SessionPart] = field(default_factory=list)
+class WorkoutBlock:
+    block_type: WorkoutBlockType
+    execution_mode: WorkoutBlockExecutionMode = WorkoutBlockExecutionMode.DO_ALL
+    options: list[WorkoutOption] = field(default_factory=list)
 ```
 
-`SessionPart` is the internal building block inside a session card. Its fields should read like a workout prescription. It breaks a workout into the same language used in daily practice.
+</details>
+
+<details class="training-card-details">
+<summary>WorkoutOption</summary>
+
+```python
+@dataclass(slots=True)
+class WorkoutOption:
+    title: str
+    repeat: str = ""
+    selection_notes: str = ""
+    load_notes: str = ""
+    parts: list[SessionPart] = field(default_factory=list)
+```
+
+</details>
+
+<details class="training-card-details">
+<summary>SessionPart</summary>
 
 ```python
 @dataclass(slots=True)
 class SessionPart:
-    name: str
-    duration: str
-    rpe: str
-    instructions: str = ""
+    title: str
+    prescription: str = ""
+    duration: str = ""
+    rpe: str = ""
+    selection_notes: str = ""
+    coaching_notes: str = ""
     terrain_notes: str = ""
+    adjustment_notes: str = ""
 ```
+
+</details>
 
 #### Supporting Classes
 
-To keep the schema compact and consistent, the card classes are supported by a few small helper types.
+The supporting classes help keep these fields consistent:
 
-`CardType` defines the four main card labels: *macro*, *mezzo*, *micro*, and *session*. Using an *enum* here keeps the hierarchy explicit and avoids scattering free-text type names throughout the code. It also makes the model easier to validate, compare, and extend later.
+- `CardType` identifies whether a card is a *macro*, *mezzo*, *micro*, or *session* card. It keeps the hierarchy explicit.
 
-```python
-class CardType(StrEnum):
-    MACRO = "macro"
-    MEZZO = "mezzo"
-    MICRO = "micro"
-    SESSION = "session"
-```
+- `TrainingLevel` describes which athletes the card is suitable for, from *beginner* to *elite*.
 
-`TrainingLevel` is another controlled vocabulary. It describes who a card is suitable for, using a small fixed set of levels instead of arbitrary strings. That keeps the schema readable and prevents the same concept from being written in slightly different ways across different cards.
+- `CardReference` stores a connection to another card, together with the type of relationship, such as *parent*, *child*, *alternative*, or *support*. It can also include small tags that add context to the connection.
 
-```python
-class TrainingLevel(StrEnum):
-    ALL = "all"
-    BEGINNER = "beginner"
-    INTERMEDIATE = "intermediate"
-    ADVANCED = "advanced"
-    ELITE = "elite"
-```
-
-`CardRelationship` describes how one card connects to another. A card can point to a *parent*, *child*, *previous*, *next*, *alternative*, or *support* card. That makes the relationships part of the model itself, rather than something hidden in descriptive text.
-
-```python
-class CardRelationship(StrEnum):
-    PARENT = "parent"
-    CHILD = "child"
-    PREVIOUS = "previous"
-    NEXT = "next"
-    ALTERNATIVE = "alternative"
-    SUPPORT = "support"
-```
-
-`CardReference` is the small object that ties those pieces together. It stores the target card id, the relationship type, and a small list of optional tags. So instead of using loose links, the schema keeps references structured and machine-readable. That makes the library easier to navigate, easier to reuse, and easier to keep consistent as it grows.
-
-Each card can carry structured references to other cards. That makes the relationships explicit, machine-readable, and easy to reuse later. For this we have a `CardReference` class that captures the relationship between cards and allows for small tags to add context.
-
-A reference can say whether another card is a parent, child, previous card, next card, or simply related in some useful way. It also allows small tags to add context without turning the main card into a cluttered object. In practice, this means the structure is not just a flat list of cards. It is a connected library where relationships are part of the data model itself.
+<details class="training-card-details">
+<summary>CardReference</summary>
 
 ```python
 @dataclass(slots=True)
@@ -194,12 +229,15 @@ class CardReference:
     tags: list[str] = field(default_factory=list)
 ```
 
+</details>
+
+Using predefined values prevents small naming differences from representing the same thing and keeps the whole library consistent. Together, these supporting classes make the cards easier to filter, connect, and use later.
 
 ```{=html}
 <div class="project-link-container">
     <i class="fab fa-github"></i>
     <span> You can find the full
-    <a href="https://github.com/1312Bravo/Trail-Running-Training-Cards" target="_blank">Trai-Running-Training-Cards</a>
+    <a href="https://github.com/1312Bravo/Trail-Running-Training-Cards" target="_blank">Trail-Running-Training-Cards</a>
     project on my Github.</span>
 </div>
 ```
