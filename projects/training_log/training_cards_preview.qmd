@@ -1,6 +1,49 @@
 
 #### Supporting Classes
 
+The classes define what a card can contain, but they do not define the training ideas themselves. For that, we needed a clear way to organize the coaching knowledge behind the cards.
+
+### Coaching Philosophies
+
+We used the AI coach to help organize this knowledge into separate training-philosophy profiles. Each profile describes the main ideas of a particular approach and gives us a consistent basis for preparing and explaining cards. The goal was not to create several versions of every card, but to understand when a philosophy would actually change the way a card should be structured, selected, or used.
+
+The library also has a shared coaching foundation for ideas that are common across the different approaches. A card is connected to a named philosophy only when that connection adds something meaningful. Small differences in wording are not enough to create a separate philosophy-specific card.
+
+The `philosophy_profile_ids` field on a card records which philosophy profiles informed its content. This keeps the training knowledge connected to the card without putting the full explanation of a philosophy inside every card.
+
+The philosophy profiles are kept together with the shared coaching foundation. Each philosophy has the same small set of files, so the information stays easy to find and each profile follows the same structure.
+
+```text
+coaching/
+├── coaching_foundation.md
+└── philosophies/
+    ├── mainstream_endurance/
+    │   ├── summary.md
+    │   ├── philosophy.md
+    │   └── sources.md
+    ├── cts/
+    │   ├── summary.md
+    │   ├── philosophy.md
+    │   └── sources.md
+    └── ...
+```
+
+The basic flow is:
+
+```text
+AI coach
+    ↓
+Coaching foundation and philosophy profiles
+    ↓
+Training card content
+```
+
+### Building the Card Library
+
+We built the library from the larger planning blocks toward the individual sessions. We first defined the Macro structure and prepared the mainstream training approach as a baseline. From there, we reviewed the ideas through the different philosophies and created the Mezzo blocks that belonged inside each Macro phase.
+
+The Micro cards were then built inside the Mezzo structure to describe reusable weekly patterns. Finally, we prepared Session cards that could be reused across different weeks and training blocks. Additional cards were created only when they represented a meaningful alternative, progression, or philosophy-specific idea rather than simply repeating an existing card with different wording.
+
 
 
 
