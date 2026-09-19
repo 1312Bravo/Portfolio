@@ -271,6 +271,26 @@ a:hover {
     margin-top: 0.55rem;
 }
 
+/* Compact philosophy profile list */
+.coaching-philosophy-list {
+    padding-left: 1.25rem;
+    margin: 0.8rem 0 1.2rem;
+    list-style: disc;
+}
+
+.coaching-philosophy-list li {
+    margin: 0.65rem 0;
+}
+
+.coaching-philosophy-list img {
+    width: 18px;
+    height: 18px;
+    margin: 0 0.25rem;
+    object-fit: contain;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
 /* Post summary box */
 .post-summary {
     background-color: #f7f7f7;

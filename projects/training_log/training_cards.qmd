@@ -26,6 +26,18 @@ The goal was also not to write all of the training content by myself. Instead, I
 
 In a way, the project became a mix of my own ideas, AI support, and careful supervision. A lot of the implementation came together with AI support, but the structure, the card system, and the direction were still strongly shaped by my input. I also wanted the whole thing to stay easy to maintain, adjust, and reuse over time, so the cards would not just live inside this repo, but could also be reused in other projects that would bring the to life. This repo holds the card content and outputs it in a structured, way using a class-based setup.
 
+Alongside the project repository, we prepared a first working version of the card library as a Streamlit app. The app presents the training cards in a simple interface where they can be browsed and explored:
+
+::: {.post-summary}
+#### Explore the Card Library
+
+To explore the cards, we prepared a small interface that presents the structured library in a simple and browsable way while we continue developing the larger system behind it. It is a first, mostly static version built as a Streamlit app. It gives us a simple way to browse and explore the training cards while we continue developing the larger system behind them.
+
+[Open the Training Card Library](https://trail-running-training-cards.streamlit.app/)
+
+The app is hosted on Streamlit Community Cloud. If it receives no traffic for 12 hours, Streamlit puts it to sleep to save resources. When that happens, the page shows a *“Yes, get this app back up!”* button. Clicking that button wakes the app up again, but it can take a few seconds to load. 
+:::
+
 ### The Specialized Endurance Coach
 
 Throughout the project, we relied on a separate AI agent as our specialized endurance - (trail) running coach. We gave it a clear role through a set of detailed prompts and treated it as a coach working alongside us. Whenever the project involved endurance knowledge, we used it to provide the specialist information: from deciding what a useful card should contain and how the cards should work together, to defining their purpose and filling them with content.
@@ -232,6 +244,79 @@ class CardReference:
 </details>
 
 Using predefined values prevents small naming differences from representing the same thing and keeps the whole library consistent. Together, these supporting classes make the cards easier to filter, connect, and use later.
+
+### Coaching Philosophies
+
+The training cards classes gave us the shape of the cards and the next step is to actually build them. Before developing the cards, we created a separate layer for organizing the training knowledge inside them.
+
+Because we did not want to build the card library around one single coaching philosophy, we gave the already introduced AI coach a new task: with the guidance of our ideas, to research common endurance-training philosophies, suggest which approaches were worth including, and help us describe their main ideas. These profiles became a helper layer for the AI coach, giving it a clear background to work from while creating the card content.
+
+The philosophy profiles are built on top of a shared coaching foundatin that contains the general principles we wanted to keep consistent across the project, while each profile adds the ideas and priorities of a particular coaching approach. 
+
+Each philosophy profile captures the main ideas of one coaching approach and gives us a consistent reference for working with it. The `philosophy_profile_ids` field on each card lets us record which philosophy profiles are connected to a card.
+
+The profiles currently included are:
+
+<ul class="coaching-philosophy-list">
+  <li>
+    <span><em>Mainstream Endurance</em> - a general, evidence-informed endurance-training approach based on common exercise-science and coaching principles.</span>
+  </li>
+  <li>
+    <span><em>CTS</em> - <img src="saved_files/training_cards/cts.png" alt="CTS logo"> <a href="https://trainright.com/ultrarunning/" target="_blank">CTS Training</a></span>
+  </li>
+  <li>
+    <span><em>Evoke Endurance</em> - <img src="saved_files/training_cards/evoke_endurance.svg" alt="Evoke Endurance logo"> <a href="https://evokeendurance.com/" target="_blank">Evoke Endurance</a></span>
+  </li>
+  <li>
+    <span><em>Some Work, All Play (SWAP)</em> - <img src="saved_files/training_cards/swap.jpg" alt="SWAP logo"> <a href="https://swaprunning.com/" target="_blank">SWAP Running</a></span>
+  </li>
+  <li>
+    <span><em>Sharman Ultra</em> - <img src="saved_files/training_cards/sharman_ultra.ico" alt="Sharman Ultra logo"> <a href="https://www.sharmanultra.com/" target="_blank">Sharman Ultra Coaching</a></span>
+  </li>
+  <li>
+    <span><em>80/20 Endurance</em> - <img src="saved_files/training_cards/80_20_endurance.ico" alt="80/20 Endurance logo"> <a href="https://www.8020endurance.com/" target="_blank">80/20 Endurance</a></span>
+  </li>
+  <li>
+    <span><em>Lydiard</em> - <img src="saved_files/training_cards/lydiard.ico" alt="Lydiard Foundation logo"> <a href="https://www.lydiardfoundation.org/" target="_blank">Lydiard Foundation</a></span>
+  </li>
+</ul>
+
+To keep the philosophy profiles easy to read, compare, and maintain, we gave every profile the same three-file structure.
+- `summary.md` gives a short overview of the philosophy and its main ideas.
+- `philosophy.md` contains the more detailed interpretation of the approach.
+- `sources.md` records the publications, websites, and other material used to prepare the profile, together with other relevant notes.
+
+```text
+coaching/
+├── coaching_foundation.md
+└── philosophies/
+    ├── mainstream_endurance/
+    │   ├── summary.md
+    │   ├── philosophy.md
+    │   └── sources.md
+    ├── cts/
+    │   ├── summary.md
+    │   ├── philosophy.md
+    │   └── sources.md
+    └── ...
+```
+
+This structure gives us a repeatable template for adding new coaching philosophies later. We can create a new profile folder, follow the same three-file layout, collect and organize the relevant material, and include the profile. This keeps the system easy to extend as we discover other approaches worth exploring.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ```{=html}
 <div class="project-link-container">
