@@ -23,15 +23,15 @@ I aim to make insights clear, actionable, and occasionally even artistic. I shar
 <a href="other/CV.pdf" target="_blank"><b>CV</b></a>
 :::
 
-## Featured Projects
+## Featured projects
 
 ::: {.project-card}
-## [Training Log](projects/training_log.qmd)
+## [Training log](projects/training_log.qmd)
 Analysing training data with Python and Garmin data.
 :::
 
 ::: {.project-card}
-## [Path To UTMB](projects/path_to_utmb.qmd)
+## [Path to UTMB](projects/path_to_utmb.qmd)
 Analysing Trail Running (UTMB) data with the final goal of personal UTMB participation.
 :::
 

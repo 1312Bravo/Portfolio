@@ -44,7 +44,7 @@ To turn expected race time into a probability, race time is treated as a normal 
 The model reaches the 95% sub-27 probability threshold at a **UTMB Index of about 910**. That is firmly elite territory. At a more realistic but still very strong UTMB Index of **780**, the estimated probability of finishing under 27 hours is **34.9%**.
 :::
 
-### A Definition of readiness
+### A definition of readiness
 
 The problem can be stated as a mathematical formula for finding the UTMB index $x*$, such that
 

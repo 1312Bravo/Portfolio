@@ -29,7 +29,7 @@ In a way, the project became a mix of my own ideas, AI support, and careful supe
 Alongside the project repository, we prepared a first working version of the card library as a Streamlit app. The app presents the training cards in a simple interface where they can be browsed and explored:
 
 ::: {.post-summary}
-#### Explore the Card Library
+#### Explore the card library
 
 To explore the cards, we prepared a small interface that presents the structured library in a simple and browsable way while we continue developing the larger system behind it. It is a first, mostly static version built as a Streamlit app. It gives us a simple way to browse and explore the training cards while we continue developing the larger system behind them.
 
@@ -38,31 +38,35 @@ To explore the cards, we prepared a small interface that presents the structured
 The app is hosted on Streamlit Community Cloud. If it receives no traffic for 12 hours, Streamlit puts it to sleep to save resources. When that happens, the page shows a *“Yes, get this app back up!”* button. Clicking that button wakes the app up again, but it can take a few seconds to load. 
 :::
 
-### The Specialized Endurance Coach
+### The specialized endurance coach
 
 Throughout the project, we relied on a separate AI agent as our specialized endurance - (trail) running coach. We gave it a clear role through a set of detailed prompts and treated it as a coach working alongside us. Whenever the project involved endurance knowledge, we used it to provide the specialist information: from deciding what a useful card should contain and how the cards should work together, to defining their purpose and filling them with content.
 
 In a way, we outsourced the endurance-specific knowledge to the coach while keeping responsibility for the idea, structure, infrastructure, and direction of the project. Its guidance was based on publications, established training systems, and common endurance-training principles, while we focused on turning that knowledge into a clear and usable system.
 
-### Training Cards and Hierarchy
+### Training cards and hierarchy
 
 #### Hierarchy
 
 Endurance training is usually organized into connected training blocks. Each block covers a different period and has its own purpose, while also containing smaller blocks within it. These are the blocks represented by the cards:
 
-**Macro block** · *roughly several months* · Defines the main training phase.
-
-<div style="margin-left: 2rem;">↓</div>
-
-**Mezzo block** · *roughly several weeks* · Focuses on one part of that phase.
-
-<div style="margin-left: 2rem;">↓</div>
-
-**Micro block** · *roughly one week* · Organizes the training week.
-
-<div style="margin-left: 2rem;">↓</div>
-
-**Session** · *one workout* · Describes the individual training session.
+```text
+Macro block
+├── Roughly several months
+└── Defines the main training phase
+    ↓
+Mezzo block
+├── Roughly several weeks
+└── Focuses on one part of that phase
+    ↓
+Micro block
+├── Roughly one week
+└── Organizes the training week
+    ↓
+Session
+├── One workout
+└── Describes the individual training session
+```
 
 The card structure follows this hierarchy. Each card is defined as a Python class based on its place in the training hierarchy. All card classes share the same *BaseTrainingCard*, which contains the information common to every card. The specialized *MacroCard*, *MezzoCard*, *MicroCard*, and *SessionCard* then build on that base by adding the fields needed for their own planning block.
 
@@ -107,7 +111,7 @@ Using `slots=True` means that each card can only use the fields defined in its c
 
 Fields without a default value are required. Fields with a default value, such as `""` or `field(default_factory=list)`, can be left out when a card is created. They add detail without being necessary to identify the card. This keeps the schema balanced: strict enough to support consistent cards and coaching, but not so strict that writing cards becomes frustrating. Although `philosophy_profile_ids` has a default value in the class, validation still requires every valid card to contain at least one philosophy profile.
 
-#### Specialized Card Classes
+#### Specialized card classes
 
 `MacroCard` represents the broadest planning block that spans over several weeks or more. It should help answer: what are we trying to accomplish during this phase, and how does it fit into the wider training plan?
 
@@ -220,7 +224,7 @@ class SessionPart:
 
 </details>
 
-#### Supporting Classes
+#### Supporting classes
 
 The supporting classes help keep these fields consistent:
 
@@ -245,7 +249,7 @@ class CardReference:
 
 Using predefined values prevents small naming differences from representing the same thing and keeps the whole library consistent. Together, these supporting classes make the cards easier to filter, connect, and use later.
 
-### Coaching Philosophies
+### Coaching philosophies
 
 The training cards classes gave us the shape of the cards and the next step is to actually build them. Before developing the cards, we created a separate layer for organizing the training knowledge inside them.
 
@@ -303,17 +307,61 @@ coaching/
 
 This structure gives us a repeatable template for adding new coaching philosophies later. We can create a new profile folder, follow the same three-file layout, collect and organize the relevant material, and include the profile. This keeps the system easy to extend as we discover other approaches worth exploring.
 
+### Building the card library
+
+Once the coaching foundation and philosophy profiles were in place, we could start turning that knowledge into cards. We built the card library from the larger planning blocks toward the individual sessions. That way, each larger block is connected to smaller blocks that were developed to support it.
+
+Mezzo cards were created inside the context of their Macro phases, Micro cards were developed for the focus of their Mezzo blocks, and Session cards were selected and shaped to support the weekly structure. We repeated the same review cycle at every level of the hierarchy. Within each level, we worked through the following steps:
+
+1. We first developed the mainstream endurance cards as a shared baseline for that level.
+2. We then selected one coaching philosophy profile and reviewed every mainstream card from that profile's perspective.
+3. For each card, we asked whether the philosophy changed the card in a meaningful way. If the difference was strong enough, we created a separate philosophy-specific card.
+4. After reviewing all mainstream cards for that philosophy, we made a second pass from the perspective of the philosophy. This helped us identifyimportant ideas that were not variations of existing baseline cards, but entirely new cards that had been missed during the first comparison.
+5. We repeated this process for every philosophy profile at the same level. Once the level was complete, we moved to the next one and repeated the cycle again.
+
+This gave every card level its own mainstream baseline, philosophy review, and final check, while keeping the library from filling up with unnecessary duplicates.
+
+Although we built the cards from Macro to Session, the final library is not a strict tree. Smaller cards are developed in the context of larger blocks, but they can still be reused across several blocks. For example, one Micro card can support multiple Mezzo blocks, and one Session card can fit into different weekly structures.
+
+The `references` field stores direct connections between cards, such as parent, child, alternative, or support relationships. These references describe how cards relate to one another without placing their full content inside another card.
+
+For contextual reuse, the project uses three dedicated classes: `MacroMezzoReuse`, `MezzoMicroReuse`, and `MicroSessionReuse`. They allow a card to be used in another block without copying its content. Each reuse entry records the relevant philosophy profile, the parent card, the reused child card, and the type of reuse. This keeps the original card as the single source of truth and makes later updates easier.
+
+The `philosophy_profile_ids` field serves a different purpose. It connects a card to the training-method profiles that materially shaped its content. A card can be connected to more than one profile when it reflects ideas shared by several approaches. This keeps the source of the training idea visible without confusing it with the card's structural relationships or reuse context.
+
+```python
+@dataclass(frozen=True, slots=True)
+class MacroMezzoReuse:
+    philosophy_profile_id: str
+    macro_card_id: str
+    macro_card_name: str
+    reused_mezzo_card_id: str
+    reused_mezzo_card_name: str
+    reuse_type: str
+```
+
+```text
+Macro cards
+├── Mainstream training baseline
+└── Philosophy-specific additions
+    └── Only when a meaningful difference justified a new card
+            ↓
+Mezzo cards
+├── ...
+            ↓
+Micro cards
+├── ...
+            ↓
+Session cards
+├── Mainstream training baseline
+└── Philosophy-specific additions
+    └── Only when a meaningful difference justified a new card
 
 
-
-
-
-
-
-
-
-
-
+Every card
+└── philosophy_profile_ids
+    └── Records one or more training-method profiles materially shaped the card
+```
 
 
 

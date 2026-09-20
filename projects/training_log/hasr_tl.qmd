@@ -257,7 +257,7 @@ For sessions classified as Hard by the model but not manually, the discrepancies
 
 For Long sessions, most misclassifications by the model were sessions manually perceived as Hard but with low aggregate intensity, or longer bike rides that were considered Easy.
 
-### History-Aware Statified Relative - Training Load (HASR-TL)
+### History-aware statified relative - training load (HASR-TL)
 
 Once training sessions are divided into the three percentile-based buckets, defined from the baseline window, we can combine them into a single, interpretable metric that reflects how recent training compares to the athlete's long-term adaptation. The central idea is weighted aggregation, where each bucket contributes differently to the overall metric. By aggregating the per-bucket loads with appropriate weights, HASRTL produces a single number that reflects how the overall recent training load compares to the baseline adaptation.
 
@@ -288,7 +288,7 @@ When defining the buckets weights, for our purpose, we have to consider the buck
 
 These weights are not directly measurable, they are largely subjective, based on expert knowledge, experience, and general principles of training load management rather than precise data.
 
-### Interpretation & Bucket-level diagnostics
+### Interpretation & bucket-level diagnostics
 
 Although $\Delta_t$ provides a clear mathematical ratio of recent to baseline training load, its practical interpretation is less straightforward - it is not always obvious when an increase or decrease becomes significant, risky, or indicative of detraining.
 

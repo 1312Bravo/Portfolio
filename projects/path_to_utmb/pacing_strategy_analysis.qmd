@@ -56,7 +56,7 @@ The final model keeps three features that still matter together: early aggressiv
 The final conclusion supports the two ideas from the opening section. Better UTMB performances are associated with **starting controlled**, **keeping the race stable**, and **preserving enough relative strength for the late race**. In other words, the data supports the idea that the best race is not necessarily the most aggressive one, but the one where the runner avoids paying too much later.
 :::
 
-### From finish time to race shape - Data
+### From finish time to race shape - data
 
 To test this, I combine two types of UTMB data from the **2022, 2023, 2024, and 2025** editions, both described in the [data collection post](data.qmd). The first is **[race result data](data.qmd#utmb-race-results)**: finishing time, rank, race status, and runner descriptive variables. The second is **[race/runner sector data](data.qmd#utmb-racerunner-sector-data)**: checkpoint-by-checkpoint timing, including when a runner arrived, when they left, how long they rested, and how long they spent moving through each part of the course.
 

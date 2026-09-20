@@ -24,7 +24,7 @@ The GPX-derived course points were then connected with UTMB checkpoint and secto
 
 **Checkpoint IDs** are not perfectly stable across years. Some repeated checkpoint IDs refer to very similar course positions, while others shift along the course. Because of that, we keep sectors year-specific for analysis, while using averaged checkpoint positions for the repeated IDs only for presentation.
 
-### Course Profile
+### Course profile
 
 The rough summary of the UTMB course profile is approximately:
 

@@ -1,44 +1,41 @@
-### Coaching Philosophies
 
-The goal was not to create several versions of every card, but to understand when a philosophy would actually change the way a card should be structured, selected, or used.
 
-The library also has a shared coaching foundation for ideas that are common across the different approaches. A card is connected to a named philosophy only when that connection adds something meaningful. Small differences in wording are not enough to create a separate philosophy-specific card.
+### Building the card library
 
-The philosophy profiles are kept together with the shared coaching foundation. Each philosophy has the same small set of files, so the information stays easy to find and each profile follows the same structure.
+We built the card library from the larger planning blocks toward the individual sessions. This order was important. If we had started by writing individual workouts, we could have ended up with a large collection of sessions without a clear idea of where they belonged or what they were meant to support. By starting with the broader training structure, each smaller card could be connected to a larger purpose.
 
-```text
-coaching/
-├── coaching_foundation.md
-└── philosophies/
-    ├── mainstream_endurance/
-    │   ├── summary.md
-    │   ├── philosophy.md
-    │   └── sources.md
-    ├── cts/
-    │   ├── summary.md
-    │   ├── philosophy.md
-    │   └── sources.md
-    └── ...
-```
+We first defined the Macro cards and prepared the mainstream endurance approach as a baseline. These cards described the broad training phases and the main purpose of each phase. They gave us a first outline of how the library could represent a longer training process, from building a base to developing specific abilities, managing competition, or recovering between harder periods.
 
-The basic flow is:
+The mainstream approach was not meant to be the only answer. It gave us a practical starting point that we could understand and develop further. We then reviewed the structure through the different coaching-philosophy profiles. The AI coach helped us compare the main ideas of each approach and identify where a philosophy would genuinely change the purpose, emphasis, timing, or use of a card.
 
-```text
-AI coach
-    ↓
-Coaching foundation and philosophy profiles
-    ↓
-Training card content
-```
+This distinction helped us avoid creating several cards that only said the same thing in slightly different words. A new card was worth adding when it represented a meaningful alternative, a different progression, a different training emphasis, or a philosophy-specific way of using a block or session. When the difference was only a change in wording, we kept the idea in the existing card instead of making the library unnecessarily large.
 
-### Building the Card Library
+After the Macro structure was in place, we developed the Mezzo cards that belonged inside those broader phases. These cards narrowed the focus to a shorter part of the training process and made the larger phase easier to work with. The Micro cards were then built inside the Mezzo structure to describe reusable weekly patterns. At this point, the hierarchy became practical: the Macro card explained the wider direction, the Mezzo card described the current focus, and the Micro card helped organize the week around it.
 
-We built the library from the larger planning blocks toward the individual sessions. We first defined the Macro structure and prepared the mainstream training approach as a baseline. From there, we reviewed the ideas through the different philosophies and created the Mezzo blocks that belonged inside each Macro phase.
+Only after these planning layers were clear did we prepare the Session cards. The sessions were not meant to be isolated workouts collected in a list. Each one had to have a clear purpose and a meaningful place in the wider structure. We also wanted them to be reusable, so a session could be adapted through different options, parts, progressions, or regressions instead of being written as one rigid prescription for one specific day.
 
-The Micro cards were then built inside the Mezzo structure to describe reusable weekly patterns. Finally, we prepared Session cards that could be reused across different weeks and training blocks. Additional cards were created only when they represented a meaningful alternative, progression, or philosophy-specific idea rather than simply repeating an existing card with different wording.
+Throughout this process, the AI endurance coach helped prepare and develop the training content, while we guided the structure and reviewed how the suggestions fitted into the library. We looked at whether the cards were consistent with their planning level, whether their purpose was clear, and whether they added something useful rather than repeating an existing idea. This made the process less like writing many independent notes and more like gradually building a connected system.
+
+The result is a library that moves from long-term direction to practical execution. A card can be understood on its own, but it also has a place in the hierarchy and can be connected to related cards. This gives us a collection that is easier to browse and use, while still keeping the training ideas organized enough to expand later.
+
+#### Additions
+
+----
 
 
 
+The connections do not mean that every higher-level philosophy card needs its own separate version of every smaller card. A philosophy-specific Macro or Mezzo card can still connect to reusable mainstream Micro or Session cards when those lower-level cards remain broadly useful. This reflects the way training works in practice: a coaching philosophy can change the larger direction or emphasis without changing every individual workout.
 
+The mainstream cards therefore acted as comparison anchors rather than as a final, fixed answer. They gave us a common starting point for each level of the hierarchy. When we reviewed a philosophy, we could ask a specific question: does this approach support the existing card, change how it should be understood, or introduce an idea that is not represented at all? This made the comparison more focused than asking the AI coach to generate completely separate libraries without a shared reference.
+
+The process was repeated within each level instead of being completed only once for the whole project. For the Macro level, we built the mainstream phases, reviewed them profile by profile, added the meaningful philosophy-specific cards, and then checked the completed Macro set before moving down to Mezzo. We repeated the same cycle for Mezzo, Micro, and Session cards. This meant that every level had its own baseline, its own philosophy review, and its own final check.
+
+The parent card provided the context for each of these passes. Before creating a Mezzo card, we considered which Macro phase it belonged to and what part of that phase it was meant to develop. Before creating a Micro card, we checked which Mezzo focus it supported and how it should shape the week. Session cards were then created with the weekly purpose in mind, rather than as independent workouts that happened to be useful on their own.
+
+The philosophy review itself was also deliberately separated into two steps. First, we compared the existing mainstream cards with one philosophy at a time. This helped us identify cards that needed a different emphasis or a clearly different training purpose. After that comparison was complete, we looked at the philosophy on its own and asked whether it contained important ideas that had not appeared in any mainstream card. This second pass was useful because not every philosophy-specific idea can be found by modifying an existing baseline card.
+
+Only after both passes did we decide how the idea should enter the library. It could remain part of an existing mainstream card, become a philosophy-specific card, or be represented through a relationship to another card. The decision depended on whether the difference changed how the card should be selected, understood, structured, or used. This gave us a practical boundary between adding useful variety and creating unnecessary duplicates.
+
+The same approach also helped us keep the connections between cards realistic. A card can belong to more than one philosophy profile, and a philosophy-specific card can still use or support smaller cards that are shared with the mainstream library. We did not treat the philosophy profiles as completely separate worlds. Instead, we used them as different perspectives that could overlap, reinforce an existing card, or justify a more specific addition when the difference was meaningful.
 
 
