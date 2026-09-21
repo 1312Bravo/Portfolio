@@ -378,8 +378,32 @@ Every card
 
 The result is a library that moves from long-term direction to practical execution. A card can be understood on its own, but it also has a place in the hierarchy and can be connected to related cards. This gives us a collection that is easy to browse and use, while still keeping the training ideas organized enough to expand later.
 
+### Card library
 
+We keep the card library separate from the pipeline that builds, checks, and delivers it. The library contains the card data, while the repository contains the tools that work with it. These tools are responsible for:
 
+- *Schemas*
+    - Define the fields, types, and relationships that make up a valid card.
+    - The main card classes are defined in:
+        - `base.py`, `macro.py`, `mezzo.py`, `micro.py`, and `session.py`.
+        - `enums.py`, `references.py`, and `session_family.py` provide controlled values, relationships, and session categories.
+<br><br>
+
+- *Validation*
+    - Check required fields, allowed values, and card-specific structures.
+    - The main validation files are:
+        - `json_store.py`, `pathway.py`, and `card_library_index.py`.
+        - `scripts/cache/validate_cache.py` runs validation on the local cache.
+<br><br>
+
+- *Conversion and synchronization tools*
+    - Move cards between temporary Python authoring files, local JSON, and Google Drive.
+    - The main supporting files are:
+        - `serialization.py` and `json_store.py` handle JSON conversion and library bundles.
+        - `cloud_store.py` and `google_drive_client.py` handle Google Drive synchronization.
+        - `scripts/authoring/` and `scripts/cloud/` contain the workflow scripts.
+
+The accepted card content itself is stored as JSON in Google Drive, which acts as the source of truth for the library. The repository contains a few Python examples and temporary authoring tools, but it does not maintain a second complete Python version of all cards. This keeps the card data separate from the pipeline that defines, checks, moves, and uses it.
 
 
 ```{=html}

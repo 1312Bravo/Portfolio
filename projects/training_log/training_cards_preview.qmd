@@ -1,0 +1,74 @@
+### Cloud card library
+
+The accepted card content itself is stored as JSON in Google Drive, which acts as the source of truth for the library. The repository still contains a few Python examples and temporary authoring tools, but it does not maintain a second complete Python version of all cards. This keeps the card data separate from the system that defines, checks, moves, and displays it.
+
+#### Cloud structure
+
+The cloud library follows the same hierarchy as the cards themselves. Each card is stored as an individual JSON file under its planning level and philosophy profile:
+
+```text
+training_cards_library/
+├── cards/
+│   ├── macro/
+│   │   ├── mainstream_endurance/
+│   │   ├── cts/
+│   │   └── ...
+│   ├── mezzo/
+│   ├── micro/
+│   └── session/
+├── manifest.json
+├── display_config.json
+├── macro_mezzo_reuse.json
+├── mezzo_micro_reuse.json
+├── micro_session_reuse.json
+├── card_library_index.json
+└── training_cards_library.json
+```
+
+The card folders are organized by level first and then by philosophy profile. A card connected to one profile is stored under that profile. When a card genuinely combines ideas from several profiles, it is stored under a separate `multi_profile` folder. The folder helps organize the files, but the card's own `philosophy_profile_ids` field remains the authoritative record of its connections.
+
+The remaining files provide the information needed around the individual cards:
+
+- `manifest.json` records the library and schema versions and the expected library structure.
+- `display_config.json` contains application-facing labels and display settings.
+- The three reuse files describe how cards can be reused between Macro and Mezzo, Mezzo and Micro, or Micro and Session levels.
+- `card_library_index.json` provides compact metadata for browsing the library.
+- `training_cards_library.json` is the bundled version used by the application. It brings the cards and the supporting metadata together in one validated file.
+
+This means that the cloud library is not just a folder full of unrelated JSON files. It has a content layer containing the cards and a small metadata layer describing versions, display settings, reuse, and browsing information.
+
+#### From authoring to cloud storage
+
+The normal workflow begins by downloading the current cloud library into a local cache. We then edit existing JSON cards or use temporary Python class-based scaffolding when a new card is easier to prepare in Python. In either case, the accepted result is converted into JSON and placed in the local cache before it is uploaded.
+
+```text
+Card authoring or editing
+        ↓
+Local cloud-library cache
+        ↓
+Schema and relationship validation
+        ↓
+Bundle and index generation
+        ↓
+Upload to Google Drive
+        ↓
+Streamlit downloads the validated bundle
+```
+
+The local cache is only a working copy. It allows us to review, validate, and prepare changes without editing the cloud library blindly. Before uploading, the project checks the card schemas, references, reuse mappings, manifest, and library index. The bundle is then rebuilt from the validated cache and the relevant files are uploaded to Google Drive.
+
+The upload scripts can work with the whole library or with one card level at a time. This makes it possible to update, for example, the session layer without unnecessarily replacing the accepted Macro, Mezzo, and Micro files. For larger changes, the library can also be downloaded again after the upload so the cloud result can be checked against the local version.
+
+#### How the application uses the library
+
+The Streamlit application does not depend on the temporary Python authoring files. When the application starts, it looks for the validated library bundle. In the deployed version, it downloads `training_cards_library.json` from the root of the Google Drive library into a temporary runtime cache when needed.
+
+The application then reads the bundle, converts the JSON records into the card objects defined by the schemas, and validates the cards together with the manifest, index, display configuration, and reuse mappings. Only after this step does the application use the data to build the card library, filters, pathways, and detail views.
+
+This gives us a useful boundary between the data and the interface. We can update the card content or its supporting metadata without rewriting the Streamlit views, as long as the published data still follows the expected schema. The same structured library could also be used by another application later, because the cards are not tied directly to the current interface.
+
+#### Why keep the cards outside the repository?
+
+Keeping the accepted card content in the cloud makes the project easier to maintain and reuse. The repository can focus on the rules and tools that define, validate, transform, and display the cards, while Google Drive holds the changing library itself. This avoids maintaining two competing copies of the same content and makes it possible to use the card library in other projects without copying the whole repository.
+
+For the current stage, Google Drive is enough because the library is primarily a structured collection of JSON files and the editing workflow is controlled by scripts. A more advanced database could become useful later if the application needs in-app editing, several users, permissions, or more complex querying. For now, separating the cloud data from the project code gives us the flexibility we need without adding unnecessary infrastructure.
