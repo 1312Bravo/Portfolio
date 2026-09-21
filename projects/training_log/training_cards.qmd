@@ -309,17 +309,25 @@ This structure gives us a repeatable template for adding new coaching philosophi
 
 ### Building the card library
 
-Once the coaching foundation and philosophy profiles were in place, we could start turning that knowledge into cards. We built the card library from the larger planning blocks toward the individual sessions. That way, each larger block is connected to smaller blocks that were developed to support it.
+Once the coaching foundation and philosophy profiles were in place, we could start turning that knowledge into cards. We built the card library from the larger planning blocks toward the individual sessions. That way, each smaller card was developed within a larger block, but could still be reused elsewhere when it fit.
 
-Mezzo cards were created inside the context of their Macro phases, Micro cards were developed for the focus of their Mezzo blocks, and Session cards were selected and shaped to support the weekly structure. We repeated the same review cycle at every level of the hierarchy. Within each level, we worked through the following steps:
+Mezzo cards were created inside the context of their Macro phases, Micro cards were developed for the focus of their Mezzo blocks, and Session cards were selected and shaped to support the weekly structure. Session cards were therefore treated as reusable training concepts, rather than as isolated workouts written for only one specific day.
+
+#### The card-building process
+
+We first defined how the process should work: how to move through the card levels, compare the philosophy profiles, and decide when a new card was justified. The AI coach then worked through the profiles and prepared the training content for the cards according to that process. We stayed involved throughout by reviewing the suggestions, guiding the next steps, and adjusting the direction whenever needed.
+
+The same review cycle was repeated at every level of the hierarchy:
 
 1. We first developed the mainstream endurance cards as a shared baseline for that level.
 2. We then selected one coaching philosophy profile and reviewed every mainstream card from that profile's perspective.
 3. For each card, we asked whether the philosophy changed the card in a meaningful way. If the difference was strong enough, we created a separate philosophy-specific card.
-4. After reviewing all mainstream cards for that philosophy, we made a second pass from the perspective of the philosophy. This helped us identifyimportant ideas that were not variations of existing baseline cards, but entirely new cards that had been missed during the first comparison.
+4. After reviewing all mainstream cards for that philosophy, we made a second pass from the perspective of the philosophy. This helped us identify important ideas that were not variations of existing baseline cards, but entirely new cards that had been missed during the first comparison.
 5. We repeated this process for every philosophy profile at the same level. Once the level was complete, we moved to the next one and repeated the cycle again.
 
-This gave every card level its own mainstream baseline, philosophy review, and final check, while keeping the library from filling up with unnecessary duplicates.
+This gave every card level its own mainstream baseline, philosophy review, and final check, while keeping the library from filling up with unnecessary duplicates. The mainstream cards acted as comparison anchors and gave us a common starting point for each level of the hierarchy. For every philosophy, we could ask whether it supported an existing card, changed it meaningfully, or introduced an idea that was not represented at all.
+
+#### Connecting and reusing cards
 
 Although we built the cards from Macro to Session, the final library is not a strict tree. Smaller cards are developed in the context of larger blocks, but they can still be reused across several blocks. For example, one Micro card can support multiple Mezzo blocks, and one Session card can fit into different weekly structures.
 
@@ -327,7 +335,7 @@ The `references` field stores direct connections between cards, such as parent, 
 
 For contextual reuse, the project uses three dedicated classes: `MacroMezzoReuse`, `MezzoMicroReuse`, and `MicroSessionReuse`. They allow a card to be used in another block without copying its content. Each reuse entry records the relevant philosophy profile, the parent card, the reused child card, and the type of reuse. This keeps the original card as the single source of truth and makes later updates easier.
 
-The `philosophy_profile_ids` field serves a different purpose. It connects a card to the training-method profiles that materially shaped its content. A card can be connected to more than one profile when it reflects ideas shared by several approaches. This keeps the source of the training idea visible without confusing it with the card's structural relationships or reuse context.
+This means we do not need a separate version of every card for each philosophy-specific pathway. The larger training direction can change while smaller cards are still reused where they fit, so the library does not need duplicate cards.
 
 ```python
 @dataclass(frozen=True, slots=True)
@@ -339,6 +347,10 @@ class MacroMezzoReuse:
     reused_mezzo_card_name: str
     reuse_type: str
 ```
+
+#### Linking cards to philosophy  philosophies
+
+The `philosophy_profile_ids` field serves a different purpose. It connects a card to the training-method profiles that materially shaped its content. Baseline cards are connected to mainstream_endurance, while cards shaped by several approaches can contain more than one profile. A card can be connected to more than one profile when it reflects ideas shared by several approaches. This keeps the source of the training idea visible without confusing it with the card's structural relationships or reuse context.
 
 ```text
 Macro cards
@@ -356,12 +368,16 @@ Session cards
 ├── Mainstream training baseline
 └── Philosophy-specific additions
     └── Only when a meaningful difference justified a new card
+```
 
-
+```text
 Every card
 └── philosophy_profile_ids
-    └── Records one or more training-method profiles materially shaped the card
+    └── Records one or more training-method profiles that materially shaped the card
 ```
+
+The result is a library that moves from long-term direction to practical execution. A card can be understood on its own, but it also has a place in the hierarchy and can be connected to related cards. This gives us a collection that is easy to browse and use, while still keeping the training ideas organized enough to expand later.
+
 
 
 
