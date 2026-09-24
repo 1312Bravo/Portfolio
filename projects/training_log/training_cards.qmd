@@ -24,7 +24,7 @@ The reason this idea appealed to me is that training decisions can be mentally t
 
 The goal was also not to write all of the training content by myself. Instead, I wanted to use an AI agent as a kind of specialized coach, guided by prompts and grounded in publications, training principles, and established endurance knowledge, to help prepare and structure the cards. That way, the training logic would come from a more expert-like source, while I focused on the infrastructure and the overall system.
 
-In a way, the project became a mix of my own ideas, AI support, and careful supervision. A lot of the implementation came together with AI support, but the structure, the card system, and the direction were still strongly shaped by my input. I also wanted the whole thing to stay easy to maintain, adjust, and reuse over time, so the cards would not just live inside this repo, but could also be reused in other projects that would bring the to life. This repo holds the card content and outputs it in a structured, way using a class-based setup.
+In a way, the project became a mix of my own ideas, AI support, and careful supervision. A lot of the implementation came together with AI support, but the structure, the card system, and the direction were still strongly shaped by my input. I also wanted the whole thing to stay easy to maintain, adjust, and reuse over time, so the cards would not just live inside this repo, but could also be reused in other projects that would bring them to life. This repo holds the card content and outputs it in a structured way using a class-based setup.
 
 Alongside the project repository, we prepared a first working version of the card library as a Streamlit app. The app presents the training cards in a simple interface where they can be browsed and explored:
 
@@ -40,7 +40,7 @@ The app is hosted on Streamlit Community Cloud. If it receives no traffic for 12
 
 ### The specialized endurance coach
 
-Throughout the project, we relied on a separate AI agent as our specialized endurance - (trail) running coach. We gave it a clear role through a set of detailed prompts and treated it as a coach working alongside us. Whenever the project involved endurance knowledge, we used it to provide the specialist information: from deciding what a useful card should contain and how the cards should work together, to defining their purpose and filling them with content.
+Throughout the project, we relied on a separate AI agent as our specialized endurance and trail-running coach. We gave it a clear role through a set of detailed prompts and treated it as a coach working alongside us. Whenever the project involved endurance knowledge, we used it to provide the specialist information: from deciding what a useful card should contain and how the cards should work together, to defining their purpose and filling them with content.
 
 In a way, we outsourced the endurance-specific knowledge to the coach while keeping responsibility for the idea, structure, infrastructure, and direction of the project. Its guidance was based on publications, established training systems, and common endurance-training principles, while we focused on turning that knowledge into a clear and usable system.
 
@@ -107,7 +107,7 @@ class BaseTrainingCard:
 
 </details>
 
-Using `slots=True` means that each card can only use the fields defined in its class. The card identity fields are `id`, `slug`, `title`, and `card_type`. In addition addition to the required fields `suitable_levels`, `summary`, and `purpose`, the other fields contain the card's coaching information, while `references` connects the card to other cards in the library.
+Using `slots=True` means that each card can only use the fields defined in its class. The card identity fields are `id`, `slug`, `title`, and `card_type`. In addition to the required fields `suitable_levels`, `summary`, and `purpose`, the other fields contain the card's coaching information, while `references` connects the card to other cards in the library.
 
 Fields without a default value are required. Fields with a default value, such as `""` or `field(default_factory=list)`, can be left out when a card is created. They add detail without being necessary to identify the card. This keeps the schema balanced: strict enough to support consistent cards and coaching, but not so strict that writing cards becomes frustrating. Although `philosophy_profile_ids` has a default value in the class, validation still requires every valid card to contain at least one philosophy profile.
 
@@ -228,11 +228,11 @@ class SessionPart:
 
 The supporting classes help keep these fields consistent:
 
-- `CardType` identifies whether a card is a *macro*, *mezzo*, *micro*, or *session* card. It keeps the hierarchy explicit.
+- `CardType` identifies whether a card is a *macro*, *mezzo*, *micro*, or *session* card. It keeps the hierarchy explicit
 
-- `TrainingLevel` describes which athletes the card is suitable for, from *beginner* to *elite*.
+- `TrainingLevel` describes which athletes the card is suitable for, from *beginner* to *elite*
 
-- `CardReference` stores a connection to another card, together with the type of relationship, such as *parent*, *child*, *alternative*, or *support*. It can also include small tags that add context to the connection.
+- `CardReference` stores a connection to another card, together with the type of relationship, such as *parent*, *child*, *alternative*, or *support*. It can also include small tags that add context to the connection
 
 <details class="training-card-details">
 <summary>CardReference</summary>
@@ -255,7 +255,7 @@ The training cards classes gave us the shape of the cards and the next step is t
 
 Because we did not want to build the card library around one single coaching philosophy, we gave the already introduced AI coach a new task: with the guidance of our ideas, to research common endurance-training philosophies, suggest which approaches were worth including, and help us describe their main ideas. These profiles became a helper layer for the AI coach, giving it a clear background to work from while creating the card content.
 
-The philosophy profiles are built on top of a shared coaching foundatin that contains the general principles we wanted to keep consistent across the project, while each profile adds the ideas and priorities of a particular coaching approach. 
+The philosophy profiles are built on top of a shared coaching foundation that contains the general principles we wanted to keep consistent across the project, while each profile adds the ideas and priorities of a particular coaching approach. 
 
 Each philosophy profile captures the main ideas of one coaching approach and gives us a consistent reference for working with it. The `philosophy_profile_ids` field on each card lets us record which philosophy profiles are connected to a card.
 
@@ -286,9 +286,9 @@ The profiles currently included are:
 </ul>
 
 To keep the philosophy profiles easy to read, compare, and maintain, we gave every profile the same three-file structure.
-- `summary.md` gives a short overview of the philosophy and its main ideas.
-- `philosophy.md` contains the more detailed interpretation of the approach.
-- `sources.md` records the publications, websites, and other material used to prepare the profile, together with other relevant notes.
+- `summary.md` gives a short overview of the philosophy and its main ideas
+- `philosophy.md` contains the more detailed interpretation of the approach
+- `sources.md` records the publications, websites, and other material used to prepare the profile, together with other relevant notes
 
 ```text
 coaching/
@@ -348,7 +348,7 @@ class MacroMezzoReuse:
     reuse_type: str
 ```
 
-#### Linking cards to philosophy  philosophies
+#### Linking cards to philosophy profiles
 
 The `philosophy_profile_ids` field serves a different purpose. It connects a card to the training-method profiles that materially shaped its content. Baseline cards are connected to mainstream_endurance, while cards shaped by several approaches can contain more than one profile. A card can be connected to more than one profile when it reflects ideas shared by several approaches. This keeps the source of the training idea visible without confusing it with the card's structural relationships or reuse context.
 
@@ -383,25 +383,25 @@ The result is a library that moves from long-term direction to practical executi
 We keep the card library separate from the pipeline that builds, checks, and delivers it. The library contains the card data, while the repository contains the tools that work with it. These tools are responsible for:
 
 - *Schemas*
-    - Define the fields, types, and relationships that make up a valid card.
-    - The main card classes are defined in:
-        - `base.py`, `macro.py`, `mezzo.py`, `micro.py`, and `session.py`.
-        - `enums.py`, `references.py`, and `session_family.py` provide controlled values, relationships, and session categories.
+    - Define the fields, types, and relationships that make up a valid card
+    - The main card classes are defined in
+        - `base.py`, `macro.py`, `mezzo.py`, `micro.py`, `session.py`
+        - `enums.py`, `references.py`, `session_family.py` provide controlled values, relationships, and session categories
 <br><br>
 
 - *Validation*
-    - Check required fields, allowed values, and card-specific structures.
-    - The main validation files are:
-        - `json_store.py`, `pathway.py`, and `card_library_index.py`.
-        - `scripts/cache/validate_cache.py` runs validation on the local cache.
+    - Check required fields, allowed values, and card-specific structures
+    - The main validation files are
+        - `json_store.py`, `pathway.py`, `card_library_index.py`
+        - `scripts/cache/validate_cache.py` runs validation on the local cache
 <br><br>
 
 - *Conversion and synchronization tools*
-    - Move cards between temporary Python authoring files, local JSON, and Google Drive.
-    - The main supporting files are:
-        - `serialization.py` and `json_store.py` handle JSON conversion and library bundles.
-        - `cloud_store.py` and `google_drive_client.py` handle Google Drive synchronization.
-        - `scripts/authoring/` and `scripts/cloud/` contain the workflow scripts.
+    - Move cards between temporary Python authoring files, local JSON, and Google Drive
+    - The main supporting files are
+        - `serialization.py`, `json_store.py` handle JSON conversion and library bundles
+        - `cloud_store.py`, `google_drive_client.py` handle Google Drive synchronization
+        - `scripts/authoring/`, `scripts/cloud/` contain the workflow scripts
 
 Google Drive stores the accepted card content as JSON and acts as the source of truth for the library. The repository contains the Python schemas and authoring tools used to define, validate, and prepare the cards, but it does not keep a second complete Python copy of the library. Python is the tooling layer around the cards, while JSON is the format used to store the card data, and Google Drive is the current source of truth where that JSON library is kept.
 
@@ -442,11 +442,11 @@ training_cards_library/
 
 Alongside the individual card files, the library root contains several supporting metadata files:
 
-- `manifest.json` records the library version, schema version, and expected contents.
-- `display_config.json` stores labels and presentation settings used when the library is displayed.
-- `macro_mezzo_reuse.json`, `mezzo_micro_reuse.json`, and `micro_session_reuse.json` record how cards can be reused between connected planning levels.
-- `card_library_index.json` provides compact metadata for browsing and filtering the library.
-- `training_cards_library.json` is the complete validated bundle, combining the cards with the metadata needed by the application.
+- `manifest.json` records the library version, schema version, and expected contents
+- `display_config.json` stores labels and presentation settings used when the library is displayed
+- `macro_mezzo_reuse.json`, `mezzo_micro_reuse.json`, `micro_session_reuse.json` record how cards can be reused between connected planning levels
+- `card_library_index.json` provides compact metadata for browsing and filtering the library
+- `training_cards_library.json` is the complete validated bundle, combining the cards with the metadata needed by the application
 
 Together, these files describe not only the cards themselves, but also how the library should be validated, connected, and used.
 
@@ -546,8 +546,8 @@ At the card level, each JSON file follows the schema defined by the Python card 
 
 The workflow from authoring a card to storing it in the cloud has two paths:
 
-- When we edit a card that already exists in the cloud library, we first download the current library into the local cache and update its JSON record there.
-- When we create a new card, we can first prepare it in a temporary Python file using the card classes. The new card is then converted into JSON and added to the local cache.
+- When we edit a card that already exists in the cloud library, we first download the current library into the local cache and update its JSON record there
+- When we create a new card, we can first prepare it in a temporary Python file using the card classes. The new card is then converted into JSON and added to the local cache
 
 Each new card receives a unique level-based ID, such as macro_002, and a readable slug used in its filename; validation checks that both are unique before the card enters the library.
 
@@ -567,11 +567,96 @@ Upload to Google Drive
 Streamlit downloads the validated bundle
 ```
 
-Before the changes are uploaded, the validation tools check the card schemas, references, reuse mappings, manifest, and library index. The upload workflow supported by the created scripts then rebuilds the bundle and supporting metadata before sending the updated files to cloud. The upload scripts can publish the complete library or update only one card level while leaving the other card files unchanged.
+Before the changes are uploaded, the validation tools check the card schemas, references, reuse mappings, manifest, and library index. The upload scripts we prepared then rebuild the bundle and supporting metadata before uploading the updated files back to the cloud. The upload scripts can publish the complete library or update only one card level while leaving the other card files unchanged.
 
+### Project structure
 
+Since the project combines coaching knowledge, structured card data, cloud workflows, and a user interface, a clear project structure is in my opinion very important.  This makes the project easier to understand, maintain, and extend. 
 
+The sketch below shows the main parts of the system and how they are separated.
 
+```text
+Trail-Running-Training-Cards/
+├── coaching/                         # Coaching knowledge and card guidance
+│   ├── coaching_foundation.md        # Shared training principles
+│   ├── card_hierarchy.md             # Planning hierarchy
+│   ├── card_authoring_guidance.md    # Guidance for preparing cards
+│   └── philosophies/                 # Separate coaching approaches
+│       ├── mainstream_endurance/
+│       │   ├── summary.md
+│       │   ├── philosophy.md
+│       │   └── sources.md
+│       ├── cts/
+│       │   ├── summary.md
+│       │   ├── philosophy.md
+│       │   └── sources.md
+│       └── ...
+├── training_cards/                   # Card schemas and data workflows
+│   ├── schemas/                      # Card classes and supporting types
+│   │   ├── base.py                   # Shared card structure
+│   │   ├── macro.py                  # Macro card definition
+│   │   ├── ...                       
+│   │   ├── enums.py                  # Controlled values
+│   │   └── references.py             # Card relationships
+│   ├── cards/
+│   │   ├── examples/                 # Temporary Python authoring examples
+│   │   │   ├── macro_example.py
+│   │   │   ├── ...
+│   │   └── card_matrix.md            # Card taxonomy and build decisions
+│   ├── serialization.py              # Python-to-JSON conversion
+│   ├── json_store.py                 # JSON storage and validation
+│   ├── cloud_store.py                # Cloud-library synchronization
+│   └── scripts/                      # Authoring, cache, and upload workflows
+├── streamlit_app/                    # Current card-library interface
+│   ├── app.py                        # Application entry point
+│   ├── data.py                       # Library loading and preparation
+│   ├── views/                        # Main interface views
+│   └── renderers/                    # Card and detail presentation
+├── tests/                            # Checks for storage and library behaviour
+├── notes/                            # Durable project and workflow documentation
+└── archive/                          # Retired experiments outside the active system
+
+Google Drive (outside the repository)
+└── training_cards_library/           # Accepted JSON card library and metadata
+```
+
+### AI-assisted development
+
+AI assistance supported the project throughout. It also became a kind of experiment and learning exercise for me: I explored an increasingly common way of working, but one I had not used (and favored) much before. Could I build a complete system without writing a single line of code ourselves?
+
+This was far from a hands-off process. I had to define the agents' roles, prepare the prompts, provide context, review the outputs, correct mistakes, and redirect the work whenever it moved away from the intended direction. A large part of our contribution was orchestrating the process and making sure that the different pieces stayed consistent. This was also particularly demanding because I tend to approach projects with a perfectionist level of attention to detail. Small inconsistencies matter to me, so I kept reviewing and refining the result.
+
+I remained responsible for:
+- the original card idea and purpose of the project
+- the project structure and card hierarchy
+- the schema and data-organization decisions
+- the prompts, boundaries, and workflow
+- the visual direction of the interface
+- reviewing, correcting, and approving the results
+
+We divided the work into clearly defined roles:
+- Specialized endurance coach: prepared the training knowledge, philosophy profiles, and card content
+- Technical agents: helped implement the schemas, validation, storage, reuse logic, and cloud workflows
+- Application-focused agents: helped build the current interface based on our requirements, visual ideas, and corrections
+
+### The current card library application
+
+To really use the cards, we built a first interface for the library with Streamlit.
+
+This is the current version of the system. It is still mainly a browsing and exploration tool rather than a complete training platform. The larger goal is to develop it further so it can help us make training decisions and use the card library more actively in our own training.
+
+The current version allows us to:
+
+- browse and search cards across the different planning levels
+- filter cards by type, philosophy profile, tags, and other metadata
+- open detailed cards and read their purpose, training information, guidance, and references
+- explore coaching philosophy profiles and their source material
+- move through the Macro-to-Session hierarchy and follow related card connections
+- inspect available session options and training pathways
+
+[Open the Training Card Library](https://trail-running-training-cards.streamlit.app/)
+
+This gives us a first usable interface for the structured library. Future development can move the system beyond browsing by adding more practical training support and making it more useful for everyday decision-making.
 
 ```{=html}
 <div class="project-link-container">

@@ -1,3 +1,47 @@
+### Project structure
+
+The project is organized into a few main areas, each with a different responsibility. The coaching material provides the knowledge behind the cards, the `training_cards` package defines and manages the structured library, and the Streamlit code presents that library through the current interface. The remaining folders support testing, documentation, and experiments without becoming part of the active system.
+
+The structure can be summarized like this:
+
+```text
+Trail-Running-Training-Cards/
+├── coaching/                         # Coaching knowledge and card guidance
+│   ├── coaching_foundation.md        # Shared training principles
+│   ├── card_hierarchy.md             # Planning hierarchy
+│   ├── card_authoring_guidance.md    # Guidance for preparing cards
+│   └── philosophies/                 # Separate coaching approaches
+│       ├── mainstream_endurance/
+│       │   ├── summary.md
+│       │   ├── philosophy.md
+│       │   └── sources.md
+│       ├── cts/
+│       │   ├── summary.md
+│       │   ├── philosophy.md
+│       │   └── sources.md
+│       └── ...
+├── training_cards/                   # Card schemas and data workflows
+│   ├── schemas/                      # Card classes and supporting types
+│   ├── cards/examples/               # Temporary Python authoring examples
+│   ├── serialization.py              # Python-to-JSON conversion
+│   ├── json_store.py                 # JSON storage and validation
+│   ├── cloud_store.py                # Cloud-library synchronization
+│   └── scripts/                      # Authoring, cache, and upload workflows
+├── streamlit_app/                    # Current card-library interface
+│   ├── app.py                        # Application entry point
+│   ├── data.py                       # Library loading and preparation
+│   ├── views/                        # Main interface views
+│   └── renderers/                    # Card and detail presentation
+├── tests/                            # Checks for storage and library behaviour
+├── notes/                            # Durable project and workflow documentation
+└── archive/                          # Retired experiments outside the active system
+
+Google Drive (outside the repository)
+└── training_cards_library/           # Accepted JSON card library and metadata
+```
+
+This layout separates the knowledge used to prepare the cards, the code that defines and checks them, the cloud data itself, and the interface that presents the result. It also gives each part a clear place to grow without making the whole project depend on one large collection of files.
+
 #### How the application uses the library
 
 The Streamlit application does not depend on the temporary Python authoring files. When the application starts, it looks for the validated library bundle. In the deployed version, it downloads `training_cards_library.json` from the root of the Google Drive library into a temporary runtime cache when needed.
@@ -11,3 +55,20 @@ This gives us a useful boundary between the data and the interface. We can updat
 Keeping the accepted card content in the cloud makes the project easier to maintain and reuse. The repository can focus on the rules and tools that define, validate, transform, and display the cards, while Google Drive holds the changing library itself. This avoids maintaining two competing copies of the same content and makes it possible to use the card library in other projects without copying the whole repository.
 
 For the current stage, Google Drive is enough because the library is primarily a structured collection of JSON files and the editing workflow is controlled by scripts. A more advanced database could become useful later if the application needs in-app editing, several users, permissions, or more complex querying. For now, separating the cloud data from the project code gives us the flexibility we need without adding unnecessary infrastructure.
+
+### The Streamlit application
+
+With the card library and cloud workflow in place, we prepared a first Streamlit application as the current interface for the system. It gives us a practical way to browse the cards, inspect their coaching information, explore the philosophy profiles, and follow the connections between the different planning levels.
+
+This is only the current version of the application and reflects what the system can support at this stage. It is still mainly a browsing and exploration tool rather than a complete training platform. The larger goal is to develop it further so it can help us make training decisions, build suitable pathways, and use the card library more actively in our own training.
+
+The current version allows us to:
+
+- browse and search the card library;
+- filter cards by type, profile, or other metadata;
+- open individual card details;
+- explore coaching philosophies and their sources;
+- follow the Macro-to-Session structure and card relationships; and
+- inspect available session and pathway options.
+
+These features give us a first usable interface for the structured library. Future development can move the application beyond browsing by adding more practical training support and making it more useful for everyday decision-making.
