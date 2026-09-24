@@ -12,26 +12,16 @@ title: "When Training Becomes a Deck of Cards - Training Card Library"
 
 ### Idea
 
-In the trail-running podcast The Albon Way, I heard John Albon describe training as a card-based system. It immediately clicked with me.
+In the trail-running podcast [*The Albon Way*](https://podcasts.apple.com/gb/podcast/the-albon-way/id1769928638), I heard John Albon describe training as a card-based system. It immediately clicked with me. I could vividly picture the idea of running training cards and wanted to turn that picture into something real. I knew what the cards should be, but not yet how everything around them would work, so I wanted the wider system to take shape as we built it.
 
-I had a clear idea of what the cards should be, but not yet how everything around them would work. I wanted that part to take shape as we built, letting the original card idea guide the project.
+The concept was to create a set of cards, a bit like Pokémon, Yu-Gi-Oh, or Cars cards, but built specifically for running. Each card would capture something practical about a training element, such as what to do, its strengths, what it does, when to use it, and who it is for. These would not be loose notes: I wanted them to follow a clear structure while still appearing as real cards in a clean and intuitive user experience. In my head, they could live inside an application and feel easy to browse, almost like a small training deck to choose from.
 
-I could vividly picture the idea of running training cards, and I wanted to turn that picture into something real. The concept was to create a set of training cards, a bit like Pokémon, Yu-Gi-Oh, or Cars cards, but built specifically for running. Each card would capture something practical about a training element, such as what exactly to do, its strengths, what it does, when to use it, and who it is for.
-
-Those cards would not just be loose notes. I had a very clear picture of how they could look and work, and that visual idea appealed to me a lot. I wanted them to follow a clear underlying structure while still appearing as real cards in a clean and intuitive user experience. In my head, it was something that could live inside an application and feel easy to browse, almost like a small training deck you could choose from naturally.
-
-The reason this idea appealed to me is that training decisions can be mentally tiring. I usually know roughly where I am in a training period, but after a full day of work I do not always want to think too much about what the next session should be. I wanted this to become a quick tool that would reduce decision fatigue, make daily training choices easier, and give me a few ready-made options to choose from. At the same time, it would educate me about training along the way and make it easier for both newer and more experienced athletes to think about training, effort, and purpose in a clearer way.
-
-The goal was also not to write all of the training content by myself. Instead, I wanted to use an AI agent as a kind of specialized coach, guided by prompts and grounded in publications, training principles, and established endurance knowledge, to help prepare and structure the cards. That way, the training logic would come from a more expert-like source, while I focused on the infrastructure and the overall system.
-
-In a way, the project became a mix of my own ideas, AI support, and careful supervision. A lot of the implementation came together with AI support, but the structure, the card system, and the direction were still strongly shaped by my input. I also wanted the whole thing to stay easy to maintain, adjust, and reuse over time, so the cards would not just live inside this repo, but could also be reused in other projects that would bring them to life. This repo holds the card content and outputs it in a structured way using a class-based setup.
-
-Alongside the project repository, we prepared a first working version of the card library as a Streamlit app. The app presents the training cards in a simple interface where they can be browsed and explored:
+The idea also appealed to me because training decisions can be mentally tiring. I usually know roughly where I am in a training period, but after a full day of work I do not always want to think too much about the next session. I wanted a quick tool that would reduce decision fatigue, make daily choices easier, and provide a few ready-made options. At the same time, it would educate us about training and help both newer and more experienced athletes think more clearly about training, effort, and purpose.
 
 ::: {.post-summary}
 #### Explore the card library
 
-To explore the cards, we prepared a small interface that presents the structured library in a simple and browsable way while we continue developing the larger system behind it. It is a first, mostly static version built as a Streamlit app. It gives us a simple way to browse and explore the training cards while we continue developing the larger system behind them.
+To explore the cards, we prepared a first, mostly static Streamlit interface for the structured library. It gives us a simple way to browse and explore the training cards while we continue developing the larger system behind them.
 
 [Open the Training Card Library](https://trail-running-training-cards.streamlit.app/)
 
@@ -337,6 +327,9 @@ For contextual reuse, the project uses three dedicated classes: `MacroMezzoReuse
 
 This means we do not need a separate version of every card for each philosophy-specific pathway. The larger training direction can change while smaller cards are still reused where they fit, so the library does not need duplicate cards.
 
+<details class="training-card-details">
+<summary>MacroMezzoReuse</summary>
+
 ```python
 @dataclass(frozen=True, slots=True)
 class MacroMezzoReuse:
@@ -347,6 +340,8 @@ class MacroMezzoReuse:
     reused_mezzo_card_name: str
     reuse_type: str
 ```
+
+</details>
 
 #### Linking cards to philosophy profiles
 
