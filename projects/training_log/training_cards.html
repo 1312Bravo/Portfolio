@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.33">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>When Training Becomes a Deck of Cards - Training Card Library – Urh Peček | Data Science Blog</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-59898bd1c6b9d2bb783127feaa000c76.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-920f8b5b4a9e6fe8e930067d636556fa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Urh Peček | Data Science Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-projects" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Projects</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
+        <li>
+    <a class="dropdown-item" href="../../projects/path_to_utmb.html">
+ <span class="dropdown-text">Path To UTMB</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../projects/training_log.html">
+ <span class="dropdown-text">Training Log</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="mailto:pecek.urh@gmail.com"> 
+<span class="menu-text">pecek.urh@gmail.com</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/1312Bravo" target="_blank"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">When Training Becomes a Deck of Cards - Training Card Library</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="{=html}">
+<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"></p>
+</div>
+<div class="project-trail">
+<p><a href="../../projects/training_log.html">Training Log</a></p>
+</div>
+<section id="idea" class="level3">
+<h3 class="anchored" data-anchor-id="idea">Idea</h3>
+<p>In the trail-running podcast <a href="https://podcasts.apple.com/gb/podcast/the-albon-way/id1769928638"><em>The Albon Way</em></a>, I heard John Albon describe training as a card-based system. It immediately clicked with me. I could vividly picture the idea of running training cards and wanted to turn that picture into something real. I knew what the cards should be, but not yet how everything around them would work, so I wanted the wider system to take shape as we built it.</p>
+<p>The concept was to create a set of cards, a bit like Pokémon, Yu-Gi-Oh, or Cars cards, but built specifically for running. Each card would capture something practical about a training element, such as what to do, its strengths, what it does, when to use it, and who it is for. These would not be loose notes: I wanted them to follow a clear structure while still appearing as real cards in a clean and intuitive user experience. In my head, they could live inside an application and feel easy to browse, almost like a small training deck to choose from.</p>
+<p>The idea also appealed to me because training decisions can be mentally tiring. I usually know roughly where I am in a training period, but after a full day of work I do not always want to think too much about the next session. I wanted a quick tool that would reduce decision fatigue, make daily choices easier, and provide a few ready-made options. At the same time, it would educate us about training and help both newer and more experienced athletes think more clearly about training, effort, and purpose.</p>
+<section id="explore-the-card-library" class="level4 post-summary">
+<h4 class="anchored" data-anchor-id="explore-the-card-library">Explore the card library</h4>
+<p>To explore the cards, we prepared a first, mostly static Streamlit interface for the structured library. It gives us a simple way to browse and explore the training cards while we continue developing the larger system behind them.</p>
+<p><a href="https://trail-running-training-cards.streamlit.app/">Open the Training Card Library</a></p>
+<p>The app is hosted on Streamlit Community Cloud. If it receives no traffic for 12 hours, Streamlit puts it to sleep to save resources. When that happens, the page shows a <em>“Yes, get this app back up!”</em> button. Clicking that button wakes the app up again, but it can take a few seconds to load.</p>
+</section>
+</section>
+<section id="the-specialized-endurance-coach" class="level3">
+<h3 class="anchored" data-anchor-id="the-specialized-endurance-coach">The specialized endurance coach</h3>
+<p>Throughout the project, we relied on a separate AI agent as our specialized endurance and trail-running coach. We gave it a clear role through a set of detailed prompts and treated it as a coach working alongside us. Whenever the project involved endurance knowledge, we used it to provide the specialist information: from deciding what a useful card should contain and how the cards should work together, to defining their purpose and filling them with content.</p>
+<p>In a way, we outsourced the endurance-specific knowledge to the coach while keeping responsibility for the idea, structure, infrastructure, and direction of the project. Its guidance was based on publications, established training systems, and common endurance-training principles, while we focused on turning that knowledge into a clear and usable system.</p>
+</section>
+<section id="training-cards-and-hierarchy" class="level3">
+<h3 class="anchored" data-anchor-id="training-cards-and-hierarchy">Training cards and hierarchy</h3>
+<section id="hierarchy" class="level4">
+<h4 class="anchored" data-anchor-id="hierarchy">Hierarchy</h4>
+<p>Endurance training is usually organized into connected training blocks. Each block covers a different period and has its own purpose, while also containing smaller blocks within it. These are the blocks represented by the cards:</p>
+<pre class="text"><code>Macro block
+├── Roughly several months
+└── Defines the main training phase
+    ↓
+Mezzo block
+├── Roughly several weeks
+└── Focuses on one part of that phase
+    ↓
+Micro block
+├── Roughly one week
+└── Organizes the training week
+    ↓
+Session
+├── One workout
+└── Describes the individual training session</code></pre>
+<p>The card structure follows this hierarchy. Each card is defined as a Python class based on its place in the training hierarchy. All card classes share the same <em>BaseTrainingCard</em>, which contains the information common to every card. The specialized <em>MacroCard</em>, <em>MezzoCard</em>, <em>MicroCard</em>, and <em>SessionCard</em> then build on that base by adding the fields needed for their own planning block.</p>
+</section>
+<section id="basetrainingcard" class="level4">
+<h4 class="anchored" data-anchor-id="basetrainingcard">BaseTrainingCard</h4>
+<p><code>BaseTrainingCard</code> is the shared foundation for all card types. It creates the stable frame that every specialized card can build on.</p>
+<p>It separates:</p>
+<ul>
+<li>What must always be there</li>
+<li>What is useful but not always present</li>
+<li>What only belongs to a specific card level</li>
+</ul>
+<details class="training-card-details">
+<summary>
+BaseTrainingCard
+</summary>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>(slots<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BaseTrainingCard:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">id</span>: <span class="bu">str</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    slug: <span class="bu">str</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    title: <span class="bu">str</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    card_type: CardType</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    suitable_levels: <span class="bu">list</span>[TrainingLevel]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    summary: <span class="bu">str</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    purpose: <span class="bu">str</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    tags: <span class="bu">list</span>[<span class="bu">str</span>] <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">list</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    philosophy_profile_ids: <span class="bu">list</span>[<span class="bu">str</span>] <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">list</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    goal_race_context: <span class="bu">list</span>[<span class="bu">str</span>] <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">list</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    training_profile: <span class="bu">list</span>[<span class="bu">str</span>] <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">list</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    expected_adaptations: <span class="bu">list</span>[<span class="bu">str</span>] <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">list</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    watchouts: <span class="bu">list</span>[<span class="bu">str</span>] <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">list</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    progression_rules: <span class="bu">list</span>[<span class="bu">str</span>] <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">list</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    regression_rules: <span class="bu">list</span>[<span class="bu">str</span>] <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">list</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    additional_information: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    references: <span class="bu">list</span>[CardReference] <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">list</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>Using <code>slots=True</code> means that each card can only use the fields defined in its class. The card identity fields are <code>id</code>, <code>slug</code>, <code>title</code>, and <code>card_type</code>. In addition to the required fields <code>suitable_levels</code>, <code>summary</code>, and <code>purpose</code>, the other fields contain the card’s coaching information, while <code>references</code> connects the card to other cards in the library.</p>
+<p>Fields without a default value are required. Fields with a default value, such as <code>""</code> or <code>field(default_factory=list)</code>, can be left out when a card is created. They add detail without being necessary to identify the card. This keeps the schema balanced: strict enough to support consistent cards and coaching, but not so strict that writing cards becomes frustrating. Although <code>philosophy_profile_ids</code> has a default value in the class, validation still requires every valid card to contain at least one philosophy profile.</p>
+</section>
+<section id="specialized-card-classes" class="level4">
+<h4 class="anchored" data-anchor-id="specialized-card-classes">Specialized card classes</h4>
+<p><code>MacroCard</code> represents the broadest planning block that spans over several months or more. It should help answer: what are we trying to accomplish during this phase, and how does it fit into the wider training plan?</p>
+<p>It inherits the shared contract and adds the fields that matter only for a broad phase-level object.</p>
+<details class="training-card-details">
+<summary>
+MacroCard
+</summary>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>(slots<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MacroCard(BaseTrainingCard):</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    recommended_duration_weeks: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    timing_guidance: <span class="bu">list</span>[<span class="bu">str</span>] <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">list</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p><code>MezzoCard</code> is the intermediate block layer. It answers: what are we sharpening inside this phase, and how should this block sit between the macro plan and the weekly load?</p>
+<details class="training-card-details">
+<summary>
+MezzoCard
+</summary>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>(slots<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MezzoCard(BaseTrainingCard):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    recommended_duration_weeks: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    placement_guidance: <span class="bu">list</span>[<span class="bu">str</span>] <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">list</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p><code>MicroCard</code> is the week-level planning card. It is the bridge between the block-level intention and the day-by-day reality of training. It describes how a coach shapes one training week to support the larger block.</p>
+<details class="training-card-details">
+<summary>
+MicroCard
+</summary>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>(slots<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MicroCard(BaseTrainingCard):</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    recommended_duration_days: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    week_structure: <span class="bu">list</span>[<span class="bu">str</span>] <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">list</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    key_sessions: <span class="bu">list</span>[<span class="bu">str</span>] <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">list</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    load_pattern: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    placement_guidance: <span class="bu">list</span>[<span class="bu">str</span>] <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">list</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    recovery_requirements: <span class="bu">list</span>[<span class="bu">str</span>] <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">list</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p><code>SessionCard</code> is the most detailed card. It describes one workout or session pattern. It needs enough structure to guide execution, but it should still feel like a reusable workout concept rather than a one-off prescription.</p>
+<p>It is supported by four additional classes: <code>WorkoutBlock</code>, <code>WorkoutOption</code>, <code>SessionPart</code>, and <code>SessionFamily</code>. The first three break a workout into its main parts, possible variations, and individual instructions, while <code>SessionFamily</code> groups similar workouts under a common label. Together, these supporting classes give each session a clear structure while still allowing us to represent different workout formats and options.</p>
+<details class="training-card-details">
+<summary>
+SessionCard
+</summary>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>(slots<span class="op">=</span><span class="va">True</span>, kw_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SessionCard(BaseTrainingCard):</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    session_family: SessionFamily</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    typical_duration: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    workout_blocks: <span class="bu">list</span>[WorkoutBlock] <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">list</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<details class="training-card-details">
+<summary>
+WorkoutBlock
+</summary>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>(slots<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> WorkoutBlock:</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    block_type: WorkoutBlockType</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    execution_mode: WorkoutBlockExecutionMode <span class="op">=</span> WorkoutBlockExecutionMode.DO_ALL</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    options: <span class="bu">list</span>[WorkoutOption] <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">list</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<details class="training-card-details">
+<summary>
+WorkoutOption
+</summary>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>(slots<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> WorkoutOption:</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    title: <span class="bu">str</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    repeat: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    selection_notes: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    load_notes: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    parts: <span class="bu">list</span>[SessionPart] <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">list</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<details class="training-card-details">
+<summary>
+SessionPart
+</summary>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>(slots<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SessionPart:</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    title: <span class="bu">str</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    prescription: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    duration: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    rpe: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    selection_notes: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    coaching_notes: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    terrain_notes: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    adjustment_notes: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</section>
+<section id="supporting-classes" class="level4">
+<h4 class="anchored" data-anchor-id="supporting-classes">Supporting classes</h4>
+<p>The supporting classes help keep these fields consistent:</p>
+<ul>
+<li><p><code>CardType</code> identifies whether a card is a <em>macro</em>, <em>mezzo</em>, <em>micro</em>, or <em>session</em> card. It keeps the hierarchy explicit</p></li>
+<li><p><code>TrainingLevel</code> describes which athletes the card is suitable for, from <em>beginner</em> to <em>elite</em></p></li>
+<li><p><code>CardReference</code> stores a connection to another card, together with the type of relationship, such as <em>parent</em>, <em>child</em>, <em>alternative</em>, or <em>support</em>. It can also include small tags that add context to the connection</p></li>
+</ul>
+<details class="training-card-details">
+<summary>
+CardReference
+</summary>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>(slots<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> CardReference:</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    card_id: <span class="bu">str</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    relationship: CardRelationship</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    tags: <span class="bu">list</span>[<span class="bu">str</span>] <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">list</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>Using predefined values prevents small naming differences from representing the same thing and keeps the whole library consistent. Together, these supporting classes make the cards easier to filter, connect, and use later.</p>
+</section>
+</section>
+<section id="coaching-philosophies" class="level3">
+<h3 class="anchored" data-anchor-id="coaching-philosophies">Coaching philosophies</h3>
+<p>The training cards classes gave us the shape of the cards and the next step is to actually build them. Before developing the cards, we created a separate layer for organizing the training knowledge inside them.</p>
+<p>Because we did not want to build the card library around one single coaching philosophy, we gave the already introduced AI coach a new task: with the guidance of our ideas, to research common endurance-training philosophies, suggest which approaches were worth including, and help us describe their main ideas. These profiles became a helper layer for the AI coach, giving it a clear background to work from while creating the card content.</p>
+<p>The philosophy profiles are built on top of a shared coaching foundation that contains the general principles we wanted to keep consistent across the project, while each profile adds the ideas and priorities of a particular coaching approach.</p>
+<p>Each philosophy profile captures the main ideas of one coaching approach and gives us a consistent reference for working with it. The <code>philosophy_profile_ids</code> field on each card lets us record which philosophy profiles are connected to a card.</p>
+<p>The profiles currently included are:</p>
+<ul class="coaching-philosophy-list">
+<li>
+<span><em>Mainstream Endurance</em> - a general, evidence-informed endurance-training approach based on common exercise-science and coaching principles.</span>
+</li>
+<li>
+<span><em>CTS</em> - <img src="saved_files/training_cards/cts.png" alt="CTS logo"> <a href="https://trainright.com/ultrarunning/" target="_blank">CTS Training</a></span>
+</li>
+<li>
+<span><em>Evoke Endurance</em> - <img src="saved_files/training_cards/evoke_endurance.svg" alt="Evoke Endurance logo"> <a href="https://evokeendurance.com/" target="_blank">Evoke Endurance</a></span>
+</li>
+<li>
+<span><em>Some Work, All Play (SWAP)</em> - <img src="saved_files/training_cards/swap.jpg" alt="SWAP logo"> <a href="https://swaprunning.com/" target="_blank">SWAP Running</a></span>
+</li>
+<li>
+<span><em>Sharman Ultra</em> - <img src="saved_files/training_cards/sharman_ultra.ico" alt="Sharman Ultra logo"> <a href="https://www.sharmanultra.com/" target="_blank">Sharman Ultra Coaching</a></span>
+</li>
+<li>
+<span><em>80/20 Endurance</em> - <img src="saved_files/training_cards/80_20_endurance.ico" alt="80/20 Endurance logo"> <a href="https://www.8020endurance.com/" target="_blank">80/20 Endurance</a></span>
+</li>
+<li>
+<span><em>Lydiard</em> - <img src="saved_files/training_cards/lydiard.ico" alt="Lydiard Foundation logo"> <a href="https://www.lydiardfoundation.org/" target="_blank">Lydiard Foundation</a></span>
+</li>
+</ul>
+<p>To keep the philosophy profiles easy to read, compare, and maintain, we gave every profile the same three-file structure. - <code>summary.md</code> gives a short overview of the philosophy and its main ideas - <code>philosophy.md</code> contains the more detailed interpretation of the approach - <code>sources.md</code> records the publications, websites, and other material used to prepare the profile, together with other relevant notes</p>
+<pre class="text"><code>coaching/
+├── coaching_foundation.md
+└── philosophies/
+    ├── mainstream_endurance/
+    │   ├── summary.md
+    │   ├── philosophy.md
+    │   └── sources.md
+    ├── cts/
+    │   ├── summary.md
+    │   ├── philosophy.md
+    │   └── sources.md
+    └── ...</code></pre>
+<p>This structure gives us a repeatable template for adding new coaching philosophies later. We can create a new profile folder, follow the same three-file layout, collect and organize the relevant material, and include the profile. This keeps the system easy to extend as we discover other approaches worth exploring.</p>
+</section>
+<section id="building-the-card-library" class="level3">
+<h3 class="anchored" data-anchor-id="building-the-card-library">Building the card library</h3>
+<p>Once the coaching foundation and philosophy profiles were in place, we could start turning that knowledge into cards. We built the card library from the larger planning blocks toward the individual sessions. That way, each smaller card was developed within a larger block, but could still be reused elsewhere when it fit.</p>
+<p>Mezzo cards were created in the context of their Macro phases, Micro cards were developed for the focus of their Mezzo blocks, and Session cards were selected and shaped to support the weekly structure. Session cards were therefore treated as reusable training concepts, rather than as isolated workouts written for only one specific day.</p>
+<section id="the-card-building-process" class="level4">
+<h4 class="anchored" data-anchor-id="the-card-building-process">The card-building process</h4>
+<p>We first defined how the process should work: how to move through the card levels, compare the philosophy profiles, and decide when a new card was justified. The AI coach then worked through the profiles and prepared the training content for the cards according to that process. We stayed involved throughout by reviewing the suggestions, guiding the next steps, and adjusting the direction whenever needed.</p>
+<p>The same review cycle was repeated at every level of the hierarchy:</p>
+<ol type="1">
+<li>We first developed the mainstream endurance cards as a shared baseline for that level.</li>
+<li>We then selected one coaching philosophy profile and reviewed every mainstream card from that profile’s perspective.</li>
+<li>For each card, we asked whether the philosophy changed the card in a meaningful way. If the difference was strong enough, we created a separate philosophy-specific card.</li>
+<li>After reviewing all mainstream cards for that philosophy, we made a second pass from the perspective of the philosophy. This helped us identify important ideas that were not variations of existing baseline cards, but entirely new cards that had been missed during the first comparison.</li>
+<li>We repeated this process for every philosophy profile at the same level. Once the level was complete, we moved to the next one and repeated the cycle again.</li>
+</ol>
+<p>This gave every card level its own mainstream baseline, philosophy review, and final check, while keeping the library from filling up with unnecessary duplicates. The mainstream cards acted as comparison anchors and gave us a common starting point for each level of the hierarchy. For every philosophy, we could ask whether it supported an existing card, changed it meaningfully, or introduced an idea that was not represented at all.</p>
+</section>
+<section id="connecting-and-reusing-cards" class="level4">
+<h4 class="anchored" data-anchor-id="connecting-and-reusing-cards">Connecting and reusing cards</h4>
+<p>Although we built the cards from Macro to Session, the final library is not a strict tree. Smaller cards are developed in the context of larger blocks, but they can still be reused across several blocks. For example, one Micro card can support multiple Mezzo blocks, and one Session card can fit into different weekly structures.</p>
+<p>The <code>references</code> field stores direct connections between cards, such as parent, child, alternative, or support relationships. These references describe how cards relate to one another without placing their full content inside another card.</p>
+<p>For contextual reuse, the project uses three dedicated classes: <code>MacroMezzoReuse</code>, <code>MezzoMicroReuse</code>, and <code>MicroSessionReuse</code>. They allow a card to be used in another block without copying its content. Each reuse entry records the relevant philosophy profile, the parent card, the reused child card, and the type of reuse. This keeps the original card as the single source of truth and makes later updates easier.</p>
+<p>This means we do not need a separate version of every card for each philosophy-specific pathway. The larger training direction can change while smaller cards are still reused where they fit, so the library does not need duplicate cards.</p>
+<details class="training-card-details">
+<summary>
+MacroMezzoReuse
+</summary>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>(frozen<span class="op">=</span><span class="va">True</span>, slots<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MacroMezzoReuse:</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    philosophy_profile_id: <span class="bu">str</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    macro_card_id: <span class="bu">str</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    macro_card_name: <span class="bu">str</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    reused_mezzo_card_id: <span class="bu">str</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    reused_mezzo_card_name: <span class="bu">str</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    reuse_type: <span class="bu">str</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</section>
+<section id="linking-cards-to-philosophy-profiles" class="level4">
+<h4 class="anchored" data-anchor-id="linking-cards-to-philosophy-profiles">Linking cards to philosophy profiles</h4>
+<p>The <code>philosophy_profile_ids</code> field serves a different purpose. It connects a card to the training-method profiles that materially shaped its content. Baseline cards are connected to mainstream_endurance, while cards shaped by several approaches can contain more than one profile. A card can be connected to more than one profile when it reflects ideas shared by several approaches. This keeps the source of the training idea visible without confusing it with the card’s structural relationships or reuse context.</p>
+<p>The same baseline-and-additions pattern applies to every card level:</p>
+<pre class="text"><code>Macro cards
+├── Mainstream training baseline
+└── Philosophy-specific additions
+    └── Only when a meaningful difference justified a new card
+            ↓
+Mezzo cards
+├── ...
+            ↓
+Micro cards
+├── ...
+            ↓
+Session cards
+├── Mainstream training baseline
+└── Philosophy-specific additions
+    └── Only when a meaningful difference justified a new card</code></pre>
+<pre class="text"><code>Every card
+└── philosophy_profile_ids
+    └── Records one or more training-method profiles that materially shaped the card</code></pre>
+<p>The result is a library that moves from long-term direction to practical execution. A card can be understood on its own, but it also has a place in the hierarchy and can be connected to related cards. This gives us a collection that is easy to browse and use, while still keeping the training ideas organized enough to expand later.</p>
+</section>
+</section>
+<section id="card-library" class="level3">
+<h3 class="anchored" data-anchor-id="card-library">Card library</h3>
+<p>We keep the card library separate from the pipeline that builds, checks, and delivers it. The library contains the card data, while the repository contains the tools that work with it. These tools are responsible for:</p>
+<ul>
+<li><em>Schemas</em>
+<ul>
+<li>Define the fields, types, and relationships that make up a valid card</li>
+<li>The main card classes are defined in
+<ul>
+<li><code>base.py</code>, <code>macro.py</code>, <code>mezzo.py</code>, <code>micro.py</code>, <code>session.py</code></li>
+<li><code>enums.py</code>, <code>references.py</code>, <code>session_family.py</code> provide controlled values, relationships, and session categories <br><br></li>
+</ul></li>
+</ul></li>
+<li><em>Validation</em>
+<ul>
+<li>Check required fields, allowed values, and card-specific structures</li>
+<li>The main validation files are
+<ul>
+<li><code>json_store.py</code>, <code>pathway.py</code>, <code>card_library_index.py</code></li>
+<li><code>scripts/cache/validate_cache.py</code> runs validation on the local cache <br><br></li>
+</ul></li>
+</ul></li>
+<li><em>Conversion and synchronization tools</em>
+<ul>
+<li>Move cards between temporary Python authoring files, local JSON, and Google Drive</li>
+<li>The main supporting files are
+<ul>
+<li><code>serialization.py</code>, <code>json_store.py</code> handle JSON conversion and library bundles</li>
+<li><code>cloud_store.py</code>, <code>google_drive_client.py</code> handle Google Drive synchronization</li>
+<li><code>scripts/authoring/</code>, <code>scripts/cloud/</code> contain the workflow scripts</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Google Drive stores the accepted card content as JSON and acts as the source of truth for the library. The repository contains the Python schemas and authoring tools used to define, validate, and prepare the cards, but it does not keep a second complete Python copy of the library. Python is the tooling layer around the cards, while JSON is the format used to store the card data, and Google Drive is the current source of truth where that JSON library is kept.</p>
+<section id="cloud-structure" class="level4">
+<h4 class="anchored" data-anchor-id="cloud-structure">Cloud structure</h4>
+<p>For the current version, we chose Google Drive as the cloud storage for the card library because it gives us a simple place to keep structured card data without introducing a database too early.</p>
+<p>The Google Drive library contains more than the individual card records. It stores the card content together with the metadata needed to describe, validate, connect, and organize the library.</p>
+<p>At the card level, each Macro, Mezzo, Micro, and Session card is stored as its own JSON file. At the library level, additional files store version information, display settings, reuse mappings, and the combined library bundle.</p>
+<p>The resulting storage structure looks like this:</p>
+<pre class="text"><code>training_cards_library/
+├── cards/
+│   ├── macro/
+│   │   ├── mainstream_endurance/
+│   │   │   ├── mainstream-base-development.json
+│   │   │   ├── mainstream-capacity-development.json
+│   │   │   └── ...
+│   │   ├── cts/
+│   │   │   ├── cts-base-development.json
+│   │   │   ├── cts-capacity-development.json
+│   │   │   └── ...
+│   │   └── ...
+│   ├── mezzo/
+│   ├── micro/
+│   └── session/
+├── manifest.json
+├── display_config.json
+├── macro_mezzo_reuse.json
+├── mezzo_micro_reuse.json
+├── micro_session_reuse.json
+├── card_library_index.json
+└── training_cards_library.json</code></pre>
+<p>Alongside the individual card files, the library root contains several supporting metadata files:</p>
+<ul>
+<li><code>manifest.json</code> records the library version, schema version, and expected contents</li>
+<li><code>display_config.json</code> stores labels and presentation settings used when the library is displayed</li>
+<li><code>macro_mezzo_reuse.json</code>, <code>mezzo_micro_reuse.json</code>, <code>micro_session_reuse.json</code> record how cards can be reused between connected planning levels</li>
+<li><code>card_library_index.json</code> provides compact metadata for browsing and filtering the library</li>
+<li><code>training_cards_library.json</code> is the complete validated bundle, combining the cards with the metadata needed by the application</li>
+</ul>
+<p>Together, these files describe not only the cards themselves, but also how the library should be validated, connected, and used.</p>
+<p>At the card level, each JSON file follows the schema defined by the Python card classes. For example, an individual Macro card is stored like this:</p>
+<details class="training-card-details">
+<summary>
+Macro card JSON: Base Development
+</summary>
+<div class="sourceCode" id="cb16"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"id"</span><span class="fu">:</span> <span class="st">"macro_002"</span><span class="fu">,</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"slug"</span><span class="fu">:</span> <span class="st">"mainstream-base-development"</span><span class="fu">,</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"title"</span><span class="fu">:</span> <span class="st">"Base Development"</span><span class="fu">,</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"card_type"</span><span class="fu">:</span> <span class="st">"macro"</span><span class="fu">,</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"suitable_levels"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"all"</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"summary"</span><span class="fu">:</span> <span class="st">"A foundation-building phase for aerobic capacity, durable routine, strength support, and load tolerance."</span><span class="fu">,</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"purpose"</span><span class="fu">:</span> <span class="st">"Build the broad capacity that makes later performance, specificity, and harder training more useful."</span><span class="fu">,</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"tags"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"base"</span><span class="ot">,</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aerobic"</span><span class="ot">,</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"durability"</span><span class="ot">,</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"foundation"</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"philosophy_profile_ids"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mainstream_endurance"</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"goal_race_context"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Early in a preparation cycle before demanding race-specific work."</span><span class="ot">,</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"When the athlete needs better aerobic durability or more consistent training tolerance."</span><span class="ot">,</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"After return-to-consistency work is stable enough to support gradual progression."</span><span class="ot">,</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"For long-range goals where a wider foundation is more valuable than early specificity."</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"training_profile"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"High proportion of easy aerobic running with controlled progression."</span><span class="ot">,</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gradual long-run development and enough recovery to make volume repeatable."</span><span class="ot">,</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Strength, mobility, strides, or coordination work may support durability without dominating the phase."</span><span class="ot">,</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Trail terrain can be varied, but technicality, climbing, and descent load should increase gradually."</span></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"expected_adaptations"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Improved aerobic efficiency and endurance."</span><span class="ot">,</span></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Greater tolerance for weekly running load and long-run duration."</span><span class="ot">,</span></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Better readiness for more directed capacity or race-specific training."</span></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"watchouts"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do not make the phase a race-specific block too early."</span><span class="ot">,</span></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Avoid chronic moderate-hard running that makes easy volume less repeatable."</span><span class="ot">,</span></span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do not increase volume, vertical gain, and long-run difficulty together too aggressively."</span><span class="ot">,</span></span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Persistent heaviness or soreness means the base is not being absorbed."</span></span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"progression_rules"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Increase load gradually through frequency, duration, or long-run progression before frequent intensity."</span><span class="ot">,</span></span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Keep most work easy enough that the athlete can repeat the week well."</span><span class="ot">,</span></span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Move toward capacity development when volume, routine, and recovery are stable."</span></span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"regression_rules"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Hold weekly load steady if easy running becomes less easy."</span><span class="ot">,</span></span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Reduce vertical gain, technicality, or downhill exposure before abandoning the aerobic purpose."</span><span class="ot">,</span></span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Return to consistency work if the routine itself becomes unreliable."</span></span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"additional_information"</span><span class="fu">:</span> <span class="st">"Base development is not filler before the real training starts. It is where the athlete becomes more trainable: able to run regularly, absorb load, move well, and carry enough aerobic capacity for later work to matter."</span><span class="fu">,</span></span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"references"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"card_id"</span><span class="fu">:</span> <span class="st">"macro_001"</span><span class="fu">,</span></span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"relationship"</span><span class="fu">:</span> <span class="st">"previous"</span><span class="fu">,</span></span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"tags"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>        <span class="st">"common_sequence"</span></span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a>      <span class="ot">]</span></span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"card_id"</span><span class="fu">:</span> <span class="st">"macro_003"</span><span class="fu">,</span></span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"relationship"</span><span class="fu">:</span> <span class="st">"next"</span><span class="fu">,</span></span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"tags"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a>        <span class="st">"development_sequence"</span></span>
+<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a>      <span class="ot">]</span></span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"card_id"</span><span class="fu">:</span> <span class="st">"macro_009"</span><span class="fu">,</span></span>
+<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"relationship"</span><span class="fu">:</span> <span class="st">"alternative"</span><span class="fu">,</span></span>
+<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"tags"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a>        <span class="st">"lower_cost"</span></span>
+<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a>      <span class="ot">]</span></span>
+<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"recommended_duration_weeks"</span><span class="fu">:</span> <span class="st">"8-16"</span><span class="fu">,</span></span>
+<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"timing_guidance"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Usually belongs early in the training cycle."</span><span class="ot">,</span></span>
+<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Longer goals or less durable athletes may need a longer base before specific work."</span></span>
+<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</section>
+<section id="from-authoring-to-cloud-storage" class="level4">
+<h4 class="anchored" data-anchor-id="from-authoring-to-cloud-storage">From authoring to cloud storage</h4>
+<p>The workflow from authoring a card to storing it in the cloud has two paths:</p>
+<ul>
+<li>When we edit a card that already exists in the cloud library, we first download the current library into the local cache and update its JSON record there</li>
+<li>When we create a new card, we can first prepare it in a temporary Python file using the card classes. The new card is then converted into JSON and added to the local cache</li>
+</ul>
+<p>Each new card receives a unique level-based ID, such as macro_002, and a readable slug used in its filename; validation checks that both are unique before the card enters the library.</p>
+<p>In both cases, the result is validated locally before the relevant files are uploaded to Google Drive.</p>
+<pre class="text"><code>Card authoring or editing
+        ↓
+Local cloud-library cache
+        ↓
+Schema and relationship validation
+        ↓
+Bundle and index generation
+        ↓
+Upload to Google Drive
+        ↓
+Streamlit downloads the validated bundle</code></pre>
+<p>Before the changes are uploaded, the validation tools check the card schemas, references, reuse mappings, manifest, and library index. The upload scripts we prepared then rebuild the bundle and supporting metadata before uploading the updated files back to the cloud. The upload scripts can publish the complete library or update only one card level while leaving the other card files unchanged.</p>
+</section>
+</section>
+<section id="project-structure" class="level3">
+<h3 class="anchored" data-anchor-id="project-structure">Project structure</h3>
+<p>Since the project combines coaching knowledge, structured card data, cloud workflows, and a user interface, we wanted to keep its structure clear. This makes the project easier to understand, maintain, and extend.</p>
+<p>The sketch below shows the main parts of the system and how they are separated.</p>
+<pre class="text"><code>Trail-Running-Training-Cards/
+├── coaching/                         # Coaching knowledge and card guidance
+│   ├── coaching_foundation.md        # Shared training principles
+│   ├── card_hierarchy.md             # Planning hierarchy
+│   ├── card_authoring_guidance.md    # Guidance for preparing cards
+│   └── philosophies/                 # Separate coaching approaches
+│       ├── mainstream_endurance/
+│       │   ├── summary.md
+│       │   ├── philosophy.md
+│       │   └── sources.md
+│       ├── cts/
+│       │   ├── summary.md
+│       │   ├── philosophy.md
+│       │   └── sources.md
+│       └── ...
+├── training_cards/                   # Card schemas and data workflows
+│   ├── schemas/                      # Card classes and supporting types
+│   │   ├── base.py                   # Shared card structure
+│   │   ├── macro.py                  # Macro card definition
+│   │   ├── ...                       
+│   │   ├── enums.py                  # Controlled values
+│   │   └── references.py             # Card relationships
+│   ├── cards/
+│   │   ├── examples/                 # Temporary Python authoring examples
+│   │   │   ├── macro_example.py
+│   │   │   ├── ...
+│   │   └── card_matrix.md            # Card taxonomy and build decisions
+│   ├── serialization.py              # Python-to-JSON conversion
+│   ├── json_store.py                 # JSON storage and validation
+│   ├── cloud_store.py                # Cloud-library synchronization
+│   └── scripts/                      # Authoring, cache, and upload workflows
+├── streamlit_app/                    # Current card-library interface
+│   ├── app.py                        # Application entry point
+│   ├── data.py                       # Library loading and preparation
+│   ├── views/                        # Main interface views
+│   └── renderers/                    # Card and detail presentation
+├── tests/                            # Checks for storage and library behaviour
+├── notes/                            # Durable project and workflow documentation
+└── archive/                          # Retired experiments outside the active system
+
+Google Drive (outside the repository)
+└── training_cards_library/           # Accepted JSON card library and metadata</code></pre>
+</section>
+<section id="ai-assisted-development" class="level3">
+<h3 class="anchored" data-anchor-id="ai-assisted-development">AI-assisted development</h3>
+<p>AI assistance supported the project throughout. It also became a kind of experiment and learning exercise for me: I explored an increasingly common way of working, but one I had not used (and favored) much before. Could we build a complete system without writing a single line of code ourselves?</p>
+<p>This was far from a hands-off process. I had to define the agents’ roles, prepare the prompts, provide context, review the outputs, correct mistakes, and redirect the work whenever it moved away from the intended direction. A large part of our contribution was orchestrating the process and making sure that the different pieces stayed consistent. This was also particularly demanding because I tend to approach projects with a perfectionist level of attention to detail. Small inconsistencies matter to me, so I kept reviewing and refining the result.</p>
+<p>I remained responsible for: - the original card idea and purpose of the project - the project structure and card hierarchy - the schema and data-organization decisions - the prompts, boundaries, and workflow - the visual direction of the interface - reviewing, correcting, and approving the results</p>
+<p>We divided the work into clearly defined roles: - Specialized endurance coach: prepared the training knowledge, philosophy profiles, and card content - Technical agents: helped implement the schemas, validation, storage, reuse logic, and cloud workflows - Application-focused agents: helped build the current interface based on our requirements, visual ideas, and corrections</p>
+</section>
+<section id="the-current-card-library-application" class="level3">
+<h3 class="anchored" data-anchor-id="the-current-card-library-application">The current card library application</h3>
+<p>To really use the cards, we built a first interface for the library with Streamlit.</p>
+<p>This is the current version of the system. It is still mainly a browsing and exploration tool rather than a complete training platform. The larger goal is to develop it further so it can help us make training decisions and use the card library more actively in our own training.</p>
+<p>The current version allows us to:</p>
+<ul>
+<li>browse and search cards across the different planning levels</li>
+<li>filter cards by type, philosophy profile, tags, and other metadata</li>
+<li>open detailed cards and read their purpose, training information, guidance, and references</li>
+<li>explore coaching philosophy profiles and their source material</li>
+<li>move through the Macro-to-Session hierarchy and follow related card connections</li>
+<li>inspect available session options and training pathways</li>
+</ul>
+<p><a href="https://trail-running-training-cards.streamlit.app/">Open the Training Card Library</a></p>
+<p>This gives us a first usable interface for the structured library. Future development can move the system beyond browsing by adding more practical training support and making it more useful for everyday decision-making.</p>
+<div class="project-link-container">
+    <i class="fab fa-github"></i>
+    <span> You can find the full
+    <a href="https://github.com/1312Bravo/Trail-Running-Training-Cards" target="_blank">Trail-Running-Training-Cards</a>
+    project on my GitHub.</span>
+</div>
+<div class="post-nav">
+<p><a href="../../projects/training_log.html" class="post-nav-back">Back to Training Log</a></p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

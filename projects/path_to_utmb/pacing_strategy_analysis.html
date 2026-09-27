@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>In ultra running, the “winner” is the one who slows down the least. Is this true? – Urh Peček | Data Science Blog</title>
+<title>In Ultra Running, the “Winner” Is the One Who Slows Down the Least. Is This True? – Urh Peček | Data Science Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -135,6 +135,10 @@ window.Quarto = {
     <a class="dropdown-item" href="../../projects/training_log.html">
  <span class="dropdown-text">Training Log</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../projects/a_bit_of_everything.html">
+ <span class="dropdown-text">A Bit of Everything</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -165,7 +169,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">In ultra running, the “winner” is the one who slows down the least. Is this true?</h1>
+<h1 class="title">In Ultra Running, the “Winner” Is the One Who Slows Down the Least. Is This True?</h1>
 </div>
 
 
@@ -183,7 +187,7 @@ window.Quarto = {
 
 
 <div class="{=html}">
-<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer"></p>
+<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"></p>
 </div>
 <div class="project-trail">
 <p><a href="../../projects/path_to_utmb.html">Path To UTMB</a></p>
@@ -227,7 +231,7 @@ Takeaway
 </section>
 </section>
 <section id="from-finish-time-to-race-shape---data" class="level3">
-<h3 class="anchored" data-anchor-id="from-finish-time-to-race-shape---data">From finish time to race shape - Data</h3>
+<h3 class="anchored" data-anchor-id="from-finish-time-to-race-shape---data">From finish time to race shape - data</h3>
 <p>To test this, I combine two types of UTMB data from the <strong>2022, 2023, 2024, and 2025</strong> editions, both described in the <a href="../../projects/path_to_utmb/data.html">data collection post</a>. The first is <strong><a href="../../projects/path_to_utmb/data.html#utmb-race-results">race result data</a></strong>: finishing time, rank, race status, and runner descriptive variables. The second is <strong><a href="../../projects/path_to_utmb/data.html#utmb-racerunner-sector-data">race/runner sector data</a></strong>: checkpoint-by-checkpoint timing, including when a runner arrived, when they left, how long they rested, and how long they spent moving through each part of the course.</p>
 <p>Together, these data sources connect the final result with the shape of the race that produced it. The dataset contains <strong>10,563 runner-race observations</strong> from <strong>9,528 unique runners</strong>, and for each runner we can follow how the race unfolded sector by sector.</p>
 <p>We focus on <strong>finishers with usable sector data across the race</strong>. In the raw data, <strong>6,971 runners finished</strong> which means about <strong>66%</strong> of runner-race observations ended with a finish. Across the four editions, the finisher share ranged from roughly <strong>64% to 68%</strong>.</p>
@@ -823,7 +827,7 @@ Takeaway
 <p>In practical terms, if we want to improve the probability of a successful long distance running race, the model points toward a clear strategy: <strong>keep the opening phase under control, maintain a stable pacing profile, and preserve enough relative strength for the late race</strong>.</p>
 <div class="project-link-container">
     <i class="fab fa-github"></i>
-    <span> You can find the full code for the structured analysis, on Path To UTMB Github repository under the
+    <span> You can find the full code for the structured analysis, on Path To UTMB GitHub repository under the
     <a href="https://github.com/1312Bravo/Path-To-UTMB/tree/main/pacing_strategy" target="_blank"> pacing_strategy</a>
      directory.</span>
 </div>

@@ -1,0 +1,19 @@
+---
+title: "A bit of everything"
+---
+
+:::{=html}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+:::
+
+<div class="project-trail">
+  <a href="../index.qmd">Home</a>
+</div>
+
+Some projects do not naturally belong to one of the larger project themes. This section brings those projects together in one place: smaller experiments, practical tools, and ideas that may later grow into their own project families.
+
+::: {.blog-card}
+## [When Training Becomes a Deck of Cards - Training Card Library](a_bit_of_everything/training_cards.qmd)  
+In the trail-running podcast *The Albon Way*, I heard John Albon describe thinking about training as a card-based system. It immediately clicked with me, and I could picture it clearly. I wanted to turn that into a small project with a light data science and data engineering touch that would help me with my training while also teaching me more about endurance sports training along the way.
+<span class="blog-date">September 2026</span>
+:::

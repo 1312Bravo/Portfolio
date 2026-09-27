@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>about – Urh Peček | Data Science Blog</title>
+<title>training_cards_preview – Urh Peček | Data Science Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +23,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-59898bd1c6b9d2bb783127feaa000c76.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-920f8b5b4a9e6fe8e930067d636556fa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-59898bd1c6b9d2bb783127feaa000c76.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-920f8b5b4a9e6fe8e930067d636556fa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,7 +69,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent quarto-light">
@@ -79,7 +79,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Urh Peček | Data Science Blog</span>
     </a>
   </div>
@@ -90,7 +90,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -99,16 +99,12 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
         <li>
-    <a class="dropdown-item" href="./projects/path_to_utmb.html">
+    <a class="dropdown-item" href="../../projects/path_to_utmb.html">
  <span class="dropdown-text">Path To UTMB</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./projects/training_log.html">
+    <a class="dropdown-item" href="../../projects/training_log.html">
  <span class="dropdown-text">Training Log</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./projects/a_bit_of_everything.html">
- <span class="dropdown-text">A Bit of Everything</span></a>
   </li>  
     </ul>
   </li>
@@ -141,8 +137,70 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+<section id="cloud-card-library" class="level3">
+<h3 class="anchored" data-anchor-id="cloud-card-library">Cloud card library</h3>
+<p>The accepted card content itself is stored as JSON in Google Drive, which acts as the source of truth for the library. The repository still contains a few Python examples and temporary authoring tools, but it does not maintain a second complete Python version of all cards. This keeps the card data separate from the system that defines, checks, moves, and displays it.</p>
+<section id="cloud-structure" class="level4">
+<h4 class="anchored" data-anchor-id="cloud-structure">Cloud structure</h4>
+<p>The cloud library follows the same hierarchy as the cards themselves. Each card is stored as an individual JSON file under its planning level and philosophy profile:</p>
+<pre class="text"><code>training_cards_library/
+├── cards/
+│   ├── macro/
+│   │   ├── mainstream_endurance/
+│   │   ├── cts/
+│   │   └── ...
+│   ├── mezzo/
+│   ├── micro/
+│   └── session/
+├── manifest.json
+├── display_config.json
+├── macro_mezzo_reuse.json
+├── mezzo_micro_reuse.json
+├── micro_session_reuse.json
+├── card_library_index.json
+└── training_cards_library.json</code></pre>
+<p>The card folders are organized by level first and then by philosophy profile. A card connected to one profile is stored under that profile. When a card genuinely combines ideas from several profiles, it is stored under a separate <code>multi_profile</code> folder. The folder helps organize the files, but the card’s own <code>philosophy_profile_ids</code> field remains the authoritative record of its connections.</p>
+<p>The remaining files provide the information needed around the individual cards:</p>
+<ul>
+<li><code>manifest.json</code> records the library and schema versions and the expected library structure.</li>
+<li><code>display_config.json</code> contains application-facing labels and display settings.</li>
+<li>The three reuse files describe how cards can be reused between Macro and Mezzo, Mezzo and Micro, or Micro and Session levels.</li>
+<li><code>card_library_index.json</code> provides compact metadata for browsing the library.</li>
+<li><code>training_cards_library.json</code> is the bundled version used by the application. It brings the cards and the supporting metadata together in one validated file.</li>
+</ul>
+<p>This means that the cloud library is not just a folder full of unrelated JSON files. It has a content layer containing the cards and a small metadata layer describing versions, display settings, reuse, and browsing information.</p>
+</section>
+<section id="from-authoring-to-cloud-storage" class="level4">
+<h4 class="anchored" data-anchor-id="from-authoring-to-cloud-storage">From authoring to cloud storage</h4>
+<p>The normal workflow begins by downloading the current cloud library into a local cache. We then edit existing JSON cards or use temporary Python class-based scaffolding when a new card is easier to prepare in Python. In either case, the accepted result is converted into JSON and placed in the local cache before it is uploaded.</p>
+<pre class="text"><code>Card authoring or editing
+        ↓
+Local cloud-library cache
+        ↓
+Schema and relationship validation
+        ↓
+Bundle and index generation
+        ↓
+Upload to Google Drive
+        ↓
+Streamlit downloads the validated bundle</code></pre>
+<p>The local cache is only a working copy. It allows us to review, validate, and prepare changes without editing the cloud library blindly. Before uploading, the project checks the card schemas, references, reuse mappings, manifest, and library index. The bundle is then rebuilt from the validated cache and the relevant files are uploaded to Google Drive.</p>
+<p>The upload scripts can work with the whole library or with one card level at a time. This makes it possible to update, for example, the session layer without unnecessarily replacing the accepted Macro, Mezzo, and Micro files. For larger changes, the library can also be downloaded again after the upload so the cloud result can be checked against the local version.</p>
+</section>
+<section id="how-the-application-uses-the-library" class="level4">
+<h4 class="anchored" data-anchor-id="how-the-application-uses-the-library">How the application uses the library</h4>
+<p>The Streamlit application does not depend on the temporary Python authoring files. When the application starts, it looks for the validated library bundle. In the deployed version, it downloads <code>training_cards_library.json</code> from the root of the Google Drive library into a temporary runtime cache when needed.</p>
+<p>The application then reads the bundle, converts the JSON records into the card objects defined by the schemas, and validates the cards together with the manifest, index, display configuration, and reuse mappings. Only after this step does the application use the data to build the card library, filters, pathways, and detail views.</p>
+<p>This gives us a useful boundary between the data and the interface. We can update the card content or its supporting metadata without rewriting the Streamlit views, as long as the published data still follows the expected schema. The same structured library could also be used by another application later, because the cards are not tied directly to the current interface.</p>
+</section>
+<section id="why-keep-the-cards-outside-the-repository" class="level4">
+<h4 class="anchored" data-anchor-id="why-keep-the-cards-outside-the-repository">Why keep the cards outside the repository?</h4>
+<p>Keeping the accepted card content in the cloud makes the project easier to maintain and reuse. The repository can focus on the rules and tools that define, validate, transform, and display the cards, while Google Drive holds the changing library itself. This avoids maintaining two competing copies of the same content and makes it possible to use the card library in other projects without copying the whole repository.</p>
+<p>For the current stage, Google Drive is enough because the library is primarily a structured collection of JSON files and the editing workflow is controlled by scripts. A more advanced database could become useful later if the application needs in-app editing, several users, permissions, or more complex querying. For now, separating the cloud data from the project code gives us the flexibility we need without adding unnecessary infrastructure.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -217,7 +275,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/1312Bravo\.github\.io\/Portfolio\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

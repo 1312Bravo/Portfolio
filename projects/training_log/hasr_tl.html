@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Increase your chances of staying away from running injuries - HASR-TL – Urh Peček | Data Science Blog</title>
+<title>Increase Your Chances of Staying Away from Running Injuries - HASR-TL – Urh Peček | Data Science Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -135,6 +135,10 @@ window.Quarto = {
     <a class="dropdown-item" href="../../projects/training_log.html">
  <span class="dropdown-text">Training Log</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../projects/a_bit_of_everything.html">
+ <span class="dropdown-text">A Bit of Everything</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -165,7 +169,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Increase your chances of staying away from running injuries - HASR-TL</h1>
+<h1 class="title">Increase Your Chances of Staying Away from Running Injuries - HASR-TL</h1>
 </div>
 
 
@@ -183,7 +187,7 @@ window.Quarto = {
 
 
 <div class="{=html}">
-<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer"></p>
+<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"></p>
 </div>
 <div class="project-trail">
 <p><a href="../../projects/training_log.html">Training Log</a></p>
@@ -389,7 +393,7 @@ Takeaway
 <p>For Long sessions, most misclassifications by the model were sessions manually perceived as Hard but with low aggregate intensity, or longer bike rides that were considered Easy.</p>
 </section>
 <section id="history-aware-statified-relative---training-load-hasr-tl" class="level3">
-<h3 class="anchored" data-anchor-id="history-aware-statified-relative---training-load-hasr-tl">History-Aware Statified Relative - Training Load (HASR-TL)</h3>
+<h3 class="anchored" data-anchor-id="history-aware-statified-relative---training-load-hasr-tl">History-aware statified relative - training load (HASR-TL)</h3>
 <p>Once training sessions are divided into the three percentile-based buckets, defined from the baseline window, we can combine them into a single, interpretable metric that reflects how recent training compares to the athlete’s long-term adaptation. The central idea is weighted aggregation, where each bucket contributes differently to the overall metric. By aggregating the per-bucket loads with appropriate weights, HASRTL produces a single number that reflects how the overall recent training load compares to the baseline adaptation.</p>
 <p><strong>Weighted aggregation</strong></p>
 <p>Let <span class="math inline">\(w_\text{Easy}, w_\text{Hard}, w_\text{Long}\)</span> denote weights for Easy, Hard, and Long sessions, respectively, with <span class="math display">\[w_\text{Easy}, w_\text{Hard}, w_\text{Long}=1,\quad w_k \geq 0 .\]</span></p>
@@ -416,7 +420,7 @@ Takeaway
 <p>These weights are not directly measurable, they are largely subjective, based on expert knowledge, experience, and general principles of training load management rather than precise data.</p>
 </section>
 <section id="interpretation-bucket-level-diagnostics" class="level3">
-<h3 class="anchored" data-anchor-id="interpretation-bucket-level-diagnostics">Interpretation &amp; Bucket-level diagnostics</h3>
+<h3 class="anchored" data-anchor-id="interpretation-bucket-level-diagnostics">Interpretation &amp; bucket-level diagnostics</h3>
 <p>Although <span class="math inline">\(\Delta_t\)</span> provides a clear mathematical ratio of recent to baseline training load, its practical interpretation is less straightforward - it is not always obvious when an increase or decrease becomes significant, risky, or indicative of detraining.</p>
 <p><img src="saved_files/hasr_tl/hasr_tl_full.png" class="click-zoom img-fluid"></p>
 <p>The idea behind the HASR-TL metric is to summarize this relationship in a single number, but a deeper understanding comes from also examining the individual training buckets (e.g., easy, hard, long). Comparing these buckets within the baseline and recent windows, and between them, helps reveal where changes originate and adds richer context than the ratio alone.</p>
@@ -444,7 +448,7 @@ Takeaway
 </div>
 <div class="project-link-container">
     <i class="fab fa-github"></i>
-    <span> You can find the full code for this section, along with the analyses, which is then easily integrated into the <code>src/main.py</code> script, on my Github repository under the
+    <span> You can find the full code for this section, along with the analyses, which is then easily integrated into the <code>src/main.py</code> script, on my GitHub repository under the
     <a href="https://github.com/1312Bravo/TrainingPeaks_customLog/tree/main/history_aware_relative_stratified_training_load" target="_blank"> history_aware_relative_stratified_training_load</a>
      directory.</span>
 </div>
