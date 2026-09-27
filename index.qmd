@@ -36,7 +36,7 @@ Analysing Trail Running (UTMB) data with the final goal of personal UTMB partici
 :::
 
 ::: {.project-card}
-## [A bit of everything](projects/a_bit_of_everything.qmd)
+## [A Bit of Everything](projects/a_bit_of_everything.qmd)
 Independent research projects that sit outside the larger project themes.
 :::
 
