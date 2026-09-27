@@ -16,6 +16,8 @@ website:
             href: projects/path_to_utmb.qmd
           - text: Training Log
             href: projects/training_log.qmd
+          - text: A Bit of Everything
+            href: projects/a_bit_of_everything.qmd
     right:
       - text: "pecek.urh@gmail.com"
         href: mailto:pecek.urh@gmail.com

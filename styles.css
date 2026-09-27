@@ -248,6 +248,49 @@ a:hover {
     line-height: 1.6;
 }
 
+/* Minimal expandable class examples */
+.training-card-details {
+    margin: 0.2rem 0 0.9rem;
+}
+
+.training-card-details summary {
+    cursor: pointer;
+    color: #4f4f4f;
+}
+
+.training-card-details summary::marker {
+    font-size: 0.72em;
+    color: #777777;
+}
+
+.training-card-details summary:hover {
+    color: #111111;
+}
+
+.training-card-details pre {
+    margin-top: 0.55rem;
+}
+
+/* Compact philosophy profile list */
+.coaching-philosophy-list {
+    padding-left: 1.25rem;
+    margin: 0.8rem 0 1.2rem;
+    list-style: disc;
+}
+
+.coaching-philosophy-list li {
+    margin: 0.65rem 0;
+}
+
+.coaching-philosophy-list img {
+    width: 18px;
+    height: 18px;
+    margin: 0 0.25rem;
+    object-fit: contain;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
 /* Post summary box */
 .post-summary {
     background-color: #f7f7f7;
