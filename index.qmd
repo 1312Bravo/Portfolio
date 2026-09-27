@@ -35,3 +35,8 @@ Analysing training data with Python and Garmin data.
 Analysing Trail Running (UTMB) data with the final goal of personal UTMB participation.
 :::
 
+::: {.project-card}
+## [A bit of everything](projects/a_bit_of_everything.qmd)
+Independent research projects that sit outside the larger project themes.
+:::
+

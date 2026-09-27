@@ -10,6 +10,22 @@ title: "When Training Becomes a Deck of Cards - Training Card Library"
   <a href="../a_bit_of_everything.qmd">A Bit of Everything</a>
 </div>
 
+::: {.post-summary}
+#### Explore the card library
+
+To explore the cards, we prepared a first, mostly static Streamlit interface for the structured library. It gives us a simple way to browse and explore the training cards while we continue developing the larger system behind them.
+
+<div class="training-app-link">
+  <span class="training-app-link-arrow" aria-hidden="true">→</span>
+  <a href="https://trail-running-training-cards.streamlit.app/" target="_blank">
+    <strong>Open the Training Card Library</strong>
+    <span class="training-app-link-external" aria-hidden="true">↗</span>
+  </a>
+</div>
+
+The app is hosted on Streamlit Community Cloud. If it receives no traffic for 12 hours, Streamlit puts it to sleep to save resources. When that happens, the page shows a *“Yes, get this app back up!”* button. Clicking that button wakes the app up again, but it can take a few seconds to load. 
+:::
+
 ### Idea
 
 In the trail-running podcast [*The Albon Way*](https://podcasts.apple.com/gb/podcast/the-albon-way/id1769928638), I heard John Albon describe training as a card-based system. It immediately clicked with me. I could vividly picture the idea of running training cards and wanted to turn that picture into something real. I knew what the cards should be, but not yet how everything around them would work, so I wanted the wider system to take shape as we built it.
@@ -17,16 +33,6 @@ In the trail-running podcast [*The Albon Way*](https://podcasts.apple.com/gb/pod
 The concept was to create a set of cards, a bit like Pokémon, Yu-Gi-Oh, or Cars cards, but built specifically for running. Each card would capture something practical about a training element, such as what to do, its strengths, what it does, when to use it, and who it is for. These would not be loose notes: I wanted them to follow a clear structure while still appearing as real cards in a clean and intuitive user experience. In my head, they could live inside an application and feel easy to browse, almost like a small training deck to choose from.
 
 The idea also appealed to me because training decisions can be mentally tiring. I usually know roughly where I am in a training period, but after a full day of work I do not always want to think too much about the next session. I wanted a quick tool that would reduce decision fatigue, make daily choices easier, and provide a few ready-made options. At the same time, it would educate us about training and help both newer and more experienced athletes think more clearly about training, effort, and purpose.
-
-::: {.post-summary}
-#### Explore the card library
-
-To explore the cards, we prepared a first, mostly static Streamlit interface for the structured library. It gives us a simple way to browse and explore the training cards while we continue developing the larger system behind them.
-
-[Open the Training Card Library](https://trail-running-training-cards.streamlit.app/)
-
-The app is hosted on Streamlit Community Cloud. If it receives no traffic for 12 hours, Streamlit puts it to sleep to save resources. When that happens, the page shows a *“Yes, get this app back up!”* button. Clicking that button wakes the app up again, but it can take a few seconds to load. 
-:::
 
 ### The specialized endurance coach
 
