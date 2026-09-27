@@ -7,7 +7,7 @@ title: "When Training Becomes a Deck of Cards - Training Card Library"
 :::
 
 <div class="project-trail">
-  <a href="../training_log.qmd">Training Log</a>
+  <a href="../a_bit_of_everything.qmd">A Bit of Everything</a>
 </div>
 
 ### Idea
@@ -665,5 +665,5 @@ This gives us a first usable interface for the structured library. Future develo
 ```
 
 ::: {.post-nav}
-[Back to Training Log](../training_log.qmd){.post-nav-back}
+[Back to A Bit of Everything](../a_bit_of_everything.qmd){.post-nav-back}
 :::
