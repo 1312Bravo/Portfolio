@@ -3,7 +3,7 @@ title: "When Training Becomes a Deck of Cards - Training Card Library"
 ---
 
 :::{=html}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 :::
 
 <div class="project-trail">
@@ -103,7 +103,7 @@ Fields without a default value are required. Fields with a default value, such a
 
 #### Specialized card classes
 
-`MacroCard` represents the broadest planning block that spans over several weeks or more. It should help answer: what are we trying to accomplish during this phase, and how does it fit into the wider training plan?
+`MacroCard` represents the broadest planning block that spans over several months or more. It should help answer: what are we trying to accomplish during this phase, and how does it fit into the wider training plan?
 
 It inherits the shared contract and adds the fields that matter only for a broad phase-level object.
 
@@ -153,7 +153,7 @@ class MicroCard(BaseTrainingCard):
 
 `SessionCard` is the most detailed card. It describes one workout or session pattern. It needs enough structure to guide execution, but it should still feel like a reusable workout concept rather than a one-off prescription.
 
-It is supported by three smaller classes: `WorkoutBlock`, `WorkoutOption`, and `SessionPart`. They break a workout into its main parts, possible variations, and individual instructions. `SessionFamily` groups similar workouts under a common label. Together, these supporting classes give each session a clear structure while still allowing us to represent different workout formats and options.
+It is supported by four additional classes: `WorkoutBlock`, `WorkoutOption`, `SessionPart`, and `SessionFamily`. The first three break a workout into its main parts, possible variations, and individual instructions, while `SessionFamily` groups similar workouts under a common label. Together, these supporting classes give each session a clear structure while still allowing us to represent different workout formats and options.
 
 <details class="training-card-details">
 <summary>SessionCard</summary>
@@ -301,7 +301,7 @@ This structure gives us a repeatable template for adding new coaching philosophi
 
 Once the coaching foundation and philosophy profiles were in place, we could start turning that knowledge into cards. We built the card library from the larger planning blocks toward the individual sessions. That way, each smaller card was developed within a larger block, but could still be reused elsewhere when it fit.
 
-Mezzo cards were created inside the context of their Macro phases, Micro cards were developed for the focus of their Mezzo blocks, and Session cards were selected and shaped to support the weekly structure. Session cards were therefore treated as reusable training concepts, rather than as isolated workouts written for only one specific day.
+Mezzo cards were created in the context of their Macro phases, Micro cards were developed for the focus of their Mezzo blocks, and Session cards were selected and shaped to support the weekly structure. Session cards were therefore treated as reusable training concepts, rather than as isolated workouts written for only one specific day.
 
 #### The card-building process
 
@@ -346,6 +346,8 @@ class MacroMezzoReuse:
 #### Linking cards to philosophy profiles
 
 The `philosophy_profile_ids` field serves a different purpose. It connects a card to the training-method profiles that materially shaped its content. Baseline cards are connected to mainstream_endurance, while cards shaped by several approaches can contain more than one profile. A card can be connected to more than one profile when it reflects ideas shared by several approaches. This keeps the source of the training idea visible without confusing it with the card's structural relationships or reuse context.
+
+The same baseline-and-additions pattern applies to every card level:
 
 ```text
 Macro cards
@@ -566,7 +568,7 @@ Before the changes are uploaded, the validation tools check the card schemas, re
 
 ### Project structure
 
-Since the project combines coaching knowledge, structured card data, cloud workflows, and a user interface, a clear project structure is in my opinion very important.  This makes the project easier to understand, maintain, and extend. 
+Since the project combines coaching knowledge, structured card data, cloud workflows, and a user interface, we wanted to keep its structure clear. This makes the project easier to understand, maintain, and extend.
 
 The sketch below shows the main parts of the system and how they are separated.
 
@@ -617,7 +619,7 @@ Google Drive (outside the repository)
 
 ### AI-assisted development
 
-AI assistance supported the project throughout. It also became a kind of experiment and learning exercise for me: I explored an increasingly common way of working, but one I had not used (and favored) much before. Could I build a complete system without writing a single line of code ourselves?
+AI assistance supported the project throughout. It also became a kind of experiment and learning exercise for me: I explored an increasingly common way of working, but one I had not used (and favored) much before. Could we build a complete system without writing a single line of code ourselves?
 
 This was far from a hands-off process. I had to define the agents' roles, prepare the prompts, provide context, review the outputs, correct mistakes, and redirect the work whenever it moved away from the intended direction. A large part of our contribution was orchestrating the process and making sure that the different pieces stayed consistent. This was also particularly demanding because I tend to approach projects with a perfectionist level of attention to detail. Small inconsistencies matter to me, so I kept reviewing and refining the result.
 
@@ -658,7 +660,7 @@ This gives us a first usable interface for the structured library. Future develo
     <i class="fab fa-github"></i>
     <span> You can find the full
     <a href="https://github.com/1312Bravo/Trail-Running-Training-Cards" target="_blank">Trail-Running-Training-Cards</a>
-    project on my Github.</span>
+    project on my GitHub.</span>
 </div>
 ```
 

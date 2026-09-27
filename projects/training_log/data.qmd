@@ -3,7 +3,7 @@ title: "Track Your Training Smarter - Data"
 ---
 
 :::{=html}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 :::
 
 <div class="project-trail">
@@ -79,7 +79,7 @@ Of course, logging in requires credentials (emails, passwords, API keys). They a
 ```{=html}
 <div class="project-link-container">
     <i class="fab fa-github"></i>
-    <span> You can find the full code for this section, which is then easily integrated into the <code>src/main.py</code> script, on my Github repository under the
+    <span> You can find the full code for this section, which is then easily integrated into the <code>src/main.py</code> script, on my GitHub repository under the
     <a href="https://github.com/1312Bravo/TrainingPeaks_customLog/tree/main/basic_daily_activity_statistics" target="_blank"> basic_daily_activity_statistics</a>
      directory.</span>
 </div>

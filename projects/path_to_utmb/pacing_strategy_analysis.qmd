@@ -3,7 +3,7 @@ title: 'In Ultra Running, the "Winner" Is the One Who Slows Down the Least. Is T
 ---
 
 :::{=html}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 :::
 
 <div class="project-trail">
@@ -434,7 +434,7 @@ In practical terms, if we want to improve the probability of a successful long d
 ```{=html}
 <div class="project-link-container">
     <i class="fab fa-github"></i>
-    <span> You can find the full code for the structured analysis, on Path To UTMB Github repository under the
+    <span> You can find the full code for the structured analysis, on Path To UTMB GitHub repository under the
     <a href="https://github.com/1312Bravo/Path-To-UTMB/tree/main/pacing_strategy" target="_blank"> pacing_strategy</a>
      directory.</span>
 </div>

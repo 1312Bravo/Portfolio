@@ -3,7 +3,7 @@ title: "What UTMB Index Do I Need to Break 27 Hours with Almost Certainty"
 ---
 
 :::{=html}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-9usAa8m0M+WyW59Ry...cut..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 :::
 
 <div class="project-trail">
@@ -247,7 +247,7 @@ For most runners, readiness is therefore not a point at which success becomes gu
 ```{=html}
 <div class="project-link-container">
     <i class="fab fa-github"></i>
-    <span> You can find the full code for the structured analysis, on Path To UTMB Github repository under the
+    <span> You can find the full code for the structured analysis, on Path To UTMB GitHub repository under the
     <a href="https://github.com/1312Bravo/Path-To-UTMB/tree/main/utmb_under_27h" target="_blank"> utmb_under_27h</a>
      directory.</span>
 </div>
