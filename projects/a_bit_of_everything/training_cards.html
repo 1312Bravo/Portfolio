@@ -204,7 +204,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="training-app-link">
 <p><span class="training-app-link-arrow" aria-hidden="true">→</span> <a href="https://trail-running-training-cards.streamlit.app/" target="_blank"> <strong>Open the Training Card Library</strong> <span class="training-app-link-external" aria-hidden="true">↗</span> </a></p>
 </div>
-<p>The app is hosted on Streamlit Community Cloud. If it receives no traffic for 12 hours, Streamlit puts it to sleep to save resources. When that happens, the page shows a <em>“Yes, get this app back up!”</em> button. Clicking that button wakes the app up again, but it can take a few seconds to load.</p>
+<p>The app is hosted on Streamlit Community Cloud, where apps can sleep after 12 hours without traffic. To help prevent this, we added a small GitHub Action that checks the app every eight hours so it stays awake. If the <em>“Yes, get this app back up!”</em> button still appears, it is safe to click, although loading may take a few seconds.</p>
 </section>
 <section id="idea" class="level3">
 <h3 class="anchored" data-anchor-id="idea">Idea</h3>
@@ -678,6 +678,7 @@ Streamlit downloads the validated bundle</code></pre>
 <p>Since the project combines coaching knowledge, structured card data, cloud workflows, and a user interface, we wanted to keep its structure clear. This makes the project easier to understand, maintain, and extend.</p>
 <p>The sketch below shows the main parts of the system and how they are separated.</p>
 <pre class="text"><code>Trail-Running-Training-Cards/
+├── .github/                          # GitHub actions
 ├── coaching/                         # Coaching knowledge and card guidance
 │   ├── coaching_foundation.md        # Shared training principles
 │   ├── card_hierarchy.md             # Planning hierarchy
