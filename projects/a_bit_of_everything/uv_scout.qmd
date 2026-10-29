@@ -1,0 +1,35 @@
+---
+title: "UV Scout - Planning Time Outside Around the UV Index"
+---
+
+:::{=html}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+:::
+
+<div class="project-trail">
+  <a href="../a_bit_of_everything.qmd">A Bit of Everything</a>
+</div>
+
+### Idea
+
+<!-- We will write the motivation and the question behind UV Scout here. -->
+
+### The app
+
+<!-- We will describe the main user flow and features here. -->
+
+### Data and approach
+
+<!-- We will explain the forecast sources, calculations, and guidance here. -->
+
+### What I learned
+
+<!-- We will add the project reflection here. -->
+
+### Conclusion
+
+<!-- We will write the takeaway and next steps here. -->
+
+::: {.post-nav}
+[Back to A Bit of Everything](../a_bit_of_everything.qmd){.post-nav-back}
+:::

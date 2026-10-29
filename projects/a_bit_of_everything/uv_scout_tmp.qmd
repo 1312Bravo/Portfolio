@@ -1,0 +1,22 @@
+---
+title: "UV Scout - Planning Time Outside Around the UV Index"
+---
+
+:::{=html}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+:::
+
+<div class="project-trail">
+  <a href="../a_bit_of_everything.qmd">A Bit of Everything</a>
+</div>
+
+### Idea
+
+Before a run, I usually check the familiar parts of the forecast: temperature, rain, perhaps wind. They help me picture the day and decide what to wear. But when I am going to spend a while outside, there is another part of the forecast I can easily overlook: the UV Index. It offers a way to think about the sun's strength beyond whether the day feels hot or looks cloudy.
+
+During summer training, I needed a few reminders to put on sunscreen before heading out. When I forgot, I sometimes came home with a pretty bad sunburn. Then autumn arrived with cooler temperatures and cloudier days, and I caught myself wondering whether sunscreen still belonged in my pre-outing routine. The weather seemed gentler, but I did not know what that meant for UV at the time and place I had in mind.
+
+I asked an AI agent what the UV Index was and whether it could help answer that question. I began to see it as part of a broader habit: planning for the conditions I might face outside. I wanted UV to have a place in that routine too.
+
+That question grew into UV Scout, an app that helps me plan outings and offers practical guidance based on the UV Index at my chosen time and place.
+

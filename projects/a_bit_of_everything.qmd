@@ -17,3 +17,9 @@ This section brings together independent projects that do not fit into one of th
 In the trail-running podcast *The Albon Way*, I heard John Albon describe thinking about training as a card-based system. It immediately clicked with me, and I could picture it clearly. I wanted to turn that into a small project with a light data science and data engineering touch that would help me with my training while also teaching me more about endurance sports training along the way.
 <span class="blog-date">September 2026</span>
 :::
+
+::: {.blog-card}
+## [UV Scout - Planning Time Outside Around the UV Index](a_bit_of_everything/uv_scout.qmd)<br>
+Summer training gave me a few painful reminders to put on sunscreen before heading out. When autumn brought cooler temperatures, I began to wonder whether sunscreen still belonged in my pre-outing routine. That question grew into UV Scout, an app that helps me plan outings and offers practical guidance based on the UV Index for the time I spend outdoor.
+<span class="blog-date">October 2026</span>
+:::
