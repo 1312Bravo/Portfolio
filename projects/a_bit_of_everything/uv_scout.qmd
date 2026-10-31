@@ -10,6 +10,20 @@ title: "UV Scout - Planning Time Outside Around the UV Index"
   <a href="../a_bit_of_everything.qmd">A Bit of Everything</a>
 </div>
 
+::: {.post-summary}
+#### UV Scout
+
+![](saved_files/uv_scout/uv-scout-logo.png){fig-align="center" width="180"}
+
+**UV Scout** focuses on the UV Index, with other weather variables included as supporting forecast context. [Open the live web app](https://uvscout.expo.app).
+
+UV Scout was developed with mobile use in mind, though it can also be used in a desktop browser. The layout and interactions are designed primarily for phones.
+
+Choose a location by searching, using the map, or selecting your device location. In UV Outlook, see how the UV Index is expected to change through the day, alongside the weather conditions. Or Plan an Outing by setting when and how long you’ll be outside. The app then gives you an outing summary based on the expected UV levels, explaining what to expect and offering practical guidance on how to respond, with the other weather conditions as context.
+
+UV Scout is available as an **Android app** (there is no native iPhone app yet) or as a **website** for phones and desktop. Both require an internet connection to load forecast and map data. On a phone, I recommend adding the website to the Home Screen, or installing it through the browser if that option is available. It appears with the UV Scout icon and opens in its own window, so using the website on a phone feels much like using the Android app.
+:::
+
 ### Idea
 
 Summer training taught me the sunscreen lesson the hard way. More than once, I headed out without applying it and came home with a painful sunburn, promising myself I would remember next time.
