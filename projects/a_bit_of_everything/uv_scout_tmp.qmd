@@ -10,23 +10,5 @@ title: "UV Scout - Planning Time Outside Around the UV Index"
   <a href="../a_bit_of_everything.qmd">A Bit of Everything</a>
 </div>
 
-::: {.post-summary}
-#### Explore UV Scout
-
-UV Scout is designed primarily for Android, with a live web version for desktop and mobile browsers. [Open the web app](https://uvscout.expo.app), browse [Android preview builds on Expo](https://expo.dev/accounts/bravogroup/projects/uvscout/builds), or explore the [source code and setup instructions on GitHub](https://github.com/1312Bravo/uv-index-app).
-
-The Android app is currently shared as a preview APK through Expo rather than through Google Play. I have kept native app development focused on Android; adding an iOS version would bring more platform and release work than I wanted to take on for this project.
-:::
-
 ### Idea
-
-Summer training taught me the sunscreen lesson the hard way. More than once, I headed out without applying it and came home with a painful sunburn, promising myself I would remember next time.
-
-One autumn day, with cooler temperatures and cloudier skies, I wondered whether sunscreen still belonged in my pre-outing routine. I asked ChatGPT what the UV Index was and whether I should still apply sunscreen before a run.
-
-Until then, I mostly thought about temperature, rain, and wind when planning time outdoors. Those details helped me picture how the day might feel, while the UV Index was another part of the forecast I had not learned to consider. I wanted to understand what it could tell me about a specific outing.
-
-At first, I was looking for a straightforward answer about sunscreen. The more I thought about it, the more I wanted context for the whole outing. Where would I be? What time was I going? How long did I plan to stay outside? I wanted to see UV alongside the rest of the forecast and get practical guidance for my plans.
-
-That question grew into UV Scout, an app that helps me plan outings and offers practical guidance based on the UV Index at my chosen time and place.
 
