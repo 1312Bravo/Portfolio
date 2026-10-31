@@ -12,7 +12,17 @@ title: "UV Scout - Planning Time Outside Around the UV Index"
 
 ### Idea
 
-<!-- We will write the motivation and the question behind UV Scout here. -->
+Summer training taught me the sunscreen lesson the hard way. More than once, I headed out without applying it and came home with a painful sunburn, promising myself I would remember next time.
+
+One autumn day, with cooler temperatures and cloudier skies, I wondered whether sunscreen still belonged in my pre-outing routine. Until then, I mostly judged whether I needed sunscreen by the temperature and cloud cover.
+
+So, I asked ChatGPT what the UV Index was and whether I should still apply sunscreen before a run. At first, I was looking for a straightforward answer about sunscreen. The more I thought about it, the more I wanted context for the whole outing. Where would I be? What time was I going? How long did I plan to stay outside? I wanted to get practical guidance for my plans.
+
+When we think about the weather, temperature, rain, and cloud cover often come to mind first. UV is easier to overlook because we cannot see or feel it, even though excessive exposure can harm our skin and eyes. The UV Index makes this less visible part of the weather easier to understand and helps us consider sun protection when planning an outing.
+
+That idea grew into UV Scout, an app focused on the UV Index, with some other common local weather variables included for context. It combines the UV outlook with when and how long I plan to be outside to offer practical guidance for each outing.
+
+You can read more about UV radiation, its effects on health, and the UV Index in the [WHO fact sheet on ultraviolet radiation](https://www.who.int/news-room/fact-sheets/detail/ultraviolet-radiation).
 
 ### The app
 
@@ -29,6 +39,15 @@ title: "UV Scout - Planning Time Outside Around the UV Index"
 ### Conclusion
 
 <!-- We will write the takeaway and next steps here. -->
+
+```{=html}
+<div class="project-link-container">
+    <i class="fab fa-github"></i>
+    <span> You can find the full
+    <a href="https://github.com/1312Bravo/uv-index-app" target="_blank">UV-Index-App</a>
+    project on my GitHub.</span>
+</div>
+```
 
 ::: {.post-nav}
 [Back to A Bit of Everything](../a_bit_of_everything.qmd){.post-nav-back}

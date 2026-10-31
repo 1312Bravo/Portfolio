@@ -13,7 +13,7 @@ title: "When Training Becomes a Deck of Cards - Training Card Library"
 ::: {.post-summary}
 #### Explore the card library
 
-To explore the cards, we prepared a first, mostly static Streamlit interface for the structured library. It gives us a simple way to browse and explore the training cards while we continue developing the larger system behind them.
+To explore the cards, we prepared a first, mostly static **Streamlit** interface for the structured library. It gives us a simple way to browse and explore the training cards while we continue developing the larger system behind them.
 
 <div class="training-app-link">
   <span class="training-app-link-arrow" aria-hidden="true">→</span>
@@ -28,7 +28,7 @@ The app is hosted on Streamlit Community Cloud, where apps can sleep after 12 ho
 
 ### Idea
 
-In the trail-running podcast [*The Albon Way*](https://podcasts.apple.com/gb/podcast/the-albon-way/id1769928638), I heard John Albon describe training as a card-based system. It immediately clicked with me. I could vividly picture the idea of running training cards and wanted to turn that picture into something real. I knew what the cards should be, but not yet how everything around them would work, so I wanted the wider system to take shape as we built it.
+In the trail-running podcast [*The Albon Way*](https://podcasts.apple.com/gb/podcast/the-albon-way/id1769928638), I heard John Albon describe **training as a card-based system**. It immediately clicked with me. I could vividly picture the idea of running training cards and wanted to turn that picture into something real. I knew what the cards should be, but not yet how everything around them would work, so I wanted the wider system to take shape as we built it.
 
 The concept was to create a set of cards, a bit like Pokémon, Yu-Gi-Oh, or Cars cards, but built specifically for running. Each card would capture something practical about a training element, such as what to do, its strengths, what it does, when to use it, and who it is for. These would not be loose notes: I wanted them to follow a clear structure while still appearing as real cards in a clean and intuitive user experience. In my head, they could live inside an application and feel easy to browse, almost like a small training deck to choose from.
 
@@ -36,15 +36,15 @@ The idea also appealed to me because training decisions can be mentally tiring. 
 
 ### The specialized endurance coach
 
-Throughout the project, we relied on a separate AI agent as our specialized endurance and trail-running coach. We gave it a clear role through a set of detailed prompts and treated it as a coach working alongside us. Whenever the project involved endurance knowledge, we used it to provide the specialist information: from deciding what a useful card should contain and how the cards should work together, to defining their purpose and filling them with content.
+Throughout the project, we relied on a separate **AI agent as our specialized endurance and trail-running coach**. We gave it a clear role through a set of detailed prompts and treated it as a coach working alongside us. Whenever the project involved endurance knowledge, we used it to provide the specialist information: from deciding what a useful card should contain and how the cards should work together, to defining their purpose and filling them with content.
 
-In a way, we outsourced the endurance-specific knowledge to the coach while keeping responsibility for the idea, structure, infrastructure, and direction of the project. Its guidance was based on publications, established training systems, and common endurance-training principles, while we focused on turning that knowledge into a clear and usable system.
+In a way, we **outsourced the endurance-specific knowledge** to the coach while keeping responsibility for the idea, structure, infrastructure, and direction of the project. Its guidance was based on publications, established training systems, and common endurance-training principles, while we focused on turning that knowledge into a clear and usable system.
 
 ### Training cards and hierarchy
 
 #### Hierarchy
 
-Endurance training is usually organized into connected training blocks. Each block covers a different period and has its own purpose, while also containing smaller blocks within it. These are the blocks represented by the cards:
+Endurance training is usually organized into connected **training blocks**. Each block covers a different period and has its own purpose, while also containing smaller blocks within it. These are the blocks represented by the cards:
 
 ```text
 Macro block
@@ -64,7 +64,7 @@ Session
 └── Describes the individual training session
 ```
 
-The card structure follows this hierarchy. Each card is defined as a Python class based on its place in the training hierarchy. All card classes share the same *BaseTrainingCard*, which contains the information common to every card. The specialized *MacroCard*, *MezzoCard*, *MicroCard*, and *SessionCard* then build on that base by adding the fields needed for their own planning block.
+The card structure follows this hierarchy. Each card is defined as a Python class based on its place in the training **hierarchy**. All card classes share the same *BaseTrainingCard*, which contains the information common to every card. The specialized card classes *MacroCard*, *MezzoCard*, *MicroCard*, and *SessionCard* then build on that base by adding the fields needed for their own planning block.
 
 #### BaseTrainingCard
 
@@ -249,11 +249,11 @@ Using predefined values prevents small naming differences from representing the 
 
 The training cards classes gave us the shape of the cards and the next step is to actually build them. Before developing the cards, we created a separate layer for organizing the training knowledge inside them.
 
-Because we did not want to build the card library around one single coaching philosophy, we gave the already introduced AI coach a new task: with the guidance of our ideas, to research common endurance-training philosophies, suggest which approaches were worth including, and help us describe their main ideas. These profiles became a helper layer for the AI coach, giving it a clear background to work from while creating the card content.
+Because we did not want to build the card library around one single **coaching philosophy**, we gave the already introduced AI coach a new task: with the guidance of our ideas, to research common endurance-training philosophies, suggest which approaches were worth including, and help us describe their main ideas. These profiles became a helper layer for the AI coach, giving it a clear background to work from while creating the card content.
 
-The philosophy profiles are built on top of a shared coaching foundation that contains the general principles we wanted to keep consistent across the project, while each profile adds the ideas and priorities of a particular coaching approach. 
+The philosophy profiles are built on top of a shared coaching foundation that contains the general principles we wanted to keep consistent across the project, while each profile adds the ideas and priorities of a particular coaching approach.
 
-Each philosophy profile captures the main ideas of one coaching approach and gives us a consistent reference for working with it. The `philosophy_profile_ids` field on each card lets us record which philosophy profiles are connected to a card.
+Each **philosophy profile** captures the main ideas of one coaching approach and gives us a consistent reference for working with it. The `philosophy_profile_ids` field on each card lets us record which philosophy profiles are connected to a card.
 
 The profiles currently included are:
 
@@ -311,9 +311,9 @@ Mezzo cards were created in the context of their Macro phases, Micro cards were 
 
 #### The card-building process
 
-We first defined how the process should work: how to move through the card levels, compare the philosophy profiles, and decide when a new card was justified. The AI coach then worked through the profiles and prepared the training content for the cards according to that process. We stayed involved throughout by reviewing the suggestions, guiding the next steps, and adjusting the direction whenever needed.
+We first defined **how the process should work**: how to move through the card levels, compare the philosophy profiles, and decide when a new card was justified. The AI coach then worked through the profiles and prepared the training content for the cards according to that process. We stayed involved throughout by reviewing the suggestions, guiding the next steps, and adjusting the direction whenever needed.
 
-The same review cycle was repeated at every level of the hierarchy:
+The same **review cycle** was repeated at every level of the hierarchy:
 
 1. We first developed the mainstream endurance cards as a shared baseline for that level.
 2. We then selected one coaching philosophy profile and reviewed every mainstream card from that profile's perspective.
@@ -325,7 +325,7 @@ This gave every card level its own mainstream baseline, philosophy review, and f
 
 #### Connecting and reusing cards
 
-Although we built the cards from Macro to Session, the final library is not a strict tree. Smaller cards are developed in the context of larger blocks, but they can still be reused across several blocks. For example, one Micro card can support multiple Mezzo blocks, and one Session card can fit into different weekly structures.
+Although we built the cards from Macro to Session, **the final library is not a strict tree**. Smaller cards are developed in the context of larger blocks, but they can still be reused across several blocks. For example, one Micro card can support multiple Mezzo blocks, and one Session card can fit into different weekly structures.
 
 The `references` field stores direct connections between cards, such as parent, child, alternative, or support relationships. These references describe how cards relate to one another without placing their full content inside another card.
 
@@ -383,7 +383,7 @@ The result is a library that moves from long-term direction to practical executi
 
 ### Card library
 
-We keep the card library separate from the pipeline that builds, checks, and delivers it. The library contains the card data, while the repository contains the tools that work with it. These tools are responsible for:
+We keep the **card library** separate from the pipeline that builds, checks, and delivers it. The library contains the card data, while the repository contains the tools that work with it. These tools are responsible for:
 
 - *Schemas*
     - Define the fields, types, and relationships that make up a valid card
@@ -406,7 +406,7 @@ We keep the card library separate from the pipeline that builds, checks, and del
         - `cloud_store.py`, `google_drive_client.py` handle Google Drive synchronization
         - `scripts/authoring/`, `scripts/cloud/` contain the workflow scripts
 
-Google Drive stores the accepted card content as JSON and acts as the source of truth for the library. The repository contains the Python schemas and authoring tools used to define, validate, and prepare the cards, but it does not keep a second complete Python copy of the library. Python is the tooling layer around the cards, while JSON is the format used to store the card data, and Google Drive is the current source of truth where that JSON library is kept.
+**Google Drive** stores the accepted card content as **JSON** and acts as the source of truth for the library. The repository contains the Python schemas and authoring tools used to define, validate, and prepare the cards, but it does not keep a second complete Python copy of the library. Python is the tooling layer around the cards, while JSON is the format used to store the card data, and Google Drive is the current source of truth where that JSON library is kept.
 
 #### Cloud structure
 
@@ -414,7 +414,7 @@ For the current version, we chose Google Drive as the cloud storage for the card
 
 The Google Drive library contains more than the individual card records. It stores the card content together with the metadata needed to describe, validate, connect, and organize the library. 
 
-At the card level, each Macro, Mezzo, Micro, and Session card is stored as its own JSON file. At the library level, additional files store version information, display settings, reuse mappings, and the combined library bundle.
+At the card level, each Macro, Mezzo, Micro, and Session card is stored as its own **JSON** file. At the library level, additional files store version information, display settings, reuse mappings, and the combined library bundle.
 
 The resulting storage structure looks like this:
 
@@ -443,7 +443,7 @@ training_cards_library/
 └── training_cards_library.json
 ```
 
-Alongside the individual card files, the library root contains several supporting metadata files:
+Alongside the individual card files, the library root contains several **supporting metadata files**:
 
 - `manifest.json` records the library version, schema version, and expected contents
 - `display_config.json` stores labels and presentation settings used when the library is displayed
@@ -547,7 +547,7 @@ At the card level, each JSON file follows the schema defined by the Python card 
 
 #### From authoring to cloud storage
 
-The workflow from authoring a card to storing it in the cloud has two paths:
+The **workflow from authoring a card to storing it** in the cloud has two paths:
 
 - When we edit a card that already exists in the cloud library, we first download the current library into the local cache and update its JSON record there
 - When we create a new card, we can first prepare it in a temporary Python file using the card classes. The new card is then converted into JSON and added to the local cache
@@ -622,11 +622,11 @@ Google Drive (outside the repository)
 
 ### AI-assisted development
 
-AI assistance supported the project throughout. It also became a kind of experiment and learning exercise for me: I explored an increasingly common way of working, but one I had not used (and favored) much before. Could we build a complete system without writing a single line of code ourselves?
+**AI assistance** supported the project throughout. It also became a kind of experiment and learning exercise for me: I explored an increasingly common way of working, but one I had not used (and favored) much before. Could we build a complete system without writing a single line of code ourselves?
 
 This was far from a hands-off process. I had to define the agents' roles, prepare the prompts, provide context, review the outputs, correct mistakes, and redirect the work whenever it moved away from the intended direction. A large part of our contribution was orchestrating the process and making sure that the different pieces stayed consistent. This was also particularly demanding because I tend to approach projects with a perfectionist level of attention to detail. Small inconsistencies matter to me, so I kept reviewing and refining the result.
 
-I remained responsible for:
+**I remained responsible for**:
 - the original card idea and purpose of the project
 - the project structure and card hierarchy
 - the schema and data-organization decisions
@@ -635,13 +635,13 @@ I remained responsible for:
 - reviewing, correcting, and approving the results
 
 We divided the work into clearly defined roles:
-- Specialized endurance coach: prepared the training knowledge, philosophy profiles, and card content
-- Technical agents: helped implement the schemas, validation, storage, reuse logic, and cloud workflows
-- Application-focused agents: helped build the current interface based on our requirements, visual ideas, and corrections
+- **Specialized endurance coach**: prepared the training knowledge, philosophy profiles, and card content
+- **Technical agents**: helped implement the schemas, validation, storage, reuse logic, and cloud workflows
+- **Application-focused agents**: helped build the current interface based on our requirements, visual ideas, and corrections
 
 ### The current card library application
 
-To really use the cards, we built a first interface for the library with Streamlit.
+To really use the cards, we built a first interface for the library with **Streamlit**.
 
 This is the current version of the system. It is still mainly a browsing and exploration tool rather than a complete training platform. The larger goal is to develop it further so it can help us make training decisions and use the card library more actively in our own training.
 
