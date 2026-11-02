@@ -19,7 +19,11 @@ title: "UV Scout - Planning Time Outside Around the UV Index"
 
 UV Scout was developed with mobile use in mind, though it can also be used in a desktop browser. The layout and interactions are designed primarily for phones.
 
-Choose a location by searching, using the map, or selecting your device location. In UV Outlook, see how the UV Index is expected to change through the day, alongside the weather conditions. Or Plan an Outing by setting when and how long you’ll be outside. The app then gives you an outing summary based on the expected UV levels, explaining what to expect and offering practical guidance on how to respond, with the other weather conditions as context.
+Choose a location by searching, using the map, or selecting your device location. In UV Outlook, see how the UV Index is expected to change through the day, alongside the weather conditions. Or Plan an Outing by setting when and how long you'll be outside. The app then gives you an outing summary based on the expected UV levels, explaining what to expect and offering practical guidance on how to respond, with the other weather conditions as context.
+
+Although the UV Index is at its center, I also use UV Scout to get a **quick overview of the current and near-term forecast** for a selected location. The app brings the relevant information together in one place, where it's easy to scan and understand at a glance.
+
+UV Scout is still evolving and will probably keep growing through use. As I use it to plan outings and check the local forecast, I expect to notice features I wish it had. Those ideas can guide what I add next.
 
 UV Scout is available as an **Android app** (there is no native iPhone app yet) or as a **website** for phones and desktop. Both require an internet connection to load forecast and map data. On a phone, I recommend adding the website to the Home Screen, or installing it through the browser if that option is available. It appears with the UV Scout icon and opens in its own window, so using the website on a phone feels much like using the Android app.
 :::
