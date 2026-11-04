@@ -74,7 +74,16 @@ V Scout calculates approximate **sunrise**, **sunset**, **dawn**, and **dusk** t
 
 UV Scout credits its data providers where their information appears: Open-Meteo is linked next to the forecast, Open-Meteo and GeoNames beside place-search results, and OpenStreetMap contributors are acknowledged on the map. The app's **Sources** section also links BigDataCloud for nearby place names, WHO for UV levels and protection guidance, NOAA and SunCalc for daylight calculations, and WMO and the U.S. National Weather Service for the simplified rain and wind guides. When we use device location, the device or browser supplies the coordinates with permission.
 
+
 ### UV Scout outing guidance
+
+The main idea behind UV Scout is to consider the UV forecast in the context of an outing and help us plan and prepare for it. We choose a location, when we expect to head out, and how long we plan to stay outside.
+
+WHO guidance provides a general reference for sun protection. UV Scout builds on it by interpreting the forecast for the location, start time, and duration of a specific outing. It follows the expected UV Index across those hours, summarizes the outing's UV levels, and shows how long we can expect to spend in each range. It then connects those periods to practical guidance: when protection is recommended, when extra care is needed, and what steps we can take. This helps us see not just the UV conditions for a location, but how they may unfold during our outing and how we prepare and how we might need to adjust during the outing. By bringing the forecast and its guidance together in one outing summary, UV Scout makes it easier to understand what the UV levels mean for the time we'll actually be outside.
+
+The summary also brings in other weather variables as a context for the same location and outing. These variables offer a quick picture of the wider conditions. They add useful context alongside the UV breakdown, so we can take in the main weather information for an outing in one place.
+
+The summary and recommendations are intended to support planning. They don't take into account an individual's UV exposure, their personal health risk, skin sensitivity or shade along a route, so its guidance isn't tailored to those conditions.
 
 ```{=html}
 <div class="project-link-container">

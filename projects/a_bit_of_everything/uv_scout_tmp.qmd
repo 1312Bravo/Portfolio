@@ -8,31 +8,7 @@ title: "UV Scout - Planning Time Outside Around the UV Index"
 
 <div class="project-trail">
   <a href="../a_bit_of_everything.qmd">A Bit of Everything</a>
-</div>
-
-### Data sources
-
-To make the forecast specific to a place, UV Scout first needs its coordinates. We can search for a place using [Open-Meteo's geocoding service](https://open-meteo.com/en/docs/geocoding-api), which uses [GeoNames](https://www.geonames.org/) place data, choose a point on an [OpenStreetMap](https://www.openstreetmap.org/copyright) map, or use the device's location with permission. For coordinates chosen on the map or device, [BigDataCloud's reverse-geocoding service](https://www.bigdatacloud.com/free-api/free-reverse-geocode-to-city-api) can add a nearby place name.
-
-Once we select a location, UV Scout requests its forecast from the [Open-Meteo Forecast API](https://open-meteo.com/en/docs). The response includes current and hourly UV Index values, along with temperature, cloud cover, precipitation, wind, and the location's time zone. The app requests a forecast covering the next two days, so the same source can support both a look at current conditions and a planned outing.
-
-These values are model-based forecasts, not measurements from a sensor at the exact spot selected on the map. UV Scout depends on the provider's forecast and availability, and credits its data sources in the app. The map also includes OpenStreetMap's required contributor attribution.
-
-The forecast provider supplies the underlying data; our work with UV Scout begins in how we organize that data around a planned outing and translate it into a useful summary. That's where the app moves from presenting a forecast to helping us make sense of it.
-
-### From forecast to outing guidance
-
-The main idea behind UV Scout is to connect a forecast to a specific plan. We choose a location, when we expect to head out, and how long we plan to stay outside. The app then considers the UV forecast across that window, instead of treating one reading as if it described the entire outing.
-
-Hourly UV values describe the hour before their timestamp. UV Scout matches each value to the period it represents, then compares those periods with the planned start and end. If an outing begins or ends partway through an hour, the summary uses only the overlapping part of that period. Because the forecast gives an hourly average rather than a minute-by-minute UV value, the app assumes that average also represents the portion of the hour included in the outing.
-
-From the covered hours, UV Scout calculates the average and highest forecast UV, and how long the outing is expected to fall into different UV ranges. It groups consecutive hours in the same range into time windows, so the summary can show when protection is most relevant and how the forecast changes during the outing. If some of the planned time has no forecast data, the app identifies the missing coverage rather than treating it as zero UV.
-
-The guidance uses three working ranges: below 3, from 3 to below 8, and 8 or higher. WHO guidance provides a reference for the protection steps, while UV Scout applies its own rules to the forecast periods and the duration of the outing. It can describe when UV is expected to reach a level where protection is advised, suggest practical actions for those periods, and highlight the strongest hours. A short high-UV period therefore appears in its actual place in the plan, rather than making the entire outing sound equally intense. The displayed UV category may be rounded, but the guidance rules use the underlying forecast value.
-
-The other weather variables add context to the plan. Temperature, cloud cover, rain, and wind are summarized alongside UV, but they do not reduce or increase the forecast UV value or change its protection thresholds. For example, heavy cloud cover may prompt a reminder to keep protection in place when UV is still elevated; it does not make the app lower the UV forecast.
-
-These summaries and recommendations are UV Scout's own way of organizing public guidance around a forecast and a planned time outside. They are general planning guidance, not a calculation of personal UV exposure, burn time, or individual health risk. The app does not know a person's sensitivity, clothing, sunscreen use, or the shade along a route, so it cannot tailor the result to those conditions.
+</div> 
 
 ### What I learned
 
