@@ -21,7 +21,7 @@ UV Scout was developed with mobile use in mind, though it can also be used in a 
 
 Choose a location by searching, using the map, or selecting your device location. In UV Outlook, see how the UV Index is expected to change through the day, alongside the weather conditions. Or Plan an Outing by setting when and how long you'll be outside. The app then gives you an outing summary based on the expected UV levels, explaining what to expect and offering practical guidance on how to respond, with the other weather conditions as context.
 
-Although the UV Index is at its center, I also use UV Scout to get a **quick overview of the current and near-term forecast** for a selected location. The app brings the relevant information together in one place, where it's easy to scan and understand at a glance.
+In practice, I also use UV Scout to get a **quick overview of the current and near-term forecast** for a selected location. The app brings the relevant information together in one place, where it's easy to scan and understand at a glance.
 
 UV Scout is still evolving and will probably keep growing through use. As I use it to plan outings and check the local forecast, I expect to notice features I wish it had. Those ideas can guide what I add next.
 
@@ -34,7 +34,7 @@ Summer training taught me the sunscreen lesson the hard way. More than once, I h
 
 One autumn day, with cooler temperatures and cloudier skies, I wondered whether sunscreen still belonged in my pre-outing routine. Until then, I mostly judged whether I needed sunscreen by the temperature and cloud cover.
 
-So, I asked ChatGPT what the UV Index was and whether I should still apply sunscreen before a run. At first, I was looking for a straightforward answer about sunscreen. The more I thought about it, the more I wanted context for the whole outing. Where would I be? What time was I going? How long did I plan to stay outside? I wanted to get practical guidance for my plans.
+So, I asked AI agent what the UV Index was and whether I should still apply sunscreen before a run. At first, I was looking for a straightforward answer about sunscreen. The more I thought about it, the more I wanted context for the whole outing. Where would I be? What time was I going? How long did I plan to stay outside? I wanted to get practical guidance for my plans.
 
 When we think about the weather, temperature, rain, and cloud cover often come to mind first. UV is easier to overlook because we cannot see or feel it, even though excessive exposure can harm our skin and eyes. The UV Index makes this less visible part of the weather easier to understand and helps us consider sun protection when planning an outing.
 
@@ -42,21 +42,39 @@ That idea grew into UV Scout, an app focused on the UV Index, with some other co
 
 You can read more about UV radiation, its effects on health, and the UV Index in the [WHO fact sheet on ultraviolet radiation](https://www.who.int/news-room/fact-sheets/detail/ultraviolet-radiation).
 
-### The app
+### Data sources
 
-<!-- We will describe the main user flow and features here. -->
+#### Location
 
-### Data and approach
+To make the forecast specific to a place, UV Scout first needs its coordinates. We can choose a **location** in three ways:
 
-<!-- We will explain the forecast sources, calculations, and guidance here. -->
+- **Search for a place**: Open-Meteo's [geocoding service](https://open-meteo.com/en/docs/geocoding-api), which uses [GeoNames](https://www.geonames.org/) place data.
+- **Choose a point on the map**: the map uses [OpenStreetMap](https://www.openstreetmap.org/copyright).
+- **Use the device's location**: with permission.
 
-### What I learned
+For coordinates chosen on the map or device, [BigDataCloud's reverse-geocoding service](https://www.bigdatacloud.com/free-api/free-reverse-geocode-to-city-api) adds a nearby place name.
 
-<!-- We will add the project reflection here. -->
+#### Weather forecast
 
-### Conclusion
+Once a location is selected, UV Scout requests its **forecast** from the [Open-Meteo Forecast API](https://open-meteo.com/en/docs). The response includes current and hourly **UV Index** values, along with **temperature**, **cloud cover**, **precipitation**, **wind**, and the location's **time zone**. The app requests a forecast covering the next two days, so the same source can support both a look at current conditions and a near-term planned outing.
 
-<!-- We will write the takeaway and next steps here. -->
+When UV Scout sends our coordinates to Open-Meteo, the API matches them to a suitable nearby forecast grid cell and returns the forecast for that area. The returned coordinates mark the cell's centre, which may be a few kilometres from the selected point, so the forecast represents **nearby conditions** rather than the exact spot. Its spatial detail varies by location and forecast period: some regional models have grid spacing around 1-2 km, while global models are around 9-11 km. ([Open-Meteo API documentation](https://open-meteo.com/en/docs))
+
+#### Daylight
+
+V Scout calculates approximate **sunrise**, **sunset**, **dawn**, and **dusk** times for the selected location and date. The calculation draws on the solar methods documented by [SunCalc](https://github.com/mourner/suncalc) and [NOAA’s solar calculation reference](https://gml.noaa.gov/grad/solcalc/calcdetails.html).
+
+#### UV guidance
+
+**WHO** provides a general reference for what UV Index levels mean and how to protect against UV exposure. Its guidance recommends sun protection when the UV Index is 3 or higher, with greater precautions at 8 and above. [WHO on the UV Index](https://www.who.int/news-room/questions-and-answers/item/radiation-the-ultraviolet-%28uv%29-index) and [WHO on sun protection](https://www.who.int/news-room/questions-and-answers/item/radiation-protecting-against-skin-cancer) offer more detail.
+
+**UV Scout** uses this guidance as a reference, then applies its own rules to the forecast and the time we plan to be outside. It tries to describe what to expect and suggest practical steps. The time-specific summary and recommendations are UV Scout's own interpretation, not a personalized measure of someone's exposure or health risk.
+
+#### Credits
+
+UV Scout credits its data providers where their information appears: Open-Meteo is linked next to the forecast, Open-Meteo and GeoNames beside place-search results, and OpenStreetMap contributors are acknowledged on the map. The app's **Sources** section also links BigDataCloud for nearby place names, WHO for UV levels and protection guidance, NOAA and SunCalc for daylight calculations, and WMO and the U.S. National Weather Service for the simplified rain and wind guides. When we use device location, the device or browser supplies the coordinates with permission.
+
+### UV Scout outing guidance
 
 ```{=html}
 <div class="project-link-container">
