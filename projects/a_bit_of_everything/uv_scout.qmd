@@ -92,6 +92,8 @@ UV exposure can also vary with the landscape along an outing. A route may pass t
 
 Finally, UV Scout does not tailor its guidance to the type of activity. A run may involve a cap and lightweight covering clothing, while a bike ride or swim brings different clothing and equipment choices. Sunscreen may also need reapplying after swimming or heavy sweating. The app doesn't ask what activity we plan to do, so its guidance can't reflect these practical differences.
 
+These limitations reflect the current version of UV Scout. As we add features and use the app in more kinds of outings, new assumptions or constraints may emerge that we will need to reconsider.
+
 
 ```{=html}
 <div class="project-link-container">
