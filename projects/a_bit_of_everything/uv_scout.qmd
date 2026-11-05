@@ -42,6 +42,14 @@ That idea grew into UV Scout, an app focused on the UV Index, with some other co
 
 You can read more about UV radiation, its effects on health, and the UV Index in the [WHO fact sheet on ultraviolet radiation](https://www.who.int/news-room/fact-sheets/detail/ultraviolet-radiation).
 
+### Development
+
+The technical work behind UV Scout was handled by an AI agent. I brought the idea and guided its development, while the agent wrote code. 
+
+My contribution was shaping the idea and steering its development through many iterations. We worked especially carefully on the app’s central feature: how it interprets the UV forecast for an outing and turns it into a clear summary and practical guidance on protection that is recommended and what steps to take.
+
+As the app took shape, I reviewed how it worked and gave feedback on whether its behavior and recommendations matched what I had in mind. I didn’t write or review the code itself, since software development isn’t my area of expertise.
+
 ### Data sources
 
 #### Location
@@ -110,6 +118,9 @@ Finally, UV Scout does not tailor its guidance to the type of activity. A run ma
 
 These limitations reflect the current version of UV Scout. As we add features and use the app in more kinds of outings, new assumptions or constraints may emerge that we will need to reconsider.
 
+### Future growth
+
+The limitations described above point to possible directions for UV Scout's future growth. As I continue using it to plan outings and check the local forecast, I expect to see which improvements address real needs and what other ideas emerge. I want the app to grow in response to that experience.
 
 ```{=html}
 <div class="project-link-container">
