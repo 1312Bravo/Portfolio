@@ -84,6 +84,22 @@ The summary also brings in other weather variables as a context for the same loc
 
 The summary and recommendations are intended to **support planning**. They don't take into account an individual's UV exposure, their personal health risk, skin sensitivity or shade along a route, so its guidance isn't tailored to those conditions.
 
+#### An outing example in Cape Town
+
+For a real example, we can choose Cape Town and plan six hours outside on November 6, 2026, from 7:00 AM to 1:00 PM. All times are local to Cape Town. These screenshots were captured from the live app on November 5, 2026, so the values describe the forecast available then.
+
+::: {.app-screenshot-pair layout-ncol=2 layout-valign="top"}
+
+![](saved_files/uv_scout/cape-town-outing-uv-summary-mobile.png){class="click-zoom" width="100%" fig-alt="UV Scout's UV summary for Cape Town, November 6, 2026, from 7:00 AM to 1:00 PM, captured on a phone."}
+
+![](saved_files/uv_scout/cape-town-outing-protection-weather-mobile.png){class="click-zoom" width="100%" fig-alt="UV Scout's protection steps and supporting weather summary for the Cape Town outing, captured on a phone."}
+
+:::
+
+What stands out here is the combination of a cool, mostly cloudy forecast with UV that reaches very high levels. Cooler temperatures and cloudier skies were exactly what prompted my original question about sunscreen.
+
+The value here is also in preparing for the whole outing. Although we start with low forecast UV, UV Scout brings the stronger levels expected later into our preparation from the beginning. The timed guidance helps us decide what protection to bring and when to give it more attention, with the wider weather conditions available alongside it.
+
 ### Limitations
 
 UV Scout currently **ties an outing to one selected location**. That gives us a forecast for a specific point, while outdoor activities can take us across a wider area. UV and weather conditions may vary along the way, but the outing summary continues to use the location we selected. This matters most when an outing covers a longer distance or moves through different areas. In those cases, the conditions at the selected location may not represent what we encounter throughout the route.

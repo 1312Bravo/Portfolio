@@ -10,6 +10,20 @@ title: "UV Scout - Planning Time Outside Around the UV Index"
   <a href="../a_bit_of_everything.qmd">A Bit of Everything</a>
 </div> 
 
+#### An outing in Cape Town
+
+For a real example, we can choose Cape Town and plan six hours outside on November 6, 2026, from 7:00 AM to 1:00 PM. All times are local to Cape Town. These screenshots were captured from the live app on November 5, 2026, so the values describe the forecast available then.
+
+![UV Scout's UV summary for Cape Town, November 6, 2026, from 7:00 AM to 1:00 PM.](saved_files/uv_scout/cape-town-outing-uv-summary.jpg){class="click-zoom" fig-align="center" width="760"}
+
+The outing starts with a forecast UV Index of 1.0 and reaches 8.8, with an average of 5.8 across the six hours. The guidance separates this into three periods: below 3 from 7:00 AM to 8:00 AM, between 3 and below 8 from 8:00 AM to 11:00 AM, and 8 or higher from 11:00 AM to 1:00 PM. The chart labels mark the end of each forecast hour, so the value of 8.8 at 1:00 PM represents the period from noon to 1:00 PM.
+
+Those periods give the protection steps their timing. In this example, the app recommends applying sunscreen to uncovered skin before the first UV 3+ period at 8:00 AM, keeping protection in place through 1:00 PM, and taking extra care during the strongest hours from 11:00 AM onward. It also highlights cloudy periods when the forecast UV remains elevated.
+
+![UV Scout's protection steps and supporting weather summary for the Cape Town outing.](saved_files/uv_scout/cape-town-outing-protection-weather.jpg){class="click-zoom" fig-align="center" width="760"}
+
+The supporting weather summary puts the outing in context: an average temperature of 17 degrees Celsius, average cloud cover of 81%, expected precipitation of 1.5 mm, and average wind of 16 km/h. Together, the UV timeline, protection steps, and weather context show what the selected forecast means for those six hours outside.
+
 ### Limitations
 
 UV Scout currently ties an outing to one selected location. That gives us a forecast for a specific point, while many outdoor activities—whether we walk, run, hike, ride, or do something else—take us through multiple places. UV and weather conditions may vary along the way, but the outing summary continues to use the location we selected. It cannot show how conditions change as our position changes or describe the forecast for each part of a route.

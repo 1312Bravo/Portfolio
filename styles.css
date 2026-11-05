@@ -486,6 +486,14 @@ img.click-zoom {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.055);
 }
 
+.app-screenshot-pair .quarto-layout-row {
+    flex-direction: row;
+}
+
+.app-screenshot-pair .quarto-layout-cell {
+    min-width: 0;
+}
+
 img.click-zoom:active {
     transform: scale(2);
     /* zoom factor */
