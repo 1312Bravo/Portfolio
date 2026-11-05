@@ -10,6 +10,17 @@ title: "UV Scout - Planning Time Outside Around the UV Index"
   <a href="../a_bit_of_everything.qmd">A Bit of Everything</a>
 </div> 
 
+### Limitations
+
+UV Scout currently ties an outing to one selected location. That gives us a forecast for a specific point, while many outdoor activities—whether we walk, run, hike, ride, or do something else—take us through multiple places. UV and weather conditions may vary along the way, but the outing summary continues to use the location we selected. It cannot show how conditions change as our position changes or describe the forecast for each part of a route.
+
+This matters most when an outing covers a longer distance or moves through areas with different terrain or elevation. In those cases, the conditions at the selected location may not represent what we encounter throughout the route.
+
+UV exposure can also vary with the landscape along an outing. A route may pass through forest, cross open terrain, or move in and out of shade from buildings and landforms. UV Scout does not currently account for these changes. If the app included a route, map or land-cover data might offer a way to estimate which sections are more shaded or exposed, though that estimate would still be approximate.
+
+Finally, UV Scout does not tailor its guidance to the type of activity. A walk, run, hike, bike ride, and swim can involve different practical considerations and equipment, but the app does not ask what we plan to do. Its guidance is therefore the same general UV guidance across activity types.
+
+
 ### What I learned
 
 <!-- We will add the project reflection here. -->

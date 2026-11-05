@@ -62,7 +62,7 @@ When UV Scout sends our coordinates to Open-Meteo, the API matches them to a sui
 
 #### Daylight
 
-V Scout calculates approximate **sunrise**, **sunset**, **dawn**, and **dusk** times for the selected location and date. The calculation draws on the solar methods documented by [SunCalc](https://github.com/mourner/suncalc) and [NOAA’s solar calculation reference](https://gml.noaa.gov/grad/solcalc/calcdetails.html).
+V Scout calculates approximate **sunrise**, **sunset**, **dawn**, and **dusk** times for the selected location and date. The calculation draws on the solar methods documented by [SunCalc](https://github.com/mourner/suncalc) and [NOAA's solar calculation reference](https://gml.noaa.gov/grad/solcalc/calcdetails.html).
 
 #### UV guidance
 
@@ -74,16 +74,24 @@ V Scout calculates approximate **sunrise**, **sunset**, **dawn**, and **dusk** t
 
 UV Scout credits its data providers where their information appears: Open-Meteo is linked next to the forecast, Open-Meteo and GeoNames beside place-search results, and OpenStreetMap contributors are acknowledged on the map. The app's **Sources** section also links BigDataCloud for nearby place names, WHO for UV levels and protection guidance, NOAA and SunCalc for daylight calculations, and WMO and the U.S. National Weather Service for the simplified rain and wind guides. When we use device location, the device or browser supplies the coordinates with permission.
 
-
 ### UV Scout outing guidance
 
 The main idea behind UV Scout is to consider the UV forecast in the context of an outing and help us plan and prepare for it. We choose a location, when we expect to head out, and how long we plan to stay outside.
 
-WHO guidance provides a general reference for sun protection. UV Scout builds on it by interpreting the forecast for the location, start time, and duration of a specific outing. It follows the expected UV Index across those hours, summarizes the outing's UV levels, and shows how long we can expect to spend in each range. It then connects those periods to practical guidance: when protection is recommended, when extra care is needed, and what steps we can take. This helps us see not just the UV conditions for a location, but how they may unfold during our outing and how we prepare and how we might need to adjust during the outing. By bringing the forecast and its guidance together in one outing summary, UV Scout makes it easier to understand what the UV levels mean for the time we'll actually be outside.
+WHO guidance provides a general reference for sun protection. UV Scout builds on it by **interpreting the forecast** for the location, start time, and duration of a specific outing. It follows the expected UV Index across those hours, summarizes the outing's UV levels, and shows how long we can expect to spend in each range. It then connects those periods to **practical guidance**: when protection is recommended, when extra care is needed, and what steps we can take. This helps us see not just the UV conditions for a location, but how they may unfold during our outing and how we prepare and how we might need to adjust during the outing. By bringing the forecast and its guidance together in one outing summary, UV Scout makes it easier to understand what the UV levels mean for the time we'll actually be outside.
 
 The summary also brings in other weather variables as a context for the same location and outing. These variables offer a quick picture of the wider conditions. They add useful context alongside the UV breakdown, so we can take in the main weather information for an outing in one place.
 
-The summary and recommendations are intended to support planning. They don't take into account an individual's UV exposure, their personal health risk, skin sensitivity or shade along a route, so its guidance isn't tailored to those conditions.
+The summary and recommendations are intended to **support planning**. They don't take into account an individual's UV exposure, their personal health risk, skin sensitivity or shade along a route, so its guidance isn't tailored to those conditions.
+
+### Limitations
+
+UV Scout currently **ties an outing to one selected location**. That gives us a forecast for a specific point, while outdoor activities can take us across a wider area. UV and weather conditions may vary along the way, but the outing summary continues to use the location we selected. This matters most when an outing covers a longer distance or moves through different areas. In those cases, the conditions at the selected location may not represent what we encounter throughout the route.
+
+UV exposure can also vary with the landscape along an outing. A route may pass through forest, cross open terrain, or move in and out of shade from buildings and surrounding terrain. UV Scout does not currently account for these changes. If UV Scout included a route, we might be able to use the map to estimate which sections are shaded or exposed, though the estimate would still be approximate.
+
+Finally, UV Scout does not tailor its guidance to the type of activity. A run may involve a cap and lightweight covering clothing, while a bike ride or swim brings different clothing and equipment choices. Sunscreen may also need reapplying after swimming or heavy sweating. The app doesn't ask what activity we plan to do, so its guidance can't reflect these practical differences.
+
 
 ```{=html}
 <div class="project-link-container">

@@ -31,10 +31,18 @@ Keep the existing personal story: summer sunburns, the autumn question about sun
 - Explain how the app handles a changing UV forecast: it identifies the relevant UV periods across the outing, so guidance can describe when different levels are expected rather than reducing the plan to one reading.
 - Include a concise note that forecast coverage can be incomplete and that the result depends on the available forecast. Confirm exact interval handling and summary calculations against the current implementation before drafting.
 
-### Limitations and future development
+### Limitations — to draft in `uv_scout_tmp.qmd`
 
-- Briefly acknowledge forecast uncertainty, location-level variation, internet and provider availability, and the limits of general guidance.
-- Close with the idea that UV Scout can evolve as real use reveals useful features or improvements. Keep this grounded in the author's experience rather than promising a particular roadmap.
+- Explain that the outing summary uses one selected location throughout, even when an activity follows a route through multiple places.
+- Describe how UV and weather conditions may vary along a route, while UV Scout does not follow the user's changing position.
+- Treat route-level shade as a separate limitation: the app does not map tree cover, building shade, or exposed sections.
+- Note separately that guidance does not change by activity type, with examples such as walking, running, hiking, cycling, and swimming.
+- Avoid presenting ordinary forecast uncertainty or the short-term planning scope as special product limitations; do not repeat the personal-guidance limits already covered in the outing-guidance section.
+
+### Future development — to draft separately later
+
+- Reflect on how using the app may reveal useful features or improvements.
+- Keep this grounded in the author's experience rather than promising a particular roadmap.
 
 ## Editorial boundaries
 
@@ -61,5 +69,6 @@ In the UV Scout app repository (`uv-index-app`):
 - [x] Explain the difference between forecast data, public-health evidence, and UV Scout's own interpretation.
 - [x] Draft the data-source section.
 - [x] Draft the outing calculation and recommendation section.
-- [ ] Add limitations and a short reflection on how future ideas may come from using the app.
+- [x] Draft the route and location limitation section.
+- [ ] Draft a separate reflection on future development.
 - [ ] Check external links, attribution, and consistency with the existing Idea and post summary.
