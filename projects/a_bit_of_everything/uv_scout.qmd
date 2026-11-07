@@ -104,6 +104,8 @@ For a real example, we can choose Cape Town and plan six hours outside on Novemb
 
 :::
 
+<p class="figure-caption">Screenshots of the version of UV Scout available when this post was written. The app may have changed since then.</p>
+
 Across this six-hour outing, the forecast UV Index ranges from 2.0 to 8.9 and averages 6.1. It starts in the Low range, reaches Very high by the hour ending at 11:00 AM, and stays at 8 or higher from 11:00 AM to 1:00 PM.
 
 UV Scout connects those changing levels to timed guidance. It recommends sun protection from 8:00 AM, when the UV Index first reaches 3, and extra care during the final two hours, when the UV Index is 8 or higher. The steps include applying sunscreen before the first UV 3+ period, covering exposed skin, protecting the eyes, seeking shade, and limiting direct sun during the strongest hours.
