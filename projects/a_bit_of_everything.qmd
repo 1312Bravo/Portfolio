@@ -20,6 +20,6 @@ In the trail-running podcast *The Albon Way*, I heard John Albon describe thinki
 
 ::: {.blog-card}
 ## [UV Scout - Planning Time Outside Around the UV Index](a_bit_of_everything/uv_scout.qmd)<br>
-Summer training gave me a few painful reminders to put on sunscreen before heading out. When autumn brought cooler temperatures, I began to wonder whether sunscreen still belonged in my pre-outing routine. That question grew into UV Scout, an app that helps me plan outings and offers practical guidance based on the UV Index for the time I spend outdoor.
+Summer training gave me a few painful reminders to put on sunscreen before heading out. When autumn brought cooler temperatures, I began to wonder whether sunscreen still belonged in my pre-outing routine. That question grew into UV Scout, an app that helps me plan outings and offers practical guidance based on the UV Index for the time I spend outdoors.
 <span class="blog-date">November 2026</span>
 :::

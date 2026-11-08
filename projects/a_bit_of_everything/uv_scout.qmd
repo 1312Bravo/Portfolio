@@ -34,7 +34,7 @@ Summer training taught me the sunscreen lesson the hard way. More than once, I h
 
 One autumn day, with cooler temperatures and cloudier skies, I wondered whether sunscreen still belonged in my pre-outing routine. Until then, I mostly judged whether I needed sunscreen by the temperature and cloud cover.
 
-So, I asked AI agent what the UV Index was and whether I should still apply sunscreen before a run. At first, I was looking for a straightforward answer about sunscreen. The more I thought about it, the more I wanted context for the whole outing. Where would I be? What time was I going? How long did I plan to stay outside? I wanted to get practical guidance for my plans.
+So, I asked an AI agent what the UV Index was and whether I should still apply sunscreen before a run. At first, I was looking for a straightforward answer about sunscreen. The more I thought about it, the more I wanted context for the whole outing. Where would I be? What time was I going? How long did I plan to stay outside? I wanted to get practical guidance for my plans.
 
 When we think about the weather, temperature, rain, and cloud cover often come to mind first. UV is easier to overlook because we cannot see or feel it, even though excessive exposure can harm our skin and eyes. The UV Index makes this less visible part of the weather easier to understand and helps us consider sun protection when planning an outing.
 
@@ -44,9 +44,9 @@ You can read more about UV radiation, its effects on health, and the UV Index in
 
 ### Development
 
-The technical work behind UV Scout was handled by an AI agent. I brought the idea and guided its development, while the agent wrote code. 
+The technical work behind UV Scout was handled by an AI agent. I brought the idea and guided its development, while the agent wrote code.
 
-My contribution was shaping the idea and steering its development through many iterations. We worked especially carefully on the app’s central feature: how it interprets the UV forecast for an outing and turns it into a clear summary and practical guidance on protection that is recommended and what steps to take.
+My contribution was shaping the idea and steering its development through many iterations. We worked especially carefully on the app’s central feature: how it interprets the UV forecast for an outing and turns it into a clear summary and practical guidance on when protection is recommended and what steps to take.
 
 As the app took shape, I reviewed how it worked and gave feedback on whether its behavior and recommendations matched what I had in mind. I didn’t write or review the code itself, since software development isn’t my area of expertise.
 
@@ -70,7 +70,7 @@ When UV Scout sends our coordinates to Open-Meteo, the API matches them to a sui
 
 #### Daylight
 
-V Scout calculates approximate **sunrise**, **sunset**, **dawn**, and **dusk** times for the selected location and date. The calculation draws on the solar methods documented by [SunCalc](https://github.com/mourner/suncalc) and [NOAA's solar calculation reference](https://gml.noaa.gov/grad/solcalc/calcdetails.html).
+UV Scout calculates approximate **sunrise**, **sunset**, **dawn**, and **dusk** times for the selected location and date. The calculation draws on the solar methods documented by [SunCalc](https://github.com/mourner/suncalc) and [NOAA's solar calculation reference](https://gml.noaa.gov/grad/solcalc/calcdetails.html).
 
 #### UV guidance
 
@@ -84,9 +84,9 @@ UV Scout credits its data providers where their information appears: Open-Meteo 
 
 ### UV Scout outing guidance
 
-The main idea behind UV Scout is to consider the UV forecast in the context of an outing and help us plan and prepare for it. We choose a location, when we expect to head out, and how long we plan to stay outside.
+The main idea behind UV Scout is to consider the UV forecast in the context of an outing and help us plan and prepare for it. We choose a location, a start time, and how long we plan to stay outside.
 
-WHO guidance provides a general reference for sun protection. UV Scout builds on it by **interpreting the forecast** for the location, start time, and duration of a specific outing. It follows the expected UV Index across those hours, summarizes the outing's UV levels, and shows how long we can expect to spend in each range. It then connects those periods to **practical guidance**: when protection is recommended, when extra care is needed, and what steps we can take. This helps us see not just the UV conditions for a location, but how they may unfold during our outing and how we prepare and how we might need to adjust during the outing. By bringing the forecast and its guidance together in one outing summary, UV Scout makes it easier to understand what the UV levels mean for the time we'll actually be outside.
+WHO guidance provides a general reference for sun protection. UV Scout builds on it by **interpreting the forecast** for the location, start time, and duration of a specific outing. It follows the expected UV Index across those hours, summarizes the outing's UV levels, and shows how long we can expect to spend in each range. It then connects those periods to **practical guidance**: when protection is recommended, when extra care is needed, and what steps we can take. Together, the forecast and time-specific guidance show how UV conditions may change during the outing and what steps may be useful at different points.
 
 The summary also brings in other weather variables as a context for the same location and outing. These variables offer a quick picture of the wider conditions. They add useful context alongside the UV breakdown, so we can take in the main weather information for an outing in one place.
 
