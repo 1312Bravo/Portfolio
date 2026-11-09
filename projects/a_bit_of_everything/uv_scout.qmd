@@ -102,19 +102,19 @@ The summary and recommendations are intended to **support planning**. They don't
 
 #### An outing example in Cape Town
 
-For a real example, we can choose Cape Town and plan six hours outside on November 8, 2026, from 7:00 AM to 1:00 PM. All times are local to Cape Town. These screenshots were captured from the live app on November 7, 2026, so the values describe the forecast available then.
+For a real example, we can choose Cape Town and plan six hours outside on November 10, 2026, from 7:00 AM to 1:00 PM. All times are local to Cape Town. These screenshots were captured from the live app on November 9, 2026, so the values describe the forecast available then.
 
 ::: {.app-screenshot-pair layout-ncol=2 layout-valign="top"}
 
-![](saved_files/uv_scout/cape-town-outing-uv-summary-mobile.png){class="click-zoom" width="100%" fig-alt="UV Scout's UV summary for Cape Town, November 8, 2026, from 7:00 AM to 1:00 PM, captured on a phone."}
+![](saved_files/uv_scout/cape-town-outing-uv-summary-mobile.png){class="click-zoom" width="100%" fig-alt="UV Scout's UV summary for Cape Town, November 10, 2026, from 7:00 AM to 1:00 PM, captured on a phone."}
 
-![](saved_files/uv_scout/cape-town-outing-protection-weather-mobile.png){class="click-zoom" width="100%" fig-alt="UV Scout's UV breakdown and protection steps for the Cape Town outing on November 8, 2026, from 7:00 AM to 1:00 PM."}
+![](saved_files/uv_scout/cape-town-outing-protection-weather-mobile.png){class="click-zoom" width="100%" fig-alt="UV Scout's UV breakdown and protection steps for the Cape Town outing on November 10, 2026, from 7:00 AM to 1:00 PM."}
 
 :::
 
 <p class="figure-caption">Screenshots of the version of UV Scout available when this post was written. The app may have changed since then.</p>
 
-Across this six-hour outing, the forecast UV Index ranges from 2.0 to 8.9 and averages 6.1. It starts in the Low range, reaches Very high by the hour ending at 11:00 AM, and stays at 8 or higher from 11:00 AM to 1:00 PM.
+Across this six-hour outing, the forecast UV Index ranges from 2.0 to 9.1 and averages 6.2. The highest value, 9.1, is expected between noon and 1:00 PM. The UV Index reaches the app's Very high category by 11:00 AM and is 8 or higher from 11:00 AM to 1:00 PM.
 
 UV Scout connects those changing levels to timed guidance. It recommends sun protection from 8:00 AM, when the UV Index first reaches 3, and extra care during the final two hours, when the UV Index is 8 or higher. The steps include applying sunscreen before the first UV 3+ period, covering exposed skin, protecting the eyes, seeking shade, and limiting direct sun during the strongest hours.
 
