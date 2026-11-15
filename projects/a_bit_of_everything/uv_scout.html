@@ -212,6 +212,11 @@ ul.task-list li input[type="checkbox"] {
 <p>Once a location is selected, UV Scout requests its <strong>forecast</strong> from the <a href="https://open-meteo.com/en/docs">Open-Meteo Forecast API</a>. The response includes current and hourly <strong>UV Index</strong> values, along with <strong>temperature</strong>, <strong>cloud cover</strong>, <strong>precipitation</strong>, <strong>wind</strong>, and the location’s <strong>time zone</strong>. The app requests a forecast covering the next two days, so the same source can support both a look at current conditions and a near-term planned outing.</p>
 <p>When UV Scout sends our coordinates to Open-Meteo, the API matches them to a suitable nearby forecast grid cell and returns the forecast for that area. The returned coordinates mark the cell’s centre, which may be a few kilometres from the selected point, so the forecast represents <strong>nearby conditions</strong> rather than the exact spot. Its spatial detail varies by location and forecast period: some regional models have grid spacing around 1-2 km, while global models are around 9-11 km. (<a href="https://open-meteo.com/en/docs">Open-Meteo API documentation</a>)</p>
 </section>
+<section id="air-quality" class="level4">
+<h4 class="anchored" data-anchor-id="air-quality">Air quality</h4>
+<p>UV Scout uses the <a href="https://open-meteo.com/en/docs/air-quality-api">Open-Meteo Air Quality API</a> for current European AQI and hourly outing estimates. These forecasts use <a href="https://atmosphere.copernicus.eu/">CAMS</a> model data. They are estimates for a forecast grid point, not readings from a monitoring station at the location we select.</p>
+<p>The <strong>European AQI</strong> reflects the poorest level among five pollutants, as described in the <a href="https://airindex.eea.europa.eu/AQI/">EEA methodology</a>. EEA guidance informs the categories and activity advice in UV Scout. For an outing, the app calculates its own time-weighted average, peak, and hourly range from the forecast.</p>
+</section>
 <section id="daylight" class="level4">
 <h4 class="anchored" data-anchor-id="daylight">Daylight</h4>
 <p>UV Scout calculates approximate <strong>sunrise</strong>, <strong>sunset</strong>, <strong>dawn</strong>, and <strong>dusk</strong> times for the selected location and date. The calculation draws on the solar methods documented by <a href="https://github.com/mourner/suncalc">SunCalc</a> and <a href="https://gml.noaa.gov/grad/solcalc/calcdetails.html">NOAA’s solar calculation reference</a>.</p>
@@ -223,7 +228,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="credits" class="level4">
 <h4 class="anchored" data-anchor-id="credits">Credits</h4>
-<p>UV Scout credits its data providers where their information appears: Open-Meteo is linked next to the forecast, Open-Meteo and GeoNames beside place-search results, and OpenStreetMap contributors are acknowledged on the map. The app’s <strong>Sources</strong> section also links BigDataCloud for nearby place names, WHO for UV levels and protection guidance, NOAA and SunCalc for daylight calculations, and WMO and the U.S. National Weather Service for the simplified rain and wind guides. When we use device location, the device or browser supplies the coordinates with permission.</p>
+<p>UV Scout credits its data providers where their information appears: Open-Meteo is linked next to the weather forecast, Open-Meteo and CAMS ENSEMBLE next to air-quality estimates, Open-Meteo and GeoNames beside place-search results, and OpenStreetMap contributors are acknowledged on the map. The app’s <strong>Sources</strong> section also links BigDataCloud for nearby place names, the EEA for AQI categories and activity advice, WHO for UV levels and protection guidance, NOAA and SunCalc for daylight calculations, and WMO and the U.S. National Weather Service for the simplified rain and wind guides. When we use device location, the device or browser supplies the coordinates with permission.</p>
 </section>
 </section>
 <section id="uv-scout-outing-guidance" class="level3">
@@ -231,6 +236,12 @@ ul.task-list li input[type="checkbox"] {
 <p>The main idea behind UV Scout is to consider the UV forecast in the context of an outing and help us plan and prepare for it. We choose a location, a start time, and how long we plan to stay outside.</p>
 <p>WHO guidance provides a general reference for sun protection. UV Scout builds on it by <strong>interpreting the forecast</strong> for the location, start time, and duration of a specific outing. It follows the expected UV Index across those hours, summarizes the outing’s UV levels, and shows how long we can expect to spend in each range. It then connects those periods to <strong>practical guidance</strong>: when protection is recommended, when extra care is needed, and what steps we can take. Together, the forecast and time-specific guidance show how UV conditions may change during the outing and what steps may be useful at different points.</p>
 <p>The summary also brings in other weather variables as a context for the same location and outing. These variables offer a quick picture of the wider conditions. They add useful context alongside the UV breakdown, so we can take in the main weather information for an outing in one place.</p>
+<div class="post-note">
+<div class="note-label">
+Note | November 2026 | Air quality
+</div>
+<p>We have added <strong>air quality</strong> as another part of the picture. UV Outlook shows the latest European AQI estimate for the selected location, while Plan an Outing summarizes the expected AQI across the chosen time window, including its time-weighted average, peak, and category-based guidance. That gives us another environmental factor to consider alongside the UV Index and weather.</p>
+</div>
 <p>The summary and recommendations are intended to <strong>support planning</strong>. They don’t take into account an individual’s UV exposure, their personal health risk, skin sensitivity or shade along a route, so its guidance isn’t tailored to those conditions.</p>
 <section id="an-outing-example-in-cape-town" class="level4">
 <h4 class="anchored" data-anchor-id="an-outing-example-in-cape-town">An outing example in Cape Town</h4>
