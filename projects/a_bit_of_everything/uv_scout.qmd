@@ -78,7 +78,7 @@ When UV Scout sends our coordinates to Open-Meteo, the API matches them to a sui
 
 #### Air quality
 
-UV Scout uses the [Open-Meteo Air Quality API](https://open-meteo.com/en/docs/air-quality-api) for current European AQI and hourly outing estimates. These forecasts use [CAMS](https://atmosphere.copernicus.eu/) model data, so they represent nearby forecast conditions.
+UV Scout uses the [Open-Meteo Air Quality API](https://open-meteo.com/en/docs/air-quality-api) for current European AQI and hourly outing estimates. These forecasts use [CAMS](https://atmosphere.copernicus.eu/) model data. They are estimates for a forecast grid point, not readings from a monitoring station at the location we select.
 
 The **European AQI** reflects the poorest level among five pollutants, as described in the [EEA methodology](https://airindex.eea.europa.eu/AQI/). EEA guidance informs the categories and activity advice in UV Scout. For an outing, the app calculates its own time-weighted average, peak, and hourly range from the forecast.
 
@@ -94,7 +94,7 @@ UV Scout calculates approximate **sunrise**, **sunset**, **dawn**, and **dusk** 
 
 #### Credits
 
-UV Scout credits its data providers where their information appears: Open-Meteo is linked next to the forecast, Open-Meteo and GeoNames beside place-search results, and OpenStreetMap contributors are acknowledged on the map. The app's **Sources** section also links BigDataCloud for nearby place names, WHO for UV levels and protection guidance, NOAA and SunCalc for daylight calculations, and WMO and the U.S. National Weather Service for the simplified rain and wind guides. When we use device location, the device or browser supplies the coordinates with permission.
+UV Scout credits its data providers where their information appears: Open-Meteo is linked next to the weather forecast, Open-Meteo and CAMS ENSEMBLE next to air-quality estimates, Open-Meteo and GeoNames beside place-search results, and OpenStreetMap contributors are acknowledged on the map. The app's **Sources** section also links BigDataCloud for nearby place names, the EEA for AQI categories and activity advice, WHO for UV levels and protection guidance, NOAA and SunCalc for daylight calculations, and WMO and the U.S. National Weather Service for the simplified rain and wind guides. When we use device location, the device or browser supplies the coordinates with permission.
 
 ### UV Scout outing guidance
 
@@ -106,6 +106,7 @@ The summary also brings in other weather variables as a context for the same loc
 
 ::: {.post-note}
 <div class="note-label">Note | November 2026 | Air quality added</div>
+
 We have added **air quality** as another part of the picture. UV Outlook shows the latest European AQI estimate for the selected location, while Plan an Outing summarizes the expected AQI across the chosen time window, including its time-weighted average, peak, and category-based guidance. That gives us another environmental factor to consider alongside the UV Index and weather.
 :::
 
