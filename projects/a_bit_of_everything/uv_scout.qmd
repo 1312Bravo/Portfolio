@@ -105,7 +105,7 @@ WHO guidance provides a general reference for sun protection. UV Scout builds on
 The summary also brings in other weather variables as a context for the same location and outing. These variables offer a quick picture of the wider conditions. They add useful context alongside the UV breakdown, so we can take in the main weather information for an outing in one place.
 
 ::: {.post-note}
-<div class="note-label">Note | November 2026 | Air quality added</div>
+<div class="note-label">Note | November 2026 | Air quality</div>
 
 We have added **air quality** as another part of the picture. UV Outlook shows the latest European AQI estimate for the selected location, while Plan an Outing summarizes the expected AQI across the chosen time window, including its time-weighted average, peak, and category-based guidance. That gives us another environmental factor to consider alongside the UV Index and weather.
 :::
