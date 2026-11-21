@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>When Training Becomes a Deck of Cards - Training Card Library – Urh Peček | Data Science Blog</title>
+<title>When Training Becomes a Deck of Cards - Run Companion Deck – Urh Peček | Data Science Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -175,7 +175,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">When Training Becomes a Deck of Cards - Training Card Library</h1>
+<h1 class="title">When Training Becomes a Deck of Cards - Run Companion Deck</h1>
 </div>
 
 
@@ -198,13 +198,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="project-trail">
 <p><a href="../../projects/a_bit_of_everything.html">A Bit of Everything</a></p>
 </div>
-<section id="explore-the-card-library" class="level4 post-summary">
-<h4 class="anchored" data-anchor-id="explore-the-card-library">Explore the card library</h4>
-<p>To explore the cards, we prepared a first, mostly static <strong>Streamlit</strong> interface for the structured library. It gives us a simple way to browse and explore the training cards while we continue developing the larger system behind them.</p>
-<div class="training-app-link">
-<p><span class="training-app-link-arrow" aria-hidden="true">→</span> <a href="https://trail-running-training-cards.streamlit.app/" target="_blank"> <strong>Open the Training Card Library</strong> <span class="training-app-link-external" aria-hidden="true">↗</span> </a></p>
+<section id="run-companion-deck" class="level4 post-summary">
+<h4 class="anchored" data-anchor-id="run-companion-deck">Run Companion Deck</h4>
+<p>To explore the cards, we prepared a first, mostly static web app for the structured library. It gives us a simple way to browse and explore the training cards while we continue developing the larger system behind them. We named the app <strong>Run Companion Deck</strong>.</p>
+<div class="app-link">
+<p><span class="app-link-arrow" aria-hidden="true">→</span> <a href="https://run-companion-deck.netlify.app/" target="_blank"> <strong>Open the Run Companion Deck</strong> <span class="app-link-external" aria-hidden="true">↗</span> </a></p>
 </div>
-<p>The app is hosted on Streamlit Community Cloud, where apps can sleep after 12 hours without traffic. To help prevent this, we added a small GitHub Action that checks the app every eight hours so it stays awake. If the <em>“Yes, get this app back up!”</em> button still appears, it is safe to click, although loading may take a few seconds.</p>
 </section>
 <section id="idea" class="level3">
 <h3 class="anchored" data-anchor-id="idea">Idea</h3>
@@ -667,9 +666,13 @@ Schema and relationship validation
         ↓
 Bundle and index generation
         ↓
-Upload to Google Drive
+Upload accepted library to cloud storage
         ↓
-Streamlit downloads the validated bundle</code></pre>
+Retrieve and validate the library for an interface release
+        ↓
+Prepare the card data and build the web interface
+        ↓
+Publish the updated interface</code></pre>
 <p>Before the changes are uploaded, the validation tools check the card schemas, references, reuse mappings, manifest, and library index. The upload scripts we prepared then rebuild the bundle and supporting metadata before uploading the updated files back to the cloud. The upload scripts can publish the complete library or update only one card level while leaving the other card files unchanged.</p>
 </section>
 </section>
@@ -709,7 +712,7 @@ Streamlit downloads the validated bundle</code></pre>
 │   ├── json_store.py                 # JSON storage and validation
 │   ├── cloud_store.py                # Cloud-library synchronization
 │   └── scripts/                      # Authoring, cache, and upload workflows
-├── streamlit_app/                    # Current card-library interface
+├── user_interface/                   # Card browsing, filtering, and pathway exploration
 ├── tests/                            # Checks for storage and library behaviour
 ├── notes/                            # Durable project and workflow documentation
 └── archive/                          # Retired experiments outside the active system
@@ -724,9 +727,9 @@ Google Drive (outside the repository)
 <p><strong>I remained responsible for</strong>: - the original card idea and purpose of the project - the project structure and card hierarchy - the schema and data-organization decisions - the prompts, boundaries, and workflow - the visual direction of the interface - reviewing, correcting, and approving the results</p>
 <p>We divided the work into clearly defined roles: - <strong>Specialized endurance coach</strong>: prepared the training knowledge, philosophy profiles, and card content - <strong>Technical agents</strong>: helped implement the schemas, validation, storage, reuse logic, and cloud workflows - <strong>Application-focused agents</strong>: helped build the current interface based on our requirements, visual ideas, and corrections</p>
 </section>
-<section id="the-current-card-library-application" class="level3">
-<h3 class="anchored" data-anchor-id="the-current-card-library-application">The current card library application</h3>
-<p>To really use the cards, we built a first interface for the library with <strong>Streamlit</strong>.</p>
+<section id="run-companion-deck-1" class="level3">
+<h3 class="anchored" data-anchor-id="run-companion-deck-1">Run Companion Deck</h3>
+<p>To really use the cards, we built a first <strong>interface</strong> for the library.</p>
 <p>This is the current version of the system. It is still mainly a browsing and exploration tool rather than a complete training platform. The larger goal is to develop it further so it can help us make training decisions and use the card library more actively in our own training.</p>
 <p>The current version allows us to:</p>
 <ul>
@@ -737,7 +740,7 @@ Google Drive (outside the repository)
 <li>move through the Macro-to-Session hierarchy and follow related card connections</li>
 <li>inspect available session options and training pathways</li>
 </ul>
-<p><a href="https://trail-running-training-cards.streamlit.app/">Open the Training Card Library</a></p>
+<p><a href="https://run-companion-deck.netlify.app/">Open Run Companion Deck</a></p>
 <p>This gives us a first usable interface for the structured library. Future development can move the system beyond browsing by adding more practical training support and making it more useful for everyday decision-making.</p>
 <div class="project-link-container">
     <i class="fab fa-github"></i>

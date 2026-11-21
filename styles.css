@@ -151,9 +151,8 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Streamlit app link inside project posts */
-.training-app-link,
-.project-app-link {
+/* App links */
+.app-link {
     display: flex;
     align-items: center;
     gap: 0.55rem;
@@ -166,33 +165,28 @@ a:hover {
     transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.training-app-link:hover,
-.project-app-link:hover {
+.app-link:hover {
     background-color: #f8f9fa;
     transform: translateX(3px);
 }
 
-.training-app-link-arrow,
-.project-app-link-arrow {
+.app-link-arrow {
     color: #555555;
     font-size: 1.25rem;
     line-height: 1;
 }
 
-.training-app-link a,
-.project-app-link a {
+.app-link a {
     color: #222222;
     text-decoration: none;
 }
 
-.training-app-link a:hover,
-.project-app-link a:hover {
+.app-link a:hover {
     color: #000000;
     text-decoration: underline;
 }
 
-.training-app-link-external,
-.project-app-link-external {
+.app-link-external {
     margin-left: 0.25rem;
     font-size: 1.05em;
 }
