@@ -68,6 +68,12 @@ To make the forecast specific to a place, UV Scout first needs its coordinates. 
 - **Choose a point on the map**: the map uses [OpenStreetMap](https://www.openstreetmap.org/copyright).
 - **Use the device's location**: with permission.
 
+::: {.post-note}
+<div class="note-label">Note | November 2026 | Saved locations</div>
+
+UV Scout also lets us save locations to revisit later. Saved locations stay in the app or browser profile where we add them and do not sync across devices or profiles.
+:::
+
 For coordinates chosen on the map or device, [BigDataCloud's reverse-geocoding service](https://www.bigdatacloud.com/free-api/free-reverse-geocode-to-city-api) adds a nearby place name.
 
 #### Weather forecast

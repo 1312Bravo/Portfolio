@@ -13,6 +13,8 @@ title: "When Training Becomes a Deck of Cards - Run Companion Deck"
 ::: {.post-summary}
 #### Run Companion Deck
 
+![Run Companion Deck runner-card mark](saved_files/training_cards/runner-deck-mark.png){fig-align="center" width="180"}
+
 To explore the cards, we prepared a first, mostly static web app for the structured library. It gives us a simple way to browse and explore the training cards while we continue developing the larger system behind them. We named the app **Run Companion Deck**.
 
 <div class="app-link">
