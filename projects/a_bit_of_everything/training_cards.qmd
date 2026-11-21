@@ -622,6 +622,8 @@ Google Drive (outside the repository)
 └── training_cards_library/           # Accepted JSON card library and metadata
 ```
 
+<p class="post-caption">This sketch shows the project structure when this post was written. It may change as we add features and develop the system further.</p>
+
 ### AI-assisted development
 
 **AI assistance** supported the project throughout. It also became a kind of experiment and learning exercise for me: I explored an increasingly common way of working, but one I had not used (and favored) much before. Could we build a complete system without writing a single line of code ourselves?

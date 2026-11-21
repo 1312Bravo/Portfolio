@@ -421,6 +421,13 @@ a:hover {
     color: #444444;
 }
 
+/* Small captions below visuals and diagrams in posts */
+.post-caption {
+    margin: 0.5rem 0 1rem;
+    font-size: 0.875em;
+    color: #6c757d;
+}
+
 /* Quiet breadcrumb for detailed posts */
 .project-trail {
     margin: 0.2rem 0 1.15rem;

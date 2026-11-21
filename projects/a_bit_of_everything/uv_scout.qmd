@@ -124,7 +124,7 @@ For a real example, we can choose Cape Town and plan six hours outside on Novemb
 
 :::
 
-<p class="figure-caption">Screenshots of the version of UV Scout available when this post was written. The app may have changed since then.</p>
+<p class="post-caption">Screenshots of the version of UV Scout available when this post was written. The app may have changed since then.</p>
 
 Across this six-hour outing, the forecast UV Index ranges from 2.0 to 9.1 and averages 6.2. The highest value, 9.1, is expected between noon and 1:00 PM. The UV Index reaches the app's Very high category by 11:00 AM and is 8 or higher from 11:00 AM to 1:00 PM.
 
