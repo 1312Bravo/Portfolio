@@ -15,11 +15,11 @@ title: "UV Scout - Planning Time Outside Around the UV Index"
 
 ![](saved_files/uv_scout/uv-scout-logo-transparent.png){fig-align="center" width="180"}
 
-<div class="project-app-link">
-  <span class="project-app-link-arrow" aria-hidden="true">→</span>
+<div class="app-link">
+  <span class="app-link-arrow" aria-hidden="true">→</span>
   <a href="https://uvscout.expo.app" target="_blank" rel="noopener">
     <strong>Open the UV Scout web app</strong>
-    <span class="project-app-link-external" aria-hidden="true">↗</span>
+    <span class="app-link-external" aria-hidden="true">↗</span>
   </a>
 </div>
 
